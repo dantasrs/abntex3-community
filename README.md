@@ -57,13 +57,25 @@ de uso das normas.
 
 ## Roteiro
 
-1. Consolidar governança, licença e arquitetura.
-2. Criar a infraestrutura de testes com `l3build`.
-3. Implementar um perfil mínimo de trabalho acadêmico.
-4. Integrar e validar `biblatex-abnt`.
-5. Acrescentar perfis de projeto de pesquisa, artigo, relatório e livro.
+1. Consolidar governança, arquitetura e rastreabilidade normativa.
+2. Criar fontes documentadas, build e testes com `l3build`.
+3. Implementar o núcleo sobre classes LaTeX usuais.
+4. Entregar estrutura, layout e elementos documentais.
+5. Integrar e validar `biblatex-abnt`.
+6. Entregar os perfis acadêmico, projeto, artigo, relatório e livro.
+7. Documentar migração, estabilizar a API e preparar a distribuição CTAN.
 
-O roteiro detalhado está em [`docs/roadmap.md`](docs/roadmap.md).
+Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
+[`roteiro técnico completo`](docs/roadmap.md).
+
+## Governança e colaboração
+
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — fluxo e requisitos das contribuições;
+- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — padrões de convivência;
+- [`SECURITY.md`](SECURITY.md) — relato privado de vulnerabilidades;
+- [`CITATION.cff`](CITATION.cff) — metadados para citação;
+- [`docs/decisoes/`](docs/decisoes/) — decisões arquiteturais aceitas;
+- [`docs/versionamento.md`](docs/versionamento.md) — versões e compatibilidade.
 
 ## Licença
 

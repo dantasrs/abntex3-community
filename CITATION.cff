@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: >-
+  Se este software contribuir para seu trabalho, cite-o usando os metadados
+  deste arquivo.
+title: abnTeX3 Community
+type: software
+authors:
+  - given-names: Rafael
+    name-particle: dos Santos
+    family-names: Dantas
+repository-code: https://github.com/dantasrs/abntex3-community
+url: https://github.com/dantasrs/abntex3-community
+license: LPPL-1.3c
+abstract: >-
+  Continuação comunitária e independente para produção de documentos LaTeX
+  compatíveis com normas brasileiras de informação e documentação, com
+  requisitos rastreáveis e integração com biblatex-abnt.
+keywords:
+  - LaTeX
+  - ABNT
+  - trabalhos acadêmicos
+  - documentação técnica
+  - tipografia

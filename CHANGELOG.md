@@ -8,6 +8,10 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
 - Fundação do projeto comunitário independente.
 - Matriz normativa inicial.
-- Roteiro técnico e política de contribuição.
+- Arquitetura, inventário de arquivos e roteiro técnico completo.
+- Código de conduta, política de segurança e metadados de citação.
+- Templates estruturados para issues e pull requests.
+- Registro das decisões arquiteturais fundamentais.
+- Política de versionamento semântico e compatibilidade.
+- Política de contribuição.
 - Licenciamento sob LPPL 1.3c ou posterior.
-

@@ -1,0 +1,65 @@
+name: Propor uma melhoria
+description: Sugira uma funcionalidade, mudança de API, arquitetura ou documentação.
+title: "[Proposta]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Descreva primeiro o problema. Mudanças grandes ou incompatíveis precisam
+        de decisão arquitetural antes da implementação.
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema
+      description: Qual necessidade concreta ainda não é atendida?
+    validations:
+      required: true
+  - type: textarea
+    id: solucao
+    attributes:
+      label: Solução proposta
+      description: Explique a interface e o comportamento desejados.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área principal
+      options:
+        - API pública
+        - Arquitetura interna
+        - Perfil documental
+        - Integração com biblatex-abnt
+        - Build, testes ou CI
+        - Documentação
+        - Distribuição ou release
+        - Outra
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+      description: Liste soluções alternativas e seus custos.
+    validations:
+      required: false
+  - type: textarea
+    id: compatibilidade
+    attributes:
+      label: Impacto de compatibilidade
+      description: Indique se a proposta altera comandos, opções ou resultados existentes.
+    validations:
+      required: true
+  - type: checkboxes
+    id: verificacoes
+    attributes:
+      label: Verificações
+      options:
+        - label: Procurei propostas existentes sobre o mesmo tema.
+          required: true
+        - label: A proposta não introduz regras institucionais particulares no núcleo.
+          required: true
+        - label: Concordo em seguir o Código de Conduta.
+          required: true

@@ -19,7 +19,9 @@
 # l3build
 build/
 
+# Normas técnicas mantidas apenas para consulta local
+bases/
+
 # Editors and operating systems
 *~
 .DS_Store
-
