@@ -72,5 +72,4 @@ LaTeX Project Public License, versão 1.3c ou posterior. Consulte
 [`LICENSE`](LICENSE) e [`manifest.txt`](manifest.txt).
 
 O projeto possui estado de manutenção `maintained`. O mantenedor atual é
-[`rafazildod`](https://github.com/rafazildod).
-
+[`dantasrs`](https://github.com/dantasrs).
