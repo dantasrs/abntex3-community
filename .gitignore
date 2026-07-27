@@ -1,0 +1,25 @@
+# LaTeX
+*.aux
+*.bcf
+*.blg
+*.bbl
+*.fdb_latexmk
+*.fls
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# l3build
+build/
+
+# Editors and operating systems
+*~
+.DS_Store
+
