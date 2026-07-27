@@ -1,0 +1,65 @@
+name: Relatar um erro
+description: Informe um comportamento incorreto e reproduzível do pacote ou da documentação.
+title: "[Bug]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado pelo relato. Não inclua PDFs de normas técnicas ou dados sensíveis.
+        Para vulnerabilidades, siga a política de segurança em vez deste formulário.
+  - type: textarea
+    id: resumo
+    attributes:
+      label: Resumo
+      description: Descreva objetivamente o comportamento incorreto.
+      placeholder: O que aconteceu?
+    validations:
+      required: true
+  - type: textarea
+    id: exemplo
+    attributes:
+      label: Exemplo mínimo
+      description: Forneça o menor documento completo que reproduza o problema.
+      render: latex
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamento esperado
+      description: Explique o resultado que você esperava.
+    validations:
+      required: true
+  - type: textarea
+    id: ambiente
+    attributes:
+      label: Ambiente
+      description: Informe sistema, distribuição TeX, motor e versão do pacote.
+      placeholder: |
+        Sistema:
+        TeX Live/MiKTeX:
+        Motor:
+        Commit ou versão do abntex3:
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log relevante
+      description: Cole somente o trecho necessário, removendo informações pessoais.
+      render: text
+    validations:
+      required: false
+  - type: checkboxes
+    id: verificacoes
+    attributes:
+      label: Verificações
+      options:
+        - label: Procurei issues existentes sobre o mesmo problema.
+          required: true
+        - label: O exemplo não contém conteúdo protegido de normas técnicas.
+          required: true
+        - label: Concordo em seguir o Código de Conduta.
+          required: true

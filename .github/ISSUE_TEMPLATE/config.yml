@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Política de segurança
+    url: https://github.com/dantasrs/abntex3-community/security/policy
+    about: Relate vulnerabilidades de forma privada conforme esta política.
+  - name: Como contribuir
+    url: https://github.com/dantasrs/abntex3-community/blob/main/CONTRIBUTING.md
+    about: Consulte escopo, requisitos e fluxo de contribuições.

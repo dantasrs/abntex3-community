@@ -1,0 +1,74 @@
+name: Requisito normativo
+description: Registre uma implementação, correção ou interpretação vinculada a uma norma.
+title: "[Norma]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Não transcreva trechos extensos nem anexe PDFs da norma. Descreva o
+        requisito com palavras próprias e indique apenas o item necessário.
+  - type: input
+    id: norma
+    attributes:
+      label: Norma e edição
+      placeholder: ABNT NBR 14724:2024
+    validations:
+      required: true
+  - type: input
+    id: item
+    attributes:
+      label: Item normativo
+      placeholder: Número do item ou seção aplicável
+    validations:
+      required: true
+  - type: dropdown
+    id: perfil
+    attributes:
+      label: Perfil afetado
+      multiple: true
+      options:
+        - Núcleo comum
+        - Trabalho acadêmico
+        - Projeto de pesquisa
+        - Artigo
+        - Relatório técnico ou científico
+        - Livro ou folheto
+        - Integração bibliográfica
+    validations:
+      required: true
+  - type: textarea
+    id: interpretacao
+    attributes:
+      label: Interpretação
+      description: Descreva o requisito de forma concisa e original.
+    validations:
+      required: true
+  - type: textarea
+    id: comportamento
+    attributes:
+      label: Comportamento verificável
+      description: Explique como um teste pode distinguir conformidade e não conformidade.
+    validations:
+      required: true
+  - type: textarea
+    id: divergencias
+    attributes:
+      label: Dúvidas ou divergências
+      description: Registre ambiguidades, opções permitidas e interpretações alternativas.
+    validations:
+      required: false
+  - type: checkboxes
+    id: direitos
+    attributes:
+      label: Direitos e revisão
+      options:
+        - label: Tenho acesso legítimo à edição indicada.
+          required: true
+        - label: Não anexei nem transcrevi conteúdo protegido em extensão desnecessária.
+          required: true
+        - label: Aceito que a conformidade exige revisão normativa independente.
+          required: true
+        - label: Concordo em seguir o Código de Conduta.
+          required: true
