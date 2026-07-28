@@ -1,0 +1,22 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\section{Nivel primario}
+\subsection{Nivel secundario}
+\subsubsection{Nivel terciario}
+\paragraph{Nivel quaternario}
+\subparagraph{Nivel quinario}
+\TYPE{primary = \thesection}
+\TYPE{secondary = \thesubsection}
+\TYPE{tertiary = \thesubsubsection}
+\TYPE{quaternary = \theparagraph}
+\TYPE{quinary = \thesubparagraph}
+\makeatletter
+\TYPE{secnumdepth = \number\c@secnumdepth}
+\TYPE{tocdepth = \number\c@tocdepth}
+\makeatother
+\END
+\end{document}

@@ -19,9 +19,11 @@
 %
 % \section{Estado}
 %
-% A versão 0.0.0 oferece a API mínima de configuração e metadados necessária
-% aos módulos futuros. Ela ainda não implementa apresentação normativa nem
-% faz alegação de conformidade com qualquer norma.
+% A versão 0.0.0 oferece a API mínima de configuração e metadados e o primeiro
+% módulo de apresentação, dedicado a seções e sumário. A implementação possui
+% rastreabilidade para a ABNT NBR 6024:2012 e a ABNT NBR 6027:2012, mas ainda
+% depende de revisão normativa independente e não faz alegação de
+% conformidade.
 %
 % \section{Uso mínimo}
 %
@@ -52,13 +54,16 @@
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesExplPackage{abntex3}
-  {2026-07-28}{0.0.0}{Nucleo e API do abnTeX3 Community}
+  {2026-07-28}{0.0.0}{Nucleo estrutural do abnTeX3 Community}
 
 \RequirePackage{abntex3-core}
+\RequirePackage{abntex3-structure}
 \RequirePackage{l3keys2e}
 
 \ProcessKeysOptions{abntex3}
 \abntex_core_initialize:
+\hook_gput_code:nnn {begindocument/before} {abntex3-structure}
+  {\abntex_structure_initialize:}
 \endinput
 %</package>
 %    \end{macrocode}

@@ -1,0 +1,33 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[
+  profundidade-secoes=3,
+  profundidade-sumario=2,
+  largura-indicativo-sumario=7em
+]{abntex3}
+\ABNTEXstructureSetup{3}{
+  destaque=italico,
+  alinhamento=centro,
+  espaco-antes=2ex,
+  espaco-depois=1ex
+}
+
+\begin{document}
+\START
+\makeatletter
+\TYPE{secnumdepth = \number\c@secnumdepth}
+\TYPE{tocdepth = \number\c@tocdepth}
+\makeatother
+\ExplSyntaxOn
+\tl_if_eq:cnTF {g__abntex_level_3_font_tl} {\itshape}
+  {\TYPE{level 3 font = italic}}
+  {\TYPE{level 3 font = unexpected}}
+\tl_if_eq:cnTF {g__abntex_level_3_alignment_tl} {\centering}
+  {\TYPE{level 3 alignment = center}}
+  {\TYPE{level 3 alignment = unexpected}}
+\dim_compare:nNnTF {\g__abntex_toc_number_width_dim} = {7em}
+  {\TYPE{toc number width = configured}}
+  {\TYPE{toc number width = unexpected}}
+\ExplSyntaxOff
+\END
+\end{document}

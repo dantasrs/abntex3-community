@@ -1,0 +1,26 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+\newcount\TOCcalls
+
+\begin{document}
+\START
+\makeatletter
+\def\addcontentsline#1#2#3{%
+  \global\advance\TOCcalls by 1
+  \TYPE{toc type = #2}}
+\makeatother
+\ABNTEXpretextualtitle{Agradecimentos}
+\TYPE{after pretextual = \number\TOCcalls}
+\ABNTEXposttextualtitle{Referencias}
+\TYPE{after posttextual = \number\TOCcalls}
+\ABNTEXappendix{Questionario}
+\TYPE{appendix = \number\TOCcalls}
+\ABNTEXannex{Documento}
+\TYPE{annex = \number\TOCcalls}
+\ExplSyntaxOn
+\TYPE{appendix counter = \int_use:N \g__abntex_appendix_int}
+\TYPE{annex counter = \int_use:N \g__abntex_annex_int}
+\ExplSyntaxOff
+\END
+\end{document}

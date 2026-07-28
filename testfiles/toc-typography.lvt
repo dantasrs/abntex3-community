@@ -1,0 +1,19 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage{abntex3}
+\ABNTEXstructureSetup{1}{destaque=negrito}
+\ABNTEXstructureSetup{2}{destaque=italico}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \__abntex_level_font:n #1
+  {\TYPE{toc style level = #1}}
+\makeatletter
+\def\@dottedtocline#1#2#3#4#5{#4#5}
+\l@chapter{\numberline{1}Primaria}{1}
+\l@section{\numberline{1.1}Secundaria}{2}
+\makeatother
+\ExplSyntaxOff
+\END
+\end{document}

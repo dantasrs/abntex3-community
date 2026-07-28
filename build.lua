@@ -9,7 +9,11 @@ unpackfiles = {"*.ins"}
 installfiles = {"*.sty"}
 typesetfiles = {"*.dtx"}
 demofiles = {"examples/*.tex"}
-docfiles = {"docs/api.md"}
+docfiles = {
+  "docs/api.md",
+  "docs/structure.md",
+  "docs/requisitos/*.md"
+}
 textfiles = {"README.md", "CHANGELOG.md", "LICENSE", "manifest.txt"}
 
 checkengines = {"pdftex", "luatex", "xetex"}

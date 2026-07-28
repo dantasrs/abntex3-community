@@ -88,20 +88,21 @@ módulos seguintes, ainda sem alegação de conformidade.
 
 **Normas:** ABNT NBR 6024:2012 e ABNT NBR 6027:2012.
 
-- [ ] Criar as matrizes `nbr-6024-2012.md` e `nbr-6027-2012.md`.
-- [ ] Criar `abntex3-structure.dtx`.
-- [ ] Implementar níveis e indicativos de seção.
-- [ ] Implementar títulos com e sem indicativo numérico.
-- [ ] Implementar alinhamento, espaçamento e destaques configuráveis.
-- [ ] Implementar apêndices e anexos sem acoplamento à classe-base.
-- [ ] Implementar sumário e correspondência tipográfica com o texto.
-- [ ] Tratar entradas pré-textuais e pós-textuais no sumário.
-- [ ] Testar títulos longos, quebras de página e profundidades.
-- [ ] Testar caracteres acentuados e marcadores de PDF.
-- [ ] Criar documentação e exemplos mínimos.
+- [x] Criar as matrizes `nbr-6024-2012.md` e `nbr-6027-2012.md`.
+- [x] Criar `abntex3-structure.dtx`.
+- [x] Implementar níveis e indicativos de seção.
+- [x] Implementar títulos com e sem indicativo numérico.
+- [x] Implementar alinhamento, espaçamento e destaques configuráveis.
+- [x] Implementar apêndices e anexos sem acoplamento à classe-base.
+- [x] Implementar sumário e correspondência tipográfica com o texto.
+- [x] Tratar entradas pré-textuais e pós-textuais no sumário.
+- [x] Testar títulos longos, quebras de página e profundidades.
+- [x] Testar caracteres acentuados e marcadores de PDF.
+- [x] Criar documentação e exemplos mínimos.
 
 **Critério de saída:** estrutura e sumário têm requisitos rastreáveis e testes
-nos três motores.
+nos três motores. Uma revisão normativa independente continua necessária antes
+de qualquer alegação de conformidade.
 
 ## Marco 4 — Layout e paginação
 

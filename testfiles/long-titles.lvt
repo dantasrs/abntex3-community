@@ -1,0 +1,17 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\OMIT
+\section{Titulo suficientemente longo para ocupar mais de uma linha e
+demonstrar que o indicativo permanece separado do titulo sem pontuacao}
+Texto relacionado.
+\newpage
+\subsection{Outro titulo longo depois de uma quebra de pagina controlada}
+Texto relacionado.
+\TIMO
+\TYPE{long titles and page break = ok}
+\END
+\end{document}

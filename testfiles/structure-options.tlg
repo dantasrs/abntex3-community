@@ -1,4 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-abntex3 loaded
-version = ....-..-.. v... Nucleo estrutural do abnTeX3 Community
+secnumdepth = 3
+tocdepth = 2
+level3font=italic
+level3alignment=center
+tocnumberwidth=configured

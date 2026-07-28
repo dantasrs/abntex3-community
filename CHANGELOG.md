@@ -28,3 +28,11 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Diagnósticos próprios para classes, conflitos, validação e depreciação.
 - Compatibilidade inicial com `article`, `report` e `book`.
 - Testes de precedência, metadados, perfis, classes e ordem de carregamento.
+- Matrizes rastreáveis da ABNT NBR 6024:2012 e da ABNT NBR 6027:2012.
+- Módulo documentado `abntex3-structure` para cinco níveis progressivos.
+- Configuração de profundidade, destaque, alinhamento e espaçamento por nível.
+- Títulos pré-textuais e pós-textuais, sumário, apêndices e anexos.
+- Correspondência tipográfica entre títulos e entradas do sumário.
+- Testes de profundidade, títulos longos, quebras de página, acentos,
+  hiperlinks e classes-base nos três motores.
+- Exemplo completo de estrutura e sumário.
