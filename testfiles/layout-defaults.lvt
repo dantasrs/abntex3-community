@@ -1,0 +1,35 @@
+\input regression-test.tex
+\documentclass[12pt]{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\tl_if_eq:NnTF \g__abntex_paper_tl {a4}
+  {\TYPE{paper = a4}}
+  {\TYPE{paper = unexpected}}
+\dim_compare:nNnTF {\paperwidth} < {\paperheight}
+  {\TYPE{orientation = portrait}}
+  {\TYPE{orientation = unexpected}}
+\dim_compare:nNnTF {\g__abntex_top_margin_dim} = {3cm}
+  {\TYPE{top margin = 3cm}}
+  {\TYPE{top margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_bottom_margin_dim} = {2cm}
+  {\TYPE{bottom margin = 2cm}}
+  {\TYPE{bottom margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_inner_margin_dim} = {3cm}
+  {\TYPE{inner margin = 3cm}}
+  {\TYPE{inner margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_outer_margin_dim} = {2cm}
+  {\TYPE{outer margin = 2cm}}
+  {\TYPE{outer margin = unexpected}}
+\ExplSyntaxOff
+\makeatletter
+\if@twoside
+  \TYPE{print mode = unexpected}
+\else
+  \TYPE{print mode = recto only}
+\fi
+\makeatother
+\END
+\end{document}

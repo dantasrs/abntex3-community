@@ -43,6 +43,8 @@ armazenados no repositório.
 
 ## Matrizes detalhadas disponíveis
 
+- [`ABNT NBR 14724:2024`](requisitos/nbr-14724-2024.md) — layout e
+  paginação;
 - [`ABNT NBR 6024:2012`](requisitos/nbr-6024-2012.md) — numeração
   progressiva das seções;
 - [`ABNT NBR 6027:2012`](requisitos/nbr-6027-2012.md) — sumário.

@@ -16,10 +16,12 @@ LICENSE
 README.md
 SECURITY.md
 examples/estrutura-sumario.tex
+examples/layout-paginacao.tex
 examples/minimo.tex
 scripts/validate-distribution.sh
 source/abntex3.dtx
 source/abntex3-core.dtx
+source/abntex3-layout.dtx
 source/abntex3-structure.dtx
 source/abntex3.ins
 testfiles/accented-bookmarks.lvt
@@ -30,6 +32,8 @@ testfiles/class-book.lvt
 testfiles/class-book.tlg
 testfiles/class-report.lvt
 testfiles/class-report.tlg
+testfiles/caption-numbering.lvt
+testfiles/caption-numbering.tlg
 testfiles/common-after.lvt
 testfiles/common-after.tlg
 testfiles/common-before.lvt
@@ -38,6 +42,14 @@ testfiles/conflict-after.lvt
 testfiles/conflict-after.tlg
 testfiles/conflict-before.lvt
 testfiles/conflict-before.tlg
+testfiles/duplex-parity.lvt
+testfiles/duplex-parity.tlg
+testfiles/footnotes-captions.lvt
+testfiles/footnotes-captions.tlg
+testfiles/layout-defaults.lvt
+testfiles/layout-defaults.tlg
+testfiles/layout-options.lvt
+testfiles/layout-options.tlg
 testfiles/loading.lvt
 testfiles/loading.tlg
 testfiles/long-titles.lvt
@@ -46,6 +58,10 @@ testfiles/metadata.lvt
 testfiles/metadata.tlg
 testfiles/options.lvt
 testfiles/options.tlg
+testfiles/pagination.lvt
+testfiles/pagination.tlg
+testfiles/primary-pages.lvt
+testfiles/primary-pages.tlg
 testfiles/profile-requirements.lvt
 testfiles/profile-requirements.tlg
 testfiles/profile-validation.lvt
@@ -54,6 +70,8 @@ testfiles/sections-article.lvt
 testfiles/sections-article.tlg
 testfiles/sections-report.lvt
 testfiles/sections-report.tlg
+testfiles/spacing-exceptions.lvt
+testfiles/spacing-exceptions.tlg
 testfiles/structure-options.lvt
 testfiles/structure-options.tlg
 testfiles/support/abntex2cite.sty
@@ -65,6 +83,7 @@ testfiles/unnumbered-titles.lvt
 testfiles/unnumbered-titles.tlg
 docs/api.md
 docs/arquitetura.md
+docs/layout.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md
 docs/decisoes/0003-motores-e-versoes.md
@@ -73,6 +92,7 @@ docs/decisoes/README.md
 docs/normas.md
 docs/requisitos/nbr-6024-2012.md
 docs/requisitos/nbr-6027-2012.md
+docs/requisitos/nbr-14724-2024.md
 docs/roadmap.md
 docs/structure.md
 docs/versionamento.md

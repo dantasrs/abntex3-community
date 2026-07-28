@@ -1,0 +1,47 @@
+\input regression-test.tex
+\documentclass[12pt]{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ABNTEXpretextualpages
+\ExplSyntaxOn
+\bool_if:NTF \g__abntex_page_numbers_bool
+  {\TYPE{pretext numbers = unexpected}}
+  {\TYPE{pretext numbers = hidden}}
+\ExplSyntaxOff
+\TYPE{pretext first page = \thepage}
+\makeatletter
+\ps@plain
+\ifx\@oddhead\@empty
+  \TYPE{pretext plain style = hidden}
+\else
+  \TYPE{pretext plain style = unexpected}
+\fi
+\makeatother
+Conteudo pre-textual.
+\newpage
+\TYPE{pretext second page = \thepage}
+Mais conteudo pre-textual.
+\ABNTEXtextualpages
+\ExplSyntaxOn
+\bool_if:NTF \g__abntex_page_numbers_bool
+  {\TYPE{textual numbers = visible}}
+  {\TYPE{textual numbers = unexpected}}
+\ExplSyntaxOff
+\TYPE{textual first page = \thepage}
+\makeatletter
+\ps@plain
+\ifx\@oddhead\@empty
+  \TYPE{textual plain style = unexpected}
+\else
+  \TYPE{textual plain style = header}
+\fi
+\if\relax\detokenize\expandafter{\@oddfoot}\relax
+  \TYPE{textual footer = empty}
+\else
+  \TYPE{textual footer = unexpected}
+\fi
+\makeatother
+\END
+\end{document}

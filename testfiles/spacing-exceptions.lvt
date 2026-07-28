@@ -1,0 +1,26 @@
+\input regression-test.tex
+\documentclass[12pt]{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ifdim\baselineskip>14pt
+  \TYPE{general spacing = enlarged}
+\else
+  \TYPE{general spacing = unexpected}
+\fi
+\begin{ABNTEXcitacaolonga}
+\ifdim\leftskip=4cm
+  \TYPE{long quote indent = 4cm}
+\else
+  \TYPE{long quote indent = unexpected}
+\fi
+\ifdim\baselineskip<14pt
+  \TYPE{long quote spacing = single and small}
+\else
+  \TYPE{long quote spacing = unexpected}
+\fi
+Texto da citacao.
+\end{ABNTEXcitacaolonga}
+\END
+\end{document}

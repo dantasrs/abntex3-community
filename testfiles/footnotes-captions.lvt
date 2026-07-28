@@ -1,0 +1,26 @@
+\input regression-test.tex
+\documentclass[12pt]{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\setbox0=\vbox{\footnoterule}
+\ifdim\wd0=5cm
+  \TYPE{footnote rule = 5cm}
+\else
+  \TYPE{footnote rule = unexpected}
+\fi
+\OMIT
+Texto com nota.\footnote{Nota com mais de uma linha para exercitar o
+alinhamento suspenso e o espaço simples.}
+\begin{figure}[h]
+  \centering
+  \rule{2cm}{1cm}
+  \caption{Legenda de teste}
+  \ABNTEXfonte{elaboração própria}
+  \ABNTEXnota{nota explicativa}
+\end{figure}
+\TIMO
+\TYPE{footnote and caption helpers = compiled}
+\END
+\end{document}

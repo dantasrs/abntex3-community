@@ -1,10 +1,16 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 after pretextual = 0
+[1
+]
 toc type = section
 after posttextual = 1
+[2
+]
 toc type = section
 appendix = 2
+[3
+]
 toc type = section
 annex = 3
 appendixcounter=1

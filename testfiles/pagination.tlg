@@ -1,0 +1,13 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+pretextnumbers=hidden
+pretext first page = 1
+pretext plain style = hidden
+[1
+]
+pretext second page = 2
+[2]
+textualnumbers=visible
+textual first page = 3
+textual plain style = header
+textual footer = empty

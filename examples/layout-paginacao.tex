@@ -1,0 +1,48 @@
+\documentclass[12pt]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage[
+  papel=a4,
+  orientacao-papel=retrato,
+  impressao=frente-e-verso
+]{abntex3}
+
+\begin{document}
+
+\ABNTEXpretextualpages
+
+\ABNTEXpretextualtitle{Agradecimentos}
+
+Este exemplo exercita páginas contadas sem número aparente.
+
+\ABNTEXsumario
+
+\ABNTEXtextualpages
+
+\chapter{Introdução ao layout}
+
+O texto geral usa entrelinha de um e meio e preserva a família tipográfica
+selecionada pelo documento.\footnote{A nota usa tamanho menor, espaço simples
+e alinhamento suspenso.}
+
+\begin{ABNTEXcitacaolonga}
+Este trecho demonstra o espaço físico reservado a uma citação longa. A
+formatação bibliográfica e a indicação de autoria serão integradas ao
+\texttt{biblatex-abnt} em etapa posterior.
+\end{ABNTEXcitacaolonga}
+
+\begin{figure}[ht]
+  \centering
+  \rule{6cm}{3cm}
+  \caption{Representação usada para validar textos auxiliares}
+  \ABNTEXfonte{elaboração própria}
+  \ABNTEXnota{as dimensões são apenas demonstrativas}
+\end{figure}
+
+\chapter{Paridade}
+
+No modo frente e verso, este capítulo começa em página ímpar. Se necessário,
+uma página sem cabeçalho ou rodapé é inserida automaticamente.
+
+\end{document}

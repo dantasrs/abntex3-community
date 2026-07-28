@@ -1,5 +1,8 @@
 # abnTeX3 Community
 
+[![CI](https://github.com/dantasrs/abntex3-community/actions/workflows/ci.yml/badge.svg)](https://github.com/dantasrs/abntex3-community/actions/workflows/ci.yml)
+[![Licença: LPPL 1.3c+](https://img.shields.io/badge/licen%C3%A7a-LPPL%201.3c%2B-blue.svg)](LICENSE)
+
 Continuação comunitária e independente da ideia apresentada no projeto
 [`abntex/abntex3`](https://github.com/abntex/abntex3), voltada à produção de
 documentos LaTeX compatíveis com normas brasileiras de informação e
@@ -8,9 +11,9 @@ documentação.
 ## Situação do projeto
 
 O projeto possui infraestrutura reproduzível, API experimental de configuração
-e metadados e um primeiro módulo para seções, numeração, sumário, apêndices e
-anexos. A versão 0.0.0 ainda não é indicada para produção e não faz alegação
-de conformidade.
+e metadados e módulos para layout, paginação, seções, numeração, sumário,
+apêndices e anexos. A versão 0.0.0 ainda não é indicada para produção e não
+faz alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -59,16 +62,59 @@ de uso das normas.
 
 ## Roteiro
 
-1. Consolidar governança, arquitetura e rastreabilidade normativa.
-2. Criar fontes documentadas, build e testes com `l3build`.
-3. Implementar o núcleo sobre classes LaTeX usuais.
-4. Entregar estrutura, layout e elementos documentais.
-5. Integrar e validar `biblatex-abnt`.
-6. Entregar os perfis acadêmico, projeto, artigo, relatório e livro.
-7. Documentar migração, estabilizar a API e preparar a distribuição CTAN.
+### Marcos concluídos
+
+- [x] **Marco 0 — Fundação:** governança, independência, licença, arquitetura
+  e matriz normativa inicial.
+- [x] **Marco 1 — Infraestrutura:** fontes documentadas, `l3build`, testes nos
+  três motores, CI e pacote CTAN de ensaio.
+- [x] **Marco 2 — Núcleo e API:** configuração, metadados, perfis e suporte
+  inicial a `article`, `report` e `book`.
+- [x] **Marco 3 — Estrutura:** numeração progressiva, seções, sumário,
+  apêndices e anexos.
+- [x] **Marco 4 — Layout:** A4, margens, frente e verso, paginação,
+  espaçamento, notas, citações longas e textos auxiliares.
+
+### Próximos marcos
+
+- [ ] **Marco 5 — Elementos pré-textuais e listas:** implementar capa,
+  lombada, folha de rosto, ficha catalográfica, aprovação, dedicatória,
+  agradecimentos, epígrafe, resumos, palavras-chave e listas, com base nas
+  NBR 14724:2024, 12225:2023 e 6028:2021.
+- [ ] **Marco 6 — Elementos pós-textuais e bibliografia:** integrar
+  `biblatex-abnt` e `biber`, validar citações e referências e implementar
+  glossário, índice e o fluxo pós-textual segundo as NBR 6023:2025,
+  10520:2023 e 6034:2004.
+- [ ] **Marco 7 — Trabalho acadêmico:** reunir os módulos em um primeiro
+  perfil completo para teses, dissertações, TCCs e monografias, acompanhado
+  de exemplo, manual e revisão normativa independente.
+- [ ] **Marco 8 — Projeto de pesquisa:** criar o perfil específico da
+  NBR 15287:2025, documentando e testando suas diferenças em relação ao
+  trabalho acadêmico.
+- [ ] **Marco 9 — Artigo:** implementar o perfil da NBR 6022:2018, incluindo
+  autoria múltipla, afiliações, datas editoriais e testes de composição em
+  uma ou duas colunas.
+- [ ] **Marco 10 — Relatório técnico ou científico:** implementar o perfil da
+  NBR 10719:2015, com identificação, equipes, dados institucionais e anexos
+  específicos.
+- [ ] **Marco 11 — Livro ou folheto:** implementar o perfil da
+  NBR 6029:2023, incluindo elementos editoriais, volumes, lombada e índice.
+- [ ] **Marco 12 — Migração:** publicar a correspondência entre interfaces do
+  abnTeX2 e do abnTeX3 Community, uma camada limitada de compatibilidade e o
+  guia de migração para `biblatex-abnt`.
+- [ ] **Marco 13 — Qualidade e portabilidade:** ampliar os testes para Linux,
+  Windows e macOS, interoperabilidade com pacotes comuns, regressão visual,
+  acessibilidade e desempenho.
+- [ ] **Marco 14 — Alfa e beta:** publicar os primeiros artefatos no GitHub,
+  recolher experiências de uso, concluir revisões normativas e congelar
+  progressivamente a API.
+- [ ] **Marco 15 — Versão estável e CTAN:** preparar a versão `1.0.0`, criar
+  release e tag, submeter ao CTAN e acompanhar a inclusão nas distribuições
+  TeX.
 
 Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
-[`roteiro técnico completo`](docs/roadmap.md).
+[`roteiro técnico completo`](docs/roadmap.md), que contém tarefas, critérios
+de saída e dependências de cada marco.
 
 ## API experimental
 
@@ -90,7 +136,9 @@ O núcleo funciona inicialmente com `article`, `report` e `book`:
 Consulte a [`referência da API`](docs/api.md) para os metadados disponíveis,
 perfis, precedência de configuração, validação técnica e garantias de
 estabilidade. O uso de seções e sumário está documentado em
-[`docs/structure.md`](docs/structure.md).
+[`docs/structure.md`](docs/structure.md); papel, margens, impressão em uma ou
+duas faces, paginação e espaçamento estão em
+[`docs/layout.md`](docs/layout.md).
 
 ## Desenvolvimento
 

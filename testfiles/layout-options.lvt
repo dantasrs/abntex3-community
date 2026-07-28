@@ -1,0 +1,43 @@
+\input regression-test.tex
+\documentclass[12pt]{article}
+\usepackage[
+  orientacao-papel=paisagem,
+  impressao=frente-e-verso,
+  margem-superior=31mm,
+  margem-inferior=21mm,
+  margem-interna=32mm,
+  margem-externa=22mm,
+  recuo-citacao-longa=35mm
+]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\dim_compare:nNnTF {\paperwidth} > {\paperheight}
+  {\TYPE{orientation = landscape}}
+  {\TYPE{orientation = unexpected}}
+\dim_compare:nNnTF {\g__abntex_top_margin_dim} = {31mm}
+  {\TYPE{top margin = configured}}
+  {\TYPE{top margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_bottom_margin_dim} = {21mm}
+  {\TYPE{bottom margin = configured}}
+  {\TYPE{bottom margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_inner_margin_dim} = {32mm}
+  {\TYPE{inner margin = configured}}
+  {\TYPE{inner margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_outer_margin_dim} = {22mm}
+  {\TYPE{outer margin = configured}}
+  {\TYPE{outer margin = unexpected}}
+\dim_compare:nNnTF {\g__abntex_long_quote_indent_dim} = {35mm}
+  {\TYPE{long quote indent = configured}}
+  {\TYPE{long quote indent = unexpected}}
+\ExplSyntaxOff
+\makeatletter
+\if@twoside
+  \TYPE{print mode = duplex}
+\else
+  \TYPE{print mode = unexpected}
+\fi
+\makeatother
+\END
+\end{document}
