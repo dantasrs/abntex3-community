@@ -1,0 +1,345 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-layout.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-layout}: layout e paginação}
+% \author{dantasrs}
+% \date{2026-07-28 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Escopo}
+%
+% Este módulo configura papel, orientação, margens, impressão em uma ou duas
+% faces, entrelinha, paginação, notas e textos auxiliares de ilustrações e
+% tabelas. A rastreabilidade está na matriz da ABNT NBR 14724:2024.
+%
+% A implementação ainda aguarda revisão normativa independente e não
+% constitui alegação de conformidade.
+%
+% \section{Configuração}
+%
+% As chaves de layout pertencem a \cs{ABNTEXsetup} e também podem ser opções
+% do pacote:
+% \begin{itemize}
+%   \item |papel=a4|;
+%   \item |orientacao-papel=retrato| ou |paisagem|;
+%   \item |impressao=anverso| ou |frente-e-verso|;
+%   \item |margem-superior|, |margem-inferior|, |margem-interna| e
+%     |margem-externa|;
+%   \item |recuo-citacao-longa|.
+% \end{itemize}
+%
+% As chaves dimensionais e de orientação devem ser configuradas no preâmbulo.
+% O padrão usa A4 em retrato, 3\,cm nas margens superior e interna e 2\,cm nas
+% margens inferior e externa.
+%
+% \section{Paginação}
+%
+% \begin{function}{\ABNTEXpretextualpages,\ABNTEXtextualpages}
+%   O primeiro comando inicia a contagem arábica e oculta sua impressão. O
+%   segundo abre a parte textual em nova página apropriada ao modo de
+%   impressão e passa a exibir os números. Elementos que não entram na
+%   contagem devem preceder \cs{ABNTEXpretextualpages}.
+% \end{function}
+%
+% Seções primárias começam em nova página no modo |anverso| e em página ímpar
+% no modo |frente-e-verso|. Páginas inseridas para manter a paridade não
+% exibem cabeçalho nem rodapé.
+%
+% \section{Espaçamento e exceções}
+%
+% O texto geral usa entrelinha de um e meio. O módulo não escolhe família
+% tipográfica nem substitui o tamanho-base definido pela classe; exemplos
+% normativos devem usar 12\,pt. Exceções usam entrelinha simples e
+% \cs{small}, preservando a família escolhida pelo documento.
+%
+% \begin{function}{ABNTEXcitacaolonga}
+%   \begin{syntax}
+%     \cs{begin}\{ABNTEXcitacaolonga\}\oarg{recuo}
+%   \end{syntax}
+%   Compõe uma citação longa em tamanho menor, espaço simples, sem aspas e
+%   com recuo esquerdo. O valor inicial é 4\,cm e pode ser alterado pela
+%   opção ou pelo argumento local.
+% \end{function}
+%
+% \begin{function}{\ABNTEXfonte,\ABNTEXnota}
+%   Compõem, com tamanho menor e espaço simples, a identificação da fonte e
+%   uma nota imediatamente depois de ilustração ou tabela. O comando
+%   \cs{caption} recebe a mesma política tipográfica.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-layout}
+  {2026-07-28}{0.0.0}{Layout e paginacao do abnTeX3 Community}
+
+\RequirePackage{geometry}
+\RequirePackage{setspace}
+\RequirePackage{caption}
+
+\tl_new:N \g__abntex_paper_tl
+\tl_new:N \g__abntex_orientation_tl
+\tl_new:N \g__abntex_print_mode_tl
+\dim_new:N \g__abntex_top_margin_dim
+\dim_new:N \g__abntex_bottom_margin_dim
+\dim_new:N \g__abntex_inner_margin_dim
+\dim_new:N \g__abntex_outer_margin_dim
+\dim_new:N \g__abntex_long_quote_indent_dim
+\bool_new:N \g__abntex_page_numbers_bool
+
+\tl_gset:Nn \g__abntex_paper_tl {a4}
+\tl_gset:Nn \g__abntex_orientation_tl {retrato}
+\tl_gset:Nn \g__abntex_print_mode_tl {anverso}
+\dim_gset:Nn \g__abntex_top_margin_dim {3cm}
+\dim_gset:Nn \g__abntex_bottom_margin_dim {2cm}
+\dim_gset:Nn \g__abntex_inner_margin_dim {3cm}
+\dim_gset:Nn \g__abntex_outer_margin_dim {2cm}
+\dim_gset:Nn \g__abntex_long_quote_indent_dim {4cm}
+\bool_gset_true:N \g__abntex_page_numbers_bool
+
+\cs_new_protected:Npn \__abntex_layout_apply_geometry:
+  {
+    \tl_if_eq:NnTF \g__abntex_orientation_tl {paisagem}
+      {\geometry{a4paper,landscape}}
+      {\geometry{a4paper,portrait}}
+    \tl_if_eq:NnTF \g__abntex_print_mode_tl {frente-e-verso}
+      {
+        \geometry{
+          twoside=true,
+          inner=\dim_use:N \g__abntex_inner_margin_dim,
+          outer=\dim_use:N \g__abntex_outer_margin_dim,
+          top=\dim_use:N \g__abntex_top_margin_dim,
+          bottom=\dim_use:N \g__abntex_bottom_margin_dim,
+          headheight=12pt,
+          headsep=0.5782cm
+        }
+      }
+      {
+        \geometry{
+          twoside=false,
+          left=\dim_use:N \g__abntex_inner_margin_dim,
+          right=\dim_use:N \g__abntex_outer_margin_dim,
+          top=\dim_use:N \g__abntex_top_margin_dim,
+          bottom=\dim_use:N \g__abntex_bottom_margin_dim,
+          headheight=12pt,
+          headsep=0.5782cm
+        }
+      }
+  }
+
+\keys_define:nn {abntex3}
+  {
+    papel .choices:nn = {a4}
+      {
+        \tl_gset:Nx \g__abntex_paper_tl {\l_keys_choice_tl}
+        \__abntex_layout_apply_geometry:
+      },
+    orientacao-papel .choices:nn = {retrato, paisagem}
+      {
+        \tl_gset:Nx \g__abntex_orientation_tl {\l_keys_choice_tl}
+        \__abntex_layout_apply_geometry:
+      },
+    impressao .choices:nn = {anverso, frente-e-verso}
+      {
+        \tl_gset:Nx \g__abntex_print_mode_tl {\l_keys_choice_tl}
+        \__abntex_layout_apply_geometry:
+      },
+    margem-superior .code:n =
+      {
+        \dim_gset:Nn \g__abntex_top_margin_dim {#1}
+        \__abntex_layout_apply_geometry:
+      },
+    margem-inferior .code:n =
+      {
+        \dim_gset:Nn \g__abntex_bottom_margin_dim {#1}
+        \__abntex_layout_apply_geometry:
+      },
+    margem-interna .code:n =
+      {
+        \dim_gset:Nn \g__abntex_inner_margin_dim {#1}
+        \__abntex_layout_apply_geometry:
+      },
+    margem-externa .code:n =
+      {
+        \dim_gset:Nn \g__abntex_outer_margin_dim {#1}
+        \__abntex_layout_apply_geometry:
+      },
+    recuo-citacao-longa .dim_gset:N =
+      \g__abntex_long_quote_indent_dim
+  }
+
+\__abntex_layout_apply_geometry:
+
+\cs_new_protected:Npn \__abntex_layout_apply_sides:
+  {
+    \tl_if_eq:NnTF \g__abntex_print_mode_tl {frente-e-verso}
+      {
+        \@twosidetrue
+        \@mparswitchtrue
+        \tl_if_eq:NnF \g__abntex_class_tl {article}
+          {\@openrighttrue}
+      }
+      {
+        \@twosidefalse
+        \@mparswitchfalse
+        \tl_if_eq:NnF \g__abntex_class_tl {article}
+          {\@openrightfalse}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_layout_primary_break:
+  {
+    \tl_if_eq:NnTF \g__abntex_print_mode_tl {frente-e-verso}
+      {\cleardoublepage}
+      {\clearpage}
+  }
+
+\cs_new_protected:Npn \__abntex_layout_install_primary_break:
+  {
+    \tl_if_eq:NnTF \g__abntex_class_tl {article}
+      {
+        \hook_gput_code:nnn {cmd/section/before}
+          {abntex3-layout-primary}
+          {\__abntex_layout_primary_break:}
+      }
+      {
+        \hook_gput_code:nnn {cmd/chapter/before}
+          {abntex3-layout-primary}
+          {\__abntex_layout_primary_break:}
+      }
+  }
+
+\cs_new_protected:cpn {ps@abntex3}
+  {
+    \cs_set_eq:NN \@mkboth \use_none:nn
+    \cs_set:Npn \@oddhead
+      {\normalfont\small\hfil\thepage}
+    \cs_set:Npn \@evenhead
+      {\normalfont\small\thepage\hfil}
+    \cs_set:Npn \@oddfoot {}
+    \cs_set:Npn \@evenfoot {}
+  }
+
+\cs_gset_protected:cpn {ps@plain}
+  {
+    \bool_if:NTF \g__abntex_page_numbers_bool
+      {\use:c {ps@abntex3}}
+      {\use:c {ps@empty}}
+  }
+
+\cs_new_protected:Npn \__abntex_layout_footnote_rule:
+  {
+    \kern -3pt
+    \hrule width 5cm height 0.4pt
+    \kern 2.6pt
+  }
+
+\cs_new_protected:Npn \__abntex_layout_make_footnote:n #1
+  {
+    \setstretch{1}
+    \parindent \z@
+    \hangindent 1.5em
+    \hangafter \@ne
+    \noindent
+    \makebox[1.5em][l]{\@makefnmark}#1
+  }
+
+\cs_new_protected:Npn \__abntex_layout_initialize:
+  {
+    \__abntex_layout_apply_sides:
+    \__abntex_layout_install_primary_break:
+    \tl_if_eq:NnF \g__abntex_class_tl {article}
+      {
+        \counterwithout{figure}{chapter}
+        \counterwithout{table}{chapter}
+      }
+    \cs_gset_eq:NN \footnoterule \__abntex_layout_footnote_rule:
+    \cs_gset_eq:NN \@makefntext \__abntex_layout_make_footnote:n
+    \captionsetup{
+      font={small,stretch=1},
+      labelfont=normalfont,
+      labelsep=endash,
+      justification=raggedright,
+      singlelinecheck=false
+    }
+    \onehalfspacing
+    \pagestyle{abntex3}
+  }
+
+\NewDocumentCommand \ABNTEXpretextualpages {}
+  {
+    \clearpage
+    \pagenumbering{arabic}
+    \bool_gset_false:N \g__abntex_page_numbers_bool
+    \pagestyle{empty}
+    \thispagestyle{empty}
+  }
+
+\NewDocumentCommand \ABNTEXtextualpages {}
+  {
+    \__abntex_layout_primary_break:
+    \bool_gset_true:N \g__abntex_page_numbers_bool
+    \pagestyle{abntex3}
+    \thispagestyle{abntex3}
+  }
+
+\NewDocumentEnvironment {ABNTEXcitacaolonga}
+  {O{\dim_use:N \g__abntex_long_quote_indent_dim}}
+  {
+    \par
+    \addvspace{\baselineskip}
+    \group_begin:
+      \small
+      \setstretch{1}
+      \dim_set:Nn \leftskip {#1}
+      \dim_zero:N \rightskip
+      \dim_zero:N \parindent
+      \noindent
+  }
+  {
+      \par
+    \group_end:
+    \addvspace{\baselineskip}
+  }
+
+\cs_new_protected:Npn \__abntex_layout_auxiliary_text:nn #1#2
+  {
+    \par
+    \group_begin:
+      \small
+      \setstretch{1}
+      \raggedright
+      \noindent #1:~#2\par
+    \group_end:
+  }
+
+\NewDocumentCommand \ABNTEXfonte {m}
+  {\__abntex_layout_auxiliary_text:nn {Fonte} {#1}}
+\NewDocumentCommand \ABNTEXnota {m}
+  {\__abntex_layout_auxiliary_text:nn {Nota} {#1}}
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

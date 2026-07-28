@@ -43,14 +43,15 @@ compile_example() {
     echo "O pacote resolvido não pertence à árvore isolada: ${resolved_package}" >&2
     exit 1
   fi
-  for example in minimo estrutura-sumario; do
+  for example in minimo estrutura-sumario layout-paginacao; do
     cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
     (
       cd "${run_dir}"
       TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
         pdflatex -interaction=nonstopmode -halt-on-error \
           "${example}.tex" >/dev/null
-      if [[ "${example}" == "estrutura-sumario" ]]; then
+      if [[ "${example}" == "estrutura-sumario" || \
+            "${example}" == "layout-paginacao" ]]; then
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
           pdflatex -interaction=nonstopmode -halt-on-error \
             "${example}.tex" >/dev/null

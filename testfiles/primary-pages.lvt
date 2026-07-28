@@ -1,0 +1,14 @@
+\input regression-test.tex
+\documentclass[12pt]{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+Texto antes da primeira secao.
+\section{Primeira seção}
+\TYPE{first primary page = \thepage}
+Texto depois da primeira secao.
+\section{Segunda seção}
+\TYPE{second primary page = \thepage}
+\END
+\end{document}

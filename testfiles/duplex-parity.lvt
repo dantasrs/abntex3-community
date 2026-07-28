@@ -1,0 +1,23 @@
+\input regression-test.tex
+\documentclass[12pt]{book}
+\usepackage[impressao=frente-e-verso]{abntex3}
+
+\begin{document}
+\START
+\ABNTEXpretextualpages
+Uma pagina pre-textual.
+\ABNTEXtextualpages
+\ifodd\value{page}
+  \TYPE{textual parity = odd}
+\else
+  \TYPE{textual parity = unexpected}
+\fi
+\TYPE{textual page = \thepage}
+\chapter{Primeira seção}
+\ifodd\value{page}
+  \TYPE{primary parity = odd}
+\else
+  \TYPE{primary parity = unexpected}
+\fi
+\END
+\end{document}

@@ -155,8 +155,8 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 3 formam a infraestrutura mínima e
-o primeiro módulo normativo rastreável.
+Os arquivos já materializados até o Marco 4 formam a infraestrutura mínima e
+os primeiros módulos normativos rastreáveis.
 Os demais itens da árvore são criados apenas no marco em que sua
 responsabilidade é implementada.
 

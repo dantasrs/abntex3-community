@@ -36,3 +36,14 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Testes de profundidade, títulos longos, quebras de página, acentos,
   hiperlinks e classes-base nos três motores.
 - Exemplo completo de estrutura e sumário.
+- Matriz rastreável da ABNT NBR 14724:2024 para layout e paginação.
+- Módulo documentado `abntex3-layout` com papel A4, orientação e margens.
+- Modos de impressão em anverso e frente e verso com margens espelhadas.
+- Contagem pré-textual, exibição textual e paginação externa no cabeçalho.
+- Entrelinha geral, notas de rodapé, citações longas, legendas e fontes.
+- Numeração contínua de figuras e tabelas, independente dos capítulos.
+- Testes de dimensões, páginas únicas e múltiplas, páginas em branco e
+  paridade nos três motores.
+- Exemplo completo de layout e paginação.
+- Visão executiva do roadmap no README, com marcos concluídos e próximos.
+- Badges de integração contínua e licença no README.

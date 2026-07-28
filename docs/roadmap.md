@@ -108,17 +108,17 @@ de qualquer alegação de conformidade.
 
 **Norma principal:** ABNT NBR 14724:2024.
 
-- [ ] Criar a matriz `nbr-14724-2024.md`.
-- [ ] Criar `abntex3-layout.dtx`.
-- [ ] Implementar papel, orientação e margens.
-- [ ] Implementar impressão em frente e frente e verso.
-- [ ] Implementar contagem e exibição de páginas.
-- [ ] Implementar cabeçalhos e rodapés mínimos.
-- [ ] Definir política de fonte e tamanho sem impor família desnecessária.
-- [ ] Implementar espaçamento geral e exceções.
-- [ ] Implementar notas, citações longas, legendas e fontes.
-- [ ] Testar documentos de uma página, múltiplas páginas e páginas em branco.
-- [ ] Testar paridade de páginas no modo frente e verso.
+- [x] Criar a matriz `nbr-14724-2024.md`.
+- [x] Criar `abntex3-layout.dtx`.
+- [x] Implementar papel, orientação e margens.
+- [x] Implementar impressão em anverso e frente e verso.
+- [x] Implementar contagem e exibição de páginas.
+- [x] Implementar cabeçalhos e rodapés mínimos.
+- [x] Definir política de fonte e tamanho sem impor família desnecessária.
+- [x] Implementar espaçamento geral e exceções.
+- [x] Implementar notas, citações longas, legendas e fontes.
+- [x] Testar documentos de uma página, múltiplas páginas e páginas em branco.
+- [x] Testar paridade de páginas no modo frente e verso.
 
 **Critério de saída:** o layout básico é mensurável, testado e independente do
 perfil documental.

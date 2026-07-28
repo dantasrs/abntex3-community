@@ -1,9 +1,9 @@
 # API pública
 
-Este documento descreve o contrato iniciado no Marco 2 e ampliado no Marco 3.
-A versão `0.0.0` continua experimental. O módulo estrutural possui
-rastreabilidade normativa, mas ainda aguarda revisão independente e não faz
-alegação de conformidade.
+Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
+Marcos 3 e 4. A versão `0.0.0` continua experimental. Os módulos estrutural e
+de layout possuem rastreabilidade normativa, mas ainda aguardam revisão
+independente e não fazem alegação de conformidade.
 
 ## Carregamento e classes
 
@@ -40,6 +40,14 @@ perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
 - `largura-indicativo-sumario`;
 - `nome-apendice`;
 - `nome-anexo`;
+- `papel`;
+- `orientacao-papel`;
+- `impressao`;
+- `margem-superior`;
+- `margem-inferior`;
+- `margem-interna`;
+- `margem-externa`;
+- `recuo-citacao-longa`;
 - `debug`, uma opção experimental de diagnóstico.
 
 As mesmas chaves podem ser passadas como opções do pacote. A precedência, da
@@ -90,7 +98,7 @@ O núcleo possui mensagens próprias para:
 
 Comandos, opções e chaves documentados são a API pública experimental da linha
 `0.0.x`. Funções e variáveis com nomes internos não têm garantia de
-compatibilidade. Nenhuma interface está obsoleta até o Marco 3; a mensagem de
+compatibilidade. Nenhuma interface está obsoleta até o Marco 4; a mensagem de
 depreciação estabelece o mecanismo que será usado quando necessário.
 
 ## Estrutura e sumário
@@ -105,3 +113,18 @@ O Marco 3 acrescenta:
 
 A referência, os valores aceitos e os limites estão em
 [`structure.md`](structure.md).
+
+## Layout e paginação
+
+O Marco 4 acrescenta:
+
+- chaves de papel, orientação física, modo de impressão e margens;
+- `\ABNTEXpretextualpages` e `\ABNTEXtextualpages`;
+- o ambiente `ABNTEXcitacaolonga`;
+- `\ABNTEXfonte` e `\ABNTEXnota`;
+- estilo de página, entrelinha, notas e legendas configurados pelo módulo.
+
+`orientacao` permanece sendo o metadado acadêmico de orientação;
+`orientacao-papel` controla retrato ou paisagem. As chaves físicas devem ser
+usadas no preâmbulo. A referência detalhada está em
+[`layout.md`](layout.md).

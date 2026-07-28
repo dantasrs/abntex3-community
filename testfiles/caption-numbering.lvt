@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass[12pt]{book}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\chapter{Primeira seção}
+\refstepcounter{figure}
+\TYPE{first figure = \thefigure}
+\refstepcounter{table}
+\TYPE{first table = \thetable}
+\chapter{Segunda seção}
+\refstepcounter{figure}
+\TYPE{second figure = \thefigure}
+\refstepcounter{table}
+\TYPE{second table = \thetable}
+\END
+\end{document}
