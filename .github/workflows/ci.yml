@@ -50,7 +50,7 @@ jobs:
           texlive_version: 2026
           scheme: full
           run: |
-            apk add --no-cache diffutils
+            apk add --no-cache diffutils unzip
             l3build unpack
             l3build check
             l3build doc
