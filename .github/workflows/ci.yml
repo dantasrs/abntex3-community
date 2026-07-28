@@ -31,7 +31,9 @@ jobs:
         with:
           texlive_version: ${{ matrix.texlive }}
           scheme: full
-          run: l3build check
+          run: |
+            apk add --no-cache diffutils
+            l3build check
 
   distribution:
     name: Distribuição de ensaio
@@ -48,6 +50,7 @@ jobs:
           texlive_version: 2026
           scheme: full
           run: |
+            apk add --no-cache diffutils
             l3build unpack
             l3build check
             l3build doc
