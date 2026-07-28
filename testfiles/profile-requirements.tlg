@@ -1,0 +1,8 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+nenhum=
+academico=titulo,autoria,instituicao,natureza,objetivo,area,orientacao,local,data
+projeto=titulo,autoria,instituicao,local,data
+artigo=titulo,autoria,data
+relatorio=titulo,autoria,instituicao,local,data
+livro=titulo,autoria,local,data

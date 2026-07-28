@@ -2,12 +2,14 @@ module = "abntex3"
 
 sourcefiledir = "source"
 testfiledir = "testfiles"
+checksuppfiles = {"*.sty"}
 
 sourcefiles = {"*.dtx", "*.ins"}
 unpackfiles = {"*.ins"}
 installfiles = {"*.sty"}
 typesetfiles = {"*.dtx"}
 demofiles = {"examples/*.tex"}
+docfiles = {"docs/api.md"}
 textfiles = {"README.md", "CHANGELOG.md", "LICENSE", "manifest.txt"}
 
 checkengines = {"pdftex", "luatex", "xetex"}
@@ -17,6 +19,7 @@ typesetruns = 2
 
 ctanreadme = "README.md"
 packtdszip = true
+flatten = false
 
 excludefiles = {
   "*~",

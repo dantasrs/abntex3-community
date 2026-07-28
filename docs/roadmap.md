@@ -69,17 +69,17 @@ com a versão empacotada; `l3build check` é reprodutível.
 **Objetivo:** estabelecer configuração, metadados e compatibilidade básica com
 classes usuais.
 
-- [ ] Criar `abntex3-core.dtx`.
-- [ ] Implementar opções com `l3keys2e`.
-- [ ] Implementar `\ABNTEXsetup`.
-- [ ] Definir mensagens de erro, aviso e depreciação.
-- [ ] Implementar metadados: título, subtítulo, autoria, instituição, natureza,
+- [x] Criar `abntex3-core.dtx`.
+- [x] Implementar opções com `l3keys2e`.
+- [x] Implementar `\ABNTEXsetup`.
+- [x] Definir mensagens de erro, aviso e depreciação.
+- [x] Implementar metadados: título, subtítulo, autoria, instituição, natureza,
       objetivo, área, orientação, local e data.
-- [ ] Definir valores obrigatórios por perfil.
-- [ ] Detectar classe-base e conflitos conhecidos.
-- [ ] Suportar inicialmente `article`, `report` e `book`.
-- [ ] Testar carregamento antes e depois de pacotes comuns.
-- [ ] Documentar API, precedência das opções e estabilidade.
+- [x] Definir valores obrigatórios por perfil.
+- [x] Detectar classe-base e conflitos conhecidos.
+- [x] Suportar inicialmente `article`, `report` e `book`.
+- [x] Testar carregamento antes e depois de pacotes comuns.
+- [x] Documentar API, precedência das opções e estabilidade.
 
 **Critério de saída:** API mínima documentada e estável o suficiente para os
 módulos seguintes, ainda sem alegação de conformidade.

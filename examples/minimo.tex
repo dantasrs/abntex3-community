@@ -2,11 +2,24 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[brazilian]{babel}
-\usepackage{abntex3}
+\usepackage[perfil=academico]{abntex3}
 
-\title{Exemplo mínimo do abnTeX3 Community}
-\author{Equipe do projeto}
-\date{}
+\ABNTEXsetup{
+  titulo={Exemplo mínimo do abnTeX3 Community},
+  autoria={Equipe do projeto},
+  instituicao={Instituição de exemplo},
+  natureza={Trabalho acadêmico},
+  objetivo={Demonstrar a API mínima},
+  area={Documentação},
+  orientacao={Orientação de exemplo},
+  local={Recife},
+  data={2026}
+}
+\ABNTEXvalidate
+
+\title{\ABNTEXmetadata{titulo}}
+\author{\ABNTEXmetadata{autoria}}
+\date{\ABNTEXmetadata{data}}
 
 \begin{document}
 

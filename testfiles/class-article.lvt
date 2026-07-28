@@ -1,0 +1,9 @@
+\input regression-test.tex
+\documentclass[12pt,a4paper]{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\TYPE{class = \ABNTEXclass}
+\END
+\end{document}
