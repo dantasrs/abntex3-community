@@ -1,0 +1,9 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+item=adm.=>administracao
+item=Fil.=>Filosofia
+item=ABNT=>Associacao Brasileira de Normas Tecnicas
+item=IBGE=>Instituto Brasileiro de Geografia e Estatistica
+item=z=>Terceiro
+item=a=>Primeiro na declaracao
+list-count=3

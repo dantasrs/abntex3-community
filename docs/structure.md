@@ -117,7 +117,8 @@ Os rótulos podem ser alterados no preâmbulo por `nome-apendice` e
 
 ## Limites atuais
 
-- a ordem completa dos elementos pré-textuais será coordenada no Marco 5;
+- a ordem dos elementos pré-textuais é coordenada pelo módulo do Marco 5,
+  enquanto variações de perfil pertencem aos marcos específicos;
 - alíneas e subalíneas ainda não possuem uma API própria;
 - documentos multilíngues ou multivolume exigem coordenação editorial;
 - classes `memoir` e KOMA-Script ainda não são suportadas;

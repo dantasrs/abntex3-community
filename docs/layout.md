@@ -92,10 +92,15 @@ alinhamento suspenso que mantém o expoente destacado. `\caption`,
 autoria e a redação das fontes permanecem responsabilidade do usuário.
 Figuras e tabelas usam sequências contínuas, sem reinício por capítulo.
 
+No modo frente e verso, o módulo acompanha separadamente as faces físicas
+enviadas ao PDF e o contador documental. Essa distinção mantém as aberturas
+no anverso mesmo quando a ficha catalográfica ocupa uma face que não entra na
+contagem.
+
 ## Limites atuais
 
-- capa, ficha catalográfica e demais elementos pré-textuais pertencem ao
-  Marco 5;
+- capa, ficha catalográfica e demais elementos pré-textuais são tratados pelo
+  módulo `abntex3-frontmatter`;
 - referências e integração de citações pertencem ao Marco 6;
 - o perfil acadêmico completo e sua sequência de elementos pertencem ao
   Marco 7;

@@ -44,10 +44,13 @@ armazenados no repositório.
 ## Matrizes detalhadas disponíveis
 
 - [`ABNT NBR 14724:2024`](requisitos/nbr-14724-2024.md) — layout e
-  paginação;
+  paginação e elementos pré-textuais;
+- [`ABNT NBR 12225:2023`](requisitos/nbr-12225-2023.md) — lombada;
 - [`ABNT NBR 6024:2012`](requisitos/nbr-6024-2012.md) — numeração
   progressiva das seções;
-- [`ABNT NBR 6027:2012`](requisitos/nbr-6027-2012.md) — sumário.
+- [`ABNT NBR 6027:2012`](requisitos/nbr-6027-2012.md) — sumário;
+- [`ABNT NBR 6028:2021`](requisitos/nbr-6028-2021.md) — resumos e
+  palavras-chave.
 
 ## Conformidade
 

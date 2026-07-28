@@ -1,0 +1,427 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-frontmatter.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-frontmatter}: elementos pré-textuais}
+% \author{dantasrs}
+% \date{2026-07-28 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Escopo}
+%
+% Este módulo compõe a parte externa e os elementos pré-textuais descritos
+% pela ABNT NBR 14724:2024. A lombada possui opções alinhadas à ABNT NBR
+% 12225:2023, e os resumos e palavras-chave seguem a ABNT NBR 6028:2021.
+%
+% A implementação possui rastreabilidade, mas ainda aguarda revisão normativa
+% independente e não constitui alegação de conformidade.
+%
+% \section{Parte externa e identificação}
+%
+% \begin{function}{\ABNTEXcapa,\ABNTEXlombada,\ABNTEXfolhaderosto}
+%   Compõem, respectivamente, a capa, uma prova gráfica de lombada e o
+%   anverso da folha de rosto usando os metadados do núcleo. A prova da
+%   lombada aceita dois argumentos opcionais: identificação alfanumérica e
+%   conteúdo institucional ou logomarca.
+% \end{function}
+%
+% A chave |disposicao-lombada| aceita |descendente| ou |horizontal|. A
+% largura da prova pode ser configurada por |largura-lombada|.
+%
+% \section{Elementos internos}
+%
+% \begin{function}{\ABNTEXfichacatalografica}
+%   \begin{syntax}
+%     \cs{ABNTEXfichacatalografica}\Arg{conteúdo}
+%   \end{syntax}
+%   Insere os dados catalográficos fornecidos pelo profissional responsável.
+%   A página física não avança o contador documental.
+% \end{function}
+%
+% \begin{function}{\ABNTEXerrata,\ABNTEXfolhadeaprovacao}
+%   \cs{ABNTEXerrata} recebe a referência do trabalho e o conteúdo da tabela
+%   de correções. \cs{ABNTEXfolhadeaprovacao} recebe a data de aprovação e
+%   os componentes da banca; \cs{ABNTEXmembrobanca} oferece uma apresentação
+%   uniforme para cada componente.
+% \end{function}
+%
+% \begin{function}{\ABNTEXdedicatoria,\ABNTEXagradecimentos,\ABNTEXepigrafe}
+%   Compõem os elementos opcionais homônimos. A epígrafe aceita a indicação
+%   de autoria em argumento opcional.
+% \end{function}
+%
+% \section{Resumos}
+%
+% \begin{function}{\ABNTEXresumo,\ABNTEXresumoemlinguaestrangeira}
+%   Ambos recebem o texto em parágrafo único e uma lista de palavras-chave
+%   separada por vírgulas. O comando em língua estrangeira também recebe,
+%   como argumentos opcionais, o título e o rótulo das palavras-chave.
+% \end{function}
+%
+% A chave |separador-palavras-chave| tem o valor inicial |;|. O módulo inclui
+% os espaços e o ponto final, evitando que essas decisões sejam repetidas no
+% documento.
+%
+% \begin{function}{\ABNTEXvalidatepretextual}
+%   Para o perfil |academico|, verifica se capa, folha de rosto, folha de
+%   aprovação, os dois resumos e o sumário foram compostos. A mesma
+%   verificação é executada na transição para a parte textual. Elementos
+%   opcionais ausentes não produzem páginas vazias nem avisos.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-frontmatter}
+  {2026-07-28}{0.0.0}{Elementos pre-textuais do abnTeX3 Community}
+
+\RequirePackage{graphicx}
+
+\tl_new:N \g__abntex_spine_layout_tl
+\tl_new:N \g__abntex_keyword_separator_tl
+\dim_new:N \g__abntex_spine_width_dim
+\int_new:N \g__abntex_frontmatter_rank_int
+\prop_new:N \g__abntex_frontmatter_seen_prop
+
+\tl_gset:Nn \g__abntex_spine_layout_tl {descendente}
+\tl_gset:Nn \g__abntex_keyword_separator_tl {;}
+\dim_gset:Nn \g__abntex_spine_width_dim {3cm}
+
+\msg_new:nnnn {abntex3} {frontmatter-order}
+  {O~elemento~pre-textual~'#1'~esta~fora~da~ordem~recomendada.}
+  {Revise~a~sequencia~definida~na~ABNT~NBR~14724:2024.}
+\msg_new:nnnn {abntex3} {required-frontmatter-missing}
+  {O~elemento~pre-textual~'#1'~nao~foi~composto.}
+  {Inclua~o~comando~publico~correspondente~antes~da~parte~textual.}
+
+\keys_define:nn {abntex3}
+  {
+    disposicao-lombada .choices:nn = {descendente, horizontal}
+      {\tl_gset:Nx \g__abntex_spine_layout_tl {\l_keys_choice_tl}},
+    largura-lombada .dim_gset:N = \g__abntex_spine_width_dim,
+    separador-palavras-chave .tl_gset:N =
+      \g__abntex_keyword_separator_tl
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_register:nn #1#2
+  {
+    \int_compare:nNnT {#1} < {\g__abntex_frontmatter_rank_int}
+      {\msg_warning:nnn {abntex3} {frontmatter-order} {#2}}
+    \int_gset:Nn \g__abntex_frontmatter_rank_int
+      {\int_max:nn {#1} {\g__abntex_frontmatter_rank_int}}
+    \prop_gput:Nnn \g__abntex_frontmatter_seen_prop {#2} {true}
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_external_page:n #1
+  {
+    \clearpage
+    \thispagestyle{empty}
+    \group_begin:
+      \parindent \z@
+      #1
+    \group_end:
+    \clearpage
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_page:n #1
+  {
+    \__abntex_layout_primary_break:
+    \thispagestyle{empty}
+    \group_begin:
+      \parindent \z@
+      #1
+    \group_end:
+    \clearpage
+  }
+
+\cs_new:Npn \__abntex_frontmatter_title:
+  {
+    \ABNTEXmetadata{titulo}
+    \tl_if_blank:eF {\ABNTEXmetadata{subtitulo}}
+      {:~\ABNTEXmetadata{subtitulo}}
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_nature:
+  {
+    \begin{minipage}{0.5\textwidth}
+      \small
+      \setstretch{1}
+      \ABNTEXmetadata{natureza}
+      \tl_if_blank:eF {\ABNTEXmetadata{objetivo}}
+        {~\ABNTEXmetadata{objetivo}}
+      \tl_if_blank:eF {\ABNTEXmetadata{instituicao}}
+        {~\ABNTEXmetadata{instituicao}.}
+      \tl_if_blank:eF {\ABNTEXmetadata{area}}
+        {~Área~de~concentração:~\ABNTEXmetadata{area}.}
+
+      \medskip
+      Orientação:~\ABNTEXmetadata{orientacao}.
+      \tl_if_blank:eF {\ABNTEXmetadata{coorientacao}}
+        {\par Coorientação:~\ABNTEXmetadata{coorientacao}.}
+    \end{minipage}
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_identification_page:
+  {
+    \centering
+    {\ABNTEXmetadata{autoria}\par}
+    \vfill
+    {\bfseries\__abntex_frontmatter_title:\par}
+    \tl_if_blank:eF {\ABNTEXmetadata{volume}}
+      {\medskip Volume~\ABNTEXmetadata{volume}\par}
+    \vfill
+    \hfill\__abntex_frontmatter_nature:\par
+    \vfill
+    {\ABNTEXmetadata{local}\par}
+    {\ABNTEXmetadata{data}\par}
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_spine_text:
+  {
+    \ABNTEXmetadata{autoria}
+    \quad\textemdash\quad
+    \__abntex_frontmatter_title:
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_keywords:nnn #1#2#3
+  {
+    \par\medskip
+    \noindent\textbf{#1:}~
+    \clist_set:Nn \l_tmpa_clist {#3}
+    \clist_use:Nn \l_tmpa_clist
+      {\tl_use:N \g__abntex_keyword_separator_tl \c_space_tl}
+    .\par
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_abstract:nnnn #1#2#3#4
+  {
+    \ABNTEXpretextualtitle{#1}
+    #3\par
+    \__abntex_frontmatter_keywords:nnn {#2} {} {#4}
+  }
+
+\cs_new_protected:Npn \__abntex_frontmatter_validate:
+  {
+    \tl_if_eq:NnT \g__abntex_profile_tl {academico}
+      {
+        \clist_map_inline:nn
+          {
+            capa,
+            folha-de-rosto,
+            folha-de-aprovacao,
+            resumo,
+            resumo-em-lingua-estrangeira,
+            sumario
+          }
+          {
+            \prop_if_in:NnF \g__abntex_frontmatter_seen_prop {##1}
+              {
+                \msg_warning:nnn {abntex3}
+                  {required-frontmatter-missing} {##1}
+              }
+          }
+      }
+  }
+
+\NewDocumentCommand \ABNTEXcapa {}
+  {
+    \__abntex_frontmatter_register:nn {1} {capa}
+    \__abntex_frontmatter_external_page:n
+      {
+        \centering
+        \tl_if_blank:eF {\ABNTEXmetadata{instituicao}}
+          {{\ABNTEXmetadata{instituicao}\par}\vspace{1.5cm}}
+        {\ABNTEXmetadata{autoria}\par}
+        \vfill
+        {\bfseries\__abntex_frontmatter_title:\par}
+        \tl_if_blank:eF {\ABNTEXmetadata{volume}}
+          {\medskip Volume~\ABNTEXmetadata{volume}\par}
+        \vfill
+        {\ABNTEXmetadata{local}\par}
+        {\ABNTEXmetadata{data}\par}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlombada {O{} O{}}
+  {
+    \__abntex_frontmatter_register:nn {1} {lombada}
+    \__abntex_frontmatter_external_page:n
+      {
+        \centering
+        \fbox
+          {
+            \begin{minipage}[c][0.82\textheight][c]
+              {\dim_use:N \g__abntex_spine_width_dim}
+              \centering
+              \vspace*{2cm}
+              \tl_if_eq:NnTF
+                \g__abntex_spine_layout_tl {descendente}
+                {
+                  \rotatebox{-90}
+                    {
+                      \makebox[0.48\textheight][c]
+                        {\__abntex_frontmatter_spine_text:}
+                    }
+                }
+                {
+                  \__abntex_frontmatter_spine_text:
+                }
+              \vfill
+              \tl_if_blank:nF {#1} {#1\par}
+              \tl_if_blank:nF {#2} {\medskip #2\par}
+              \vspace*{3cm}
+            \end{minipage}
+          }
+      }
+  }
+
+\NewDocumentCommand \ABNTEXfolhaderosto {}
+  {
+    \__abntex_frontmatter_register:nn {2} {folha-de-rosto}
+    \__abntex_frontmatter_page:n
+      {\__abntex_frontmatter_identification_page:}
+  }
+
+\NewDocumentCommand \ABNTEXfichacatalografica {m}
+  {
+    \__abntex_frontmatter_register:nn {3} {ficha-catalografica}
+    \__abntex_frontmatter_external_page:n
+      {
+        \vspace*{\fill}
+        \begin{center}
+          \fbox
+            {
+              \begin{minipage}{0.8\textwidth}
+                \small
+                \setstretch{1}
+                #1
+              \end{minipage}
+            }
+        \end{center}
+      }
+    \addtocounter{page}{-1}
+  }
+
+\NewDocumentCommand \ABNTEXerrata {m m}
+  {
+    \__abntex_frontmatter_register:nn {4} {errata}
+    \ABNTEXpretextualtitle{Errata}
+    \begingroup
+      \small
+      \setstretch{1}
+      #1\par\medskip
+      #2\par
+    \endgroup
+  }
+
+\NewDocumentCommand \ABNTEXmembrobanca {m m m}
+  {
+    \par\bigskip
+    \noindent\rule{0.72\textwidth}{0.4pt}\par
+    \noindent #1\par
+    \tl_if_blank:nF {#2} {\noindent #2\par}
+    \tl_if_blank:nF {#3} {\noindent #3\par}
+  }
+
+\NewDocumentCommand \ABNTEXfolhadeaprovacao {m m}
+  {
+    \__abntex_frontmatter_register:nn {5} {folha-de-aprovacao}
+    \__abntex_frontmatter_page:n
+      {
+        \centering
+        {\ABNTEXmetadata{autoria}\par}
+        \vfill
+        {\bfseries\__abntex_frontmatter_title:\par}
+        \vfill
+        \hfill\__abntex_frontmatter_nature:\par
+        \vfill
+        \raggedright
+        Aprovado~em:~#1.\par
+        #2
+      }
+  }
+
+\NewDocumentCommand \ABNTEXdedicatoria {m}
+  {
+    \__abntex_frontmatter_register:nn {6} {dedicatoria}
+    \__abntex_frontmatter_page:n
+      {
+        \vspace*{\fill}
+        \hfill
+        \begin{minipage}{0.5\textwidth}
+          #1
+        \end{minipage}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXagradecimentos {m}
+  {
+    \__abntex_frontmatter_register:nn {7} {agradecimentos}
+    \ABNTEXpretextualtitle{Agradecimentos}
+    #1\par
+  }
+
+\NewDocumentCommand \ABNTEXepigrafe {O{} m}
+  {
+    \__abntex_frontmatter_register:nn {8} {epigrafe}
+    \__abntex_frontmatter_page:n
+      {
+        \vspace*{\fill}
+        \hfill
+        \begin{minipage}{0.5\textwidth}
+          #2
+          \tl_if_blank:nF {#1}
+            {\par\medskip\raggedleft #1}
+        \end{minipage}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXresumo {m m}
+  {
+    \__abntex_frontmatter_register:nn {9} {resumo}
+    \__abntex_frontmatter_abstract:nnnn
+      {Resumo} {Palavras-chave} {#1} {#2}
+  }
+
+\NewDocumentCommand \ABNTEXresumoemlinguaestrangeira
+  {O{Abstract} O{Keywords} m m}
+  {
+    \__abntex_frontmatter_register:nn
+      {10} {resumo-em-lingua-estrangeira}
+    \__abntex_frontmatter_abstract:nnnn {#1} {#2} {#3} {#4}
+  }
+
+\NewDocumentCommand \ABNTEXvalidatepretextual {}
+  {\__abntex_frontmatter_validate:}
+
+\hook_gput_code:nnn {cmd/ABNTEXsumario/before}
+  {abntex3-frontmatter}
+  {\__abntex_frontmatter_register:nn {15} {sumario}}
+\hook_gput_code:nnn {cmd/ABNTEXtextualpages/before}
+  {abntex3-frontmatter}
+  {\__abntex_frontmatter_validate:}
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

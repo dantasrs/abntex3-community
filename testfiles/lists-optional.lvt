@@ -1,0 +1,23 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\int_zero:N \l_tmpa_int
+\cs_set_protected:Npn \ABNTEXpretextualtitle #1
+  {\int_incr:N \l_tmpa_int}
+\ABNTEXlistadeabreviaturas
+\ABNTEXlistadesiglas
+\ABNTEXlistadeabreviaturasesiglas
+\ABNTEXlistadesimbolos
+\TYPE{empty manual lists = \int_use:N \l_tmpa_int}
+\cs_set_protected:cpn {@starttoc} #1
+  {\TYPE{automatic-list-file=#1}}
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\TYPE{automatic list titles = \int_use:N \l_tmpa_int}
+\ExplSyntaxOff
+\END
+\end{document}

@@ -11,6 +11,7 @@ typesetfiles = {"*.dtx"}
 demofiles = {"examples/*.tex"}
 docfiles = {
   "docs/api.md",
+  "docs/frontmatter.md",
   "docs/layout.md",
   "docs/structure.md",
   "docs/requisitos/*.md"

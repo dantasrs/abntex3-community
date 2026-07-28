@@ -1,0 +1,36 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=academico]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\msg_redirect_name:nnn
+  {abntex3} {required-frontmatter-missing} {none}
+\cs_set_protected:Npn \__abntex_frontmatter_page:n #1 {}
+\cs_set_protected:Npn \__abntex_frontmatter_external_page:n #1 {}
+\cs_set_protected:Npn \__abntex_frontmatter_abstract:nnnn #1#2#3#4 {}
+\ABNTEXcapa
+\ABNTEXfolhaderosto
+\ABNTEXfolhadeaprovacao{Data}{Banca}
+\ABNTEXresumo{Texto}{palavra}
+\ABNTEXresumoemlinguaestrangeira{Text}{keyword}
+\__abntex_frontmatter_register:nn {15} {sumario}
+\ABNTEXvalidatepretextual
+\clist_map_inline:nn
+  {
+    capa,
+    folha-de-rosto,
+    folha-de-aprovacao,
+    resumo,
+    resumo-em-lingua-estrangeira,
+    sumario
+  }
+  {
+    \prop_if_in:NnTF \g__abntex_frontmatter_seen_prop {#1}
+      {\TYPE{required #1 = present}}
+      {\TYPE{required #1 = missing}}
+  }
+\ExplSyntaxOff
+\END
+\end{document}

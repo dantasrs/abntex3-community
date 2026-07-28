@@ -1,0 +1,180 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-lists.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-lists}: listas pré-textuais}
+% \author{dantasrs}
+% \date{2026-07-28 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Listas automáticas}
+%
+% \begin{function}{\ABNTEXlistadeilustracoes,\ABNTEXlistadetabelas}
+%   Compõem as listas a partir dos arquivos auxiliares de figuras e tabelas.
+%   Cada lista começa em nova página, recebe título centralizado e não é
+%   incluída no sumário.
+% \end{function}
+%
+% \section{Listas declarativas}
+%
+% \begin{function}{\ABNTEXabreviatura,\ABNTEXsigla,\ABNTEXsimbolo}
+%   Registram pares de forma e significado. Abreviaturas e siglas são
+%   ordenadas alfabeticamente ao compor a lista; símbolos preservam a ordem
+%   de declaração.
+% \end{function}
+%
+% \begin{function}{\ABNTEXlistadeabreviaturas,\ABNTEXlistadesiglas,
+%   \ABNTEXlistadeabreviaturasesiglas,\ABNTEXlistadesimbolos}
+%   Compõem somente listas que possuam itens. A lista combinada de
+%   abreviaturas e siglas está disponível para documentos que não precisam
+%   separá-las.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-lists}
+  {2026-07-28}{0.0.0}{Listas pre-textuais do abnTeX3 Community}
+
+\prop_new:N \g__abntex_abbreviation_prop
+\prop_new:N \g__abntex_acronym_prop
+\seq_new:N \g__abntex_symbol_seq
+\seq_new:N \l__abntex_list_keys_seq
+
+\cs_new_protected:Npn \__abntex_lists_register:n #1
+  {
+    \cs_if_exist:NT \__abntex_frontmatter_register:nn
+      {\__abntex_frontmatter_register:nn {#1} {lista}}
+  }
+
+\cs_new_protected:Npn \__abntex_lists_pair:nn #1#2
+  {
+    \par
+    \noindent
+    \makebox[0.24\textwidth][l]{#1}
+    \parbox[t]{0.72\textwidth}{#2}
+    \par
+  }
+
+\cs_new_protected:Npn \__abntex_lists_sort_keys:N #1
+  {
+    \seq_clear:N \l__abntex_list_keys_seq
+    \prop_map_inline:Nn #1
+      {\seq_put_right:Nn \l__abntex_list_keys_seq {##1}}
+    \seq_sort:Nn \l__abntex_list_keys_seq
+      {
+        \str_compare:eNeTF
+          {\str_lowercase:f {##1}} > {\str_lowercase:f {##2}}
+          {\sort_return_swapped:}
+          {\sort_return_same:}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_lists_render_prop:Nn #1#2
+  {
+    \prop_if_empty:NF #1
+      {
+        \__abntex_lists_register:n {13}
+        \ABNTEXpretextualtitle{#2}
+        \__abntex_lists_sort_keys:N #1
+        \seq_map_inline:Nn \l__abntex_list_keys_seq
+          {
+            \prop_get:NnN #1 {##1} \l_tmpa_tl
+            \__abntex_lists_pair:nn {##1} {\l_tmpa_tl}
+          }
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_lists_render_combined:
+  {
+    \prop_if_empty:NTF \g__abntex_abbreviation_prop
+      {
+        \prop_if_empty:NF \g__abntex_acronym_prop
+          {
+            \__abntex_lists_render_prop:Nn
+              \g__abntex_acronym_prop {Lista~de~abreviaturas~e~siglas}
+          }
+      }
+      {
+        \prop_set_eq:NN \l_tmpa_prop \g__abntex_abbreviation_prop
+        \prop_map_inline:Nn \g__abntex_acronym_prop
+          {\prop_put:Nnn \l_tmpa_prop {##1} {##2}}
+        \__abntex_lists_render_prop:Nn
+          \l_tmpa_prop {Lista~de~abreviaturas~e~siglas}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlistadeilustracoes {}
+  {
+    \__abntex_lists_register:n {11}
+    \ABNTEXpretextualtitle{Lista~de~ilustrações}
+    \makeatletter
+    \@starttoc{lof}
+    \makeatother
+  }
+
+\NewDocumentCommand \ABNTEXlistadetabelas {}
+  {
+    \__abntex_lists_register:n {12}
+    \ABNTEXpretextualtitle{Lista~de~tabelas}
+    \makeatletter
+    \@starttoc{lot}
+    \makeatother
+  }
+
+\NewDocumentCommand \ABNTEXabreviatura {m m}
+  {\prop_gput:Nnn \g__abntex_abbreviation_prop {#1} {#2}}
+\NewDocumentCommand \ABNTEXsigla {m m}
+  {\prop_gput:Nnn \g__abntex_acronym_prop {#1} {#2}}
+\NewDocumentCommand \ABNTEXsimbolo {m m}
+  {
+    \seq_gput_right:Nn \g__abntex_symbol_seq
+      {\__abntex_lists_pair:nn {#1} {#2}}
+  }
+
+\NewDocumentCommand \ABNTEXlistadeabreviaturas {}
+  {
+    \__abntex_lists_render_prop:Nn
+      \g__abntex_abbreviation_prop {Lista~de~abreviaturas}
+  }
+\NewDocumentCommand \ABNTEXlistadesiglas {}
+  {
+    \__abntex_lists_render_prop:Nn
+      \g__abntex_acronym_prop {Lista~de~siglas}
+  }
+\NewDocumentCommand \ABNTEXlistadeabreviaturasesiglas {}
+  {\__abntex_lists_render_combined:}
+\NewDocumentCommand \ABNTEXlistadesimbolos {}
+  {
+    \seq_if_empty:NF \g__abntex_symbol_seq
+      {
+        \__abntex_lists_register:n {14}
+        \ABNTEXpretextualtitle{Lista~de~símbolos}
+        \seq_map_inline:Nn \g__abntex_symbol_seq {##1}
+      }
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

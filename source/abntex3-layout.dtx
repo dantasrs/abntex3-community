@@ -54,7 +54,9 @@
 %
 % Seções primárias começam em nova página no modo |anverso| e em página ímpar
 % no modo |frente-e-verso|. Páginas inseridas para manter a paridade não
-% exibem cabeçalho nem rodapé.
+% exibem cabeçalho nem rodapé. A paridade usa um contador de faces físicas,
+% separado do contador documental, para preservar o anverso após páginas que
+% não participam da contagem.
 %
 % \section{Espaçamento e exceções}
 %
@@ -104,6 +106,7 @@
 \dim_new:N \g__abntex_outer_margin_dim
 \dim_new:N \g__abntex_long_quote_indent_dim
 \bool_new:N \g__abntex_page_numbers_bool
+\int_new:N \g__abntex_physical_page_int
 
 \tl_gset:Nn \g__abntex_paper_tl {a4}
 \tl_gset:Nn \g__abntex_orientation_tl {retrato}
@@ -114,6 +117,9 @@
 \dim_gset:Nn \g__abntex_outer_margin_dim {2cm}
 \dim_gset:Nn \g__abntex_long_quote_indent_dim {4cm}
 \bool_gset_true:N \g__abntex_page_numbers_bool
+
+\hook_gput_code:nnn {shipout/after} {abntex3-layout-physical-pages}
+  {\int_gincr:N \g__abntex_physical_page_int}
 
 \cs_new_protected:Npn \__abntex_layout_apply_geometry:
   {
@@ -208,7 +214,15 @@
 \cs_new_protected:Npn \__abntex_layout_primary_break:
   {
     \tl_if_eq:NnTF \g__abntex_print_mode_tl {frente-e-verso}
-      {\cleardoublepage}
+      {
+        \clearpage
+        \int_if_odd:nT {\g__abntex_physical_page_int}
+          {
+            \hbox{}
+            \thispagestyle{empty}
+            \newpage
+          }
+      }
       {\clearpage}
   }
 
@@ -287,6 +301,7 @@
 \NewDocumentCommand \ABNTEXpretextualpages {}
   {
     \clearpage
+    \int_gzero:N \g__abntex_physical_page_int
     \pagenumbering{arabic}
     \bool_gset_false:N \g__abntex_page_numbers_bool
     \pagestyle{empty}

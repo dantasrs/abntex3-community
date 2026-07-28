@@ -33,7 +33,8 @@
 %   \end{syntax}
 %   Recupera de forma expansível um metadado configurado. Os nomes aceitos
 %   são |titulo|, |subtitulo|, |autoria|, |instituicao|, |natureza|,
-%   |objetivo|, |area|, |orientacao|, |local| e |data|.
+%   |objetivo|, |area|, |orientacao|, |coorientacao|, |volume|, |local| e
+%   |data|.
 % \end{function}
 %
 % \begin{function}{\ABNTEXprofile,\ABNTEXclass}
@@ -120,7 +121,7 @@
 \clist_map_inline:nn
   {
     titulo, subtitulo, autoria, instituicao, natureza,
-    objetivo, area, orientacao, local, data
+    objetivo, area, orientacao, coorientacao, volume, local, data
   }
   {\prop_gput:Nnn \g__abntex_metadata_prop {#1} {}}
 
@@ -160,6 +161,10 @@
       {\prop_gput:Nnn \g__abntex_metadata_prop {area} {#1}},
     orientacao .code:n =
       {\prop_gput:Nnn \g__abntex_metadata_prop {orientacao} {#1}},
+    coorientacao .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {coorientacao} {#1}},
+    volume .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {volume} {#1}},
     local .code:n =
       {\prop_gput:Nnn \g__abntex_metadata_prop {local} {#1}},
     data .code:n =

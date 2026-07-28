@@ -1,0 +1,41 @@
+\input regression-test.tex
+\documentclass[12pt]{book}
+\usepackage[impressao=frente-e-verso]{abntex3}
+\ABNTEXsetup{
+  titulo={Titulo},
+  autoria={Autoria},
+  instituicao={Instituicao},
+  natureza={Dissertacao},
+  objetivo={Objetivo},
+  area={Area},
+  orientacao={Orientacao},
+  local={Local},
+  data={2026}
+}
+
+\begin{document}
+\START
+\ABNTEXpretextualpages
+\OMIT
+\ABNTEXfolhaderosto
+\TIMO
+\TYPE{after title page = \thepage}
+\ExplSyntaxOn
+\TYPE{physical after title = \int_use:N \g__abntex_physical_page_int}
+\ExplSyntaxOff
+\OMIT
+\ABNTEXfichacatalografica{Conteudo catalografico}
+\TIMO
+\TYPE{after catalog data = \thepage}
+\ExplSyntaxOn
+\TYPE{physical after catalog = \int_use:N \g__abntex_physical_page_int}
+\ExplSyntaxOff
+\OMIT
+\ABNTEXfolhadeaprovacao{28 de julho de 2026}{Banca}
+\TIMO
+\TYPE{after approval page = \thepage}
+\ExplSyntaxOn
+\TYPE{physical after approval = \int_use:N \g__abntex_physical_page_int}
+\ExplSyntaxOff
+\END
+\end{document}

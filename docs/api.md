@@ -1,9 +1,9 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3 e 4. A versão `0.0.0` continua experimental. Os módulos estrutural e
-de layout possuem rastreabilidade normativa, mas ainda aguardam revisão
-independente e não fazem alegação de conformidade.
+Marcos 3, 4 e 5. A versão `0.0.0` continua experimental. Os módulos
+estrutural, de layout e pré-textual possuem rastreabilidade normativa, mas
+ainda aguardam revisão independente e não fazem alegação de conformidade.
 
 ## Carregamento e classes
 
@@ -33,6 +33,8 @@ perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
 - `objetivo`;
 - `area`;
 - `orientacao`;
+- `coorientacao`;
+- `volume`;
 - `local`;
 - `data`;
 - `profundidade-secoes`;
@@ -48,6 +50,9 @@ perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
 - `margem-interna`;
 - `margem-externa`;
 - `recuo-citacao-longa`;
+- `disposicao-lombada`;
+- `largura-lombada`;
+- `separador-palavras-chave`;
 - `debug`, uma opção experimental de diagnóstico.
 
 As mesmas chaves podem ser passadas como opções do pacote. A precedência, da
@@ -60,7 +65,7 @@ menor para a maior, é:
 Entre atribuições no mesmo nível, a última ocorrência de uma chave prevalece.
 Uma atribuição não apaga outros metadados.
 
-`\ABNTEXmetadata{<nome>}` recupera de forma expansível o valor de um dos dez
+`\ABNTEXmetadata{<nome>}` recupera de forma expansível o valor de um dos doze
 metadados documentados. Isso permite, por exemplo:
 
 ```tex
@@ -98,7 +103,7 @@ O núcleo possui mensagens próprias para:
 
 Comandos, opções e chaves documentados são a API pública experimental da linha
 `0.0.x`. Funções e variáveis com nomes internos não têm garantia de
-compatibilidade. Nenhuma interface está obsoleta até o Marco 4; a mensagem de
+compatibilidade. Nenhuma interface está obsoleta até o Marco 5; a mensagem de
 depreciação estabelece o mecanismo que será usado quando necessário.
 
 ## Estrutura e sumário
@@ -128,3 +133,18 @@ O Marco 4 acrescenta:
 `orientacao-papel` controla retrato ou paisagem. As chaves físicas devem ser
 usadas no preâmbulo. A referência detalhada está em
 [`layout.md`](layout.md).
+
+## Elementos pré-textuais e listas
+
+O Marco 5 acrescenta:
+
+- capa, prova de lombada, folha de rosto e ficha catalográfica;
+- errata, folha de aprovação, dedicatória, agradecimentos e epígrafe;
+- resumos vernáculo e estrangeiro com palavras-chave;
+- listas automáticas de ilustrações e tabelas;
+- registros e listas de abreviaturas, siglas e símbolos;
+- validação da ordem e dos elementos obrigatórios do perfil acadêmico.
+
+A ficha catalográfica recebe conteúdo preparado externamente; o pacote não
+gera dados profissionais de catalogação. A referência completa está em
+[`frontmatter.md`](frontmatter.md).

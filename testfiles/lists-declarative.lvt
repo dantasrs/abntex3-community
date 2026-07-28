@@ -1,0 +1,26 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\ABNTEXabreviatura{Fil.}{Filosofia}
+\ABNTEXabreviatura{adm.}{administracao}
+\ABNTEXsigla{IBGE}{Instituto Brasileiro de Geografia e Estatistica}
+\ABNTEXsigla{ABNT}{Associacao Brasileira de Normas Tecnicas}
+\ABNTEXsimbolo{z}{Terceiro}
+\ABNTEXsimbolo{a}{Primeiro na declaracao}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\int_zero:N \l_tmpa_int
+\cs_set_protected:Npn \ABNTEXpretextualtitle #1
+  {\int_incr:N \l_tmpa_int}
+\cs_set_protected:Npn \__abntex_lists_pair:nn #1#2
+  {\TYPE{item=#1=>#2}}
+\ABNTEXlistadeabreviaturas
+\ABNTEXlistadesiglas
+\ABNTEXlistadesimbolos
+\TYPE{list-count=\int_use:N \l_tmpa_int}
+\ExplSyntaxOff
+\END
+\end{document}
