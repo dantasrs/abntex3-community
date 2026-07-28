@@ -41,9 +41,10 @@ Não inclua no repositório:
 5. Preencha o template do pull request e relacione a issue correspondente.
 6. Não inclua arquivos gerados nem conteúdo de `bases/`.
 
-Enquanto o Marco 1 não estiver concluído, a validação mínima é
-`git diff --check`. Depois disso, mudanças de código também deverão passar por
-`l3build check` e pela compilação dos exemplos afetados.
+Toda mudança deve passar por `git diff --check`. Mudanças de código também
+devem passar por `l3build check` e pela compilação dos exemplos afetados.
+Alterações de distribuição devem executar ainda `l3build ctan` e
+`./scripts/validate-distribution.sh`.
 
 Regras específicas de universidades e organizações devem permanecer fora do
 núcleo ou ser implementadas como extensões claramente separadas.

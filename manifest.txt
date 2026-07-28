@@ -5,7 +5,9 @@ This work consists of the following files:
 .github/ISSUE_TEMPLATE/proposta.yml
 .github/ISSUE_TEMPLATE/requisito-normativo.yml
 .github/PULL_REQUEST_TEMPLATE.md
+.github/workflows/ci.yml
 .gitignore
+build.lua
 CHANGELOG.md
 CITATION.cff
 CODE_OF_CONDUCT.md
@@ -13,6 +15,14 @@ CONTRIBUTING.md
 LICENSE
 README.md
 SECURITY.md
+examples/minimo.tex
+scripts/validate-distribution.sh
+source/abntex3.dtx
+source/abntex3.ins
+testfiles/loading.lvt
+testfiles/loading.tlg
+testfiles/options.lvt
+testfiles/options.tlg
 docs/arquitetura.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md

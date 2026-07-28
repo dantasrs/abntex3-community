@@ -7,8 +7,9 @@ documentação.
 
 ## Situação do projeto
 
-O projeto está em fase de fundação. Ainda não há uma versão utilizável nem
-alegação de conformidade normativa.
+O projeto concluiu sua infraestrutura mínima de build, testes, instalação e
+empacotamento. A versão 0.0.0 ainda não implementa regras normativas, não é
+indicada para produção e não faz alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -67,6 +68,25 @@ de uso das normas.
 
 Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
 [`roteiro técnico completo`](docs/roadmap.md).
+
+## Desenvolvimento
+
+O projeto usa `l3build`. Uma instalação TeX Live completa e atual permite
+executar:
+
+```sh
+l3build unpack
+l3build check
+l3build doc
+l3build install --texmfhome /caminho/temporario/texmf
+l3build ctan
+./scripts/validate-distribution.sh
+```
+
+`l3build check` executa os testes com pdfTeX, LuaTeX e XeTeX. A integração
+contínua repete a suíte no TeX Live 2024, 2025 e 2026. O último comando valida
+o pacote CTAN de ensaio, sem publicá-lo, e compila o exemplo mínimo tanto a
+partir de uma instalação isolada quanto da árvore TDS empacotada.
 
 ## Governança e colaboração
 

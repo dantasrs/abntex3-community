@@ -18,6 +18,9 @@
 
 # l3build
 build/
+abntex3.pdf
+abntex3-ctan.zip
+abntex3.tds.zip
 
 # Normas técnicas mantidas apenas para consulta local
 bases/

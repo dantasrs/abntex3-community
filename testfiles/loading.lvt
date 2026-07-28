@@ -1,0 +1,14 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\@ifpackageloaded{abntex3}
+  {\TYPE{abntex3 loaded}}
+  {\TYPE{abntex3 not loaded}}
+\TYPE{version = \csname ver@abntex3.sty\endcsname}
+\makeatother
+\END
+\end{document}

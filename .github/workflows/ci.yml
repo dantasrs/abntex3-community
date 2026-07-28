@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: TeX Live ${{ matrix.texlive }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        texlive:
+          - 2024
+          - 2025
+          - 2026
+
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v6
+
+      - name: Testar em pdfTeX, LuaTeX e XeTeX
+        uses: xu-cheng/texlive-action@v3
+        with:
+          texlive_version: ${{ matrix.texlive }}
+          scheme: full
+          run: l3build check
+
+  distribution:
+    name: Distribuição de ensaio
+    runs-on: ubuntu-latest
+    needs: tests
+
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v6
+
+      - name: Gerar e validar a distribuição
+        uses: xu-cheng/texlive-action@v3
+        with:
+          texlive_version: 2026
+          scheme: full
+          run: |
+            l3build unpack
+            l3build check
+            l3build doc
+            l3build ctan
+            ./scripts/validate-distribution.sh
+
+      - name: Guardar o pacote CTAN de ensaio
+        uses: actions/upload-artifact@v7
+        with:
+          name: abntex3-ctan-ensaio
+          path: abntex3-ctan.zip
+          if-no-files-found: error
+          retention-days: 14
