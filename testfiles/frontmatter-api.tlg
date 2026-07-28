@@ -1,0 +1,21 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+abstract-title=Resumo
+keyword-label=Palavras-chave
+abstract-body=Textovernaculo
+keywords=primeira,segunda
+abstract-title=Abstract
+keyword-label=Keywords
+abstract-body=Foreigntext
+keywords=first,second
+seen=capa
+seen=lombada
+seen=folha-de-rosto
+seen=ficha-catalografica
+seen=folha-de-aprovacao
+seen=dedicatoria
+seen=agradecimentos
+seen=epigrafe
+seen=resumo
+seen=resumo-em-lingua-estrangeira
+last-rank=10

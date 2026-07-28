@@ -8,5 +8,7 @@ natureza = Natureza
 objetivo = Objetivo
 area = Area
 orientacao = Orientacao
+coorientacao = Coorientacao
+volume = 2
 local = Local
 data = Data

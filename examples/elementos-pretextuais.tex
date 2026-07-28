@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage[
+  perfil=academico,
+  impressao=frente-e-verso
+]{abntex3}
+
+\ABNTEXsetup{
+  titulo={Elementos pré-textuais no abnTeX3 Community},
+  subtitulo={exemplo integrado do Marco 5},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Dissertação},
+  objetivo={apresentada para obtenção do título de Mestre},
+  area={Documentação},
+  orientacao={Prof. Dr. João Souza},
+  coorientacao={Profa. Dra. Ana Santos},
+  local={Recife},
+  data={2026}
+}
+
+\ABNTEXabreviatura{Fil.}{Filosofia}
+\ABNTEXsigla{ABNT}{Associação Brasileira de Normas Técnicas}
+\ABNTEXsigla{IBGE}{Instituto Brasileiro de Geografia e Estatística}
+\ABNTEXsimbolo{$n$}{Quantidade de elementos}
+\ABNTEXsimbolo{$\sum$}{Somatório}
+
+\begin{document}
+
+\ABNTEXcapa
+\ABNTEXlombada[Dissertação 2026][Universidade Exemplo]
+
+\ABNTEXpretextualpages
+\ABNTEXfolhaderosto
+
+\ABNTEXfichacatalografica{%
+  Dados internacionais de catalogação na publicação devem ser preparados
+  conforme o código de catalogação vigente e inseridos neste ponto de
+  extensão pelo profissional responsável.
+}
+
+\ABNTEXerrata
+  {SILVA, Maria da. \textbf{Elementos pré-textuais no abnTeX3 Community}.
+   2026. Dissertação — Universidade Exemplo, Recife, 2026.}
+  {\begin{center}
+     \begin{tabular}{llll}
+       Folha & Linha & Onde se lê & Leia-se\\
+       10 & 4 & texo & texto
+     \end{tabular}
+   \end{center}}
+
+\ABNTEXfolhadeaprovacao
+  {28 de julho de 2026}
+  {%
+    \ABNTEXmembrobanca
+      {Prof. Dr. João Souza}{Orientador}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Dra. Ana Santos}{Examinadora}{Universidade Exemplo}
+  }
+
+\ABNTEXdedicatoria{À comunidade brasileira de usuários de \LaTeX.}
+
+\ABNTEXagradecimentos{%
+  A todas as pessoas que contribuíram para a construção e a revisão deste
+  exemplo.
+}
+
+\ABNTEXepigrafe[Autoria demonstrativa]{%
+  A documentação também faz parte do programa.
+}
+
+\ABNTEXresumo
+  {Este exemplo demonstra a composição dos elementos pré-textuais, o
+   registro das listas e a transição para a parte textual por meio da API
+   pública do abnTeX3 Community.}
+  {normalização, documentação, LaTeX}
+
+\ABNTEXresumoemlinguaestrangeira
+  {This example demonstrates front matter composition, list registration,
+   and the transition to the textual part through the public API.}
+  {standardization, documentation, LaTeX}
+
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadeabreviaturas
+\ABNTEXlistadesiglas
+\ABNTEXlistadesimbolos
+\ABNTEXsumario
+
+\ABNTEXtextualpages
+
+\section{Introdução}
+
+O conteúdo textual começa com numeração visível e preserva a contagem das
+páginas pré-textuais.
+
+\begin{figure}[ht]
+  \centering
+  \rule{0.6\linewidth}{2cm}
+  \caption{Demonstração de uma ilustração}
+  \ABNTEXfonte{elaborada pela própria autora.}
+\end{figure}
+
+\begin{table}[ht]
+  \centering
+  \caption{Demonstração de uma tabela}
+  \begin{tabular}{ll}
+    Elemento & Estado\\
+    Capa & implementado\\
+    Resumo & implementado
+  \end{tabular}
+  \ABNTEXfonte{elaborada pela própria autora.}
+\end{table}
+
+\end{document}

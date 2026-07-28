@@ -11,6 +11,8 @@
   objetivo={Objetivo},
   area={Area},
   orientacao={Orientacao},
+  coorientacao={Coorientacao},
+  volume={2},
   local={Local},
   data={Data}
 }
@@ -25,6 +27,8 @@
 \TYPE{objetivo = \ABNTEXmetadata{objetivo}}
 \TYPE{area = \ABNTEXmetadata{area}}
 \TYPE{orientacao = \ABNTEXmetadata{orientacao}}
+\TYPE{coorientacao = \ABNTEXmetadata{coorientacao}}
+\TYPE{volume = \ABNTEXmetadata{volume}}
 \TYPE{local = \ABNTEXmetadata{local}}
 \TYPE{data = \ABNTEXmetadata{data}}
 \END

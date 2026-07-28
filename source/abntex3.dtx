@@ -19,11 +19,12 @@
 %
 % \section{Estado}
 %
-% A versão 0.0.0 oferece a API mínima de configuração e metadados e o primeiro
-% módulos de apresentação dedicados a layout, paginação, seções e sumário. A
+% A versão 0.0.0 oferece a API mínima de configuração e metadados e módulos
+% dedicados a layout, paginação, seções, elementos pré-textuais e listas. A
 % implementação possui rastreabilidade para a ABNT NBR 14724:2024, a ABNT NBR
-% 6024:2012 e a ABNT NBR 6027:2012, mas ainda depende de revisão normativa
-% independente e não faz alegação de conformidade.
+% 6024:2012, a ABNT NBR 6027:2012, a ABNT NBR 6028:2021 e a ABNT NBR
+% 12225:2023, mas ainda depende de revisão normativa independente e não faz
+% alegação de conformidade.
 %
 % \section{Uso mínimo}
 %
@@ -59,6 +60,8 @@
 \RequirePackage{abntex3-core}
 \RequirePackage{abntex3-layout}
 \RequirePackage{abntex3-structure}
+\RequirePackage{abntex3-frontmatter}
+\RequirePackage{abntex3-lists}
 \RequirePackage{l3keys2e}
 
 \ProcessKeysOptions{abntex3}

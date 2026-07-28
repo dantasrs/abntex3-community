@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\msg_redirect_name:nnn {abntex3} {frontmatter-order} {none}
+\__abntex_frontmatter_register:nn
+  {10} {resumo-em-lingua-estrangeira}
+\__abntex_frontmatter_register:nn {9} {resumo}
+\TYPE{rank-after-inversion=\int_use:N \g__abntex_frontmatter_rank_int}
+\prop_if_in:NnTF \g__abntex_frontmatter_seen_prop {resumo}
+  {\TYPE{late-element=registered}}
+  {\TYPE{late-element=missing}}
+\ExplSyntaxOff
+\END
+\end{document}

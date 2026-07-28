@@ -127,19 +127,19 @@ perfil documental.
 
 **Normas:** ABNT NBR 14724:2024, ABNT NBR 12225:2023 e ABNT NBR 6028:2021.
 
-- [ ] Criar as matrizes `nbr-12225-2023.md` e `nbr-6028-2021.md`.
-- [ ] Criar `abntex3-frontmatter.dtx`.
-- [ ] Criar `abntex3-lists.dtx`.
-- [ ] Implementar capa e lombada.
-- [ ] Implementar folha de rosto e ficha catalográfica como ponto de extensão.
-- [ ] Implementar errata e folha de aprovação.
-- [ ] Implementar dedicatória, agradecimentos e epígrafe.
-- [ ] Implementar resumo e resumo em outro idioma.
-- [ ] Implementar palavras-chave com separador configurável.
-- [ ] Implementar listas de ilustrações e tabelas.
-- [ ] Implementar listas de abreviaturas, siglas e símbolos.
-- [ ] Definir comportamento quando elementos opcionais estiverem ausentes.
-- [ ] Testar ordem, obrigatoriedade e paginação dos elementos.
+- [x] Criar as matrizes `nbr-12225-2023.md` e `nbr-6028-2021.md`.
+- [x] Criar `abntex3-frontmatter.dtx`.
+- [x] Criar `abntex3-lists.dtx`.
+- [x] Implementar capa e lombada.
+- [x] Implementar folha de rosto e ficha catalográfica como ponto de extensão.
+- [x] Implementar errata e folha de aprovação.
+- [x] Implementar dedicatória, agradecimentos e epígrafe.
+- [x] Implementar resumo e resumo em outro idioma.
+- [x] Implementar palavras-chave com separador configurável.
+- [x] Implementar listas de ilustrações e tabelas.
+- [x] Implementar listas de abreviaturas, siglas e símbolos.
+- [x] Definir comportamento quando elementos opcionais estiverem ausentes.
+- [x] Testar ordem, obrigatoriedade e paginação dos elementos.
 
 **Critério de saída:** todos os elementos anteriores ao texto podem ser
 compostos sem comandos internos ou redefinições no documento do usuário.

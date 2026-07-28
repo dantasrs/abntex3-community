@@ -1,0 +1,22 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \__abntex_frontmatter_abstract:nnnn #1#2#3#4
+  {
+    \TYPE{title=#1}
+    \TYPE{label=#2}
+    \clist_set:Nn \l_tmpa_clist {#4}
+    \TYPE{keyword-count=\clist_count:N \l_tmpa_clist}
+    \TYPE{separator=\tl_to_str:V \g__abntex_keyword_separator_tl}
+  }
+\ABNTEXresumo{Texto}{gestacao, Aedes aegypti, Brasil}
+\ABNTEXsetup{separador-palavras-chave={ /}}
+\ABNTEXresumoemlinguaestrangeira
+  [Resumen][Palabras clave]{Texto}{uno, dos}
+\ExplSyntaxOff
+\END
+\end{document}

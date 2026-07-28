@@ -1,0 +1,48 @@
+\input regression-test.tex
+\documentclass[12pt]{report}
+\usepackage[perfil=academico]{abntex3}
+
+\ABNTEXsetup{
+  titulo={Titulo},
+  subtitulo={Subtitulo},
+  autoria={Autoria},
+  instituicao={Instituicao},
+  natureza={Dissertacao},
+  objetivo={apresentada para obtencao do grau},
+  area={Area},
+  orientacao={Orientador},
+  coorientacao={Coorientador},
+  volume={2},
+  local={Local},
+  data={2026}
+}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \__abntex_frontmatter_page:n #1 {}
+\cs_set_protected:Npn \__abntex_frontmatter_external_page:n #1 {}
+\cs_set_protected:Npn \__abntex_frontmatter_abstract:nnnn #1#2#3#4
+  {
+    \TYPE{abstract-title=#1}
+    \TYPE{keyword-label=#2}
+    \TYPE{abstract-body=#3}
+    \TYPE{keywords=#4}
+  }
+\ABNTEXcapa
+\ABNTEXlombada[v. 2][Instituicao]
+\ABNTEXfolhaderosto
+\ABNTEXfichacatalografica{Ficha}
+\ABNTEXfolhadeaprovacao{28 de julho de 2026}{Banca}
+\ABNTEXdedicatoria{Dedicatoria}
+\ABNTEXagradecimentos{Agradecimentos}
+\ABNTEXepigrafe[Autoria]{Citacao}
+\ABNTEXresumo{Texto vernaculo}{primeira, segunda}
+\ABNTEXresumoemlinguaestrangeira
+  [Abstract][Keywords]{Foreign text}{first, second}
+\prop_map_inline:Nn \g__abntex_frontmatter_seen_prop
+  {\TYPE{seen=#1}}
+\TYPE{last-rank=\int_use:N \g__abntex_frontmatter_rank_int}
+\ExplSyntaxOff
+\END
+\end{document}

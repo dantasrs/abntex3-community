@@ -74,13 +74,11 @@ de uso das normas.
   apêndices e anexos.
 - [x] **Marco 4 — Layout:** A4, margens, frente e verso, paginação,
   espaçamento, notas, citações longas e textos auxiliares.
+- [x] **Marco 5 — Elementos pré-textuais:** capa, prova de lombada, folhas de
+  identificação, resumos, palavras-chave e listas automáticas ou declarativas.
 
 ### Próximos marcos
 
-- [ ] **Marco 5 — Elementos pré-textuais e listas:** implementar capa,
-  lombada, folha de rosto, ficha catalográfica, aprovação, dedicatória,
-  agradecimentos, epígrafe, resumos, palavras-chave e listas, com base nas
-  NBR 14724:2024, 12225:2023 e 6028:2021.
 - [ ] **Marco 6 — Elementos pós-textuais e bibliografia:** integrar
   `biblatex-abnt` e `biber`, validar citações e referências e implementar
   glossário, índice e o fluxo pós-textual segundo as NBR 6023:2025,

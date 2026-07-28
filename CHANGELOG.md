@@ -47,3 +47,12 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Exemplo completo de layout e paginação.
 - Visão executiva do roadmap no README, com marcos concluídos e próximos.
 - Badges de integração contínua e licença no README.
+- Matrizes rastreáveis da ABNT NBR 12225:2023 e da ABNT NBR 6028:2021.
+- Módulos documentados `abntex3-frontmatter` e `abntex3-lists`.
+- Capa, prova de lombada, folha de rosto e ficha catalográfica extensível.
+- Errata, folha de aprovação, dedicatória, agradecimentos e epígrafe.
+- Resumos vernáculo e estrangeiro com palavras-chave configuráveis.
+- Listas automáticas de ilustrações e tabelas.
+- Listas ordenadas de abreviaturas e siglas e lista sequencial de símbolos.
+- Validação de ordem e obrigatoriedade dos elementos pré-textuais acadêmicos.
+- Exemplo integrado de elementos pré-textuais e listas.
