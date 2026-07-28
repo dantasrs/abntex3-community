@@ -4,16 +4,20 @@
 
 \begin{document}
 \START
+\OMIT
 \ABNTEXpretextualpages
 Uma pagina pre-textual.
 \ABNTEXtextualpages
+\TIMO
 \ifodd\value{page}
   \TYPE{textual parity = odd}
 \else
   \TYPE{textual parity = unexpected}
 \fi
 \TYPE{textual page = \thepage}
+\OMIT
 \chapter{Primeira seção}
+\TIMO
 \ifodd\value{page}
   \TYPE{primary parity = odd}
 \else
