@@ -115,6 +115,7 @@ abntex3-community/
 │   └── validate-distribution.sh
 ├── docs/
 │   ├── arquitetura.md
+│   ├── api.md
 │   ├── roadmap.md
 │   ├── normas.md
 │   ├── conformidade.md
@@ -170,10 +171,11 @@ responsabilidade é implementada.
 | `abntex3-profile-*.sty` | Regras exclusivas de cada perfil documental |
 | `abntex3-compat.sty` | Diagnósticos e camada limitada de migração do abnTeX2 |
 
-## API pública pretendida
+## API pública do núcleo
 
-A API deve privilegiar chaves, ambientes e comandos sem dependência da
-estrutura interna. A forma exata será congelada apenas no primeiro beta.
+A API privilegia chaves e comandos sem dependência da estrutura interna. Seu
+primeiro contrato experimental foi estabelecido no Marco 2; a estabilidade
+definitiva será congelada apenas no primeiro beta.
 
 ```tex
 \usepackage[
@@ -190,6 +192,10 @@ estrutura interna. A forma exata será congelada apenas no primeiro beta.
   data         = {...}
 }
 ```
+
+Os comandos de consulta `\ABNTEXmetadata`, `\ABNTEXprofile` e `\ABNTEXclass`,
+além de `\ABNTEXvalidate`, completam o núcleo atual. A referência detalhada
+está em [`api.md`](api.md).
 
 Comandos legados não devem ser reproduzidos automaticamente. A camada de
 compatibilidade só incluirá os casos de migração com benefício comprovado e

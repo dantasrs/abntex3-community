@@ -7,9 +7,10 @@ documentação.
 
 ## Situação do projeto
 
-O projeto concluiu sua infraestrutura mínima de build, testes, instalação e
-empacotamento. A versão 0.0.0 ainda não implementa regras normativas, não é
-indicada para produção e não faz alegação de conformidade.
+O projeto possui infraestrutura reproduzível e uma API experimental de
+configuração e metadados. A versão 0.0.0 ainda não implementa regras de
+apresentação normativa, não é indicada para produção e não faz alegação de
+conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -68,6 +69,27 @@ de uso das normas.
 
 Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
 [`roteiro técnico completo`](docs/roadmap.md).
+
+## API experimental
+
+O núcleo funciona inicialmente com `article`, `report` e `book`:
+
+```tex
+\documentclass{article}
+\usepackage[perfil=academico]{abntex3}
+
+\ABNTEXsetup{
+  titulo      = {Título do trabalho},
+  autoria     = {Nome da autoria},
+  instituicao = {Nome da instituição},
+  local       = {Recife},
+  data        = {2026}
+}
+```
+
+Consulte a [`referência da API`](docs/api.md) para os metadados disponíveis,
+perfis, precedência de configuração, validação técnica e garantias de
+estabilidade.
 
 ## Desenvolvimento
 

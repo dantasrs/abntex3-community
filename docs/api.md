@@ -1,0 +1,87 @@
+# API pública do núcleo
+
+Este documento descreve o contrato implementado no Marco 2. A versão `0.0.0`
+continua experimental e não aplica regras de apresentação normativa.
+
+## Carregamento e classes
+
+O pacote deve ser carregado sobre `article`, `report` ou `book`:
+
+```tex
+\documentclass{article}
+\usepackage[perfil=academico]{abntex3}
+```
+
+`abntex2` é uma classe conflitante, e `abntex2cite` é um pacote conflitante.
+A integração bibliográfica futura será feita por `biblatex-abnt`.
+
+`\ABNTEXclass` retorna a classe-base detectada. `\ABNTEXprofile` retorna um dos
+perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
+
+## Configuração
+
+`\ABNTEXsetup{<chaves>}` aceita:
+
+- `perfil`;
+- `titulo`;
+- `subtitulo`;
+- `autoria`;
+- `instituicao`;
+- `natureza`;
+- `objetivo`;
+- `area`;
+- `orientacao`;
+- `local`;
+- `data`;
+- `debug`, uma opção experimental de diagnóstico.
+
+As mesmas chaves podem ser passadas como opções do pacote. A precedência, da
+menor para a maior, é:
+
+1. valores iniciais do pacote;
+2. opções de `\usepackage`;
+3. chamadas de `\ABNTEXsetup`.
+
+Entre atribuições no mesmo nível, a última ocorrência de uma chave prevalece.
+Uma atribuição não apaga outros metadados.
+
+`\ABNTEXmetadata{<nome>}` recupera de forma expansível o valor de um dos dez
+metadados documentados. Isso permite, por exemplo:
+
+```tex
+\title{\ABNTEXmetadata{titulo}}
+```
+
+## Validação técnica
+
+`\ABNTEXvalidate` verifica a presença dos metadados técnicos exigidos pelo
+perfil:
+
+| Perfil | Metadados exigidos no Marco 2 |
+| --- | --- |
+| `nenhum` | nenhum |
+| `academico` | título, autoria, instituição, natureza, objetivo, área, orientação, local e data |
+| `projeto` | título, autoria, instituição, local e data |
+| `artigo` | título, autoria e data |
+| `relatorio` | título, autoria, instituição, local e data |
+| `livro` | título, autoria, local e data |
+
+Essas listas são requisitos técnicos provisórios de completude. Elas não
+constituem interpretação normativa e serão refinadas nos marcos dos
+respectivos perfis.
+
+## Mensagens e estabilidade
+
+O núcleo possui mensagens próprias para:
+
+- classe não suportada;
+- conflito de classe;
+- conflito de pacote;
+- aviso de metadado obrigatório ausente;
+- interface obsoleta;
+- diagnóstico ativado.
+
+Comandos, opções e chaves documentados são a API pública experimental da linha
+`0.0.x`. Funções e variáveis com nomes internos não têm garantia de
+compatibilidade. Nenhuma interface está obsoleta no Marco 2; a mensagem de
+depreciação estabelece o mecanismo que será usado quando necessário.

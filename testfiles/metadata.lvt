@@ -1,0 +1,31 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\ABNTEXsetup{
+  titulo={Titulo},
+  subtitulo={Subtitulo},
+  autoria={Autoria},
+  instituicao={Instituicao},
+  natureza={Natureza},
+  objetivo={Objetivo},
+  area={Area},
+  orientacao={Orientacao},
+  local={Local},
+  data={Data}
+}
+
+\begin{document}
+\START
+\TYPE{titulo = \ABNTEXmetadata{titulo}}
+\TYPE{subtitulo = \ABNTEXmetadata{subtitulo}}
+\TYPE{autoria = \ABNTEXmetadata{autoria}}
+\TYPE{instituicao = \ABNTEXmetadata{instituicao}}
+\TYPE{natureza = \ABNTEXmetadata{natureza}}
+\TYPE{objetivo = \ABNTEXmetadata{objetivo}}
+\TYPE{area = \ABNTEXmetadata{area}}
+\TYPE{orientacao = \ABNTEXmetadata{orientacao}}
+\TYPE{local = \ABNTEXmetadata{local}}
+\TYPE{data = \ABNTEXmetadata{data}}
+\END
+\end{document}

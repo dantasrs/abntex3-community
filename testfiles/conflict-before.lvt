@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{expl3}
+\ExplSyntaxOn
+\msg_redirect_name:nnn {abntex3} {package-conflict} {none}
+\ExplSyntaxOff
+\usepackage{abntex2cite}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\bool_if:NTF \g__abntex_conflict_bool
+  {\TYPE{conflict = detected}}
+  {\TYPE{conflict = not detected}}
+\ExplSyntaxOff
+\END
+\end{document}

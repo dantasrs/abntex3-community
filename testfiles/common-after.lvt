@@ -1,0 +1,13 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+\usepackage[brazilian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\begin{document}
+\START
+\TYPE{common packages after = ok}
+\TYPE{class = \ABNTEXclass}
+\END
+\end{document}

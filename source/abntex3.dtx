@@ -9,9 +9,9 @@
 %</driver>
 % \fi
 %
-% \title{\pkg{abntex3}: infraestrutura mínima}
+% \title{\pkg{abntex3}: pacote principal}
 % \author{dantasrs}
-% \date{2026-07-27 v0.0.0}
+% \date{2026-07-28 v0.0.0}
 %
 % \maketitle
 %
@@ -19,25 +19,27 @@
 %
 % \section{Estado}
 %
-% Este arquivo produz o pacote mínimo usado para validar a cadeia de build,
-% testes, instalação e distribuição do abnTeX3 Community. A versão 0.0.0 não
-% implementa regras normativas e não oferece ainda uma API pública estável.
+% A versão 0.0.0 oferece a API mínima de configuração e metadados necessária
+% aos módulos futuros. Ela ainda não implementa apresentação normativa nem
+% faz alegação de conformidade com qualquer norma.
 %
-% \section{Uso}
-%
-% O pacote pode ser carregado sobre uma classe LaTeX usual.
+% \section{Uso mínimo}
 %
 % \begin{verbatim}
 % \documentclass{article}
-% \usepackage{abntex3}
-% \begin{document}
-% Documento mínimo.
-% \end{document}
+% \usepackage[perfil=academico]{abntex3}
+% \ABNTEXsetup{
+%   titulo      = {Título},
+%   autoria     = {Nome},
+%   instituicao = {Instituição}
+% }
 % \end{verbatim}
 %
-% A opção interna |debug| existe somente para exercitar o processamento de
-% opções na infraestrutura de testes. Ela não integra a API pública e poderá
-% desaparecer antes da primeira versão alfa.
+% Opções do pacote são processadas primeiro. Chamadas posteriores de
+% \cs{ABNTEXsetup} substituem os valores anteriores, e entre chamadas
+% sucessivas prevalece a última atribuição de cada chave.
+%
+% A referência completa das chaves está no manual do núcleo.
 %
 % \end{documentation}
 %
@@ -46,21 +48,17 @@
 % \section{Implementação}
 %
 %    \begin{macrocode}
+%<@@=abntex>
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
-\ProvidesPackage{abntex3}
-  [2026-07-27 v0.0.0 Infraestrutura minima do abnTeX3 Community]
+\ProvidesExplPackage{abntex3}
+  {2026-07-28}{0.0.0}{Nucleo e API do abnTeX3 Community}
 
-\newif\ifabntexthree@debug
-\DeclareOption{debug}{\abntexthree@debugtrue}
-\DeclareOption*{%
-  \PackageWarning{abntex3}{Opcao desconhecida `\CurrentOption'}%
-}
-\ProcessOptions\relax
+\RequirePackage{abntex3-core}
+\RequirePackage{l3keys2e}
 
-\ifabntexthree@debug
-  \PackageInfo{abntex3}{Modo de diagnostico ativado}%
-\fi
+\ProcessKeysOptions{abntex3}
+\abntex_core_initialize:
 \endinput
 %</package>
 %    \end{macrocode}

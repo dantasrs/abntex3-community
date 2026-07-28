@@ -1,0 +1,253 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-core.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-core}: núcleo de configuração}
+% \author{dantasrs}
+% \date{2026-07-28 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Contrato público}
+%
+% \begin{function}{\ABNTEXsetup}
+%   \begin{syntax}
+%     \cs{ABNTEXsetup}\Arg{lista de chaves}
+%   \end{syntax}
+%   Configura o pacote no preâmbulo. Uma atribuição mais recente substitui
+%   somente o valor anterior da mesma chave.
+% \end{function}
+%
+% \begin{function}{\ABNTEXmetadata}
+%   \begin{syntax}
+%     \cs{ABNTEXmetadata}\Arg{nome}
+%   \end{syntax}
+%   Recupera de forma expansível um metadado configurado. Os nomes aceitos
+%   são |titulo|, |subtitulo|, |autoria|, |instituicao|, |natureza|,
+%   |objetivo|, |area|, |orientacao|, |local| e |data|.
+% \end{function}
+%
+% \begin{function}{\ABNTEXprofile,\ABNTEXclass}
+%   Retornam, respectivamente, o perfil selecionado e a classe-base
+%   detectada. Os perfis aceitos são |nenhum|, |academico|, |projeto|,
+%   |artigo|, |relatorio| e |livro|. As classes inicialmente suportadas são
+%   \cls{article}, \cls{report} e \cls{book}.
+% \end{function}
+%
+% \begin{function}{\ABNTEXvalidate}
+%   Verifica os metadados técnicos exigidos pelo perfil selecionado. O perfil
+%   |nenhum| não exige campos. Esta verificação mede completude da
+%   configuração; não representa conformidade normativa. Cada módulo de
+%   perfil poderá refinar a lista após sua revisão normativa.
+% \end{function}
+%
+% \section{Metadados técnicos por perfil}
+%
+% \begin{itemize}
+%   \item |academico|: título, autoria, instituição, natureza, objetivo, área,
+%     orientação, local e data;
+%   \item |projeto|: título, autoria, instituição, local e data;
+%   \item |artigo|: título, autoria e data;
+%   \item |relatorio|: título, autoria, instituição, local e data;
+%   \item |livro|: título, autoria, local e data.
+% \end{itemize}
+%
+% \section{Precedência e estabilidade}
+%
+% A ordem de precedência, da menor para a maior, é: valores iniciais, opções
+% de \cs{usepackage} e chamadas de \cs{ABNTEXsetup}. Em uma mesma lista, a
+% última ocorrência prevalece. Os comandos e as chaves documentados neste
+% arquivo formam a API pública experimental da linha 0.0.x. Nomes iniciados
+% por dois sublinhados são internos e não possuem garantia de compatibilidade.
+%
+% A opção |debug| existe para diagnóstico do desenvolvimento e também é
+% experimental. A classe \cls{abntex2} e o pacote \pkg{abntex2cite} são
+% conflitos conhecidos: o primeiro pertence à arquitetura anterior, e o
+% segundo deve ser substituído pela integração futura com
+% \pkg{biblatex-abnt}.
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-core}
+  {2026-07-28}{0.0.0}{Configuracao e metadados do abnTeX3 Community}
+
+\RequirePackage{l3keys2e}
+
+\tl_new:N \g__abntex_profile_tl
+\tl_new:N \g__abntex_class_tl
+\prop_new:N \g__abntex_metadata_prop
+\prop_new:N \g__abntex_profile_required_prop
+\seq_new:N \g__abntex_missing_metadata_seq
+\bool_new:N \g__abntex_debug_bool
+\bool_new:N \g__abntex_conflict_bool
+\cs_generate_variant:Nn \prop_get:NnNT {NVNT}
+
+\msg_new:nnnn {abntex3} {unsupported-class}
+  {Classe-base~'#1'~nao~suportada.}
+  {Use~article,~report~ou~book~nesta~fase~do~projeto.}
+\msg_new:nnnn {abntex3} {class-conflict}
+  {A~classe~'#1'~conflita~com~o~abntex3.}
+  {Migre~o~documento~para~article,~report~ou~book.}
+\msg_new:nnnn {abntex3} {package-conflict}
+  {O~pacote~'#1'~conflita~com~o~abntex3.}
+  {Remova-o;~a~bibliografia~sera~integrada~por~biblatex-abnt.}
+\msg_new:nnnn {abntex3} {required-metadata-missing}
+  {O~metadado~'#1'~e~obrigatorio~para~o~perfil~'#2'.}
+  {Defina-o~com~\token_to_str:N\ABNTEXsetup~antes~da~validacao.}
+\msg_new:nnnn {abntex3} {deprecated-interface}
+  {A~interface~'#1'~esta~obsoleta.}
+  {Use~'#2';~a~interface~antiga~podera~ser~removida~em~versao~futura.}
+\msg_new:nnn {abntex3} {debug-enabled}
+  {Modo~de~diagnostico~ativado.}
+
+\clist_map_inline:nn
+  {
+    titulo, subtitulo, autoria, instituicao, natureza,
+    objetivo, area, orientacao, local, data
+  }
+  {\prop_gput:Nnn \g__abntex_metadata_prop {#1} {}}
+
+\prop_gput:Nnn \g__abntex_profile_required_prop {nenhum} {}
+\prop_gput:Nnn \g__abntex_profile_required_prop {academico}
+  {titulo,autoria,instituicao,natureza,objetivo,area,orientacao,local,data}
+\prop_gput:Nnn \g__abntex_profile_required_prop {projeto}
+  {titulo,autoria,instituicao,local,data}
+\prop_gput:Nnn \g__abntex_profile_required_prop {artigo}
+  {titulo,autoria,data}
+\prop_gput:Nnn \g__abntex_profile_required_prop {relatorio}
+  {titulo,autoria,instituicao,local,data}
+\prop_gput:Nnn \g__abntex_profile_required_prop {livro}
+  {titulo,autoria,local,data}
+
+\keys_define:nn {abntex3}
+  {
+    perfil .choices:nn =
+      {nenhum, academico, projeto, artigo, relatorio, livro}
+      {\tl_gset:Nx \g__abntex_profile_tl {\l_keys_choice_tl}},
+    perfil .initial:n = nenhum,
+    debug .bool_gset:N = \g__abntex_debug_bool,
+    debug .initial:n = false,
+    titulo .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {titulo} {#1}},
+    subtitulo .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {subtitulo} {#1}},
+    autoria .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {autoria} {#1}},
+    instituicao .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {instituicao} {#1}},
+    natureza .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {natureza} {#1}},
+    objetivo .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {objetivo} {#1}},
+    area .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {area} {#1}},
+    orientacao .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {orientacao} {#1}},
+    local .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {local} {#1}},
+    data .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {data} {#1}}
+  }
+
+\cs_new_protected:Npn \__abntex_report_package_conflict:n #1
+  {
+    \bool_gset_true:N \g__abntex_conflict_bool
+    \msg_error:nnn {abntex3} {package-conflict} {#1}
+  }
+
+\cs_new_protected:Npn \__abntex_detect_class:
+  {
+    \tl_gclear:N \g__abntex_class_tl
+    \@ifclassloaded {abntex2}
+      {
+        \bool_gset_true:N \g__abntex_conflict_bool
+        \msg_error:nnn {abntex3} {class-conflict} {abntex2}
+      }
+      {}
+    \clist_map_inline:nn {article, report, book}
+      {
+        \@ifclassloaded {##1}
+          {\tl_gset:Nn \g__abntex_class_tl {##1}}
+          {}
+      }
+    \tl_if_empty:NT \g__abntex_class_tl
+      {\msg_error:nnx {abntex3} {unsupported-class} {\@classname}}
+  }
+
+\cs_new_protected:Npn \__abntex_check_loaded_conflicts:
+  {
+    \@ifpackageloaded {abntex2cite}
+      {\__abntex_report_package_conflict:n {abntex2cite}}
+      {}
+  }
+
+\hook_gput_code:nnn {package/abntex2cite/after} {abntex3}
+  {\__abntex_report_package_conflict:n {abntex2cite}}
+
+\cs_new_protected:Npn \__abntex_validate:
+  {
+    \seq_gclear:N \g__abntex_missing_metadata_seq
+    \prop_get:NVNT
+      \g__abntex_profile_required_prop \g__abntex_profile_tl \l_tmpa_tl
+      {
+        \exp_args:NV \clist_map_inline:nn \l_tmpa_tl
+          {
+            \prop_get:NnN \g__abntex_metadata_prop {##1} \l_tmpb_tl
+            \tl_if_blank:VTF \l_tmpb_tl
+              {\seq_gput_right:Nn \g__abntex_missing_metadata_seq {##1}}
+              {}
+          }
+      }
+    \seq_map_inline:Nn \g__abntex_missing_metadata_seq
+      {
+        \msg_warning:nnnn {abntex3} {required-metadata-missing}
+          {##1} {\tl_use:N \g__abntex_profile_tl}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_warn_deprecated:nn #1#2
+  {\msg_warning:nnnn {abntex3} {deprecated-interface} {#1} {#2}}
+
+\cs_new_protected:Npn \abntex_core_initialize:
+  {
+    \__abntex_detect_class:
+    \__abntex_check_loaded_conflicts:
+    \bool_if:NT \g__abntex_debug_bool
+      {\msg_info:nn {abntex3} {debug-enabled}}
+  }
+
+\NewDocumentCommand \ABNTEXsetup {m}
+  {\keys_set:nn {abntex3} {#1}}
+\NewExpandableDocumentCommand \ABNTEXmetadata {m}
+  {\prop_item:Nn \g__abntex_metadata_prop {#1}}
+\NewExpandableDocumentCommand \ABNTEXprofile {}
+  {\tl_use:N \g__abntex_profile_tl}
+\NewExpandableDocumentCommand \ABNTEXclass {}
+  {\tl_use:N \g__abntex_class_tl}
+\NewDocumentCommand \ABNTEXvalidate {}
+  {\__abntex_validate:}
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

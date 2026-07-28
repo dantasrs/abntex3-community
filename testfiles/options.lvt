@@ -1,15 +1,27 @@
 \input regression-test.tex
 \documentclass{article}
-\usepackage[debug]{abntex3}
+\usepackage[
+  debug,
+  perfil=artigo,
+  titulo={Titulo nas opcoes},
+  autoria={Autoria nas opcoes}
+]{abntex3}
 
 \begin{document}
 \START
-\makeatletter
-\ifabntexthree@debug
-  \TYPE{debug = true}
-\else
-  \TYPE{debug = false}
-\fi
-\makeatother
+\ABNTEXsetup{
+  titulo={Titulo no setup},
+  data={2026}
+}
+\ExplSyntaxOn
+\bool_if:NTF \g__abntex_debug_bool
+  {\TYPE{debug = true}}
+  {\TYPE{debug = false}}
+\ExplSyntaxOff
+\TYPE{profile = \ABNTEXprofile}
+\TYPE{class = \ABNTEXclass}
+\TYPE{title = \ABNTEXmetadata{titulo}}
+\TYPE{author = \ABNTEXmetadata{autoria}}
+\TYPE{date = \ABNTEXmetadata{data}}
 \END
 \end{document}

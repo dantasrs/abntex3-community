@@ -1,0 +1,17 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=academico]{abntex3}
+
+\ABNTEXsetup{titulo={Título}}
+\ExplSyntaxOn
+\msg_redirect_name:nnn {abntex3} {required-metadata-missing} {none}
+\ExplSyntaxOff
+
+\begin{document}
+\START
+\ABNTEXvalidate
+\ExplSyntaxOn
+\TYPE{missing = \seq_use:Nn \g__abntex_missing_metadata_seq {,}}
+\ExplSyntaxOff
+\END
+\end{document}

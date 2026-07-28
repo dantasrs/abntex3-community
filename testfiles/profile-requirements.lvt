@@ -1,0 +1,21 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn {abntex3} {required-metadata-missing} {none}
+\ExplSyntaxOff
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\clist_map_inline:nn
+  {nenhum, academico, projeto, artigo, relatorio, livro}
+  {
+    \keys_set:nn {abntex3} {perfil=#1}
+    \ABNTEXvalidate
+    \TYPE{#1=\seq_use:Nn \g__abntex_missing_metadata_seq {,}}
+  }
+\ExplSyntaxOff
+\END
+\end{document}
