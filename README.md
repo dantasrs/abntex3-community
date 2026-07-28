@@ -7,10 +7,10 @@ documentação.
 
 ## Situação do projeto
 
-O projeto possui infraestrutura reproduzível e uma API experimental de
-configuração e metadados. A versão 0.0.0 ainda não implementa regras de
-apresentação normativa, não é indicada para produção e não faz alegação de
-conformidade.
+O projeto possui infraestrutura reproduzível, API experimental de configuração
+e metadados e um primeiro módulo para seções, numeração, sumário, apêndices e
+anexos. A versão 0.0.0 ainda não é indicada para produção e não faz alegação
+de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -89,7 +89,8 @@ O núcleo funciona inicialmente com `article`, `report` e `book`:
 
 Consulte a [`referência da API`](docs/api.md) para os metadados disponíveis,
 perfis, precedência de configuração, validação técnica e garantias de
-estabilidade.
+estabilidade. O uso de seções e sumário está documentado em
+[`docs/structure.md`](docs/structure.md).
 
 ## Desenvolvimento
 

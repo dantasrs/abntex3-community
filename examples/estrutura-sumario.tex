@@ -1,0 +1,57 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{hyperref}
+\usepackage[
+  profundidade-secoes=5,
+  profundidade-sumario=3
+]{abntex3}
+
+\ABNTEXstructureSetup{1}{destaque=negrito}
+\ABNTEXstructureSetup{2}{destaque=negrito}
+\ABNTEXstructureSetup{3}{destaque=italico}
+
+\begin{document}
+
+\ABNTEXpretextualtitle{Agradecimentos}
+
+Este exemplo agradece às pessoas que colaboram com o desenvolvimento aberto.
+
+\ABNTEXsumario
+
+\section{Introdução à estrutura}
+
+O primeiro nível inicia a numeração progressiva.
+
+\subsection{Uma seção com título suficientemente longo para demonstrar o
+alinhamento das linhas seguintes}
+
+O texto começa em uma nova linha e permanece relacionado ao título.
+
+\subsubsection{Ações, órgãos e informações}
+
+Os caracteres acentuados também exercitam os marcadores de PDF quando
+\texttt{hyperref} está carregado.
+
+\paragraph{Quarto nível}
+
+O quarto nível continua a hierarquia.
+
+\subparagraph{Quinto nível}
+
+O quinto nível encerra a profundidade permitida.
+
+\ABNTEXposttextualtitle{Referências}
+
+As referências serão integradas ao \texttt{biblatex-abnt} em marco posterior.
+
+\ABNTEXappendix{Questionário de avaliação}
+
+Material elaborado pelo autor.
+
+\ABNTEXannex{Autorização institucional}
+
+Material de autoria externa incorporado ao trabalho.
+
+\end{document}

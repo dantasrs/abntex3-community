@@ -76,6 +76,7 @@ abntex3-community/
 │   └── abntex3-doc.bib
 ├── examples/
 │   ├── minimo.tex
+│   ├── estrutura-sumario.tex
 │   ├── trabalho-academico.tex
 │   ├── projeto-pesquisa.tex
 │   ├── artigo.tex
@@ -116,6 +117,7 @@ abntex3-community/
 ├── docs/
 │   ├── arquitetura.md
 │   ├── api.md
+│   ├── structure.md
 │   ├── roadmap.md
 │   ├── normas.md
 │   ├── conformidade.md
@@ -153,7 +155,8 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 1 formam a infraestrutura mínima.
+Os arquivos já materializados até o Marco 3 formam a infraestrutura mínima e
+o primeiro módulo normativo rastreável.
 Os demais itens da árvore são criados apenas no marco em que sua
 responsabilidade é implementada.
 

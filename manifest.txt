@@ -15,11 +15,15 @@ CONTRIBUTING.md
 LICENSE
 README.md
 SECURITY.md
+examples/estrutura-sumario.tex
 examples/minimo.tex
 scripts/validate-distribution.sh
 source/abntex3.dtx
 source/abntex3-core.dtx
+source/abntex3-structure.dtx
 source/abntex3.ins
+testfiles/accented-bookmarks.lvt
+testfiles/accented-bookmarks.tlg
 testfiles/class-article.lvt
 testfiles/class-article.tlg
 testfiles/class-book.lvt
@@ -36,6 +40,8 @@ testfiles/conflict-before.lvt
 testfiles/conflict-before.tlg
 testfiles/loading.lvt
 testfiles/loading.tlg
+testfiles/long-titles.lvt
+testfiles/long-titles.tlg
 testfiles/metadata.lvt
 testfiles/metadata.tlg
 testfiles/options.lvt
@@ -44,7 +50,19 @@ testfiles/profile-requirements.lvt
 testfiles/profile-requirements.tlg
 testfiles/profile-validation.lvt
 testfiles/profile-validation.tlg
+testfiles/sections-article.lvt
+testfiles/sections-article.tlg
+testfiles/sections-report.lvt
+testfiles/sections-report.tlg
+testfiles/structure-options.lvt
+testfiles/structure-options.tlg
 testfiles/support/abntex2cite.sty
+testfiles/toc-depth.lvt
+testfiles/toc-depth.tlg
+testfiles/toc-typography.lvt
+testfiles/toc-typography.tlg
+testfiles/unnumbered-titles.lvt
+testfiles/unnumbered-titles.tlg
 docs/api.md
 docs/arquitetura.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
@@ -53,7 +71,10 @@ docs/decisoes/0003-motores-e-versoes.md
 docs/decisoes/0004-politica-de-compatibilidade.md
 docs/decisoes/README.md
 docs/normas.md
+docs/requisitos/nbr-6024-2012.md
+docs/requisitos/nbr-6027-2012.md
 docs/roadmap.md
+docs/structure.md
 docs/versionamento.md
 manifest.txt
 

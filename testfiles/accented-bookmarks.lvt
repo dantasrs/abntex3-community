@@ -1,0 +1,19 @@
+\input regression-test.tex
+\documentclass{book}
+\usepackage[brazilian]{babel}
+\usepackage{hyperref}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\OMIT
+\ABNTEXsumario
+\chapter{Introdução à numeração}
+\section{Ações, órgãos e informações}
+\ABNTEXposttextualtitle{Referências}
+\ABNTEXappendix{Questionário de avaliação}
+\ABNTEXannex{Autorização institucional}
+\TIMO
+\TYPE{accented titles and hyperlinks = ok}
+\END
+\end{document}

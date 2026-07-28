@@ -32,9 +32,9 @@ compile_example() {
   local texmf_home="$1"
   local run_dir="$2"
   local resolved_package
+  local example
 
   mkdir -p "${run_dir}" "${run_dir}/texmf-var"
-  cp "${project_dir}/examples/minimo.tex" "${run_dir}/minimo.tex"
   resolved_package="$(
     TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
       kpsewhich abntex3.sty
@@ -43,11 +43,20 @@ compile_example() {
     echo "O pacote resolvido não pertence à árvore isolada: ${resolved_package}" >&2
     exit 1
   fi
-  (
-    cd "${run_dir}"
-    TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
-      pdflatex -interaction=nonstopmode -halt-on-error minimo.tex >/dev/null
-  )
+  for example in minimo estrutura-sumario; do
+    cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
+    (
+      cd "${run_dir}"
+      TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
+        pdflatex -interaction=nonstopmode -halt-on-error \
+          "${example}.tex" >/dev/null
+      if [[ "${example}" == "estrutura-sumario" ]]; then
+        TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
+          pdflatex -interaction=nonstopmode -halt-on-error \
+            "${example}.tex" >/dev/null
+      fi
+    )
+  done
 }
 
 compile_example "${installed_tree}" "${work_dir}/installed-example"
@@ -69,4 +78,4 @@ fi
 unzip -q "${work_dir}/abntex3.tds.zip" -d "${packaged_tree}"
 compile_example "${packaged_tree}" "${work_dir}/packaged-example"
 
-echo "Distribuição validada: arquivos permitidos e exemplo compilado via instalação e TDS."
+echo "Distribuição validada: arquivos permitidos e exemplos compilados via instalação e TDS."

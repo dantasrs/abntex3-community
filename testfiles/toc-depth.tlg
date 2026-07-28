@@ -1,4 +1,5 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-abntex3 loaded
-version = ....-..-.. v... Nucleo estrutural do abnTeX3 Community
+book secnumdepth = 3
+book tocdepth = 2
+depth-limited hierarchy = ok

@@ -41,6 +41,12 @@ Os registros devem ser redigidos com palavras próprias. Textos integrais,
 capturas de tela e reproduções substanciais das normas não devem ser
 armazenados no repositório.
 
+## Matrizes detalhadas disponíveis
+
+- [`ABNT NBR 6024:2012`](requisitos/nbr-6024-2012.md) — numeração
+  progressiva das seções;
+- [`ABNT NBR 6027:2012`](requisitos/nbr-6027-2012.md) — sumário.
+
 ## Conformidade
 
 Nenhuma versão deve ser anunciada como compatível com uma norma antes de:
@@ -50,4 +56,3 @@ Nenhuma versão deve ser anunciada como compatível com uma norma antes de:
 3. compilar os exemplos nos motores LaTeX suportados;
 4. realizar revisão normativa independente;
 5. documentar limitações e decisões de interpretação.
-

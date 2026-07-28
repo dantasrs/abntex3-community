@@ -1,0 +1,392 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-structure.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-structure}: seções e sumário}
+% \author{dantasrs}
+% \date{2026-07-28 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Escopo}
+%
+% O módulo implementa a numeração progressiva em cinco níveis sobre
+% \cls{article}, \cls{report} e \cls{book}, além de títulos não numerados,
+% entradas pré-textuais e pós-textuais, apêndices, anexos e sumário. A
+% rastreabilidade normativa está nas matrizes da ABNT NBR 6024:2012 e da
+% ABNT NBR 6027:2012.
+%
+% A implementação ainda aguarda revisão normativa independente e não
+% constitui alegação de conformidade.
+%
+% \section{Configuração}
+%
+% \begin{function}{\ABNTEXstructureSetup}
+%   \begin{syntax}
+%     \cs{ABNTEXstructureSetup}\Arg{nível}\Arg{chaves}
+%   \end{syntax}
+%   Configura um nível entre 1 e 5. As chaves são |destaque|,
+%   |alinhamento|, |espaco-antes| e |espaco-depois|. O alinhamento
+%   normativo padrão é |esquerda|; os demais valores são extensões para
+%   necessidades institucionais.
+% \end{function}
+%
+% As chaves gerais pertencem a \cs{ABNTEXsetup} e também podem ser opções do
+% pacote:
+% \begin{itemize}
+%   \item |profundidade-secoes| e |profundidade-sumario|;
+%   \item |largura-indicativo-sumario|;
+%   \item |nome-apendice| e |nome-anexo|.
+% \end{itemize}
+%
+% \section{Títulos e elementos pós-textuais}
+%
+% \begin{function}{\ABNTEXpretextualtitle,\ABNTEXposttextualtitle}
+%   Compõem títulos centralizados e não numerados com o destaque do nível
+%   primário. Somente a forma pós-textual cria entrada no sumário.
+% \end{function}
+%
+% \begin{function}{\ABNTEXappendix,\ABNTEXannex}
+%   Criam, respectivamente, apêndices e anexos com contadores alfabéticos
+%   independentes da classe-base e entrada pós-textual no sumário.
+% \end{function}
+%
+% \begin{function}{\ABNTEXsumario}
+%   Inicia uma nova página e produz o sumário com título centralizado. As
+%   entradas usam o mesmo destaque configurado para os títulos no texto.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-structure}
+  {2026-07-28}{0.0.0}{Estrutura e sumario do abnTeX3 Community}
+
+\int_new:N \g__abntex_section_depth_int
+\int_new:N \g__abntex_toc_depth_int
+\int_new:N \g__abntex_appendix_int
+\int_new:N \g__abntex_annex_int
+\int_new:N \l__abntex_level_int
+\dim_new:N \g__abntex_toc_number_width_dim
+\tl_new:N \g__abntex_primary_name_tl
+\tl_new:N \g__abntex_appendix_name_tl
+\tl_new:N \g__abntex_annex_name_tl
+
+\msg_new:nnnn {abntex3} {invalid-structure-depth}
+  {A~profundidade~'#1'~e~invalida.}
+  {Use~um~numero~inteiro~entre~1~e~5.}
+\msg_new:nnnn {abntex3} {invalid-structure-level}
+  {O~nivel~estrutural~'#1'~e~invalido.}
+  {Use~um~numero~inteiro~entre~1~e~5.}
+
+\cs_new_protected:Npn \__abntex_set_depth:Nn #1#2
+  {
+    \int_compare:nNnTF {#2} < {1}
+      {\msg_error:nnn {abntex3} {invalid-structure-depth} {#2}}
+      {
+        \int_compare:nNnTF {#2} > {5}
+          {\msg_error:nnn {abntex3} {invalid-structure-depth} {#2}}
+          {\int_gset:Nn #1 {#2}}
+      }
+  }
+
+\int_step_inline:nn {5}
+  {
+    \tl_new:c {g__abntex_level_#1_font_tl}
+    \tl_new:c {g__abntex_level_#1_alignment_tl}
+    \skip_new:c {g__abntex_level_#1_before_skip}
+    \skip_new:c {g__abntex_level_#1_after_skip}
+    \tl_gset:cn {g__abntex_level_#1_alignment_tl} {\raggedright}
+    \exp_args:Nc \skip_gset:Nn
+      {g__abntex_level_#1_before_skip} {3.25ex~plus~1ex~minus~.2ex}
+    \exp_args:Nc \skip_gset:Nn
+      {g__abntex_level_#1_after_skip} {1.5ex~plus~.2ex}
+  }
+\tl_gset:cn {g__abntex_level_1_font_tl} {\bfseries}
+\tl_gset:cn {g__abntex_level_2_font_tl} {\bfseries}
+\tl_gset:cn {g__abntex_level_3_font_tl} {\itshape}
+\tl_gset:cn {g__abntex_level_4_font_tl} {\bfseries\itshape}
+\tl_gset:cn {g__abntex_level_5_font_tl} {\normalfont}
+
+\int_gset:Nn \g__abntex_section_depth_int {5}
+\int_gset:Nn \g__abntex_toc_depth_int {5}
+\dim_gset:Nn \g__abntex_toc_number_width_dim {5.5em}
+\tl_gset:Nn \g__abntex_appendix_name_tl {APÊNDICE}
+\tl_gset:Nn \g__abntex_annex_name_tl {ANEXO}
+
+\keys_define:nn {abntex3}
+  {
+    profundidade-secoes .code:n =
+      {\__abntex_set_depth:Nn \g__abntex_section_depth_int {#1}},
+    profundidade-sumario .code:n =
+      {\__abntex_set_depth:Nn \g__abntex_toc_depth_int {#1}},
+    largura-indicativo-sumario .dim_gset:N =
+      \g__abntex_toc_number_width_dim,
+    nome-apendice .tl_gset:N = \g__abntex_appendix_name_tl,
+    nome-anexo .tl_gset:N = \g__abntex_annex_name_tl
+  }
+
+\keys_define:nn {abntex3/structure/level}
+  {
+    destaque .choices:nn =
+      {normal, negrito, italico, negrito-italico, versalete}
+      {
+        \str_case:Vn \l_keys_choice_tl
+          {
+            {normal}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int _font_tl}
+                {\normalfont}}
+            {negrito}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int _font_tl}
+                {\bfseries}}
+            {italico}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int _font_tl}
+                {\itshape}}
+            {negrito-italico}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int _font_tl}
+                {\bfseries\itshape}}
+            {versalete}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int _font_tl}
+                {\scshape}}
+          }
+      },
+    alinhamento .choices:nn = {esquerda, centro, direita}
+      {
+        \str_case:Vn \l_keys_choice_tl
+          {
+            {esquerda}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int
+                  _alignment_tl}
+                {\raggedright}}
+            {centro}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int
+                  _alignment_tl}
+                {\centering}}
+            {direita}
+              {\tl_gset:cn
+                {g__abntex_level_\int_use:N\l__abntex_level_int
+                  _alignment_tl}
+                {\raggedleft}}
+          }
+      },
+    espaco-antes .code:n =
+      {
+        \exp_args:Nc \skip_gset:Nn
+          {g__abntex_level_\int_use:N\l__abntex_level_int _before_skip}
+          {#1}
+      },
+    espaco-depois .code:n =
+      {
+        \exp_args:Nc \skip_gset:Nn
+          {g__abntex_level_\int_use:N\l__abntex_level_int _after_skip}
+          {#1}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_level_font:n #1
+  {
+    \normalfont
+    \normalsize
+    \tl_use:c {g__abntex_level_#1_font_tl}
+  }
+
+\cs_new_protected:Npn \__abntex_level_style:n #1
+  {
+    \__abntex_level_font:n {#1}
+    \tl_use:c {g__abntex_level_#1_alignment_tl}
+  }
+
+\cs_new_protected:Npn \__abntex_define_section_command:nnn #1#2#3
+  {
+    \cs_gset_protected:cpn {#2}
+      {
+        \@startsection {#2} {#3} {\z@}
+          {\skip_use:c {g__abntex_level_#1_before_skip}}
+          {\skip_use:c {g__abntex_level_#1_after_skip}}
+          {\__abntex_level_style:n {#1}}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_define_toc_entry:nnn #1#2#3
+  {
+    \cs_gset_protected:cpn {l@#2} ##1##2
+      {
+        \@dottedtocline {#3} {\z@}
+          {\dim_use:N \g__abntex_toc_number_width_dim}
+          {{\__abntex_level_font:n {#1} ##1}}
+          {{\__abntex_level_font:n {#1} ##2}}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_define_article_structure:
+  {
+    \tl_gset:Nn \g__abntex_primary_name_tl {section}
+    \__abntex_define_section_command:nnn {1} {section} {1}
+    \__abntex_define_section_command:nnn {2} {subsection} {2}
+    \__abntex_define_section_command:nnn {3} {subsubsection} {3}
+    \__abntex_define_section_command:nnn {4} {paragraph} {4}
+    \__abntex_define_section_command:nnn {5} {subparagraph} {5}
+    \__abntex_define_toc_entry:nnn {1} {section} {1}
+    \__abntex_define_toc_entry:nnn {2} {subsection} {2}
+    \__abntex_define_toc_entry:nnn {3} {subsubsection} {3}
+    \__abntex_define_toc_entry:nnn {4} {paragraph} {4}
+    \__abntex_define_toc_entry:nnn {5} {subparagraph} {5}
+    \setcounter{secnumdepth}{\int_use:N \g__abntex_section_depth_int}
+    \setcounter{tocdepth}{\int_use:N \g__abntex_toc_depth_int}
+  }
+
+\cs_new_protected:Npn \__abntex_make_chapter_head:n #1
+  {
+    \vspace*{\skip_use:c {g__abntex_level_1_before_skip}}
+    {
+      \parindent \z@
+      \__abntex_level_style:n {1}
+      \setbox\z@\hbox
+        {\thechapter\hspace{\fontdimen2\font}}
+      \hangindent\wd\z@
+      \hangafter\@ne
+      \noindent\box\z@#1\par
+      \nobreak
+      \vskip\skip_use:c {g__abntex_level_1_after_skip}
+    }
+  }
+
+\cs_new_protected:Npn \__abntex_make_star_chapter_head:n #1
+  {
+    \vspace*{\skip_use:c {g__abntex_level_1_before_skip}}
+    {
+      \parindent \z@
+      \__abntex_level_style:n {1}
+      #1\par
+      \nobreak
+      \vskip\skip_use:c {g__abntex_level_1_after_skip}
+    }
+  }
+
+\cs_new_protected:Npn \__abntex_define_chapter_structure:
+  {
+    \tl_gset:Nn \g__abntex_primary_name_tl {chapter}
+    \cs_gset_protected:Npn \@makechapterhead ##1
+      {\__abntex_make_chapter_head:n {##1}}
+    \cs_gset_protected:Npn \@makeschapterhead ##1
+      {\__abntex_make_star_chapter_head:n {##1}}
+    \__abntex_define_section_command:nnn {2} {section} {1}
+    \__abntex_define_section_command:nnn {3} {subsection} {2}
+    \__abntex_define_section_command:nnn {4} {subsubsection} {3}
+    \__abntex_define_section_command:nnn {5} {paragraph} {4}
+    \__abntex_define_toc_entry:nnn {1} {chapter} {0}
+    \__abntex_define_toc_entry:nnn {2} {section} {1}
+    \__abntex_define_toc_entry:nnn {3} {subsection} {2}
+    \__abntex_define_toc_entry:nnn {4} {subsubsection} {3}
+    \__abntex_define_toc_entry:nnn {5} {paragraph} {4}
+    \setcounter{secnumdepth}
+      {\int_eval:n {\g__abntex_section_depth_int - 1}}
+    \setcounter{tocdepth}
+      {\int_eval:n {\g__abntex_toc_depth_int - 1}}
+  }
+
+\cs_new_protected:Npn \__abntex_add_primary_toc:n #1
+  {
+    \tl_if_eq:NnTF \g__abntex_primary_name_tl {chapter}
+      {\addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+      {\addcontentsline{toc}{section}{\protect\numberline{}#1}}
+  }
+
+\cs_new_protected:Npn \__abntex_unnumbered_title:nn #1#2
+  {
+    \group_begin:
+      \tl_set:cn {g__abntex_level_1_alignment_tl} {\centering}
+      \use:c {\tl_use:N \g__abntex_primary_name_tl} * {#2}
+      \str_if_eq:nnT {#1} {post}
+        {\__abntex_add_primary_toc:n {#2}}
+    \group_end:
+  }
+
+\cs_new_protected:Npn \__abntex_lettered_title:nnn #1#2#3
+  {\__abntex_unnumbered_title:nn {post} {#1~#2~--~#3}}
+
+\cs_new_protected:Npn \abntex_structure_initialize:
+  {
+    \cs_gset:Npn \@seccntformat ##1
+      {
+        \use:c {the##1}
+        \hspace{\fontdimen2\font}
+      }
+    \tl_if_eq:NnTF \g__abntex_class_tl {article}
+      {\__abntex_define_article_structure:}
+      {\__abntex_define_chapter_structure:}
+  }
+
+\NewDocumentCommand \ABNTEXstructureSetup {m m}
+  {
+    \int_compare:nNnTF {#1} < {1}
+      {\msg_error:nnn {abntex3} {invalid-structure-level} {#1}}
+      {
+        \int_compare:nNnTF {#1} > {5}
+          {\msg_error:nnn {abntex3} {invalid-structure-level} {#1}}
+          {
+            \int_set:Nn \l__abntex_level_int {#1}
+            \keys_set:nn {abntex3/structure/level} {#2}
+          }
+      }
+  }
+
+\NewDocumentCommand \ABNTEXpretextualtitle {m}
+  {\__abntex_unnumbered_title:nn {pre} {#1}}
+\NewDocumentCommand \ABNTEXposttextualtitle {m}
+  {\__abntex_unnumbered_title:nn {post} {#1}}
+\NewDocumentCommand \ABNTEXappendix {m}
+  {
+    \int_gincr:N \g__abntex_appendix_int
+    \__abntex_lettered_title:nnn
+      {\tl_use:N \g__abntex_appendix_name_tl}
+      {\int_to_Alph:n {\g__abntex_appendix_int}}
+      {#1}
+  }
+\NewDocumentCommand \ABNTEXannex {m}
+  {
+    \int_gincr:N \g__abntex_annex_int
+    \__abntex_lettered_title:nnn
+      {\tl_use:N \g__abntex_annex_name_tl}
+      {\int_to_Alph:n {\g__abntex_annex_int}}
+      {#1}
+  }
+\NewDocumentCommand \ABNTEXsumario {}
+  {
+    \clearpage
+    \group_begin:
+      \tl_set:cn {g__abntex_level_1_alignment_tl} {\centering}
+      \tableofcontents
+    \group_end:
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

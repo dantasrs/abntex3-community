@@ -1,0 +1,23 @@
+\input regression-test.tex
+\documentclass{book}
+\usepackage[
+  profundidade-secoes=4,
+  profundidade-sumario=3
+]{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\TYPE{book secnumdepth = \number\c@secnumdepth}
+\TYPE{book tocdepth = \number\c@tocdepth}
+\makeatother
+\OMIT
+\chapter{Um}
+\section{Dois}
+\subsection{Tres}
+\subsubsection{Quatro}
+\paragraph{Cinco}
+\TIMO
+\TYPE{depth-limited hierarchy = ok}
+\END
+\end{document}
