@@ -1,0 +1,15 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[debug]{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\ifabntexthree@debug
+  \TYPE{debug = true}
+\else
+  \TYPE{debug = false}
+\fi
+\makeatother
+\END
+\end{document}

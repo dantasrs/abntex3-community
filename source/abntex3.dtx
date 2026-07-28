@@ -1,0 +1,70 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3}: infraestrutura mínima}
+% \author{dantasrs}
+% \date{2026-07-27 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Estado}
+%
+% Este arquivo produz o pacote mínimo usado para validar a cadeia de build,
+% testes, instalação e distribuição do abnTeX3 Community. A versão 0.0.0 não
+% implementa regras normativas e não oferece ainda uma API pública estável.
+%
+% \section{Uso}
+%
+% O pacote pode ser carregado sobre uma classe LaTeX usual.
+%
+% \begin{verbatim}
+% \documentclass{article}
+% \usepackage{abntex3}
+% \begin{document}
+% Documento mínimo.
+% \end{document}
+% \end{verbatim}
+%
+% A opção interna |debug| existe somente para exercitar o processamento de
+% opções na infraestrutura de testes. Ela não integra a API pública e poderá
+% desaparecer antes da primeira versão alfa.
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesPackage{abntex3}
+  [2026-07-27 v0.0.0 Infraestrutura minima do abnTeX3 Community]
+
+\newif\ifabntexthree@debug
+\DeclareOption{debug}{\abntexthree@debugtrue}
+\DeclareOption*{%
+  \PackageWarning{abntex3}{Opcao desconhecida `\CurrentOption'}%
+}
+\ProcessOptions\relax
+
+\ifabntexthree@debug
+  \PackageInfo{abntex3}{Modo de diagnostico ativado}%
+\fi
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

@@ -49,17 +49,17 @@ decisão antes da implementação.
 **Objetivo:** produzir, instalar, testar e empacotar um pacote vazio antes de
 implementar regras normativas.
 
-- [ ] Criar `build.lua`.
-- [ ] Criar `source/abntex3.ins`.
-- [ ] Criar `source/abntex3.dtx` com `abntex3.sty` mínimo.
-- [ ] Configurar geração dos módulos a partir dos `.dtx`.
-- [ ] Criar testes de carregamento e opções.
-- [ ] Criar `examples/minimo.tex`.
-- [ ] Configurar `l3build unpack`, `check`, `doc`, `install` e `ctan`.
-- [ ] Configurar CI para `pdfTeX`, `LuaTeX` e `XeTeX`.
-- [ ] Testar TeX Live corrente e duas versões anuais anteriores.
-- [ ] Adicionar verificação de arquivos não permitidos em artefatos.
-- [ ] Gerar um pacote CTAN de ensaio sem publicá-lo.
+- [x] Criar `build.lua`.
+- [x] Criar `source/abntex3.ins`.
+- [x] Criar `source/abntex3.dtx` com `abntex3.sty` mínimo.
+- [x] Configurar geração dos módulos a partir dos `.dtx`.
+- [x] Criar testes de carregamento e opções.
+- [x] Criar `examples/minimo.tex`.
+- [x] Configurar `l3build unpack`, `check`, `doc`, `install` e `ctan`.
+- [x] Configurar CI para `pdfTeX`, `LuaTeX` e `XeTeX`.
+- [x] Testar TeX Live corrente e duas versões anuais anteriores.
+- [x] Adicionar verificação de arquivos não permitidos em artefatos.
+- [x] Gerar um pacote CTAN de ensaio sem publicá-lo.
 
 **Critério de saída:** um documento mínimo compila com a versão instalada e
 com a versão empacotada; `l3build check` é reprodutível.

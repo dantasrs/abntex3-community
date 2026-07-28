@@ -111,6 +111,8 @@ abntex3-community/
 │   ├── profile-book.tlg
 │   ├── biblatex-integration.lvt
 │   └── biblatex-integration.tlg
+├── scripts/
+│   └── validate-distribution.sh
 ├── docs/
 │   ├── arquitetura.md
 │   ├── roadmap.md
@@ -149,6 +151,10 @@ abntex3-community/
 ├── SECURITY.md
 └── manifest.txt
 ```
+
+Os arquivos já materializados até o Marco 1 formam a infraestrutura mínima.
+Os demais itens da árvore são criados apenas no marco em que sua
+responsabilidade é implementada.
 
 ## Responsabilidade dos módulos
 
