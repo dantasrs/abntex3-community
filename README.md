@@ -237,6 +237,11 @@ distribuição não repete esses comandos. O último comando valida o pacote CTA
 de ensaio, sem publicá-lo, e compila os exemplos tanto a partir de uma
 instalação isolada quanto da árvore TDS empacotada.
 
+Nos pull requests, alterações limitadas à documentação executam somente a
+validação rápida de diferenças. Mudanças em fontes, testes, exemplos, scripts,
+build, manifesto ou workflows acionam a matriz TeX completa. Execuções manuais
+também são sempre completas.
+
 ## Governança e colaboração
 
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — fluxo e requisitos das contribuições;
