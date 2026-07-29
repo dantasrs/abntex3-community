@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     name: TeX Live ${{ matrix.texlive }}
@@ -33,7 +37,7 @@ jobs:
           scheme: full
           run: |
             apk add --no-cache diffutils
-            l3build check
+            l3build check --halt-on-error
 
   distribution:
     name: Distribuição de ensaio
@@ -51,9 +55,6 @@ jobs:
           scheme: full
           run: |
             apk add --no-cache diffutils unzip
-            l3build unpack
-            l3build check
-            l3build doc
             l3build ctan
             ./scripts/validate-distribution.sh
 

@@ -105,8 +105,12 @@ abntex3-community/
 │   ├── backmatter-order.tlg
 │   ├── lists.lvt
 │   ├── lists.tlg
-│   ├── profile-academic.lvt
-│   ├── profile-academic.tlg
+│   ├── academic-types.lvt
+│   ├── academic-types.tlg
+│   ├── academic-flow.lvt
+│   ├── academic-flow.tlg
+│   ├── academic-elements.lvt
+│   ├── academic-elements.tlg
 │   ├── profile-project.lvt
 │   ├── profile-project.tlg
 │   ├── profile-article.lvt
@@ -163,8 +167,9 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 5 formam a infraestrutura mínima e
-os módulos normativos de estrutura, layout e elementos pré-textuais.
+Os arquivos já materializados até o Marco 7 formam a infraestrutura mínima,
+os módulos normativos gerais e o primeiro perfil documental tecnicamente
+completo, ainda pendente de revisão normativa independente.
 Os demais itens da árvore são criados apenas no marco em que sua
 responsabilidade é implementada.
 

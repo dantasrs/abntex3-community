@@ -1,0 +1,222 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-profile-academic.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-profile-academic}: perfil de trabalho acadêmico}
+% \author{dantasrs}
+% \date{2026-07-29 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Contrato público}
+%
+% O perfil coordena os módulos gerais sem reproduzir suas implementações.
+% A parte interna compreende as fases pré-textual, textual e pós-textual.
+% A chave |tipo-trabalho| aceita |tese|, |dissertacao|, |tcc| e
+% |monografia|. Ela identifica a configuração, mas não inventa a natureza,
+% o objetivo ou o grau concedido pela instituição.
+%
+% \begin{function}{\ABNTEXtipotrabalho}
+%   Retorna de forma expansível o tipo de trabalho selecionado.
+% \end{function}
+%
+% \begin{function}{\ABNTEXacademicoexterna}
+%   Valida os metadados e compõe a capa. Uma lombada, quando aplicável, pode
+%   ser acrescentada em seguida com \cs{ABNTEXlombada}.
+% \end{function}
+%
+% \begin{function}{\ABNTEXacademicopretextual,
+%                  \ABNTEXacademicotextual,
+%                  \ABNTEXacademicopostextual}
+%   Iniciam, respectivamente, as fases pré-textual, textual e pós-textual da
+%   parte interna, preservando a contagem e a exibição de páginas oferecidas
+%   pelos módulos gerais.
+% \end{function}
+%
+% \begin{function}{\ABNTEXvalidateacademico}
+%   Verifica o tipo, os metadados e os elementos obrigatórios: capa, folha de
+%   rosto, folha de aprovação, resumos nos dois idiomas, sumário e
+%   referências. Elementos opcionais ausentes não produzem diagnóstico.
+%   O uso das quatro funções de fase instala a mesma verificação ao final do
+%   documento.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-profile-academic}
+  {2026-07-29}{0.0.0}
+  {Perfil de trabalho academico do abnTeX3 Community}
+
+\tl_new:N \g__abntex_academic_type_tl
+\int_new:N \g__abntex_academic_phase_int
+\bool_new:N \g__abntex_academic_used_bool
+\prop_new:N \g__abntex_academic_phases_prop
+\seq_new:N \g__abntex_academic_missing_elements_seq
+
+\tl_gset:Nn \g__abntex_academic_type_tl {nenhum}
+
+\msg_new:nnnn {abntex3} {academic-profile-required}
+  {O~fluxo~academico~exige~perfil=academico.}
+  {Selecione~o~perfil~academico~antes~de~usar~'#1'.}
+\msg_new:nnnn {abntex3} {academic-type-required}
+  {O~tipo~do~trabalho~academico~nao~foi~definido.}
+  {
+    Use~tipo-trabalho=tese|dissertacao|tcc|monografia~
+    em~\token_to_str:N\ABNTEXsetup.
+  }
+\msg_new:nnnn {abntex3} {academic-phase-order}
+  {A~fase~academica~'#1'~esta~fora~da~ordem.}
+  {Use~externa,~pre-textual,~textual~e~pos-textual~nessa~sequencia.}
+\msg_new:nnnn {abntex3} {academic-element-missing}
+  {O~elemento~obrigatorio~'#1'~nao~foi~composto.}
+  {Inclua~o~comando~publico~correspondente~no~fluxo~academico.}
+
+\keys_define:nn {abntex3}
+  {
+    tipo-trabalho .choices:nn =
+      {nenhum, tese, dissertacao, tcc, monografia}
+      {\tl_gset:Nx \g__abntex_academic_type_tl {\l_keys_choice_tl}},
+    tipo-trabalho .initial:n = nenhum
+  }
+
+\cs_new_protected:Npn \__abntex_academic_require_profile:n #1
+  {
+    \tl_if_eq:NnF \g__abntex_profile_tl {academico}
+      {\msg_error:nnn {abntex3} {academic-profile-required} {#1}}
+  }
+
+\cs_new_protected:Npn \__abntex_academic_validate_type:
+  {
+    \tl_if_eq:NnT \g__abntex_academic_type_tl {nenhum}
+      {\msg_warning:nn {abntex3} {academic-type-required}}
+  }
+
+\cs_new_protected:Npn \__abntex_academic_register_phase:nn #1#2
+  {
+    \bool_gset_true:N \g__abntex_academic_used_bool
+    \int_compare:nNnT {#1} < {\g__abntex_academic_phase_int}
+      {\msg_warning:nnn {abntex3} {academic-phase-order} {#2}}
+    \int_gset:Nn \g__abntex_academic_phase_int
+      {\int_max:nn {#1} {\g__abntex_academic_phase_int}}
+    \prop_gput:Nnn \g__abntex_academic_phases_prop {#2} {true}
+  }
+
+\prg_new_conditional:Npnn \__abntex_academic_element_seen:n #1 {T,F,TF}
+  {
+    \str_if_eq:nnTF {#1} {referencias}
+      {
+        \prop_if_in:NnTF \g__abntex_backmatter_seen_prop {referencias}
+          {\prg_return_true:}
+          {\prg_return_false:}
+      }
+      {
+        \prop_if_in:NnTF \g__abntex_frontmatter_seen_prop {#1}
+          {\prg_return_true:}
+          {\prg_return_false:}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_academic_collect_missing:
+  {
+    \seq_gclear:N \g__abntex_academic_missing_elements_seq
+    \clist_map_inline:nn
+      {
+        capa,
+        folha-de-rosto,
+        folha-de-aprovacao,
+        resumo,
+        resumo-em-lingua-estrangeira,
+        sumario,
+        referencias
+      }
+      {
+        \__abntex_academic_element_seen:nF {##1}
+          {
+            \seq_gput_right:Nn
+              \g__abntex_academic_missing_elements_seq {##1}
+          }
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_academic_validate:
+  {
+    \__abntex_academic_require_profile:n
+      {\token_to_str:N \ABNTEXvalidateacademico}
+    \ABNTEXvalidate
+    \__abntex_academic_validate_type:
+    \__abntex_academic_collect_missing:
+    \seq_map_inline:Nn \g__abntex_academic_missing_elements_seq
+      {\msg_warning:nnn {abntex3} {academic-element-missing} {##1}}
+  }
+
+\NewExpandableDocumentCommand \ABNTEXtipotrabalho {}
+  {\tl_use:N \g__abntex_academic_type_tl}
+
+\NewDocumentCommand \ABNTEXacademicoexterna {}
+  {
+    \__abntex_academic_require_profile:n
+      {\token_to_str:N \ABNTEXacademicoexterna}
+    \__abntex_academic_register_phase:nn {1} {externa}
+    \ABNTEXvalidate
+    \__abntex_academic_validate_type:
+    \ABNTEXcapa
+  }
+
+\NewDocumentCommand \ABNTEXacademicopretextual {}
+  {
+    \__abntex_academic_require_profile:n
+      {\token_to_str:N \ABNTEXacademicopretextual}
+    \__abntex_academic_register_phase:nn {2} {pre-textual}
+    \ABNTEXpretextualpages
+  }
+
+\NewDocumentCommand \ABNTEXacademicotextual {}
+  {
+    \__abntex_academic_require_profile:n
+      {\token_to_str:N \ABNTEXacademicotextual}
+    \__abntex_academic_register_phase:nn {3} {textual}
+    \__abntex_academic_validate_type:
+    \ABNTEXtextualpages
+  }
+
+\NewDocumentCommand \ABNTEXacademicopostextual {}
+  {
+    \__abntex_academic_require_profile:n
+      {\token_to_str:N \ABNTEXacademicopostextual}
+    \__abntex_academic_register_phase:nn {4} {pos-textual}
+    \ABNTEXposttextualpages
+  }
+
+\NewDocumentCommand \ABNTEXvalidateacademico {}
+  {\__abntex_academic_validate:}
+
+\hook_gput_code:nnn {enddocument} {abntex3-profile-academic}
+  {
+    \bool_if:NT \g__abntex_academic_used_bool
+      {\__abntex_academic_validate:}
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

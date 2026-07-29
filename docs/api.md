@@ -1,10 +1,10 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3, 4, 5 e 6. A versão `0.0.0` continua experimental. Os módulos
-estrutural, de layout, pré-textual e pós-textual possuem rastreabilidade
-normativa, mas ainda aguardam revisão independente e não fazem alegação de
-conformidade.
+Marcos 3 a 7. A versão `0.0.0` continua experimental. Os módulos estrutural,
+de layout, pré-textual e pós-textual e o perfil acadêmico possuem
+rastreabilidade normativa, mas ainda aguardam revisão independente e não
+fazem alegação de conformidade.
 
 ## Carregamento e classes
 
@@ -55,6 +55,7 @@ perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
 - `largura-lombada`;
 - `separador-palavras-chave`;
 - `citacoes`, com valores `externo`, `autor-data` ou `numerico`;
+- `tipo-trabalho`, com valores `tese`, `dissertacao`, `tcc` ou `monografia`;
 - `debug`, uma opção experimental de diagnóstico.
 
 As mesmas chaves podem ser passadas como opções do pacote. A precedência, da
@@ -166,3 +167,17 @@ O valor inicial `citacoes=externo` não carrega `biblatex`. Os valores
 `autor-data` e `numerico` são escolhas explícitas por `style=abnt` e
 `style=abnt-numeric`, respectivamente. A referência completa e a divisão de
 responsabilidades estão em [`backmatter.md`](backmatter.md).
+
+## Perfil de trabalho acadêmico
+
+O Marco 7 acrescenta:
+
+- `\ABNTEXtipotrabalho`, que informa a configuração selecionada;
+- `\ABNTEXacademicoexterna`, que valida metadados e compõe a capa;
+- `\ABNTEXacademicopretextual`, `\ABNTEXacademicotextual` e
+  `\ABNTEXacademicopostextual`, que coordenam as fases da parte interna;
+- `\ABNTEXvalidateacademico`, que verifica tipo, metadados e elementos
+  obrigatórios.
+
+A referência completa, inclusive a separação entre elementos obrigatórios e
+opcionais, está em [`profile-academic.md`](profile-academic.md).

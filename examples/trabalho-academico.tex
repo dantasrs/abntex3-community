@@ -1,0 +1,79 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=dissertacao,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Perfil acadêmico no abnTeX3 Community},
+  subtitulo={exemplo integrado do Marco 7},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Dissertação},
+  objetivo={apresentada para obtenção do título de Mestre},
+  area={Documentação},
+  orientacao={Prof. Dr. João Souza},
+  local={Recife},
+  data={2026}
+}
+
+\begin{document}
+
+\ABNTEXacademicoexterna
+
+\ABNTEXacademicopretextual
+\ABNTEXfolhaderosto
+
+% Elemento opcional: substitua o conteúdo pelos dados preparados pelo
+% profissional responsável ou remova o comando inteiro.
+\ABNTEXfichacatalografica{%
+  Dados internacionais de catalogação na publicação.
+}
+
+\ABNTEXfolhadeaprovacao
+  {29 de julho de 2026}
+  {%
+    \ABNTEXmembrobanca
+      {Prof. Dr. João Souza}{Orientador}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Dra. Ana Santos}{Examinadora}{Universidade Exemplo}
+  }
+
+\ABNTEXresumo
+  {Este exemplo reúne os módulos do pacote em um fluxo completo de trabalho
+   acadêmico, da capa às referências.}
+  {normalização, trabalho acadêmico, LaTeX}
+
+\ABNTEXresumoemlinguaestrangeira
+  {This example combines the package modules into a complete academic work
+   flow, from the cover to the references.}
+  {standardization, academic work, LaTeX}
+
+\ABNTEXsumario
+
+\ABNTEXacademicotextual
+
+\chapter{Introdução}
+
+O perfil preserva a divisão de responsabilidades: apresentação documental
+fica no abnTeX3 Community, enquanto citações e referências são processadas
+pelo \texttt{biblatex-abnt} e pelo \texttt{biber}
+\parencite{associacao2025}.
+
+\chapter{Desenvolvimento}
+
+Os quatro tipos de trabalho compartilham o mesmo fluxo. A chave de tipo
+identifica a configuração, e os metadados institucionais permanecem
+explícitos.
+
+\ABNTEXacademicopostextual
+\ABNTEXbibliografia
+
+\end{document}

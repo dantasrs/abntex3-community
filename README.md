@@ -11,9 +11,10 @@ documentação.
 ## Situação do projeto
 
 O projeto possui infraestrutura reproduzível, API experimental de configuração
-e metadados e módulos para layout, paginação, seções, elementos pré e
-pós-textuais, citações, referências, apêndices, anexos e índice. A versão
-0.0.0 ainda não é indicada para produção e não faz alegação de conformidade.
+e metadados, módulos para layout, paginação, seções, elementos pré e
+pós-textuais, citações, referências, apêndices, anexos e índice e um perfil
+acadêmico em revisão. A versão 0.0.0 ainda não é indicada para produção e não
+faz alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -82,9 +83,9 @@ de uso das normas.
 
 ### Próximos marcos
 
-- [ ] **Marco 7 — Trabalho acadêmico:** reunir os módulos em um primeiro
-  perfil completo para teses, dissertações, TCCs e monografias, acompanhado
-  de exemplo, manual e revisão normativa independente.
+- [ ] **Marco 7 — Trabalho acadêmico:** implementação, exemplo, manual e
+  testes concluídos para teses, dissertações, TCCs e monografias; falta a
+  revisão normativa independente para encerrar o marco.
 - [ ] **Marco 8 — Projeto de pesquisa:** criar o perfil específico da
   NBR 15287:2025, documentando e testando suas diferenças em relação ao
   trabalho acadêmico.
@@ -119,7 +120,10 @@ O núcleo funciona inicialmente com `article`, `report` e `book`:
 
 ```tex
 \documentclass{article}
-\usepackage[perfil=academico]{abntex3}
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=dissertacao
+]{abntex3}
 
 \ABNTEXsetup{
   titulo      = {Título do trabalho},
@@ -136,6 +140,8 @@ estabilidade. O uso de seções e sumário está documentado em
 [`docs/structure.md`](docs/structure.md); papel, margens, impressão em uma ou
 duas faces, paginação e espaçamento estão em
 [`docs/layout.md`](docs/layout.md).
+O fluxo completo de tese, dissertação, TCC ou monografia está em
+[`docs/profile-academic.md`](docs/profile-academic.md).
 
 ## Desenvolvimento
 
@@ -152,9 +158,11 @@ l3build ctan
 ```
 
 `l3build check` executa os testes com pdfTeX, LuaTeX e XeTeX. A integração
-contínua repete a suíte no TeX Live 2024, 2025 e 2026. O último comando valida
-o pacote CTAN de ensaio, sem publicá-lo, e compila o exemplo mínimo tanto a
-partir de uma instalação isolada quanto da árvore TDS empacotada.
+contínua repete a suíte no TeX Live 2024, 2025 e 2026. `l3build ctan` já
+executa testes e documentação antes de empacotar; por isso o trabalho de
+distribuição não repete esses comandos. O último comando valida o pacote CTAN
+de ensaio, sem publicá-lo, e compila os exemplos tanto a partir de uma
+instalação isolada quanto da árvore TDS empacotada.
 
 ## Governança e colaboração
 

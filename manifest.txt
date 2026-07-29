@@ -21,6 +21,7 @@ examples/layout-paginacao.tex
 examples/minimo.tex
 examples/pos-textuais-bibliografia.tex
 examples/referencias-exemplo.bib
+examples/trabalho-academico.tex
 scripts/validate-distribution.sh
 source/abntex3.dtx
 source/abntex3-backmatter.dtx
@@ -28,10 +29,17 @@ source/abntex3-core.dtx
 source/abntex3-frontmatter.dtx
 source/abntex3-layout.dtx
 source/abntex3-lists.dtx
+source/abntex3-profile-academic.dtx
 source/abntex3-structure.dtx
 source/abntex3.ins
 testfiles/accented-bookmarks.lvt
 testfiles/accented-bookmarks.tlg
+testfiles/academic-elements.lvt
+testfiles/academic-elements.tlg
+testfiles/academic-flow.lvt
+testfiles/academic-flow.tlg
+testfiles/academic-types.lvt
+testfiles/academic-types.tlg
 testfiles/backmatter-api.lvt
 testfiles/backmatter-api.tlg
 testfiles/backmatter-order.lvt
@@ -120,6 +128,7 @@ docs/arquitetura.md
 docs/backmatter.md
 docs/frontmatter.md
 docs/layout.md
+docs/profile-academic.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md
 docs/decisoes/0003-motores-e-versoes.md

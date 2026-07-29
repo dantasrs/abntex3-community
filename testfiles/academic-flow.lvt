@@ -1,0 +1,23 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage[perfil=academico,tipo-trabalho=tese]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \ABNTEXvalidate {}
+\cs_set_protected:Npn \ABNTEXcapa {\TYPE{compose=capa}}
+\cs_set_protected:Npn \ABNTEXpretextualpages {\TYPE{pages=pre-textual}}
+\cs_set_protected:Npn \ABNTEXtextualpages {\TYPE{pages=textual}}
+\cs_set_protected:Npn \ABNTEXposttextualpages {\TYPE{pages=pos-textual}}
+\ABNTEXacademicoexterna
+\ABNTEXacademicopretextual
+\ABNTEXacademicotextual
+\ABNTEXacademicopostextual
+\prop_map_inline:Nn \g__abntex_academic_phases_prop
+  {\TYPE{phase=#1}}
+\TYPE{last-phase=\int_use:N \g__abntex_academic_phase_int}
+\bool_gset_false:N \g__abntex_academic_used_bool
+\ExplSyntaxOff
+\END
+\end{document}

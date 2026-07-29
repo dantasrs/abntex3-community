@@ -168,16 +168,19 @@ reimplementar estilos bibliográficos.
 
 **Norma principal:** ABNT NBR 14724:2024.
 
-- [ ] Criar `abntex3-profile-academic.dtx`.
-- [ ] Definir elementos obrigatórios e opcionais do perfil.
-- [ ] Compor as partes externa, interna, textual e pós-textual.
-- [ ] Criar `examples/trabalho-academico.tex`.
-- [ ] Criar testes de tese, dissertação, TCC e monografia por configuração.
-- [ ] Testar documentos com e sem ficha catalográfica e folha de aprovação.
-- [ ] Produzir seção completa do manual.
+- [x] Criar `abntex3-profile-academic.dtx`.
+- [x] Definir elementos obrigatórios e opcionais do perfil.
+- [x] Compor as partes externa, interna, textual e pós-textual.
+- [x] Criar `examples/trabalho-academico.tex`.
+- [x] Criar testes de tese, dissertação, TCC e monografia por configuração.
+- [x] Testar documentos com e sem ficha catalográfica e folha de aprovação.
+- [x] Produzir seção completa do manual.
 - [ ] Executar revisão normativa independente.
 
 **Critério de saída:** primeiro perfil completo, candidato à versão alfa.
+
+**Estado:** implementação técnica concluída; o marco permanece aberto até que
+uma pessoa diferente do autor registre a revisão normativa.
 
 ## Marco 8 — Perfil de projeto de pesquisa
 
