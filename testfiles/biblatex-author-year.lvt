@@ -1,0 +1,28 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[citacoes=autor-data]{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\@ifpackageloaded{biblatex}
+  {\TYPE{biblatex=loaded}}
+  {\TYPE{biblatex=missing}}
+\TYPE{bbx=\csname blx@bbxfile\endcsname}
+\TYPE{cbx=\csname blx@cbxfile\endcsname}
+\makeatother
+\TYPE{citations=\ABNTEXcitacoes}
+\ExplSyntaxOn
+\bool_if:NTF \g__abntex_bibliography_version_bool
+  {\TYPE{versions=supported}}
+  {\TYPE{versions=insufficient}}
+\__abntex_backmatter_style_matches:TF
+  {\TYPE{style=compatible}}
+  {\TYPE{style=incompatible}}
+\cs_set:cpn {blx@bbxfile} {incompatible}
+\__abntex_backmatter_style_matches:TF
+  {\TYPE{simulated-style=compatible}}
+  {\TYPE{simulated-style=incompatible}}
+\ExplSyntaxOff
+\END
+\end{document}

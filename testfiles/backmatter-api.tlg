@@ -1,0 +1,16 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+biblatex=not-loaded
+title=Referencias
+bibliography-options=heading=none
+title=Fontes
+bibliography-options=heading=none,keyword=principal
+title=Glossario
+glossary-section=none
+glossary
+toc=Indicedeassuntos
+index
+citations=externo
+seen=referencias
+seen=glossario
+seen=indice

@@ -1,9 +1,10 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3, 4 e 5. A versão `0.0.0` continua experimental. Os módulos
-estrutural, de layout e pré-textual possuem rastreabilidade normativa, mas
-ainda aguardam revisão independente e não fazem alegação de conformidade.
+Marcos 3, 4, 5 e 6. A versão `0.0.0` continua experimental. Os módulos
+estrutural, de layout, pré-textual e pós-textual possuem rastreabilidade
+normativa, mas ainda aguardam revisão independente e não fazem alegação de
+conformidade.
 
 ## Carregamento e classes
 
@@ -15,7 +16,7 @@ O pacote deve ser carregado sobre `article`, `report` ou `book`:
 ```
 
 `abntex2` é uma classe conflitante, e `abntex2cite` é um pacote conflitante.
-A integração bibliográfica futura será feita por `biblatex-abnt`.
+A integração bibliográfica é delegada ao `biblatex-abnt`.
 
 `\ABNTEXclass` retorna a classe-base detectada. `\ABNTEXprofile` retorna um dos
 perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
@@ -53,6 +54,7 @@ perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
 - `disposicao-lombada`;
 - `largura-lombada`;
 - `separador-palavras-chave`;
+- `citacoes`, com valores `externo`, `autor-data` ou `numerico`;
 - `debug`, uma opção experimental de diagnóstico.
 
 As mesmas chaves podem ser passadas como opções do pacote. A precedência, da
@@ -103,7 +105,7 @@ O núcleo possui mensagens próprias para:
 
 Comandos, opções e chaves documentados são a API pública experimental da linha
 `0.0.x`. Funções e variáveis com nomes internos não têm garantia de
-compatibilidade. Nenhuma interface está obsoleta até o Marco 5; a mensagem de
+compatibilidade. Nenhuma interface está obsoleta até o Marco 6; a mensagem de
 depreciação estabelece o mecanismo que será usado quando necessário.
 
 ## Estrutura e sumário
@@ -148,3 +150,19 @@ O Marco 5 acrescenta:
 A ficha catalográfica recebe conteúdo preparado externamente; o pacote não
 gera dados profissionais de catalogação. A referência completa está em
 [`frontmatter.md`](frontmatter.md).
+
+## Elementos pós-textuais e bibliografia
+
+O Marco 6 acrescenta:
+
+- `\ABNTEXcitacoes`, que informa o sistema selecionado;
+- `\ABNTEXposttextualpages`, sem reinício da paginação;
+- `\ABNTEXbibliografia`, que delega a lista a `\printbibliography`;
+- `\ABNTEXglossario`, como integração opcional com pacotes de glossário;
+- `\ABNTEXindice`, como integração opcional com geradores de índice;
+- validação da ordem de referências, glossário, apêndices, anexos e índice.
+
+O valor inicial `citacoes=externo` não carrega `biblatex`. Os valores
+`autor-data` e `numerico` são escolhas explícitas por `style=abnt` e
+`style=abnt-numeric`, respectivamente. A referência completa e a divisão de
+responsabilidades estão em [`backmatter.md`](backmatter.md).

@@ -1,0 +1,20 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[citacoes=autor-data]{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\def\do#1{\TYPE{begin-bibliography-hook=installed}}
+\expandafter\ifx\csname abx@macro@\endcsname\relax\fi
+\makeatother
+\ExplSyntaxOn
+\group_begin:
+  \setstretch{1}
+  \setlength{\bibitemsep}{\baselineskip}
+  \TYPE{stretch=\baselinestretch}
+  \TYPE{item-separation=\dim_use:N\bibitemsep}
+\group_end:
+\ExplSyntaxOff
+\END
+\end{document}

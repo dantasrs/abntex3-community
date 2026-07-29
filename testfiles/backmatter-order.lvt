@@ -1,0 +1,24 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\msg_redirect_name:nnn {abntex3} {backmatter-order} {none}
+\cs_set_protected:Npn \__abntex_lettered_title:nnn #1#2#3
+  {\TYPE{lettered=#1/#2/#3}}
+\cs_set_protected:Npn \ABNTEXposttextualtitle #1 {}
+\cs_set_protected:Npn \printbibliography [#1] {}
+\bool_gset_true:N \g__abntex_bibliography_ready_bool
+\tl_gset:Nn \g__abntex_appendix_name_tl {APENDICE}
+\ABNTEXbibliografia
+\ABNTEXappendix{Primeiro}
+\ABNTEXannex{Segundo}
+\ABNTEXappendix{Fora de ordem}
+\prop_map_inline:Nn \g__abntex_backmatter_seen_prop
+  {\TYPE{seen=#1}}
+\TYPE{last-rank=\int_use:N \g__abntex_backmatter_rank_int}
+\ExplSyntaxOff
+\END
+\end{document}

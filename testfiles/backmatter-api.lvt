@@ -1,0 +1,35 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\@ifpackageloaded{biblatex}
+  {\TYPE{biblatex=loaded}}
+  {\TYPE{biblatex=not-loaded}}
+\makeatother
+\ExplSyntaxOn
+\cs_set_protected:Npn \ABNTEXposttextualtitle #1
+  {\TYPE{title=#1}}
+\cs_set_protected:Npn \printbibliography [#1]
+  {\TYPE{bibliography-options=#1}}
+\cs_set_protected:Npn \printglossary
+  {\TYPE{glossary}}
+\cs_set_protected:Npn \setglossarysection #1
+  {\TYPE{glossary-section=#1}}
+\cs_set_protected:Npn \printindex
+  {\TYPE{index}}
+\cs_set_protected:Npn \__abntex_add_primary_toc:n #1
+  {\TYPE{toc=#1}}
+\bool_gset_true:N \g__abntex_bibliography_ready_bool
+\ABNTEXbibliografia[Referencias]
+\ABNTEXbibliografia[Fontes][keyword=principal]
+\ABNTEXglossario[Glossario]
+\ABNTEXindice[Indice de assuntos]
+\TYPE{citations=\ABNTEXcitacoes}
+\prop_map_inline:Nn \g__abntex_backmatter_seen_prop
+  {\TYPE{seen=#1}}
+\ExplSyntaxOff
+\END
+\end{document}

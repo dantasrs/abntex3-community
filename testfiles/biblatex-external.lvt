@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+\usepackage[backend=biber,style=abnt]{biblatex}
+
+\begin{document}
+\START
+\TYPE{citations=\ABNTEXcitacoes}
+\ExplSyntaxOn
+\bool_if:NTF \g__abntex_bibliography_ready_bool
+  {\TYPE{external-biblatex=ready}}
+  {\TYPE{external-biblatex=missing}}
+\ExplSyntaxOff
+\makeatletter
+\TYPE{bbx=\csname blx@bbxfile\endcsname}
+\makeatother
+\END
+\end{document}

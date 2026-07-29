@@ -11,7 +11,7 @@
 %
 % \title{\pkg{abntex3-core}: núcleo de configuração}
 % \author{dantasrs}
-% \date{2026-07-28 v0.0.0}
+% \date{2026-07-29 v0.0.0}
 %
 % \maketitle
 %
@@ -73,8 +73,7 @@
 % A opção |debug| existe para diagnóstico do desenvolvimento e também é
 % experimental. A classe \cls{abntex2} e o pacote \pkg{abntex2cite} são
 % conflitos conhecidos: o primeiro pertence à arquitetura anterior, e o
-% segundo deve ser substituído pela integração futura com
-% \pkg{biblatex-abnt}.
+% segundo deve ser substituído pela integração com \pkg{biblatex-abnt}.
 %
 % \end{documentation}
 %
@@ -87,7 +86,7 @@
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesExplPackage{abntex3-core}
-  {2026-07-28}{0.0.0}{Configuracao e metadados do abnTeX3 Community}
+  {2026-07-29}{0.0.0}{Configuracao e metadados do abnTeX3 Community}
 
 \RequirePackage{l3keys2e}
 
@@ -108,7 +107,7 @@
   {Migre~o~documento~para~article,~report~ou~book.}
 \msg_new:nnnn {abntex3} {package-conflict}
   {O~pacote~'#1'~conflita~com~o~abntex3.}
-  {Remova-o;~a~bibliografia~sera~integrada~por~biblatex-abnt.}
+  {Remova-o;~a~bibliografia~e~integrada~por~biblatex-abnt.}
 \msg_new:nnnn {abntex3} {required-metadata-missing}
   {O~metadado~'#1'~e~obrigatorio~para~o~perfil~'#2'.}
   {Defina-o~com~\token_to_str:N\ABNTEXsetup~antes~da~validacao.}

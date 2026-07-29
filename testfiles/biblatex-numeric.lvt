@@ -1,0 +1,21 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[citacoes=numerico]{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\@ifpackageloaded{biblatex}
+  {\TYPE{biblatex=loaded}}
+  {\TYPE{biblatex=missing}}
+\TYPE{bbx=\csname blx@bbxfile\endcsname}
+\TYPE{cbx=\csname blx@cbxfile\endcsname}
+\makeatother
+\TYPE{citations=\ABNTEXcitacoes}
+\ExplSyntaxOn
+\__abntex_backmatter_style_matches:TF
+  {\TYPE{style=compatible}}
+  {\TYPE{style=incompatible}}
+\ExplSyntaxOff
+\END
+\end{document}

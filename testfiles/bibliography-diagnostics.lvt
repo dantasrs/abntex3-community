@@ -1,0 +1,23 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\msg_redirect_name:nnn
+  {abntex3} {bibliography-version-insufficient} {none}
+\bool_gset_true:N \g__abntex_bibliography_version_bool
+\__abntex_backmatter_check_declared_version:nnn
+  {fake-current} {2026/01/01 v1.0} {2025/01/01}
+\bool_if:NTF \g__abntex_bibliography_version_bool
+  {\TYPE{current-version=supported}}
+  {\TYPE{current-version=insufficient}}
+\__abntex_backmatter_check_declared_version:nnn
+  {fake-old} {2017/01/01 v1.0} {2018/01/01}
+\bool_if:NTF \g__abntex_bibliography_version_bool
+  {\TYPE{old-version=supported}}
+  {\TYPE{old-version=insufficient}}
+\ExplSyntaxOff
+\END
+\end{document}

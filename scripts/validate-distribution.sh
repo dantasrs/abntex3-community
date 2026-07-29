@@ -47,15 +47,33 @@ compile_example() {
     minimo \
     estrutura-sumario \
     layout-paginacao \
-    elementos-pretextuais
+    elementos-pretextuais \
+    pos-textuais-bibliografia
   do
     cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
+    if [[ "${example}" == "pos-textuais-bibliografia" ]]; then
+      cp "${project_dir}/examples/referencias-exemplo.bib" \
+        "${run_dir}/referencias-exemplo.bib"
+    fi
     (
       cd "${run_dir}"
       TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
         pdflatex -interaction=nonstopmode -halt-on-error \
           "${example}.tex" >/dev/null
-      if [[ "${example}" == "estrutura-sumario" || \
+      if [[ "${example}" == "pos-textuais-bibliografia" ]]; then
+        if ! command -v biber >/dev/null 2>&1; then
+          echo "biber não está disponível para o ensaio bibliográfico." >&2
+          exit 1
+        fi
+        biber "${example}" >/dev/null
+        makeindex "${example}" >/dev/null
+        TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
+          pdflatex -interaction=nonstopmode -halt-on-error \
+            "${example}.tex" >/dev/null
+        TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
+          pdflatex -interaction=nonstopmode -halt-on-error \
+            "${example}.tex" >/dev/null
+      elif [[ "${example}" == "estrutura-sumario" || \
             "${example}" == "layout-paginacao" || \
             "${example}" == "elementos-pretextuais" ]]; then
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \

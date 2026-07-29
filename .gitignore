@@ -19,6 +19,7 @@
 # l3build
 build/
 abntex3.pdf
+abntex3-backmatter.pdf
 abntex3-core.pdf
 abntex3-frontmatter.pdf
 abntex3-layout.pdf
