@@ -1,0 +1,41 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=academico,tipo-trabalho=monografia]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\clist_map_inline:nn
+  {
+    capa,
+    folha-de-rosto,
+    folha-de-aprovacao,
+    resumo,
+    resumo-em-lingua-estrangeira,
+    sumario
+  }
+  {\prop_gput:Nnn \g__abntex_frontmatter_seen_prop {#1} {true}}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {referencias} {true}
+\__abntex_academic_collect_missing:
+\TYPE{
+  sem-ficha=\seq_use:Nn \g__abntex_academic_missing_elements_seq {,}
+}
+\prop_gput:Nnn
+  \g__abntex_frontmatter_seen_prop {ficha-catalografica} {true}
+\prop_gremove:Nn
+  \g__abntex_frontmatter_seen_prop {folha-de-aprovacao}
+\__abntex_academic_collect_missing:
+\TYPE{
+  com-ficha-sem-aprovacao=
+  \seq_use:Nn \g__abntex_academic_missing_elements_seq {,}
+}
+\prop_gput:Nnn
+  \g__abntex_frontmatter_seen_prop {folha-de-aprovacao} {true}
+\__abntex_academic_collect_missing:
+\TYPE{
+  com-ficha-com-aprovacao=
+  \seq_use:Nn \g__abntex_academic_missing_elements_seq {,}
+}
+\ExplSyntaxOff
+\END
+\end{document}

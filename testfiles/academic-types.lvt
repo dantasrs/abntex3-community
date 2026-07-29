@@ -1,0 +1,15 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=academico]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\clist_map_inline:nn {tese, dissertacao, tcc, monografia}
+  {
+    \keys_set:nn {abntex3} {tipo-trabalho=#1}
+    \TYPE{tipo=#1/\ABNTEXtipotrabalho}
+  }
+\ExplSyntaxOff
+\END
+\end{document}

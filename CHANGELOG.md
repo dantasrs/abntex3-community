@@ -65,3 +65,9 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Ordem pós-textual de referências, glossário, apêndices, anexos e índice.
 - Diagnósticos para configuração, estilo, versão e saída do `biber`.
 - Exemplo integrado de citações, bibliografia, apêndices, anexos e índice.
+- Módulo `abntex3-profile-academic` para tese, dissertação, TCC e monografia.
+- Coordenação das partes externa, pré-textual, textual e pós-textual.
+- Validação integrada dos elementos acadêmicos obrigatórios e opcionais.
+- Exemplo completo e manual do perfil de trabalho acadêmico.
+- CI com cancelamento de execuções superadas, falha antecipada e distribuição
+  sem chamadas redundantes anteriores a `l3build ctan`.
