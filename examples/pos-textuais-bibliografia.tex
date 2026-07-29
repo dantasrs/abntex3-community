@@ -1,0 +1,44 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage[citacoes=autor-data]{abntex3}
+
+\makeindex
+\addbibresource{referencias-exemplo.bib}
+
+\begin{document}
+
+\ABNTEXtextualpages
+
+\chapter{Demonstração}
+
+Uma citação indireta pode integrar a oração com
+\textcite{associacao2025}. A forma parentética também pode indicar uma página
+específica \parencite[6]{associacao2025}. A integração mantém disponíveis as
+citações em nota.\footcite[9]{associacao2023}
+
+\begin{ABNTEXcitacaolonga}
+Este trecho demonstra o espaço físico reservado a uma citação direta longa,
+enquanto a chamada e o localizador continuam sob responsabilidade do estilo
+bibliográfico. \parencite[10]{associacao2023}
+\end{ABNTEXcitacaolonga}
+
+O termo integração\index{integração} será incluído no índice remissivo.
+
+\ABNTEXposttextualpages
+
+\ABNTEXbibliografia
+
+\ABNTEXappendix{Dados de demonstração}
+
+Conteúdo elaborado pelo autor.
+
+\ABNTEXannex{Documento de demonstração}
+
+Conteúdo não elaborado pelo autor.
+
+\ABNTEXindice[Índice de assuntos]
+
+\end{document}

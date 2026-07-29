@@ -56,3 +56,12 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Listas ordenadas de abreviaturas e siglas e lista sequencial de símbolos.
 - Validação de ordem e obrigatoriedade dos elementos pré-textuais acadêmicos.
 - Exemplo integrado de elementos pré-textuais e listas.
+- Matrizes rastreáveis das NBR 6023:2025, NBR 10520:2023 e NBR 6034:2004.
+- Módulo documentado `abntex3-backmatter` para o fluxo pós-textual.
+- Integração opt-in com `biblatex-abnt` nos sistemas autor-data e numérico.
+- Referências processadas de ponta a ponta com `biber`.
+- Espaço simples, alinhamento à esquerda e separação uniforme das referências.
+- Pontos de integração para glossário e índice remissivo.
+- Ordem pós-textual de referências, glossário, apêndices, anexos e índice.
+- Diagnósticos para configuração, estilo, versão e saída do `biber`.
+- Exemplo integrado de citações, bibliografia, apêndices, anexos e índice.

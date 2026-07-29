@@ -77,6 +77,9 @@ abntex3-community/
 ├── examples/
 │   ├── minimo.tex
 │   ├── estrutura-sumario.tex
+│   ├── elementos-pretextuais.tex
+│   ├── pos-textuais-bibliografia.tex
+│   ├── referencias-exemplo.bib
 │   ├── trabalho-academico.tex
 │   ├── projeto-pesquisa.tex
 │   ├── artigo.tex
@@ -96,8 +99,10 @@ abntex3-community/
 │   ├── sections.tlg
 │   ├── frontmatter.lvt
 │   ├── frontmatter.tlg
-│   ├── backmatter.lvt
-│   ├── backmatter.tlg
+│   ├── backmatter-api.lvt
+│   ├── backmatter-api.tlg
+│   ├── backmatter-order.lvt
+│   ├── backmatter-order.tlg
 │   ├── lists.lvt
 │   ├── lists.tlg
 │   ├── profile-academic.lvt
@@ -110,13 +115,16 @@ abntex3-community/
 │   ├── profile-report.tlg
 │   ├── profile-book.lvt
 │   ├── profile-book.tlg
-│   ├── biblatex-integration.lvt
-│   └── biblatex-integration.tlg
+│   ├── biblatex-author-year.lvt
+│   ├── biblatex-author-year.tlg
+│   ├── biblatex-numeric.lvt
+│   └── biblatex-numeric.tlg
 ├── scripts/
 │   └── validate-distribution.sh
 ├── docs/
 │   ├── arquitetura.md
 │   ├── api.md
+│   ├── backmatter.md
 │   ├── structure.md
 │   ├── roadmap.md
 │   ├── normas.md

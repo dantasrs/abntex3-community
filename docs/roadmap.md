@@ -148,18 +148,18 @@ compostos sem comandos internos ou redefinições no documento do usuário.
 
 **Normas:** ABNT NBR 6023:2025, ABNT NBR 10520:2023 e ABNT NBR 6034:2004.
 
-- [ ] Criar as matrizes `nbr-6023-2025.md`, `nbr-10520-2023.md` e
+- [x] Criar as matrizes `nbr-6023-2025.md`, `nbr-10520-2023.md` e
       `nbr-6034-2004.md`.
-- [ ] Criar `abntex3-backmatter.dtx`.
-- [ ] Integrar `biblatex-abnt` sem carregar um estilo silenciosamente.
-- [ ] Definir opções `citacoes=autor-data|numerico`.
-- [ ] Verificar citações diretas, indiretas, notas e citações longas.
-- [ ] Verificar referências com `biber`.
-- [ ] Implementar pontos de integração para glossário.
-- [ ] Implementar apêndices e anexos no fluxo pós-textual.
-- [ ] Implementar índice remissivo.
-- [ ] Testar ausência de `biber`, estilo incompatível e versões insuficientes.
-- [ ] Documentar claramente a divisão de responsabilidades entre os projetos.
+- [x] Criar `abntex3-backmatter.dtx`.
+- [x] Integrar `biblatex-abnt` sem carregar um estilo silenciosamente.
+- [x] Definir opções `citacoes=autor-data|numerico`.
+- [x] Verificar citações diretas, indiretas, notas e citações longas.
+- [x] Verificar referências com `biber`.
+- [x] Implementar pontos de integração para glossário.
+- [x] Implementar apêndices e anexos no fluxo pós-textual.
+- [x] Implementar índice remissivo.
+- [x] Testar ausência de `biber`, estilo incompatível e versões insuficientes.
+- [x] Documentar claramente a divisão de responsabilidades entre os projetos.
 
 **Critério de saída:** citações e referências funcionam de ponta a ponta sem
 reimplementar estilos bibliográficos.

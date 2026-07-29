@@ -51,6 +51,11 @@ armazenados no repositório.
 - [`ABNT NBR 6027:2012`](requisitos/nbr-6027-2012.md) — sumário;
 - [`ABNT NBR 6028:2021`](requisitos/nbr-6028-2021.md) — resumos e
   palavras-chave.
+- [`ABNT NBR 6023:2025`](requisitos/nbr-6023-2025.md) — referências e
+  divisão de responsabilidades com o `biblatex-abnt`;
+- [`ABNT NBR 10520:2023`](requisitos/nbr-10520-2023.md) — citações e sistemas
+  de chamada;
+- [`ABNT NBR 6034:2004`](requisitos/nbr-6034-2004.md) — índice.
 
 ## Conformidade
 

@@ -8,9 +8,10 @@ sourcefiles = {"*.dtx", "*.ins"}
 unpackfiles = {"*.ins"}
 installfiles = {"*.sty"}
 typesetfiles = {"*.dtx"}
-demofiles = {"examples/*.tex"}
+demofiles = {"examples/*.tex", "examples/*.bib"}
 docfiles = {
   "docs/api.md",
+  "docs/backmatter.md",
   "docs/frontmatter.md",
   "docs/layout.md",
   "docs/structure.md",

@@ -83,8 +83,8 @@ Texto da citação direta longa.
 
 O recuo inicial da citação longa é 4 cm. Ele pode ser alterado globalmente
 com `recuo-citacao-longa` ou localmente pelo argumento opcional do ambiente.
-A integração semântica completa das citações será feita com
-`biblatex-abnt` no Marco 6.
+A chamada bibliográfica pode ser inserida no ambiente pela integração com
+`biblatex-abnt` descrita em [`backmatter.md`](backmatter.md).
 
 Notas de rodapé recebem espaço simples, tamanho menor, filete de 5 cm e
 alinhamento suspenso que mantém o expoente destacado. `\caption`,
@@ -101,7 +101,8 @@ contagem.
 
 - capa, ficha catalográfica e demais elementos pré-textuais são tratados pelo
   módulo `abntex3-frontmatter`;
-- referências e integração de citações pertencem ao Marco 6;
+- referências e integração de citações pertencem ao módulo
+  `abntex3-backmatter`;
 - o perfil acadêmico completo e sua sequência de elementos pertencem ao
   Marco 7;
 - cor do texto, proximidade editorial de figuras e conteúdo das legendas não

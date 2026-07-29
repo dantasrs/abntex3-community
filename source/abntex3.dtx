@@ -11,7 +11,7 @@
 %
 % \title{\pkg{abntex3}: pacote principal}
 % \author{dantasrs}
-% \date{2026-07-28 v0.0.0}
+% \date{2026-07-29 v0.0.0}
 %
 % \maketitle
 %
@@ -23,8 +23,9 @@
 % dedicados a layout, paginação, seções, elementos pré-textuais e listas. A
 % implementação possui rastreabilidade para a ABNT NBR 14724:2024, a ABNT NBR
 % 6024:2012, a ABNT NBR 6027:2012, a ABNT NBR 6028:2021 e a ABNT NBR
-% 12225:2023, mas ainda depende de revisão normativa independente e não faz
-% alegação de conformidade.
+% 12225:2023. O fluxo pós-textual coordena o \pkg{biblatex-abnt}, referências,
+% glossário, apêndices, anexos e índice. A implementação ainda depende de
+% revisão normativa independente e não faz alegação de conformidade.
 %
 % \section{Uso mínimo}
 %
@@ -55,17 +56,19 @@
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesExplPackage{abntex3}
-  {2026-07-28}{0.0.0}{Nucleo estrutural do abnTeX3 Community}
+  {2026-07-29}{0.0.0}{Nucleo estrutural do abnTeX3 Community}
 
 \RequirePackage{abntex3-core}
 \RequirePackage{abntex3-layout}
 \RequirePackage{abntex3-structure}
 \RequirePackage{abntex3-frontmatter}
 \RequirePackage{abntex3-lists}
+\RequirePackage{abntex3-backmatter}
 \RequirePackage{l3keys2e}
 
 \ProcessKeysOptions{abntex3}
 \abntex_core_initialize:
+\abntex_backmatter_initialize:
 \hook_gput_code:nnn {begindocument/before} {abntex3-structure}
   {\abntex_structure_initialize:}
 \hook_gput_code:nnn {begindocument/before} {abntex3-layout}

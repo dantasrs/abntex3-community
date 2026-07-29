@@ -11,9 +11,9 @@ documentação.
 ## Situação do projeto
 
 O projeto possui infraestrutura reproduzível, API experimental de configuração
-e metadados e módulos para layout, paginação, seções, numeração, sumário,
-apêndices e anexos. A versão 0.0.0 ainda não é indicada para produção e não
-faz alegação de conformidade.
+e metadados e módulos para layout, paginação, seções, elementos pré e
+pós-textuais, citações, referências, apêndices, anexos e índice. A versão
+0.0.0 ainda não é indicada para produção e não faz alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -76,13 +76,12 @@ de uso das normas.
   espaçamento, notas, citações longas e textos auxiliares.
 - [x] **Marco 5 — Elementos pré-textuais:** capa, prova de lombada, folhas de
   identificação, resumos, palavras-chave e listas automáticas ou declarativas.
+- [x] **Marco 6 — Elementos pós-textuais:** integração explícita com
+  `biblatex-abnt` e `biber`, referências, glossário, apêndices, anexos e
+  índice.
 
 ### Próximos marcos
 
-- [ ] **Marco 6 — Elementos pós-textuais e bibliografia:** integrar
-  `biblatex-abnt` e `biber`, validar citações e referências e implementar
-  glossário, índice e o fluxo pós-textual segundo as NBR 6023:2025,
-  10520:2023 e 6034:2004.
 - [ ] **Marco 7 — Trabalho acadêmico:** reunir os módulos em um primeiro
   perfil completo para teses, dissertações, TCCs e monografias, acompanhado
   de exemplo, manual e revisão normativa independente.
