@@ -71,3 +71,5 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Exemplo completo e manual do perfil de trabalho acadêmico.
 - CI com cancelamento de execuções superadas, falha antecipada e distribuição
   sem chamadas redundantes anteriores a `l3build ctan`.
+- Detecção de escopo na CI para dispensar a matriz TeX em alterações
+  exclusivamente documentais, preservando os checks exigidos na `main`.

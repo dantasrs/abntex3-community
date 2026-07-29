@@ -63,7 +63,7 @@ de uso das normas.
 
 ## Roteiro
 
-### Marcos concluídos
+### Marcos implementados
 
 - [x] **Marco 0 — Fundação:** governança, independência, licença, arquitetura
   e matriz normativa inicial.
@@ -80,12 +80,13 @@ de uso das normas.
 - [x] **Marco 6 — Elementos pós-textuais:** integração explícita com
   `biblatex-abnt` e `biber`, referências, glossário, apêndices, anexos e
   índice.
+- [x] **Marco 7 — Trabalho acadêmico:** perfil completo para teses,
+  dissertações, TCCs e monografias, com exemplo, manual e testes. A revisão
+  normativa independente continua pendente antes de qualquer alegação de
+  conformidade.
 
 ### Próximos marcos
 
-- [ ] **Marco 7 — Trabalho acadêmico:** implementação, exemplo, manual e
-  testes concluídos para teses, dissertações, TCCs e monografias; falta a
-  revisão normativa independente para encerrar o marco.
 - [ ] **Marco 8 — Projeto de pesquisa:** criar o perfil específico da
   NBR 15287:2025, documentando e testando suas diferenças em relação ao
   trabalho acadêmico.
@@ -114,25 +115,97 @@ Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
 [`roteiro técnico completo`](docs/roadmap.md), que contém tarefas, critérios
 de saída e dependências de cada marco.
 
-## API experimental
+## Como usar
 
-O núcleo funciona inicialmente com `article`, `report` e `book`:
+O pacote ainda não foi publicado no CTAN. Para instalar a versão de
+desenvolvimento na árvore pessoal do TeX, use:
+
+```sh
+git clone https://github.com/dantasrs/abntex3-community.git
+cd abntex3-community
+l3build install
+```
+
+Uma instalação TeX Live completa deve fornecer também `biblatex-abnt` e
+`biber`. O pacote funciona inicialmente com as classes `article`, `report` e
+`book`.
+
+### Configuração
+
+Selecione o perfil, o tipo de trabalho e o sistema de citações no preâmbulo:
 
 ```tex
-\documentclass{article}
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
 \usepackage[
   perfil=academico,
-  tipo-trabalho=dissertacao
+  tipo-trabalho=dissertacao,
+  citacoes=autor-data
 ]{abntex3}
+
+\addbibresource{referencias.bib}
 
 \ABNTEXsetup{
   titulo      = {Título do trabalho},
   autoria     = {Nome da autoria},
   instituicao = {Nome da instituição},
+  natureza    = {Dissertação},
+  objetivo    = {apresentada para obtenção do título de Mestre},
+  area        = {Área de concentração},
+  orientacao  = {Nome da pessoa orientadora},
   local       = {Recife},
   data        = {2026}
 }
 ```
+
+### Fluxo do trabalho acadêmico
+
+Os comandos coordenadores delimitam as partes do documento:
+
+```tex
+\begin{document}
+
+\ABNTEXacademicoexterna
+
+\ABNTEXacademicopretextual
+\ABNTEXfolhaderosto
+\ABNTEXfolhadeaprovacao{Data da aprovação}{Componentes da banca}
+\ABNTEXresumo{Texto do resumo}{palavra-chave, outra palavra-chave}
+\ABNTEXresumoemlinguaestrangeira
+  {Abstract text}
+  {keyword, another keyword}
+\ABNTEXsumario
+
+\ABNTEXacademicotextual
+\chapter{Introdução}
+Texto do trabalho.
+
+\ABNTEXacademicopostextual
+\ABNTEXbibliografia
+
+\end{document}
+```
+
+A ficha catalográfica, lombada, dedicatória, agradecimentos, epígrafe, listas,
+glossário, apêndices, anexos e índice são acrescentados somente quando
+aplicáveis. Consulte o
+[`exemplo acadêmico completo`](examples/trabalho-academico.tex).
+
+### Compilação
+
+Documentos com referências processadas pelo `biber` podem ser compilados com:
+
+```sh
+pdflatex trabalho.tex
+biber trabalho
+pdflatex trabalho.tex
+pdflatex trabalho.tex
+```
+
+O projeto continua experimental e não deve ser usado como declaração
+automática de conformidade normativa.
 
 Consulte a [`referência da API`](docs/api.md) para os metadados disponíveis,
 perfis, precedência de configuração, validação técnica e garantias de
@@ -163,6 +236,11 @@ executa testes e documentação antes de empacotar; por isso o trabalho de
 distribuição não repete esses comandos. O último comando valida o pacote CTAN
 de ensaio, sem publicá-lo, e compila os exemplos tanto a partir de uma
 instalação isolada quanto da árvore TDS empacotada.
+
+Nos pull requests, alterações limitadas à documentação executam somente a
+validação rápida de diferenças. Mudanças em fontes, testes, exemplos, scripts,
+build, manifesto ou workflows acionam a matriz TeX completa. Execuções manuais
+também são sempre completas.
 
 ## Governança e colaboração
 
