@@ -120,11 +120,35 @@ de saída e dependências de cada marco.
 
 Há modelos completos e auditáveis para tese, dissertação, TCC, monografia,
 projeto de pesquisa e artigo em uma ou duas colunas. Eles demonstram todos os
-elementos aplicáveis atualmente implementados e podem ser copiados como base
-para novos documentos. Consulte
+elementos aplicáveis atualmente implementados. Cada arquivo tem duas funções:
+
+1. servir como exemplo de auditoria, no qual um avaliador pode localizar e
+   compilar cada recurso do perfil;
+2. servir como ponto de partida para um documento novo, removendo-se os
+   elementos opcionais que não forem necessários.
+
+| Documento desejado | Arquivo para copiar |
+| --- | --- |
+| Tese | [`modelo-tese-completo.tex`](examples/modelo-tese-completo.tex) |
+| Dissertação | [`modelo-dissertacao-completo.tex`](examples/modelo-dissertacao-completo.tex) |
+| TCC | [`modelo-tcc-completo.tex`](examples/modelo-tcc-completo.tex) |
+| Monografia | [`modelo-monografia-completo.tex`](examples/modelo-monografia-completo.tex) |
+| Projeto de pesquisa | [`modelo-projeto-pesquisa-completo.tex`](examples/modelo-projeto-pesquisa-completo.tex) |
+| Artigo em uma coluna | [`modelo-artigo-uma-coluna-completo.tex`](examples/modelo-artigo-uma-coluna-completo.tex) |
+| Artigo em duas colunas | [`modelo-artigo-duas-colunas-completo.tex`](examples/modelo-artigo-duas-colunas-completo.tex) |
+
+Os arquivos são deliberadamente extensos: não significa que todo documento
+deva conter todos aqueles elementos. A matriz de cobertura e o procedimento
+de auditoria estão em
 [`docs/modelos-canonicos.md`](docs/modelos-canonicos.md).
 
 ## Como usar
+
+Esta seção é um manual inicial para quem já consegue escrever texto, seções e
+comandos básicos em LaTeX, mas ainda não conhece a organização de um modelo
+documental completo.
+
+### Instalação
 
 O pacote ainda não foi publicado no CTAN. Para instalar a versão de
 desenvolvimento na árvore pessoal do TeX, use:
@@ -139,9 +163,51 @@ Uma instalação TeX Live completa deve fornecer também `biblatex-abnt` e
 `biber`. O pacote funciona inicialmente com as classes `article`, `report` e
 `book`.
 
-### Configuração
+### Classe, perfil e tipo: qual é a diferença?
 
-Selecione o perfil, o tipo de trabalho e o sistema de citações no preâmbulo:
+Esses três conceitos atuam em níveis diferentes:
+
+| Conceito | Exemplos | O que controla |
+| --- | --- | --- |
+| Classe LaTeX | `article`, `report`, `book` | Estrutura básica do LaTeX, como a existência de capítulos |
+| Perfil | `academico`, `projeto`, `artigo` | Fluxo, elementos obrigatórios e validações do gênero documental |
+| Tipo de trabalho | `tese`, `dissertacao`, `tcc`, `monografia` | Variação declarada dentro do perfil acadêmico |
+
+A classe não substitui o perfil. Por exemplo, `report` fornece `\chapter`, mas
+não sabe o que é folha de rosto, resumo ou folha de aprovação. O perfil
+`academico` coordena esses elementos. Da mesma forma, selecionar
+`tipo-trabalho=tese` não inventa o nome do programa, a natureza ou o objetivo:
+esses textos variam por instituição e precisam ser informados pelo usuário.
+
+Como ponto de partida:
+
+- use `report` ou `book` com `perfil=academico` para tese, dissertação, TCC ou
+  monografia;
+- use `report` ou `book` com `perfil=projeto` para projeto de pesquisa;
+- use `article` com `perfil=artigo` para artigo.
+
+As classes `abntex2`, `memoir` e KOMA-Script não são suportadas atualmente.
+O `abntex3` é um pacote carregado por `\usepackage`, não uma classe usada em
+`\documentclass`.
+
+### Escolha rápida do perfil
+
+| Perfil | Opções principais | Metadados mínimos | Estrutura verificada |
+| --- | --- | --- | --- |
+| Acadêmico | `perfil=academico`, `tipo-trabalho=...` | título, autoria, instituição, natureza, objetivo, área, orientação, local e data | capa, folha de rosto, aprovação, resumos nos dois idiomas, sumário e referências |
+| Projeto | `perfil=projeto` | título, autoria, instituição, natureza, local e data | folha de rosto, sumário, cinco divisões textuais e referências |
+| Artigo | `perfil=artigo`, `artigo-colunas=...` | título; autorias e dados próprios em `\ABNTEXartigoSetup` | elementos iniciais, introdução, desenvolvimento, considerações finais e referências |
+
+Há ainda os identificadores experimentais `nenhum`, `relatorio` e `livro`.
+`nenhum` permite usar os módulos gerais sem um fluxo documental específico.
+Os perfis `relatorio` e `livro` ainda não possuem implementação completa e
+não devem ser usados como modelos finais.
+
+### Estrutura mínima do arquivo
+
+Um documento possui um preâmbulo, antes de `\begin{document}`, e o conteúdo
+propriamente dito. No preâmbulo ficam a classe, os pacotes, as opções e os
+metadados:
 
 ```tex
 \documentclass[12pt]{report}
@@ -167,9 +233,98 @@ Selecione o perfil, o tipo de trabalho e o sistema de citações no preâmbulo:
   local       = {Recife},
   data        = {2026}
 }
+
+\begin{document}
+% Os comandos do perfil e o texto entram aqui.
+\end{document}
 ```
 
-### Fluxo do trabalho acadêmico
+As opções podem ser escritas em `\usepackage[...]` ou em
+`\ABNTEXsetup{...}`. Recomenda-se deixar em `\usepackage` as decisões globais
+e usar `\ABNTEXsetup` para os metadados. Se uma chave for repetida, o último
+valor prevalece.
+
+### Opções gerais
+
+#### Perfil, tipo e citações
+
+| Chave | Valores | Efeito |
+| --- | --- | --- |
+| `perfil` | `nenhum`, `academico`, `projeto`, `artigo`, `relatorio`, `livro` | Seleciona o fluxo documental |
+| `tipo-trabalho` | `tese`, `dissertacao`, `tcc`, `monografia` | Identifica o tipo dentro do perfil acadêmico |
+| `artigo-colunas` | `uma`, `duas` | Define a composição editorial do artigo; `uma` é o padrão |
+| `citacoes` | `autor-data`, `numerico`, `externo` | Seleciona a integração bibliográfica |
+
+Com `citacoes=autor-data`, o pacote carrega `biblatex-abnt` no sistema
+autor-data. Com `numerico`, usa o estilo numérico. O valor inicial `externo`
+não carrega nem configura `biblatex`; ele é destinado a quem deseja fazer a
+integração manualmente.
+
+#### Metadados
+
+| Chave | Para que serve |
+| --- | --- |
+| `titulo`, `subtitulo` | Título principal e complemento |
+| `autoria` | Autoria apresentada nos elementos gerais |
+| `instituicao` | Instituição responsável ou de vínculo |
+| `natureza` | Natureza declarada, como “Dissertação” ou “Projeto de pesquisa” |
+| `objetivo` | Finalidade institucional, como obtenção de um título |
+| `area` | Área de concentração ou conhecimento |
+| `orientacao`, `coorientacao` | Pessoas responsáveis pela orientação |
+| `volume` | Identificação de volume, quando houver |
+| `local`, `data` | Cidade e ano ou data documental |
+
+Os valores são impressos como foram fornecidos. O pacote não corrige nomes,
+titulações, redação institucional nem conteúdo acadêmico. Um valor pode ser
+recuperado, quando necessário, com `\ABNTEXmetadata{titulo}`, trocando
+`titulo` por outro nome de metadado.
+
+#### Papel, margens e impressão
+
+| Chave | Valores ou formato | Padrão |
+| --- | --- | --- |
+| `papel` | `a4` | `a4` |
+| `orientacao-papel` | `retrato`, `paisagem` | `retrato` |
+| `impressao` | `anverso`, `frente-e-verso` | `anverso` |
+| `margem-superior`, `margem-inferior` | dimensão, como `3cm` | `3cm`, `2cm` |
+| `margem-interna`, `margem-externa` | dimensão, como `3cm` | `3cm`, `2cm` |
+| `recuo-citacao-longa` | dimensão | `4cm` |
+
+No modo `frente-e-verso`, as margens interna e externa são espelhadas e as
+divisões primárias começam em página ímpar. Papel, orientação e margens devem
+ser configurados no preâmbulo.
+
+#### Seções, sumário e nomes
+
+| Chave | Valores ou formato | Uso |
+| --- | --- | --- |
+| `profundidade-secoes` | número de `1` a `5` | Quantos níveis recebem numeração |
+| `profundidade-sumario` | número de `1` a `5` | Quantos níveis aparecem no sumário |
+| `largura-indicativo-sumario` | dimensão, como `6.5em` | Espaço reservado aos números no sumário |
+| `nome-apendice`, `nome-anexo` | texto | Substitui os rótulos padrão |
+| `separador-palavras-chave` | texto | Muda o separador visual das palavras-chave |
+| `disposicao-lombada` | `descendente`, `horizontal` | Orientação do texto na prova de lombada |
+| `largura-lombada` | dimensão | Largura da prova de lombada |
+| `debug` | opção booleana experimental | Ativa mensagens adicionais de diagnóstico |
+
+### Perfil acadêmico
+
+Use o perfil acadêmico para tese, dissertação, TCC ou monografia:
+
+```tex
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=tese,
+  citacoes=autor-data
+]{abntex3}
+```
+
+A troca entre os quatro tipos altera a identificação e a validação do tipo,
+mas não preenche os metadados nem remove elementos automaticamente. As
+diferenças institucionais devem ser expressas em `natureza`, `objetivo`,
+`area`, `instituicao`, `orientacao` e `coorientacao`.
+
+#### Fluxo acadêmico
 
 Os comandos coordenadores delimitam as partes do documento:
 
@@ -197,14 +352,188 @@ Texto do trabalho.
 \end{document}
 ```
 
-A ficha catalográfica, lombada, dedicatória, agradecimentos, epígrafe, listas,
-glossário, apêndices, anexos e índice são acrescentados somente quando
-aplicáveis. Consulte o
-[`exemplo acadêmico completo`](examples/trabalho-academico.tex).
+A ordem esperada e os elementos são:
+
+| Parte | Normalmente obrigatórios | Opcionais ou condicionais |
+| --- | --- | --- |
+| Externa | capa | lombada |
+| Pré-textual | folha de rosto, aprovação, resumos nos dois idiomas e sumário | ficha catalográfica, errata, dedicatória, agradecimentos, epígrafe e listas |
+| Textual | conteúdo organizado pela autoria | nomes e quantidade das divisões |
+| Pós-textual | referências | glossário, apêndices, anexos e índice |
+
+Os comandos completos mais comuns são:
+
+```tex
+\ABNTEXfichacatalografica{Conteúdo preparado pelo serviço responsável}
+\ABNTEXerrata{Referência do trabalho}{Tabela ou texto das correções}
+\ABNTEXdedicatoria{Texto da dedicatória}
+\ABNTEXagradecimentos{Texto dos agradecimentos}
+\ABNTEXepigrafe[Autoria]{Texto da epígrafe}
+
+\ABNTEXabreviatura{Fil.}{Filosofia}
+\ABNTEXsigla{ABNT}{Associação Brasileira de Normas Técnicas}
+\ABNTEXsimbolo{$n$}{Quantidade de elementos}
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadeabreviaturasesiglas
+\ABNTEXlistadesimbolos
+```
+
+A ficha catalográfica recebe conteúdo externo; o pacote não produz
+classificação ou descrição catalográfica. Uma lista declarativa vazia não
+gera página.
+
+### Perfil de projeto de pesquisa
+
+O projeto possui um fluxo próprio e cinco divisões textuais verificadas:
+
+```tex
+\usepackage[perfil=projeto,citacoes=autor-data]{abntex3}
+
+\begin{document}
+\ABNTEXprojetoexterna
+% \ABNTEXcapa % opcional no projeto
+
+\ABNTEXprojetopretextual
+\ABNTEXfolhaderosto
+\ABNTEXsumario
+
+\ABNTEXprojetotextual
+\ABNTEXprojetointroducao{Tema, problema, hipóteses, objetivos e justificativa.}
+\ABNTEXprojetoreferencialteorico{Fundamentação da pesquisa.}
+\ABNTEXprojetometodologia{Métodos, técnicas e procedimentos.}
+\ABNTEXprojetorecursos{Recursos humanos, materiais e financeiros.}
+\ABNTEXprojetocronograma{Etapas e prazos.}
+
+\ABNTEXprojetopostextual
+\ABNTEXbibliografia
+\end{document}
+```
+
+Ao contrário do perfil acadêmico, a capa é opcional. Folha de rosto, sumário,
+as cinco divisões e referências são verificados. O pacote confirma que cada
+divisão existe, mas não avalia intelectualmente seu conteúdo.
+
+### Perfil de artigo
+
+O artigo usa `article`, registra cada autoria separadamente e mantém seus
+dados editoriais em uma configuração própria:
+
+```tex
+\documentclass[12pt]{article}
+\usepackage[
+  perfil=artigo,
+  artigo-colunas=uma,
+  citacoes=autor-data
+]{abntex3}
+
+\ABNTEXsetup{titulo={Título do artigo}, subtitulo={Subtítulo}}
+\ABNTEXartigoSetup{
+  titulo-outro-idioma={Article title},
+  resumo={Texto do resumo.},
+  palavras-chave={normalização; documentação},
+  resumo-outro-idioma={Abstract text.},
+  palavras-chave-outro-idioma={standardization; documentation},
+  data-submissao={10 de janeiro de 2026},
+  data-aprovacao={20 de março de 2026},
+  identificacao-disponibilidade={DOI: 10.0000/exemplo}
+}
+\ABNTEXartigoautor
+  {Nome da autoria}
+  {Currículo breve ou titulação}
+  {Instituição de vínculo}
+  {email@example.org}
+```
+
+Repita `\ABNTEXartigoautor` para cada pessoa. Título, ao menos uma autoria,
+resumo, palavras-chave e as duas datas editoriais são verificados. Título,
+resumo e palavras-chave em outro idioma, assim como DOI ou outra identificação
+de disponibilidade, são opcionais.
+
+O corpo é composto assim:
+
+```tex
+\ABNTEXartigopretextual
+\ABNTEXartigotextual
+\ABNTEXartigointroducao{Conteúdo da introdução.}
+\ABNTEXartigodesenvolvimento[Resultados e discussão]{Conteúdo.}
+\ABNTEXartigoconsideracoesfinais{Conteúdo final.}
+\ABNTEXartigopostextual
+\ABNTEXbibliografia
+\ABNTEXartigoagradecimentos{Agradecimentos, quando houver.}
+```
+
+O texto entre colchetes substitui o título padrão da divisão. Os
+agradecimentos, quando presentes, devem ser o último elemento. Uma ou duas
+colunas são escolhas editoriais; nenhuma delas constitui, isoladamente, uma
+exigência normativa.
+
+### Recursos comuns aos perfis
+
+#### Citações, figuras e tabelas
+
+Com `citacoes=autor-data` ou `numerico`, use os comandos normais do
+`biblatex`, por exemplo `\textcite{chave}`, `\parencite{chave}` e
+`\footcite{chave}`. Uma citação longa pode ser composta com:
+
+```tex
+\begin{ABNTEXcitacaolonga}
+Texto da citação direta longa. \parencite[42]{chave}
+\end{ABNTEXcitacaolonga}
+```
+
+Em figuras e tabelas, `\ABNTEXfonte` e `\ABNTEXnota` complementam a legenda:
+
+```tex
+\begin{figure}
+  \centering
+  \rule{6cm}{3cm}
+  \caption{Descrição da figura}
+  \ABNTEXfonte{Elaboração própria}
+  \ABNTEXnota{Informação complementar, quando necessária}
+\end{figure}
+```
+
+#### Referências, glossário, apêndices, anexos e índice
+
+```tex
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Instrumento de pesquisa}
+\ABNTEXannex{Documento fornecido por outra entidade}
+\ABNTEXindice
+```
+
+Apêndice é material elaborado pela autoria; anexo é material de outra origem.
+Para o glossário, carregue e configure `glossaries` ou `glossaries-extra`.
+Para o índice, carregue `makeidx`, execute `\makeindex` no preâmbulo e marque
+termos com `\index{termo}`. O `abntex3` posiciona e intitula esses elementos,
+enquanto os pacotes externos cuidam das entradas e da ordenação.
+
+### Personalização de títulos de seções
+
+As classes têm nomes diferentes para o primeiro nível: `article` usa
+`\section`, enquanto `report` e `book` usam `\chapter`. O pacote coordena até
+cinco níveis. É possível mudar a apresentação de um nível:
+
+```tex
+\ABNTEXstructureSetup{1}{
+  destaque      = negrito,
+  alinhamento   = esquerda,
+  espaco-antes  = 3ex,
+  espaco-depois = 1.5ex
+}
+```
+
+`destaque` aceita `normal`, `negrito`, `italico`, `negrito-italico` e
+`versalete`; `alinhamento` aceita `esquerda`, `centro` e `direita`. Algumas
+instituições impõem estilos próprios, portanto personalizar a apresentação
+pode representar uma escolha institucional deliberada.
 
 ### Compilação
 
-Documentos com referências processadas pelo `biber` podem ser compilados com:
+Para um documento simples, duas execuções de `pdflatex` atualizam referências
+internas, listas e sumário. Com bibliografia processada pelo `biber`, use:
 
 ```sh
 pdflatex trabalho.tex
@@ -212,6 +541,37 @@ biber trabalho
 pdflatex trabalho.tex
 pdflatex trabalho.tex
 ```
+
+Se houver glossário ou índice, execute também os respectivos processadores
+entre a primeira e as últimas passagens:
+
+```sh
+pdflatex trabalho.tex
+biber trabalho
+makeglossaries trabalho
+makeindex trabalho
+pdflatex trabalho.tex
+pdflatex trabalho.tex
+```
+
+O nome passado a `biber`, `makeglossaries` e `makeindex` não inclui a extensão
+`.tex`. Mensagens sobre referências indefinidas na primeira passagem são
+normais; elas devem desaparecer nas passagens finais.
+
+### O que a validação faz — e o que não faz
+
+Os comandos coordenadores registram a ordem das partes e, ao final, avisam
+sobre metadados ou elementos obrigatórios ausentes. Também é possível chamar
+explicitamente `\ABNTEXvalidateacademico`, `\ABNTEXvalidateprojeto` ou
+`\ABNTEXvalidateartigo`.
+
+A validação confirma completude técnica observável. Ela não:
+
+- avalia a qualidade da redação ou da pesquisa;
+- cria dados catalográficos;
+- decide regras particulares da instituição ou do periódico;
+- garante que uma referência foi preenchida semanticamente de forma correta;
+- substitui revisão humana ou consulta às normas aplicáveis.
 
 O projeto continua experimental e não deve ser usado como declaração
 automática de conformidade normativa.
@@ -225,7 +585,8 @@ duas faces, paginação e espaçamento estão em
 O fluxo completo de tese, dissertação, TCC ou monografia está em
 [`docs/profile-academic.md`](docs/profile-academic.md).
 O perfil de projeto de pesquisa está documentado em
-[`docs/profile-project.md`](docs/profile-project.md).
+[`docs/profile-project.md`](docs/profile-project.md), e o perfil de artigo em
+[`docs/profile-article.md`](docs/profile-article.md).
 
 ## Desenvolvimento
 
