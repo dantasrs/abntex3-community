@@ -73,3 +73,10 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
   sem chamadas redundantes anteriores a `l3build ctan`.
 - Detecção de escopo na CI para dispensar a matriz TeX em alterações
   exclusivamente documentais, preservando os checks exigidos na `main`.
+- Matriz rastreável da ABNT NBR 15287:2025.
+- Módulo `abntex3-profile-project` para projetos de pesquisa.
+- Coordenação das partes externa, pré-textual, textual e pós-textual do
+  projeto, preservando a opcionalidade da capa.
+- Comandos estruturais para introdução, referencial teórico, metodologia,
+  recursos e cronograma.
+- Validação, exemplo completo, manual e testes do perfil de projeto.

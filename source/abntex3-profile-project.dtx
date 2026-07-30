@@ -1,0 +1,202 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-profile-project.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-profile-project}: perfil de projeto de pesquisa}
+% \author{dantasrs}
+% \date{2026-07-30 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Contrato público}
+%
+% O perfil coordena um projeto de pesquisa baseado na ABNT NBR 15287:2025,
+% reutilizando os módulos gerais. A capa e a lombada são opcionais; folha de
+% rosto, sumário e referências são verificados como obrigatórios.
+%
+% \begin{function}{\ABNTEXprojetoexterna,
+%                  \ABNTEXprojetopretextual,
+%                  \ABNTEXprojetotextual,
+%                  \ABNTEXprojetopostextual}
+%   Iniciam as fases externa, pré-textual, textual e pós-textual. A fase
+%   externa não produz automaticamente a capa, que é opcional neste perfil.
+% \end{function}
+%
+% \begin{function}{\ABNTEXprojetointroducao,
+%                  \ABNTEXprojetoreferencialteorico,
+%                  \ABNTEXprojetometodologia,
+%                  \ABNTEXprojetorecursos,
+%                  \ABNTEXprojetocronograma}
+%   Criam as divisões textuais específicas, registram sua presença e recebem
+%   o conteúdo como argumento. A autoria continua responsável pela completude
+%   semântica do tema, problema, hipóteses, objetivos e justificativas.
+% \end{function}
+%
+% \begin{function}{\ABNTEXvalidateprojeto}
+%   Verifica perfil, metadados, fases, elementos obrigatórios e divisões
+%   textuais. O uso do fluxo instala a mesma verificação ao fim do documento.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{Implementação}
+%
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-profile-project}
+  {2026-07-30}{0.0.0}
+  {Perfil de projeto de pesquisa do abnTeX3 Community}
+
+\int_new:N \g__abntex_project_phase_int
+\bool_new:N \g__abntex_project_used_bool
+\prop_new:N \g__abntex_project_phases_prop
+\prop_new:N \g__abntex_project_sections_prop
+\seq_new:N \g__abntex_project_missing_elements_seq
+\seq_new:N \g__abntex_project_missing_sections_seq
+
+\msg_new:nnnn {abntex3} {project-profile-required}
+  {O~fluxo~de~projeto~exige~perfil=projeto.}
+  {Selecione~o~perfil~projeto~antes~de~usar~'#1'.}
+\msg_new:nnnn {abntex3} {project-phase-order}
+  {A~fase~do~projeto~'#1'~esta~fora~da~ordem.}
+  {Use~externa,~pre-textual,~textual~e~pos-textual~nessa~sequencia.}
+\msg_new:nnnn {abntex3} {project-element-missing}
+  {O~elemento~obrigatorio~do~projeto~'#1'~nao~foi~composto.}
+  {Inclua~o~comando~publico~correspondente~no~fluxo~do~projeto.}
+\msg_new:nnnn {abntex3} {project-section-missing}
+  {A~divisao~textual~do~projeto~'#1'~nao~foi~composta.}
+  {Inclua~o~comando~publico~correspondente~na~parte~textual.}
+
+\cs_new_protected:Npn \__abntex_project_require_profile:n #1
+  {
+    \tl_if_eq:NnF \g__abntex_profile_tl {projeto}
+      {\msg_error:nnn {abntex3} {project-profile-required} {#1}}
+  }
+
+\cs_new_protected:Npn \__abntex_project_register_phase:nn #1#2
+  {
+    \bool_gset_true:N \g__abntex_project_used_bool
+    \int_compare:nNnT {#1} < {\g__abntex_project_phase_int}
+      {\msg_warning:nnn {abntex3} {project-phase-order} {#2}}
+    \int_gset:Nn \g__abntex_project_phase_int
+      {\int_max:nn {#1} {\g__abntex_project_phase_int}}
+    \prop_gput:Nnn \g__abntex_project_phases_prop {#2} {true}
+  }
+
+\cs_new_protected:Npn \__abntex_project_section:nn #1#2
+  {
+    \__abntex_project_require_profile:n {#1}
+    \prop_gput:Nnn \g__abntex_project_sections_prop {#1} {true}
+    \use:c {\tl_use:N \g__abntex_primary_name_tl} {#2}
+  }
+
+\cs_new_protected:Npn \__abntex_project_collect_missing:
+  {
+    \seq_gclear:N \g__abntex_project_missing_elements_seq
+    \clist_map_inline:nn {folha-de-rosto, sumario, referencias}
+      {
+        \str_if_eq:nnTF {##1} {referencias}
+          {
+            \prop_if_in:NnF \g__abntex_backmatter_seen_prop {##1}
+              {\seq_gput_right:Nn
+                \g__abntex_project_missing_elements_seq {##1}}
+          }
+          {
+            \prop_if_in:NnF \g__abntex_frontmatter_seen_prop {##1}
+              {\seq_gput_right:Nn
+                \g__abntex_project_missing_elements_seq {##1}}
+          }
+      }
+    \seq_gclear:N \g__abntex_project_missing_sections_seq
+    \clist_map_inline:nn
+      {introducao, referencial-teorico, metodologia, recursos, cronograma}
+      {
+        \prop_if_in:NnF \g__abntex_project_sections_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_project_missing_sections_seq {##1}}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_project_validate:
+  {
+    \__abntex_project_require_profile:n
+      {\token_to_str:N \ABNTEXvalidateprojeto}
+    \ABNTEXvalidate
+    \__abntex_project_collect_missing:
+    \seq_map_inline:Nn \g__abntex_project_missing_elements_seq
+      {\msg_warning:nnn {abntex3} {project-element-missing} {##1}}
+    \seq_map_inline:Nn \g__abntex_project_missing_sections_seq
+      {\msg_warning:nnn {abntex3} {project-section-missing} {##1}}
+  }
+
+\NewDocumentCommand \ABNTEXprojetoexterna {}
+  {
+    \__abntex_project_require_profile:n
+      {\token_to_str:N \ABNTEXprojetoexterna}
+    \__abntex_project_register_phase:nn {1} {externa}
+    \ABNTEXvalidate
+  }
+
+\NewDocumentCommand \ABNTEXprojetopretextual {}
+  {
+    \__abntex_project_require_profile:n
+      {\token_to_str:N \ABNTEXprojetopretextual}
+    \__abntex_project_register_phase:nn {2} {pre-textual}
+    \ABNTEXpretextualpages
+  }
+
+\NewDocumentCommand \ABNTEXprojetotextual {}
+  {
+    \__abntex_project_require_profile:n
+      {\token_to_str:N \ABNTEXprojetotextual}
+    \__abntex_project_register_phase:nn {3} {textual}
+    \ABNTEXtextualpages
+  }
+
+\NewDocumentCommand \ABNTEXprojetopostextual {}
+  {
+    \__abntex_project_require_profile:n
+      {\token_to_str:N \ABNTEXprojetopostextual}
+    \__abntex_project_register_phase:nn {4} {pos-textual}
+    \ABNTEXposttextualpages
+  }
+
+\NewDocumentCommand \ABNTEXprojetointroducao {+m}
+  {\__abntex_project_section:nn {introducao} {Introdução} #1}
+\NewDocumentCommand \ABNTEXprojetoreferencialteorico {+m}
+  {\__abntex_project_section:nn {referencial-teorico} {Referencial~teórico} #1}
+\NewDocumentCommand \ABNTEXprojetometodologia {+m}
+  {\__abntex_project_section:nn {metodologia} {Metodologia} #1}
+\NewDocumentCommand \ABNTEXprojetorecursos {+m}
+  {\__abntex_project_section:nn {recursos} {Recursos} #1}
+\NewDocumentCommand \ABNTEXprojetocronograma {+m}
+  {\__abntex_project_section:nn {cronograma} {Cronograma} #1}
+
+\NewDocumentCommand \ABNTEXvalidateprojeto {}
+  {\__abntex_project_validate:}
+
+\hook_gput_code:nnn {enddocument} {abntex3-profile-project}
+  {
+    \bool_if:NT \g__abntex_project_used_bool
+      {\__abntex_project_validate:}
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

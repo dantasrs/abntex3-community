@@ -20,6 +20,7 @@ examples/elementos-pretextuais.tex
 examples/layout-paginacao.tex
 examples/minimo.tex
 examples/pos-textuais-bibliografia.tex
+examples/projeto-pesquisa.tex
 examples/referencias-exemplo.bib
 examples/trabalho-academico.tex
 scripts/validate-distribution.sh
@@ -30,6 +31,7 @@ source/abntex3-frontmatter.dtx
 source/abntex3-layout.dtx
 source/abntex3-lists.dtx
 source/abntex3-profile-academic.dtx
+source/abntex3-profile-project.dtx
 source/abntex3-structure.dtx
 source/abntex3.ins
 testfiles/accented-bookmarks.lvt
@@ -104,6 +106,12 @@ testfiles/pagination.lvt
 testfiles/pagination.tlg
 testfiles/primary-pages.lvt
 testfiles/primary-pages.tlg
+testfiles/project-elements.lvt
+testfiles/project-elements.tlg
+testfiles/project-flow.lvt
+testfiles/project-flow.tlg
+testfiles/project-sections.lvt
+testfiles/project-sections.tlg
 testfiles/profile-requirements.lvt
 testfiles/profile-requirements.tlg
 testfiles/profile-validation.lvt
@@ -129,6 +137,7 @@ docs/backmatter.md
 docs/frontmatter.md
 docs/layout.md
 docs/profile-academic.md
+docs/profile-project.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md
 docs/decisoes/0003-motores-e-versoes.md
@@ -143,6 +152,7 @@ docs/requisitos/nbr-6034-2004.md
 docs/requisitos/nbr-10520-2023.md
 docs/requisitos/nbr-12225-2023.md
 docs/requisitos/nbr-14724-2024.md
+docs/requisitos/nbr-15287-2025.md
 docs/roadmap.md
 docs/structure.md
 docs/versionamento.md

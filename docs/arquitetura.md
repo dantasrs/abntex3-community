@@ -167,9 +167,9 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 7 formam a infraestrutura mínima,
-os módulos normativos gerais e o primeiro perfil documental tecnicamente
-completo, ainda pendente de revisão normativa independente.
+Os arquivos já materializados até o Marco 8 formam a infraestrutura mínima,
+os módulos normativos gerais e os perfis acadêmico e de projeto de pesquisa
+tecnicamente completos, ainda pendentes de revisão normativa independente.
 Os demais itens da árvore são criados apenas no marco em que sua
 responsabilidade é implementada.
 

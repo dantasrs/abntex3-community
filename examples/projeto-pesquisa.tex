@@ -1,0 +1,72 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage[
+  perfil=projeto,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Preservação digital de documentos acadêmicos},
+  subtitulo={projeto de pesquisa do Marco 8},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Projeto de pesquisa},
+  objetivo={submetido ao Programa de Pós-Graduação em Documentação},
+  area={Preservação digital},
+  orientacao={Prof. Dr. João Souza},
+  local={Fortaleza},
+  data={2026}
+}
+
+\begin{document}
+
+\ABNTEXprojetoexterna
+
+% A capa é opcional neste perfil.
+\ABNTEXcapa
+
+\ABNTEXprojetopretextual
+\ABNTEXfolhaderosto
+\ABNTEXsumario
+
+\ABNTEXprojetotextual
+
+\ABNTEXprojetointroducao{%
+  O projeto investiga a preservação de documentos acadêmicos digitais.
+  O problema consiste em identificar práticas reprodutíveis para reduzir
+  perdas de informação. Parte-se da hipótese de que formatos abertos e
+  verificações automatizadas aumentam a durabilidade dos acervos. O objetivo
+  é comparar estratégias existentes e justificar um fluxo institucional.
+}
+
+\ABNTEXprojetoreferencialteorico{%
+  A análise considera princípios de normalização documental e preservação
+  digital, mantendo separadas a apresentação do projeto e a descrição
+  bibliográfica processada pelo \texttt{biblatex-abnt}
+  \parencite{associacao2025}.
+}
+
+\ABNTEXprojetometodologia{%
+  Será realizado um estudo comparativo com amostras controladas, registro dos
+  formatos, cálculo de somas de verificação e reprodução dos resultados.
+}
+
+\ABNTEXprojetorecursos{%
+  Serão utilizados um repositório versionado, armazenamento redundante,
+  ferramentas livres de validação e horas de trabalho da equipe.
+}
+
+\ABNTEXprojetocronograma{%
+  A revisão bibliográfica ocorrerá no primeiro trimestre; a coleta e os
+  ensaios, no segundo; a análise e a redação, no terceiro.
+}
+
+\ABNTEXprojetopostextual
+\ABNTEXbibliografia
+
+\end{document}

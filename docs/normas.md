@@ -56,6 +56,8 @@ armazenados no repositório.
 - [`ABNT NBR 10520:2023`](requisitos/nbr-10520-2023.md) — citações e sistemas
   de chamada;
 - [`ABNT NBR 6034:2004`](requisitos/nbr-6034-2004.md) — índice.
+- [`ABNT NBR 15287:2025`](requisitos/nbr-15287-2025.md) — perfil de projeto
+  de pesquisa.
 
 ## Conformidade
 

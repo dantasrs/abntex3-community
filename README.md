@@ -12,9 +12,9 @@ documentação.
 
 O projeto possui infraestrutura reproduzível, API experimental de configuração
 e metadados, módulos para layout, paginação, seções, elementos pré e
-pós-textuais, citações, referências, apêndices, anexos e índice e um perfil
-acadêmico em revisão. A versão 0.0.0 ainda não é indicada para produção e não
-faz alegação de conformidade.
+pós-textuais, citações, referências, apêndices, anexos e índice, além dos
+perfis acadêmico e de projeto de pesquisa em revisão. A versão 0.0.0 ainda não
+é indicada para produção e não faz alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -84,12 +84,12 @@ de uso das normas.
   dissertações, TCCs e monografias, com exemplo, manual e testes. A revisão
   normativa independente continua pendente antes de qualquer alegação de
   conformidade.
+- [x] **Marco 8 — Projeto de pesquisa:** perfil completo da NBR 15287:2025,
+  com estrutura textual própria, exemplo, manual e testes. A revisão normativa
+  independente continua pendente.
 
 ### Próximos marcos
 
-- [ ] **Marco 8 — Projeto de pesquisa:** criar o perfil específico da
-  NBR 15287:2025, documentando e testando suas diferenças em relação ao
-  trabalho acadêmico.
 - [ ] **Marco 9 — Artigo:** implementar o perfil da NBR 6022:2018, incluindo
   autoria múltipla, afiliações, datas editoriais e testes de composição em
   uma ou duas colunas.
@@ -215,6 +215,8 @@ duas faces, paginação e espaçamento estão em
 [`docs/layout.md`](docs/layout.md).
 O fluxo completo de tese, dissertação, TCC ou monografia está em
 [`docs/profile-academic.md`](docs/profile-academic.md).
+O perfil de projeto de pesquisa está documentado em
+[`docs/profile-project.md`](docs/profile-project.md).
 
 ## Desenvolvimento
 

@@ -186,16 +186,19 @@ uma pessoa diferente do autor registre a revisão normativa.
 
 **Norma:** ABNT NBR 15287:2025.
 
-- [ ] Criar a matriz `nbr-15287-2025.md`.
-- [ ] Criar `abntex3-profile-project.dtx`.
-- [ ] Mapear diferenças em relação ao trabalho acadêmico.
-- [ ] Implementar estrutura específica do projeto.
-- [ ] Criar `examples/projeto-pesquisa.tex`.
-- [ ] Criar testes de elementos obrigatórios e opcionais.
-- [ ] Produzir seção do manual.
+- [x] Criar a matriz `nbr-15287-2025.md`.
+- [x] Criar `abntex3-profile-project.dtx`.
+- [x] Mapear diferenças em relação ao trabalho acadêmico.
+- [x] Implementar estrutura específica do projeto.
+- [x] Criar `examples/projeto-pesquisa.tex`.
+- [x] Criar testes de elementos obrigatórios e opcionais.
+- [x] Produzir seção do manual.
 - [ ] Executar revisão normativa independente.
 
 **Critério de saída:** perfil de projeto completo e reutilizando o núcleo.
+
+**Estado:** implementação técnica concluída; o marco permanece aberto até que
+uma pessoa diferente do autor registre a revisão normativa.
 
 ## Marco 9 — Perfil de artigo
 

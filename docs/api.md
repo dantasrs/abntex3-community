@@ -1,10 +1,10 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3 a 7. A versão `0.0.0` continua experimental. Os módulos estrutural,
-de layout, pré-textual e pós-textual e o perfil acadêmico possuem
-rastreabilidade normativa, mas ainda aguardam revisão independente e não
-fazem alegação de conformidade.
+Marcos 3 a 8. A versão `0.0.0` continua experimental. Os módulos estrutural,
+de layout, pré-textual e pós-textual e os perfis acadêmico e de projeto
+possuem rastreabilidade normativa, mas ainda aguardam revisão independente e
+não fazem alegação de conformidade.
 
 ## Carregamento e classes
 
@@ -181,3 +181,18 @@ O Marco 7 acrescenta:
 
 A referência completa, inclusive a separação entre elementos obrigatórios e
 opcionais, está em [`profile-academic.md`](profile-academic.md).
+
+## Perfil de projeto de pesquisa
+
+O Marco 8 acrescenta:
+
+- `\ABNTEXprojetoexterna`, `\ABNTEXprojetopretextual`,
+  `\ABNTEXprojetotextual` e `\ABNTEXprojetopostextual`, que coordenam as
+  quatro fases sem tornar a capa obrigatória;
+- `\ABNTEXprojetointroducao`, `\ABNTEXprojetoreferencialteorico`,
+  `\ABNTEXprojetometodologia`, `\ABNTEXprojetorecursos` e
+  `\ABNTEXprojetocronograma`, que compõem e registram as divisões textuais;
+- `\ABNTEXvalidateprojeto`, que verifica metadados, elementos e divisões
+  obrigatórias.
+
+A referência completa está em [`profile-project.md`](profile-project.md).

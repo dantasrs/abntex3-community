@@ -49,11 +49,13 @@ compile_example() {
     layout-paginacao \
     elementos-pretextuais \
     pos-textuais-bibliografia \
-    trabalho-academico
+    trabalho-academico \
+    projeto-pesquisa
   do
     cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
     if [[ "${example}" == "pos-textuais-bibliografia" || \
-          "${example}" == "trabalho-academico" ]]; then
+          "${example}" == "trabalho-academico" || \
+          "${example}" == "projeto-pesquisa" ]]; then
       cp "${project_dir}/examples/referencias-exemplo.bib" \
         "${run_dir}/referencias-exemplo.bib"
     fi
@@ -63,7 +65,8 @@ compile_example() {
         pdflatex -interaction=nonstopmode -halt-on-error \
           "${example}.tex" >/dev/null
       if [[ "${example}" == "pos-textuais-bibliografia" || \
-            "${example}" == "trabalho-academico" ]]; then
+            "${example}" == "trabalho-academico" || \
+            "${example}" == "projeto-pesquisa" ]]; then
         if ! command -v biber >/dev/null 2>&1; then
           echo "biber não está disponível para o ensaio bibliográfico." >&2
           exit 1
