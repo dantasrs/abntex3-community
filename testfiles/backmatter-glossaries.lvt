@@ -1,0 +1,14 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{glossaries}
+\usepackage{abntex3}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \ABNTEXposttextualtitle #1 {\TYPE{title=#1}}
+\RenewDocumentCommand \printglossary {O{}} {\TYPE{glossary=#1}}
+\ABNTEXglossario[Glossario]
+\TYPE{after=reachable}
+\ExplSyntaxOff
+\END
+\end{document}

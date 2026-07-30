@@ -116,6 +116,14 @@ Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
 [`roteiro técnico completo`](docs/roadmap.md), que contém tarefas, critérios
 de saída e dependências de cada marco.
 
+## Modelos canônicos
+
+Há modelos completos e auditáveis para tese, dissertação, TCC, monografia,
+projeto de pesquisa e artigo em uma ou duas colunas. Eles demonstram todos os
+elementos aplicáveis atualmente implementados e podem ser copiados como base
+para novos documentos. Consulte
+[`docs/modelos-canonicos.md`](docs/modelos-canonicos.md).
+
 ## Como usar
 
 O pacote ainda não foi publicado no CTAN. Para instalar a versão de

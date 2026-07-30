@@ -16,8 +16,6 @@
   {\TYPE{bibliography-options=#1}}
 \cs_set_protected:Npn \printglossary
   {\TYPE{glossary}}
-\cs_set_protected:Npn \setglossarysection #1
-  {\TYPE{glossary-section=#1}}
 \cs_set_protected:Npn \printindex
   {\TYPE{index}}
 \cs_set_protected:Npn \__abntex_add_primary_toc:n #1

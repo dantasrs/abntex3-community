@@ -84,6 +84,13 @@ abntex3-community/
 │   ├── trabalho-academico.tex
 │   ├── projeto-pesquisa.tex
 │   ├── artigo.tex
+│   ├── modelo-tese-completo.tex
+│   ├── modelo-dissertacao-completo.tex
+│   ├── modelo-tcc-completo.tex
+│   ├── modelo-monografia-completo.tex
+│   ├── modelo-projeto-pesquisa-completo.tex
+│   ├── modelo-artigo-uma-coluna-completo.tex
+│   ├── modelo-artigo-duas-colunas-completo.tex
 │   ├── artigo.tex
 │   ├── relatorio-tecnico.tex
 │   ├── livro.tex

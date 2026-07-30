@@ -1,0 +1,134 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{glossaries}
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=monografia,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\makeindex
+\makeglossaries
+\newglossaryentry{metadado}{
+  name={metadado},
+  description={dado estruturado usado para descrever outro recurso}
+}
+\addbibresource{referencias-exemplo.bib}
+\ABNTEXsetup{
+  titulo={Modelo canônico completo de monografia},
+  subtitulo={base auditável com todos os elementos implementados},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Monografia de especialização},
+  objetivo={apresentada para obtenção do título de Especialista},
+  area={Gestão da Informação},
+  orientacao={Prof. Dr. João Souza},
+  coorientacao={Profa. Dra. Ana Santos},
+  local={Natal},
+  data={2026}
+}
+\ABNTEXabreviatura{p.}{página}
+\ABNTEXsigla{PDF}{Portable Document Format}
+\ABNTEXsimbolo{$x$}{Valor observado}
+
+\begin{document}
+\ABNTEXacademicoexterna
+\ABNTEXlombada[Monografia 2026][Universidade Exemplo]
+
+\ABNTEXacademicopretextual
+\ABNTEXfolhaderosto
+\ABNTEXfichacatalografica{%
+  Ponto de extensão para a ficha catalográfica, quando aplicável.
+}
+\ABNTEXerrata
+  {SILVA, Maria da. \textbf{Modelo canônico completo de monografia}.
+   2026. Monografia — Universidade Exemplo, Natal, 2026.}
+  {\begin{center}
+     \begin{tabular}{llll}
+       Folha & Linha & Onde se lê & Leia-se\\
+       7 & 6 & metadadoso & metadado
+     \end{tabular}
+   \end{center}}
+\ABNTEXfolhadeaprovacao
+  {30 de julho de 2026}
+  {%
+    \ABNTEXmembrobanca
+      {Prof. Dr. João Souza}{Orientador}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Dra. Ana Santos}{Coorientadora}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Ma. Beatriz Alves}{Examinadora}{Instituto Exemplo}
+  }
+\ABNTEXdedicatoria{Às pessoas que ensinam e aprendem continuamente.}
+\ABNTEXagradecimentos{À instituição e às pessoas que avaliaram o trabalho.}
+\ABNTEXepigrafe[Autoria demonstrativa]{Clareza favorece a revisão.}
+\ABNTEXresumo
+  {Modelo completo de monografia que demonstra os elementos públicos,
+   alternativas selecionadas e pontos destinados à auditoria.}
+  {monografia, metadados, auditoria, LaTeX}
+\ABNTEXresumoemlinguaestrangeira
+  {Complete monograph template demonstrating public elements, selected
+   alternatives, and external audit points.}
+  {monograph, metadata, audit, LaTeX}
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadeabreviaturasesiglas
+\ABNTEXlistadesimbolos
+\ABNTEXsumario
+
+\ABNTEXacademicotextual
+\chapter{Introdução}
+\index{metadado}
+Apresentam-se contexto, problema, objetivos e justificativa. Um
+\gls{metadado} exemplifica o glossário \parencite{associacao2025}.
+\section{Questão de estudo}
+Como a explicitação da estrutura favorece a avaliação?
+\section{Objetivos}
+Demonstrar a estrutura e produzir uma referência reutilizável.
+
+\chapter{Revisão de literatura}
+\textcite{associacao2025} demonstra a chamada autor-data integrada.
+\begin{ABNTEXcitacaolonga}
+Trecho criado exclusivamente para verificar o tratamento visual de uma
+citação longa no modelo canônico.
+\end{ABNTEXcitacaolonga}
+\ABNTEXnota{Nota demonstrativa da monografia.}
+
+\chapter{Método}
+\section{Procedimentos}
+O método combina inventário técnico, compilação e inspeção.
+
+\chapter{Análise e discussão}
+\begin{figure}[ht]
+  \centering
+  \rule{0.55\linewidth}{2cm}
+  \caption{Estrutura conceitual demonstrativa}
+  \ABNTEXfonte{elaborada pela autora.}
+\end{figure}
+\begin{table}[ht]
+  \centering
+  \caption{Itens inspecionados}
+  \begin{tabular}{ll}
+    Item & Evidência\\
+    Elementos & presentes\\
+    Ordem & verificável
+  \end{tabular}
+  \ABNTEXfonte{elaborada pela autora.}
+\end{table}
+
+\chapter{Considerações finais}
+Retomam-se a questão, os objetivos, as limitações e recomendações.
+
+\ABNTEXacademicopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Quadro elaborado pela autora}
+Material produzido para apoiar a análise.
+\ABNTEXannex{Documento externo de demonstração}
+Material não elaborado pela autoria.
+\ABNTEXindice[Índice de assuntos]
+\end{document}

@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{glossaries}
+\usepackage[
+  perfil=artigo,
+  artigo-colunas=duas,
+  citacoes=autor-data
+]{abntex3}
+
+\makeglossaries
+\newglossaryentry{pipeline}{
+  name={pipeline},
+  description={sequência automatizada de etapas de construção e validação}
+}
+\addbibresource{referencias-exemplo.bib}
+\ABNTEXsetup{
+  titulo={Modelo canônico completo de artigo em duas colunas},
+  subtitulo={variante editorial auditável}
+}
+\ABNTEXartigoSetup{
+  titulo-outro-idioma={Complete canonical two-column article template},
+  resumo={Este artigo exercita a variante editorial em duas colunas e todos os elementos aplicáveis atualmente implementados.},
+  palavras-chave={artigo; duas colunas; auditoria; LaTeX},
+  resumo-outro-idioma={This article exercises the two-column editorial variant and every currently implemented applicable element.},
+  palavras-chave-outro-idioma={article; two columns; audit; LaTeX},
+  data-submissao={12 de fevereiro de 2026},
+  data-aprovacao={22 de abril de 2026},
+  identificacao-disponibilidade={DOI: 10.0000/exemplo.duas-colunas}
+}
+\ABNTEXartigoautor
+  {Ana Silva}
+  {Doutora em Ciência da Informação}
+  {Universidade Exemplo}
+  {ana@example.org}
+\ABNTEXartigoautor
+  {Bruno Souza}
+  {Mestre em Preservação Digital}
+  {Instituto Exemplo}
+  {bruno@example.org}
+
+\setlength{\emergencystretch}{1em}
+
+\begin{document}
+\ABNTEXartigopretextual
+\ABNTEXartigotextual
+
+\ABNTEXartigointroducao[Contextualização]{%
+  O título adaptado demonstra que a nomenclatura textual pode ser escolhida
+  pelas autorias. O estudo examina um \gls{pipeline} reprodutível
+  \parencite{associacao2025}.
+}
+\ABNTEXartigodesenvolvimento[Procedimentos, resultados e discussão]{%
+  Os procedimentos incluem inventário, compilação e inspeção.
+  \begin{ABNTEXcitacaolonga}
+  Este trecho permite observar recuo, corpo e espaço em uma coluna estreita.
+  O texto é apenas demonstrativo e deve ser substituído pela fonte real.
+  \end{ABNTEXcitacaolonga}
+  \ABNTEXnota{Nota demonstrativa da variante em duas colunas.}
+
+  \subsection{Resultados}
+  \begin{figure}[ht]
+    \centering
+    \rule{0.8\columnwidth}{1.5cm}
+    \caption{Pipeline demonstrativo}
+    \ABNTEXfonte{elaborada pelas autorias.}
+  \end{figure}
+  \begin{table}[ht]
+    \centering
+    \caption{Validações realizadas}
+    \begin{tabular}{ll}
+      Item & Estado\\
+      Colunas & duas\\
+      Fluxo & completo
+    \end{tabular}
+    \ABNTEXfonte{elaborada pelas autorias.}
+  \end{table}
+
+  \subsection{Discussão}
+  \begin{sloppypar}
+  A escolha de colunas é editorial e não altera os elementos estruturais.
+  A mesma sequência semântica permanece disponível nas duas variantes, o que
+  permite comparar a apresentação sem confundir estrutura e projeto gráfico.
+  \end{sloppypar}
+}
+\ABNTEXartigoconsideracoesfinais[Conclusões]{%
+  Os objetivos foram atendidos e a variante permanece verificável pelos
+  mesmos comandos públicos.
+}
+
+\ABNTEXartigopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Lista de verificação elaborada pelas autorias}
+Material produzido para a auditoria do artigo.
+\ABNTEXannex{Documento externo de demonstração}
+Material não produzido pelas autorias.
+\ABNTEXartigoagradecimentos{%
+  À comunidade e às pessoas responsáveis pela avaliação independente.
+}
+\end{document}

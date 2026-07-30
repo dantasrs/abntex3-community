@@ -15,7 +15,7 @@ trap 'rm -rf "${work_dir}"' EXIT
 archive_list="${work_dir}/archive-files.txt"
 unzip -Z1 "${archive}" > "${archive_list}"
 
-forbidden_pattern='(^|/)(bases|\.git)(/|$)|ABNT-NBR[^/]*\.pdf$|\.(aux|bcf|blg|bbl|fdb_latexmk|fls|glo|gls|idx|ilg|ind|log|out|run\.xml|synctex\.gz|toc)$'
+forbidden_pattern='(^|/)(bases|\.git)(/|$)|ABNT-NBR[^/]*\.pdf$|\.(acn|acr|alg|aux|bcf|blg|bbl|fdb_latexmk|fls|glg|glo|gls|ist|idx|ilg|ind|log|out|run\.xml|synctex\.gz|toc)$'
 if grep -E "${forbidden_pattern}" "${archive_list}"; then
   echo "O artefato contém arquivos não permitidos." >&2
   exit 1
@@ -51,13 +51,21 @@ compile_example() {
     pos-textuais-bibliografia \
     trabalho-academico \
     projeto-pesquisa \
-    artigo
+    artigo \
+    modelo-tese-completo \
+    modelo-dissertacao-completo \
+    modelo-tcc-completo \
+    modelo-monografia-completo \
+    modelo-projeto-pesquisa-completo \
+    modelo-artigo-uma-coluna-completo \
+    modelo-artigo-duas-colunas-completo
   do
     cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
     if [[ "${example}" == "pos-textuais-bibliografia" || \
           "${example}" == "trabalho-academico" || \
           "${example}" == "projeto-pesquisa" || \
-          "${example}" == "artigo" ]]; then
+          "${example}" == "artigo" || \
+          "${example}" == modelo-* ]]; then
       cp "${project_dir}/examples/referencias-exemplo.bib" \
         "${run_dir}/referencias-exemplo.bib"
     fi
@@ -69,14 +77,27 @@ compile_example() {
       if [[ "${example}" == "pos-textuais-bibliografia" || \
             "${example}" == "trabalho-academico" || \
             "${example}" == "projeto-pesquisa" || \
-            "${example}" == "artigo" ]]; then
+            "${example}" == "artigo" || \
+            "${example}" == modelo-* ]]; then
         if ! command -v biber >/dev/null 2>&1; then
           echo "biber não está disponível para o ensaio bibliográfico." >&2
           exit 1
         fi
         biber "${example}" >/dev/null
-        if [[ "${example}" == "pos-textuais-bibliografia" ]]; then
+        if [[ "${example}" == "pos-textuais-bibliografia" || \
+              "${example}" == "modelo-tese-completo" || \
+              "${example}" == "modelo-dissertacao-completo" || \
+              "${example}" == "modelo-tcc-completo" || \
+              "${example}" == "modelo-monografia-completo" || \
+              "${example}" == "modelo-projeto-pesquisa-completo" ]]; then
           makeindex "${example}" >/dev/null
+        fi
+        if [[ "${example}" == modelo-* ]]; then
+          if ! command -v makeglossaries >/dev/null 2>&1; then
+            echo "makeglossaries não está disponível para os modelos canônicos." >&2
+            exit 1
+          fi
+          makeglossaries "${example}" >/dev/null
         fi
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
           pdflatex -interaction=nonstopmode -halt-on-error \
