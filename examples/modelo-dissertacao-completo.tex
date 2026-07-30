@@ -1,0 +1,138 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{glossaries}
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=dissertacao,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\makeindex
+\makeglossaries
+\newglossaryentry{repositorio}{
+  name={repositório digital},
+  description={sistema para armazenar e disponibilizar objetos digitais}
+}
+\addbibresource{referencias-exemplo.bib}
+\ABNTEXsetup{
+  titulo={Modelo canônico completo de dissertação},
+  subtitulo={base auditável com todos os elementos implementados},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Dissertação},
+  objetivo={apresentada para obtenção do título de Mestra},
+  area={Ciência da Informação},
+  orientacao={Prof. Dr. João Souza},
+  coorientacao={Profa. Dra. Ana Santos},
+  local={Recife},
+  data={2026}
+}
+\ABNTEXabreviatura{org.}{organização}
+\ABNTEXsigla{ABNT}{Associação Brasileira de Normas Técnicas}
+\ABNTEXsimbolo{$n$}{Tamanho da amostra}
+
+\begin{document}
+\ABNTEXacademicoexterna
+\ABNTEXlombada[Dissertação 2026][Universidade Exemplo]
+
+\ABNTEXacademicopretextual
+\ABNTEXfolhaderosto
+\ABNTEXfichacatalografica{%
+  Ponto de extensão para dados catalográficos preparados por profissional.
+}
+\ABNTEXerrata
+  {SILVA, Maria da. \textbf{Modelo canônico completo de dissertação}.
+   2026. Dissertação — Universidade Exemplo, Recife, 2026.}
+  {\begin{center}
+     \begin{tabular}{llll}
+       Folha & Linha & Onde se lê & Leia-se\\
+       12 & 3 & repositorio & repositório
+     \end{tabular}
+   \end{center}}
+\ABNTEXfolhadeaprovacao
+  {30 de julho de 2026}
+  {%
+    \ABNTEXmembrobanca
+      {Prof. Dr. João Souza}{Orientador}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Dra. Ana Santos}{Coorientadora}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Dra. Beatriz Alves}{Examinadora}{Instituto Exemplo}
+  }
+\ABNTEXdedicatoria{À comunidade que mantém o conhecimento acessível.}
+\ABNTEXagradecimentos{À equipe, à instituição e às pessoas avaliadoras.}
+\ABNTEXepigrafe[Autoria demonstrativa]{Documentar é tornar verificável.}
+\ABNTEXresumo
+  {Modelo completo de dissertação para reutilização e auditoria dos elementos
+   atualmente implementados pelo pacote.}
+  {dissertação, documentação, auditoria, LaTeX}
+\ABNTEXresumoemlinguaestrangeira
+  {Complete dissertation template for reuse and auditing of every element
+   currently implemented by the package.}
+  {dissertation, documentation, audit, LaTeX}
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadeabreviaturasesiglas
+\ABNTEXlistadesimbolos
+\ABNTEXsumario
+
+\ABNTEXacademicotextual
+\chapter{Introdução}
+\index{modelo}
+Apresentam-se tema, problema, hipótese, objetivos e justificativa. O
+\gls{repositorio} é o objeto demonstrativo. A fundamentação bibliográfica é
+processada externamente \parencite{associacao2025}.
+\section{Problema e hipótese}
+O problema investiga a auditabilidade; a hipótese relaciona documentação e
+reprodutibilidade.
+\section{Objetivos e justificativa}
+O objetivo é exercitar a API completa e a justificativa é oferecer uma base
+segura para novos documentos.
+
+\chapter{Referencial teórico}
+\section{Apresentação documental}
+\textcite{associacao2025} exemplifica uma chamada integrada.
+\begin{ABNTEXcitacaolonga}
+Trecho demonstrativo para inspeção do recuo, corpo e espaçamento destinados
+a citações longas, sem reproduzir conteúdo de norma técnica.
+\end{ABNTEXcitacaolonga}
+\ABNTEXnota{Nota de rodapé demonstrativa.}
+
+\chapter{Metodologia}
+\section{Coleta e análise}
+O procedimento inventaria comandos, compila o documento e registra resultados.
+
+\chapter{Resultados e discussão}
+\begin{figure}[ht]
+  \centering
+  \rule{0.55\linewidth}{2cm}
+  \caption{Representação do fluxo de validação}
+  \ABNTEXfonte{elaborada pela autora.}
+\end{figure}
+\begin{table}[ht]
+  \centering
+  \caption{Resultados demonstrativos}
+  \begin{tabular}{ll}
+    Verificação & Resultado\\
+    Compilação & concluída\\
+    Bibliografia & processada
+  \end{tabular}
+  \ABNTEXfonte{elaborada pela autora.}
+\end{table}
+
+\chapter{Conclusão}
+Os objetivos são retomados e as limitações do modelo são explicitadas.
+
+\ABNTEXacademicopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Formulário elaborado pela autora}
+Instrumento produzido durante a pesquisa.
+\ABNTEXannex{Documento institucional de demonstração}
+Material externo associado à pesquisa.
+\ABNTEXindice[Índice de assuntos]
+\end{document}

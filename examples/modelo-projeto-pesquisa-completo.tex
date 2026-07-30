@@ -1,0 +1,131 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{glossaries}
+\usepackage[
+  perfil=projeto,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\makeindex
+\makeglossaries
+\newglossaryentry{checksum}{
+  name={soma de verificação},
+  description={valor calculado para detectar alterações em dados}
+}
+\addbibresource{referencias-exemplo.bib}
+\ABNTEXsetup{
+  titulo={Modelo canônico completo de projeto de pesquisa},
+  subtitulo={base auditável com todos os elementos implementados},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Projeto de pesquisa},
+  objetivo={submetido ao Programa de Pós-Graduação em Documentação},
+  area={Preservação digital},
+  orientacao={Prof. Dr. João Souza},
+  coorientacao={Profa. Dra. Ana Santos},
+  local={Fortaleza},
+  data={2026}
+}
+\ABNTEXabreviatura{cron.}{cronograma}
+\ABNTEXsigla{PDF}{Portable Document Format}
+\ABNTEXsimbolo{$t$}{Tempo de execução}
+
+\begin{document}
+
+% PARTE EXTERNA OPCIONAL
+\ABNTEXprojetoexterna
+\ABNTEXcapa
+\ABNTEXlombada[Projeto 2026][Universidade Exemplo]
+
+% ELEMENTOS PRÉ-TEXTUAIS
+\ABNTEXprojetopretextual
+\ABNTEXfolhaderosto
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadeabreviaturasesiglas
+\ABNTEXlistadesimbolos
+\ABNTEXsumario
+
+% ELEMENTOS TEXTUAIS ESPECÍFICOS DO PERFIL
+\ABNTEXprojetotextual
+\ABNTEXprojetointroducao{%
+  \index{projeto}
+  \textbf{Tema:} preservação de documentos científicos digitais.
+
+  \textbf{Problema:} quais procedimentos produzem evidências reprodutíveis de
+  integridade e disponibilidade?
+
+  \textbf{Hipótese:} formatos abertos, redundância e verificação automatizada
+  reduzem perdas.
+
+  \textbf{Objetivo geral:} comparar estratégias de preservação.
+
+  \textbf{Objetivos específicos:} inventariar formatos, executar ensaios e
+  documentar resultados.
+
+  \textbf{Justificativa:} a continuidade do acesso sustenta pesquisa,
+  transparência e memória institucional.
+}
+\ABNTEXprojetoreferencialteorico{%
+  A normalização documental e a preservação digital delimitam o estudo
+  \parencite{associacao2025}. Uma \gls{checksum} será usada nos ensaios.
+  \begin{ABNTEXcitacaolonga}
+  Texto demonstrativo para inspecionar o ambiente destinado às citações
+  longas, sem transcrever conteúdo protegido.
+  \end{ABNTEXcitacaolonga}
+  \ABNTEXnota{Nota explicativa demonstrativa do projeto.}
+}
+\ABNTEXprojetometodologia{%
+  A pesquisa será aplicada, documental e experimental. O universo será
+  composto por arquivos de formatos distintos; a amostra será controlada.
+  Os procedimentos incluem coleta, cálculo de somas, alteração deliberada,
+  nova verificação e comparação dos resultados.
+
+  \begin{figure}[ht]
+    \centering
+    \rule{0.55\linewidth}{2cm}
+    \caption{Fluxo experimental proposto}
+    \ABNTEXfonte{elaborada pela autora.}
+  \end{figure}
+}
+\ABNTEXprojetorecursos{%
+  Serão necessários repositório versionado, armazenamento redundante,
+  ferramentas livres, estação de trabalho e horas da equipe.
+
+  \begin{table}[ht]
+    \centering
+    \caption{Estimativa demonstrativa de recursos}
+    \begin{tabular}{lr}
+      Recurso & Quantidade\\
+      Armazenamento & 2 unidades\\
+      Estação de trabalho & 1 unidade
+    \end{tabular}
+    \ABNTEXfonte{elaborada pela autora.}
+  \end{table}
+}
+\ABNTEXprojetocronograma{%
+  \begin{center}
+    \begin{tabular}{lll}
+      Atividade & Início & Término\\
+      Revisão documental & janeiro & março\\
+      Experimentos & abril & julho\\
+      Análise e redação & agosto & dezembro
+    \end{tabular}
+  \end{center}
+}
+
+% ELEMENTOS PÓS-TEXTUAIS
+\ABNTEXprojetopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Instrumento de coleta proposto}
+Formulário elaborado pela pesquisadora para registrar cada ensaio.
+\ABNTEXannex{Especificação externa de formato}
+Documento de origem externa que apoia o projeto.
+\ABNTEXindice[Índice de assuntos]
+
+\end{document}

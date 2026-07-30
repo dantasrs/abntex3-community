@@ -14,6 +14,7 @@ docfiles = {
   "docs/backmatter.md",
   "docs/frontmatter.md",
   "docs/layout.md",
+  "docs/modelos-canonicos.md",
   "docs/profile-academic.md",
   "docs/profile-project.md",
   "docs/profile-article.md",

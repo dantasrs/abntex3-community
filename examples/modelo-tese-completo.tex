@@ -1,0 +1,167 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{glossaries}
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=tese,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\makeindex
+\makeglossaries
+\newglossaryentry{preservacao}{
+  name={preservação digital},
+  description={processos destinados a manter documentos digitais acessíveis}
+}
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Modelo canônico completo de tese},
+  subtitulo={base auditável com todos os elementos implementados},
+  autoria={Maria da Silva},
+  instituicao={Universidade Exemplo},
+  natureza={Tese},
+  objetivo={apresentada para obtenção do título de Doutora},
+  area={Ciência da Informação},
+  orientacao={Prof. Dr. João Souza},
+  coorientacao={Profa. Dra. Ana Santos},
+  volume={1},
+  local={Recife},
+  data={2026}
+}
+
+\ABNTEXabreviatura{ed.}{edição}
+\ABNTEXsigla{ABNT}{Associação Brasileira de Normas Técnicas}
+\ABNTEXsigla{PDF}{Portable Document Format}
+\ABNTEXsimbolo{$n$}{Quantidade de documentos}
+\ABNTEXsimbolo{$\sum$}{Somatório}
+
+\begin{document}
+
+% PARTE EXTERNA
+\ABNTEXacademicoexterna
+\ABNTEXlombada[Tese 2026][Universidade Exemplo]
+
+% ELEMENTOS PRÉ-TEXTUAIS
+\ABNTEXacademicopretextual
+\ABNTEXfolhaderosto
+\ABNTEXfichacatalografica{%
+  Ponto de extensão para a ficha preparada por profissional responsável.
+}
+\ABNTEXerrata
+  {SILVA, Maria da. \textbf{Modelo canônico completo de tese}. 2026.
+   Tese — Universidade Exemplo, Recife, 2026.}
+  {\begin{center}
+     \begin{tabular}{llll}
+       Folha & Linha & Onde se lê & Leia-se\\
+       10 & 4 & preservacão & preservação
+     \end{tabular}
+   \end{center}}
+\ABNTEXfolhadeaprovacao
+  {30 de julho de 2026}
+  {%
+    \ABNTEXmembrobanca
+      {Prof. Dr. João Souza}{Orientador}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Profa. Dra. Ana Santos}{Coorientadora}{Universidade Exemplo}
+    \ABNTEXmembrobanca
+      {Prof. Dr. Carlos Lima}{Examinador externo}{Instituto Exemplo}
+  }
+\ABNTEXdedicatoria{Às pessoas que preservam e compartilham conhecimento.}
+\ABNTEXagradecimentos{%
+  À comunidade de software livre e às pessoas responsáveis pela avaliação
+  normativa independente deste modelo.
+}
+\ABNTEXepigrafe[Autoria demonstrativa]{%
+  Um documento auditável explicita tanto seu conteúdo quanto suas escolhas.
+}
+\ABNTEXresumo
+  {Este modelo demonstra todos os elementos públicos aplicáveis a uma tese,
+   incluindo listas, divisões textuais, referências, glossário, apêndice,
+   anexo e índice.}
+  {tese, normalização, auditoria, LaTeX}
+\ABNTEXresumoemlinguaestrangeira
+  {This template demonstrates every public element applicable to a thesis,
+   including lists, textual divisions, references, glossary, appendix,
+   annex, and index.}
+  {thesis, standardization, audit, LaTeX}
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadeabreviaturasesiglas
+\ABNTEXlistadesimbolos
+\ABNTEXsumario
+
+% ELEMENTOS TEXTUAIS
+\ABNTEXacademicotextual
+\chapter{Introdução}
+\index{auditoria}
+Este capítulo delimita o tema, apresenta problema, hipótese, objetivos e
+justificativa. A \gls{preservacao} fornece o domínio de demonstração.
+Uma citação indireta usa a integração bibliográfica
+\parencite{associacao2025}.
+
+\section{Problema de pesquisa}
+Como tornar modelos documentais simultaneamente reutilizáveis e auditáveis?
+
+\section{Hipótese}
+A explicitação dos elementos e a compilação automatizada facilitam a revisão.
+
+\section{Objetivos}
+O objetivo geral é demonstrar o perfil. Os objetivos específicos são
+inventariar elementos, exercitar a API e validar a distribuição.
+
+\chapter{Referencial teórico}
+\section{Normalização documental}
+O estilo autor-data também permite citação integrada:
+\textcite{associacao2025}.
+\begin{ABNTEXcitacaolonga}
+Este texto meramente demonstrativo ocupa o ambiente destinado a uma citação
+direta longa. A fonte real deve ser indicada pela autoria do novo documento.
+\end{ABNTEXcitacaolonga}
+\ABNTEXnota{Nota demonstrativa composta pela API pública do layout.}
+
+\chapter{Metodologia}
+\section{Delineamento}
+O estudo demonstrativo utiliza revisão documental e ensaios de compilação.
+\section{Procedimentos}
+Cada elemento público é composto e posteriormente verificado.
+
+\chapter{Resultados e discussão}
+\section{Resultados}
+\begin{figure}[ht]
+  \centering
+  \rule{0.6\linewidth}{2cm}
+  \caption{Ilustração demonstrativa do fluxo}
+  \ABNTEXfonte{elaborada pela autora.}
+\end{figure}
+\begin{table}[ht]
+  \centering
+  \caption{Cobertura dos elementos}
+  \begin{tabular}{ll}
+    Grupo & Estado\\
+    Pré-textuais & demonstrados\\
+    Pós-textuais & demonstrados
+  \end{tabular}
+  \ABNTEXfonte{elaborada pela autora.}
+\end{table}
+\section{Discussão}
+Os resultados devem ser confrontados com o referencial adotado.
+
+\chapter{Conclusão}
+Retomam-se objetivos e resultados, registrando limitações e trabalhos futuros.
+
+% ELEMENTOS PÓS-TEXTUAIS
+\ABNTEXacademicopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Instrumento elaborado pela autora}
+Conteúdo de responsabilidade da autoria do trabalho.
+\ABNTEXannex{Documento externo reproduzido para demonstração}
+Conteúdo não elaborado pela autoria do trabalho.
+\ABNTEXindice[Índice de assuntos]
+
+\end{document}

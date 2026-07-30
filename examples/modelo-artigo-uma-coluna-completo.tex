@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{glossaries}
+\usepackage[
+  perfil=artigo,
+  artigo-colunas=uma,
+  citacoes=autor-data
+]{abntex3}
+
+\makeglossaries
+\newglossaryentry{artefato}{
+  name={artefato digital},
+  description={objeto produzido ou usado durante um processo computacional}
+}
+\addbibresource{referencias-exemplo.bib}
+\ABNTEXsetup{
+  titulo={Modelo canônico completo de artigo em uma coluna},
+  subtitulo={base auditável com todos os elementos implementados}
+}
+\ABNTEXartigoSetup{
+  titulo-outro-idioma={Complete canonical one-column article template},
+  resumo={Este artigo demonstra todos os elementos públicos aplicáveis ao perfil, com autoria múltipla, dados editoriais e pós-textuais opcionais.},
+  palavras-chave={artigo; normalização; auditoria; LaTeX},
+  resumo-outro-idioma={This article demonstrates every public element applicable to the profile, including multiple authors, editorial data, and optional back matter.},
+  palavras-chave-outro-idioma={article; standardization; audit; LaTeX},
+  data-submissao={10 de janeiro de 2026},
+  data-aprovacao={20 de março de 2026},
+  identificacao-disponibilidade={DOI: 10.0000/exemplo.uma-coluna}
+}
+\ABNTEXartigoautor
+  {Ana Silva}
+  {Doutora em Ciência da Informação}
+  {Universidade Exemplo}
+  {ana@example.org}
+\ABNTEXartigoautor
+  {Bruno Souza}
+  {Mestre em Preservação Digital}
+  {Instituto Exemplo}
+  {bruno@example.org}
+
+\begin{document}
+\ABNTEXartigopretextual
+\ABNTEXartigotextual
+
+\ABNTEXartigointroducao{%
+  A introdução delimita o assunto, apresenta objetivos e situa o tema. Este
+  modelo trata da preservação de cada \gls{artefato} e utiliza citações
+  processadas pelo \texttt{biblatex-abnt} \parencite{associacao2025}.
+}
+\ABNTEXartigodesenvolvimento[Materiais e métodos]{%
+  O método inventaria a API, compila o documento e inspeciona seus elementos.
+  \begin{ABNTEXcitacaolonga}
+  Trecho demonstrativo destinado à inspeção do ambiente de citação longa.
+  \end{ABNTEXcitacaolonga}
+  \ABNTEXnota{Nota demonstrativa do artigo em uma coluna.}
+
+  \subsection{Resultados}
+  \begin{figure}[ht]
+    \centering
+    \rule{0.55\linewidth}{2cm}
+    \caption{Fluxo demonstrativo}
+    \ABNTEXfonte{elaborada pelas autorias.}
+  \end{figure}
+  \begin{table}[ht]
+    \centering
+    \caption{Elementos inspecionados}
+    \begin{tabular}{ll}
+      Elemento & Resultado\\
+      Bloco inicial & composto\\
+      Referências & processadas
+    \end{tabular}
+    \ABNTEXfonte{elaborada pelas autorias.}
+  \end{table}
+
+  \subsection{Discussão}
+  Os resultados são confrontados com a fundamentação adotada.
+}
+\ABNTEXartigoconsideracoesfinais{%
+  As considerações respondem aos objetivos, registram limitações e indicam
+  continuidade da investigação.
+}
+
+\ABNTEXartigopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Instrumento elaborado pelas autorias}
+Material produzido especificamente para o estudo.
+\ABNTEXannex{Documento externo associado ao artigo}
+Material não elaborado pelas autorias.
+\ABNTEXartigoagradecimentos{%
+  Às instituições e às pessoas responsáveis pela revisão externa.
+}
+\end{document}

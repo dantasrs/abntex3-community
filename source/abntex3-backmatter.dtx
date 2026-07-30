@@ -310,8 +310,8 @@
       {
         \ABNTEXposttextualtitle{#1}
         \group_begin:
-          \cs_if_exist:NT \setglossarysection
-            {\setglossarysection{none}}
+          \cs_if_exist:NT \glossarysection
+            {\RenewDocumentCommand \glossarysection {O{} m} {}}
           \tl_if_blank:nTF {#2}
             {\printglossary}
             {\printglossary[#2]}
