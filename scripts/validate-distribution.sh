@@ -52,19 +52,22 @@ compile_example() {
     trabalho-academico \
     projeto-pesquisa \
     artigo \
+    relatorio-tecnico \
     modelo-tese-completo \
     modelo-dissertacao-completo \
     modelo-tcc-completo \
     modelo-monografia-completo \
     modelo-projeto-pesquisa-completo \
     modelo-artigo-uma-coluna-completo \
-    modelo-artigo-duas-colunas-completo
+    modelo-artigo-duas-colunas-completo \
+    modelo-relatorio-cientifico-completo
   do
     cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
     if [[ "${example}" == "pos-textuais-bibliografia" || \
           "${example}" == "trabalho-academico" || \
           "${example}" == "projeto-pesquisa" || \
           "${example}" == "artigo" || \
+          "${example}" == "relatorio-tecnico" || \
           "${example}" == modelo-* ]]; then
       cp "${project_dir}/examples/referencias-exemplo.bib" \
         "${run_dir}/referencias-exemplo.bib"
@@ -88,8 +91,9 @@ compile_example() {
               "${example}" == "modelo-tese-completo" || \
               "${example}" == "modelo-dissertacao-completo" || \
               "${example}" == "modelo-tcc-completo" || \
-              "${example}" == "modelo-monografia-completo" || \
-              "${example}" == "modelo-projeto-pesquisa-completo" ]]; then
+            "${example}" == "modelo-monografia-completo" || \
+            "${example}" == "modelo-projeto-pesquisa-completo" || \
+            "${example}" == "modelo-relatorio-cientifico-completo" ]]; then
           makeindex "${example}" >/dev/null
         fi
         if [[ "${example}" == modelo-* ]]; then

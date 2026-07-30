@@ -67,7 +67,6 @@ abntex3-community/
 │   ├── abntex3-profile-academic.dtx
 │   ├── abntex3-profile-project.dtx
 │   ├── abntex3-profile-article.dtx
-│   ├── abntex3-profile-article.dtx
 │   ├── abntex3-profile-report.dtx
 │   ├── abntex3-profile-book.dtx
 │   └── abntex3-compat.dtx
@@ -91,7 +90,7 @@ abntex3-community/
 │   ├── modelo-projeto-pesquisa-completo.tex
 │   ├── modelo-artigo-uma-coluna-completo.tex
 │   ├── modelo-artigo-duas-colunas-completo.tex
-│   ├── artigo.tex
+│   ├── modelo-relatorio-cientifico-completo.tex
 │   ├── relatorio-tecnico.tex
 │   ├── livro.tex
 │   └── referencias.bib
@@ -124,8 +123,16 @@ abntex3-community/
 │   ├── profile-project.tlg
 │   ├── profile-article.lvt
 │   ├── profile-article.tlg
-│   ├── profile-report.lvt
-│   ├── profile-report.tlg
+│   ├── report-flow.lvt
+│   ├── report-flow.tlg
+│   ├── report-elements.lvt
+│   ├── report-elements.tlg
+│   ├── report-team.lvt
+│   ├── report-team.tlg
+│   ├── report-sections.lvt
+│   ├── report-sections.tlg
+│   ├── report-types.lvt
+│   ├── report-types.tlg
 │   ├── profile-book.lvt
 │   ├── profile-book.tlg
 │   ├── biblatex-author-year.lvt
@@ -138,6 +145,10 @@ abntex3-community/
 │   ├── arquitetura.md
 │   ├── api.md
 │   ├── backmatter.md
+│   ├── profile-academic.md
+│   ├── profile-project.md
+│   ├── profile-article.md
+│   ├── profile-report.md
 │   ├── structure.md
 │   ├── roadmap.md
 │   ├── normas.md
@@ -176,12 +187,11 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 8 formam a infraestrutura mínima,
-os módulos normativos gerais e os perfis acadêmico, de projeto de pesquisa e
-de artigo
-tecnicamente completos, ainda pendentes de revisão normativa independente.
-Os demais itens da árvore são criados apenas no marco em que sua
-responsabilidade é implementada.
+Os arquivos já materializados até o Marco 10 formam a infraestrutura mínima,
+os módulos normativos gerais e os perfis acadêmico, de projeto de pesquisa,
+artigo e relatório técnico ou científico, todos ainda pendentes de revisão
+normativa independente. Os demais itens da árvore são criados apenas no marco
+em que sua responsabilidade é implementada.
 
 ## Responsabilidade dos módulos
 

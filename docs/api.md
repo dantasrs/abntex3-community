@@ -1,11 +1,10 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3 a 8. A versão `0.0.0` continua experimental. Os módulos estrutural,
-de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto
-e de artigo
-possuem rastreabilidade normativa, mas ainda aguardam revisão independente e
-não fazem alegação de conformidade.
+Marcos 3 a 10. A versão `0.0.0` continua experimental. Os módulos estrutural,
+de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto, de
+artigo e de relatório possuem rastreabilidade normativa, mas ainda aguardam
+revisão independente e não fazem alegação de conformidade.
 
 ## Carregamento e classes
 
@@ -212,3 +211,18 @@ A referência completa está em [`profile-project.md`](profile-project.md).
 
 A opção `artigo-colunas=uma|duas` controla uma escolha editorial. A referência
 completa está em [`profile-article.md`](profile-article.md).
+
+## Perfil de relatório técnico ou científico
+
+O Marco 10 acrescenta:
+
+- `\ABNTEXrelatorioSetup`, para identificação, classificação, resumo,
+  instituições e dados do formulário;
+- `\ABNTEXrelatoriomembroequipe`, para registrar a equipe repetidamente;
+- coordenadores das partes externa, pré-textual, textual e pós-textual;
+- capa, folha de rosto, resumo e formulário próprios do relatório;
+- comandos para introdução, desenvolvimento e considerações finais;
+- `\ABNTEXvalidaterelatorio`, com referências condicionadas a
+  `possui-citacoes=sim` e alternativa entre catalogação e formulário.
+
+A referência completa está em [`profile-report.md`](profile-report.md).

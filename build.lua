@@ -18,6 +18,7 @@ docfiles = {
   "docs/profile-academic.md",
   "docs/profile-project.md",
   "docs/profile-article.md",
+  "docs/profile-report.md",
   "docs/structure.md",
   "docs/requisitos/*.md"
 }

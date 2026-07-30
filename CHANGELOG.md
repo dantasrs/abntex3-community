@@ -87,10 +87,17 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
   agradecimentos finais.
 - Composição editorial em uma ou duas colunas, exemplo completo, manual e
   testes do perfil de artigo.
-- Sete modelos canônicos completos para tese, dissertação, TCC, monografia,
+- Oito modelos canônicos completos para tese, dissertação, TCC, monografia,
   projeto de pesquisa e artigos em uma ou duas colunas.
 - Matriz de cobertura e procedimento de auditoria externa dos modelos.
 - Validação dos modelos com bibliografia, glossário e índice nas instalações
   isolada e empacotada.
 - Compatibilidade da integração de glossário com a seção gerada pelo pacote
   `glossaries`, preservando o título pós-textual do abnTeX3 Community.
+- Matriz rastreável da ABNT NBR 10719:2015.
+- Módulo `abntex3-profile-report` com identificação, classificação de
+  segurança, equipe técnica, resumo e formulário de identificação.
+- Fluxo externo, pré-textual, textual e pós-textual de relatórios, com
+  referências condicionadas à existência declarada de citações.
+- Exemplo institucional, modelo científico completo, manual e testes do
+  perfil de relatório.

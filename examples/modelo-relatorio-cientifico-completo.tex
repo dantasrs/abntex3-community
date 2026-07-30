@@ -1,0 +1,128 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{glossaries}
+\usepackage[
+  perfil=relatorio,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\makeindex
+\makeglossaries
+\newglossaryentry{reprodutibilidade}{
+  name={reprodutibilidade},
+  description={capacidade de repetir um procedimento documentado}
+}
+\ABNTEXsigla{API}{Interface de programação de aplicações}
+\ABNTEXsimbolo{H}{Hipótese experimental}
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Avaliação experimental de formatos documentais},
+  subtitulo={relatório científico completo para auditoria},
+  autoria={Carla Souza e Daniel Alves},
+  instituicao={Laboratório Exemplo de Ciência da Informação},
+  volume={1},
+  local={Recife},
+  data={2026}
+}
+
+\ABNTEXrelatorioSetup{
+  projeto-programa-plano={Projeto Formatos Abertos},
+  numero-relatorio={RC-2026-001},
+  codigo-identificacao={LECI-RC-2026-FA-001},
+  classificacao-seguranca={acesso público},
+  tipo-relatorio={relatório científico},
+  resumo={Este relatório descreve um ensaio controlado de preservação,
+    registra o método, sintetiza os resultados e apresenta recomendações
+    para estudos posteriores.},
+  palavras-chave={formatos abertos, reprodutibilidade, preservação},
+  instituicao-endereco={Rua da Pesquisa, 10, Recife, PE},
+  instituicao-patrocinadora={Fundação Exemplo de Pesquisa},
+  patrocinadora-endereco={Avenida da Ciência, 50, Brasília, DF},
+  issn={0000-0000},
+  edicao={1},
+  numero-paginas={a preencher após a composição},
+  numero-classificacao={CDU 000.00},
+  tiragem={digital},
+  preco={distribuição gratuita},
+  distribuidor={Laboratório Exemplo de Ciência da Informação},
+  observacoes={Dados e nomes exclusivamente demonstrativos},
+  possui-citacoes=sim
+}
+
+\ABNTEXrelatoriomembroequipe
+  {Carla Souza}{Coordenação científica}{Laboratório Exemplo}
+\ABNTEXrelatoriomembroequipe
+  {Daniel Alves}{Execução experimental}{Laboratório Exemplo}
+
+\begin{document}
+\ABNTEXrelatorioexterna
+\ABNTEXrelatoriocapa
+\ABNTEXlombada[RC-2026-001]
+
+\ABNTEXrelatoriopretextual
+\ABNTEXrelatoriofolhaderosto
+\ABNTEXrelatorioequipe
+\ABNTEXerrata
+  {SOUZA, Carla; ALVES, Daniel. Avaliação experimental de formatos
+   documentais. Recife: Laboratório Exemplo, 2026.}
+  {Não há correções nesta versão demonstrativa.}
+\ABNTEXagradecimentos{À equipe de apoio do laboratório.}
+\ABNTEXrelatorioresumo
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXlistadesiglas
+\ABNTEXlistadesimbolos
+\ABNTEXsumario
+
+\ABNTEXrelatoriotextual
+\ABNTEXrelatoriointroducao{%
+  O estudo avalia formatos documentais e registra os objetivos e as razões
+  para a elaboração do relatório.
+}
+\ABNTEXrelatoriodesenvolvimento{%
+  O ensaio compara propriedades observáveis e mantém registro
+  \gls{reprodutibilidade}\index{reprodutibilidade}
+  das decisões. A normalização bibliográfica permanece delegada ao
+  \texttt{biblatex-abnt} \parencite{associacao2025}.
+
+  \begin{figure}[htbp]
+    \centering
+    \rule{0.55\textwidth}{3cm}
+    \caption{Fluxo experimental demonstrativo}
+    \ABNTEXfonte{Elaborada pela equipe (2026).}
+  \end{figure}
+
+  \begin{table}[htbp]
+    \centering
+    \caption{Resultados sintéticos}
+    \begin{tabular}{lc}
+      \hline
+      Critério & Resultado \\
+      \hline
+      Integridade & Verificada \\
+      Reprodutibilidade & Verificada \\
+      \hline
+    \end{tabular}
+    \ABNTEXfonte{Dados demonstrativos (2026).}
+  \end{table}
+}
+\ABNTEXrelatorioconsideracoesfinais{%
+  Os procedimentos são reproduzíveis no conjunto observado, mas resultados
+  externos dependem de novos ensaios e revisão por especialistas.
+}
+
+\ABNTEXrelatoriopostextual
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Protocolo elaborado pela equipe}
+Sequência demonstrativa de procedimentos do experimento.
+\ABNTEXannex{Especificação externa}
+Documento externo usado como referência no ensaio.
+\ABNTEXindice[Índice de assuntos]
+\ABNTEXrelatorioformulario
+\end{document}

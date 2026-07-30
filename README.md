@@ -13,8 +13,9 @@ documentação.
 O projeto possui infraestrutura reproduzível, API experimental de configuração
 e metadados, módulos para layout, paginação, seções, elementos pré e
 pós-textuais, citações, referências, apêndices, anexos e índice, além dos
-perfis acadêmico, de projeto de pesquisa e de artigo em revisão. A versão 0.0.0 ainda não
-é indicada para produção e não faz alegação de conformidade.
+perfis acadêmico, de projeto de pesquisa, de artigo e de relatório em revisão.
+A versão 0.0.0 ainda não é indicada para produção e não faz alegação de
+conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -56,8 +57,9 @@ A matriz inicial considera, entre outras:
 - ABNT NBR 6028:2021 — resumo, resenha e recensão;
 - ABNT NBR 10520:2023 — citações;
 - ABNT NBR 6023:2025 — referências;
-- ABNT NBR 15287:2025 — projeto de pesquisa.
-- ABNT NBR 6022:2018 — artigo em publicação periódica.
+- ABNT NBR 15287:2025 — projeto de pesquisa;
+- ABNT NBR 6022:2018 — artigo em publicação periódica;
+- ABNT NBR 10719:2015 — relatório técnico ou científico.
 
 Consulte [`docs/normas.md`](docs/normas.md) para a matriz completa e os limites
 de uso das normas.
@@ -91,12 +93,13 @@ de uso das normas.
 - [x] **Marco 9 — Artigo:** perfil completo da NBR 6022:2018, com autoria
   múltipla, dados editoriais, uma ou duas colunas, exemplo, manual e testes. A
   revisão normativa independente continua pendente.
+- [x] **Marco 10 — Relatório técnico ou científico:** identificação própria,
+  equipe técnica, resumo, dados institucionais, formulário, exemplos e testes
+  das variantes institucional e científica. A revisão normativa independente
+  continua pendente.
 
 ### Próximos marcos
 
-- [ ] **Marco 10 — Relatório técnico ou científico:** implementar o perfil da
-  NBR 10719:2015, com identificação, equipes, dados institucionais e anexos
-  específicos.
 - [ ] **Marco 11 — Livro ou folheto:** implementar o perfil da
   NBR 6029:2023, incluindo elementos editoriais, volumes, lombada e índice.
 - [ ] **Marco 12 — Migração:** publicar a correspondência entre interfaces do
@@ -119,8 +122,9 @@ de saída e dependências de cada marco.
 ## Modelos canônicos
 
 Há modelos completos e auditáveis para tese, dissertação, TCC, monografia,
-projeto de pesquisa e artigo em uma ou duas colunas. Eles demonstram todos os
-elementos aplicáveis atualmente implementados. Cada arquivo tem duas funções:
+projeto de pesquisa, artigo em uma ou duas colunas e relatório científico.
+Eles demonstram todos os elementos aplicáveis atualmente implementados. Cada
+arquivo tem duas funções:
 
 1. servir como exemplo de auditoria, no qual um avaliador pode localizar e
    compilar cada recurso do perfil;
@@ -136,6 +140,7 @@ elementos aplicáveis atualmente implementados. Cada arquivo tem duas funções:
 | Projeto de pesquisa | [`modelo-projeto-pesquisa-completo.tex`](examples/modelo-projeto-pesquisa-completo.tex) |
 | Artigo em uma coluna | [`modelo-artigo-uma-coluna-completo.tex`](examples/modelo-artigo-uma-coluna-completo.tex) |
 | Artigo em duas colunas | [`modelo-artigo-duas-colunas-completo.tex`](examples/modelo-artigo-duas-colunas-completo.tex) |
+| Relatório científico | [`modelo-relatorio-cientifico-completo.tex`](examples/modelo-relatorio-cientifico-completo.tex) |
 
 Os arquivos são deliberadamente extensos: não significa que todo documento
 deva conter todos aqueles elementos. A matriz de cobertura e o procedimento
@@ -170,7 +175,7 @@ Esses três conceitos atuam em níveis diferentes:
 | Conceito | Exemplos | O que controla |
 | --- | --- | --- |
 | Classe LaTeX | `article`, `report`, `book` | Estrutura básica do LaTeX, como a existência de capítulos |
-| Perfil | `academico`, `projeto`, `artigo` | Fluxo, elementos obrigatórios e validações do gênero documental |
+| Perfil | `academico`, `projeto`, `artigo`, `relatorio` | Fluxo, elementos obrigatórios e validações do gênero documental |
 | Tipo de trabalho | `tese`, `dissertacao`, `tcc`, `monografia` | Variação declarada dentro do perfil acadêmico |
 
 A classe não substitui o perfil. Por exemplo, `report` fornece `\chapter`, mas
@@ -185,6 +190,8 @@ Como ponto de partida:
   monografia;
 - use `report` ou `book` com `perfil=projeto` para projeto de pesquisa;
 - use `article` com `perfil=artigo` para artigo.
+- use `report` ou `book` com `perfil=relatorio` para relatório técnico ou
+  científico.
 
 As classes `abntex2`, `memoir` e KOMA-Script não são suportadas atualmente.
 O `abntex3` é um pacote carregado por `\usepackage`, não uma classe usada em
@@ -197,11 +204,12 @@ O `abntex3` é um pacote carregado por `\usepackage`, não uma classe usada em
 | Acadêmico | `perfil=academico`, `tipo-trabalho=...` | título, autoria, instituição, natureza, objetivo, área, orientação, local e data | capa, folha de rosto, aprovação, resumos nos dois idiomas, sumário e referências |
 | Projeto | `perfil=projeto` | título, autoria, instituição, natureza, local e data | folha de rosto, sumário, cinco divisões textuais e referências |
 | Artigo | `perfil=artigo`, `artigo-colunas=...` | título; autorias e dados próprios em `\ABNTEXartigoSetup` | elementos iniciais, introdução, desenvolvimento, considerações finais e referências |
+| Relatório | `perfil=relatorio` | título, autoria, instituição, local e data; dados próprios em `\ABNTEXrelatorioSetup` | folha de rosto, resumo, sumário, três divisões, catalogação ou formulário e referências quando houver citações |
 
-Há ainda os identificadores experimentais `nenhum`, `relatorio` e `livro`.
+Há ainda os identificadores experimentais `nenhum` e `livro`.
 `nenhum` permite usar os módulos gerais sem um fluxo documental específico.
-Os perfis `relatorio` e `livro` ainda não possuem implementação completa e
-não devem ser usados como modelos finais.
+O perfil `livro` ainda não possui implementação completa e não deve ser usado
+como modelo final.
 
 ### Estrutura mínima do arquivo
 
@@ -468,6 +476,36 @@ agradecimentos, quando presentes, devem ser o último elemento. Uma ou duas
 colunas são escolhas editoriais; nenhuma delas constitui, isoladamente, uma
 exigência normativa.
 
+### Perfil de relatório técnico ou científico
+
+O relatório usa metadados próprios além de título, autoria, instituição,
+local e data:
+
+```tex
+\usepackage[perfil=relatorio, citacoes=autor-data]{abntex3}
+\ABNTEXrelatorioSetup{
+  projeto-programa-plano={Programa relacionado},
+  numero-relatorio={RT-2026-001},
+  tipo-relatorio={relatório técnico},
+  resumo={Texto do resumo.},
+  palavras-chave={documentação, relatório},
+  possui-citacoes=sim
+}
+\ABNTEXrelatoriomembroequipe
+  {Nome}{Função ou qualificação}{Instituição}
+```
+
+No documento, use `\ABNTEXrelatorioexterna`,
+`\ABNTEXrelatoriopretextual`, `\ABNTEXrelatoriotextual` e
+`\ABNTEXrelatoriopostextual`. A capa e a equipe são opcionais; folha de rosto,
+resumo, sumário, introdução, desenvolvimento e considerações finais são
+verificados. Ao final, inclua dados catalográficos com
+`\ABNTEXfichacatalografica` ou o formulário próprio com
+`\ABNTEXrelatorioformulario`.
+
+O exemplo completo está em
+[`examples/relatorio-tecnico.tex`](examples/relatorio-tecnico.tex).
+
 ### Recursos comuns aos perfis
 
 #### Citações, figuras e tabelas
@@ -562,8 +600,8 @@ normais; elas devem desaparecer nas passagens finais.
 
 Os comandos coordenadores registram a ordem das partes e, ao final, avisam
 sobre metadados ou elementos obrigatórios ausentes. Também é possível chamar
-explicitamente `\ABNTEXvalidateacademico`, `\ABNTEXvalidateprojeto` ou
-`\ABNTEXvalidateartigo`.
+explicitamente `\ABNTEXvalidateacademico`, `\ABNTEXvalidateprojeto`,
+`\ABNTEXvalidateartigo` ou `\ABNTEXvalidaterelatorio`.
 
 A validação confirma completude técnica observável. Ela não:
 
@@ -585,8 +623,9 @@ duas faces, paginação e espaçamento estão em
 O fluxo completo de tese, dissertação, TCC ou monografia está em
 [`docs/profile-academic.md`](docs/profile-academic.md).
 O perfil de projeto de pesquisa está documentado em
-[`docs/profile-project.md`](docs/profile-project.md), e o perfil de artigo em
-[`docs/profile-article.md`](docs/profile-article.md).
+[`docs/profile-project.md`](docs/profile-project.md), o perfil de artigo em
+[`docs/profile-article.md`](docs/profile-article.md) e o perfil de relatório em
+[`docs/profile-report.md`](docs/profile-report.md).
 
 ## Desenvolvimento
 

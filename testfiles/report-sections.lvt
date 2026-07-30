@@ -1,0 +1,15 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage[perfil=relatorio]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \__abntex_report_section:nnn #1#2#3
+  {\TYPE{section=#1|#2|#3}}
+\ABNTEXrelatoriointroducao[Introducao]{objetivos}
+\ABNTEXrelatoriodesenvolvimento[Resultados]{pesquisa}
+\ABNTEXrelatorioconsideracoesfinais[Conclusao]{sintese}
+\ExplSyntaxOff
+\END
+\end{document}
