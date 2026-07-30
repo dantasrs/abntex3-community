@@ -1,0 +1,18 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+title=composto
+content=introducao
+title=composto
+content=referencial
+title=composto
+content=metodologia
+title=composto
+content=recursos
+title=composto
+content=cronograma
+section=introducao
+section=referencial-teorico
+section=metodologia
+section=recursos
+section=cronograma
+missing=

@@ -1,0 +1,7 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+inicial=folha-de-rosto,sumario,referencias
+completo=
+capa-obrigatoria=nao
+metadados=titulo,autoria,instituicao,natureza,local,data
+orientacao-obrigatoria=nao

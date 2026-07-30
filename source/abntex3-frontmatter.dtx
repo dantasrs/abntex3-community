@@ -171,8 +171,11 @@
       \tl_if_blank:eF {\ABNTEXmetadata{area}}
         {~Área~de~concentração:~\ABNTEXmetadata{area}.}
 
-      \medskip
-      Orientação:~\ABNTEXmetadata{orientacao}.
+      \tl_if_blank:eF {\ABNTEXmetadata{orientacao}}
+        {
+          \par\medskip
+          Orientação:~\ABNTEXmetadata{orientacao}.
+        }
       \tl_if_blank:eF {\ABNTEXmetadata{coorientacao}}
         {\par Coorientação:~\ABNTEXmetadata{coorientacao}.}
     \end{minipage}

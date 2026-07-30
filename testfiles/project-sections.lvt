@@ -1,0 +1,22 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=projeto]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \section #1 {\TYPE{title=composto}}
+\ABNTEXprojetointroducao{\TYPE{content=introducao}}
+\ABNTEXprojetoreferencialteorico{\TYPE{content=referencial}}
+\ABNTEXprojetometodologia{\TYPE{content=metodologia}}
+\ABNTEXprojetorecursos{\TYPE{content=recursos}}
+\ABNTEXprojetocronograma{\TYPE{content=cronograma}}
+\__abntex_project_collect_missing:
+\prop_map_inline:Nn \g__abntex_project_sections_prop
+  {\TYPE{section=#1}}
+\TYPE{
+  missing=\seq_use:Nn \g__abntex_project_missing_sections_seq {,}
+}
+\ExplSyntaxOff
+\END
+\end{document}

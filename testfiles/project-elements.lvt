@@ -1,0 +1,32 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=projeto]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\__abntex_project_collect_missing:
+\TYPE{
+  inicial=\seq_use:Nn \g__abntex_project_missing_elements_seq {,}
+}
+\prop_gput:Nnn \g__abntex_frontmatter_seen_prop {folha-de-rosto} {true}
+\prop_gput:Nnn \g__abntex_frontmatter_seen_prop {sumario} {true}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {referencias} {true}
+\__abntex_project_collect_missing:
+\TYPE{
+  completo=\seq_use:Nn \g__abntex_project_missing_elements_seq {,}
+}
+\TYPE{
+  capa-obrigatoria=
+  \prop_if_in:NnTF \g__abntex_frontmatter_seen_prop {capa} {sim} {nao}
+}
+\prop_get:NnN \g__abntex_profile_required_prop {projeto} \l_tmpa_tl
+\TYPE{metadados=\tl_use:N \l_tmpa_tl}
+\clist_set:NV \l_tmpa_clist \l_tmpa_tl
+\clist_if_in:NnTF \l_tmpa_clist {orientacao}
+  {\tl_set:Nn \l_tmpb_tl {sim}}
+  {\tl_set:Nn \l_tmpb_tl {nao}}
+\TYPE{orientacao-obrigatoria=\tl_use:N \l_tmpb_tl}
+\ExplSyntaxOff
+\END
+\end{document}
