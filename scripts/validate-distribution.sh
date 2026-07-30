@@ -50,12 +50,14 @@ compile_example() {
     elementos-pretextuais \
     pos-textuais-bibliografia \
     trabalho-academico \
-    projeto-pesquisa
+    projeto-pesquisa \
+    artigo
   do
     cp "${project_dir}/examples/${example}.tex" "${run_dir}/${example}.tex"
     if [[ "${example}" == "pos-textuais-bibliografia" || \
           "${example}" == "trabalho-academico" || \
-          "${example}" == "projeto-pesquisa" ]]; then
+          "${example}" == "projeto-pesquisa" || \
+          "${example}" == "artigo" ]]; then
       cp "${project_dir}/examples/referencias-exemplo.bib" \
         "${run_dir}/referencias-exemplo.bib"
     fi
@@ -66,7 +68,8 @@ compile_example() {
           "${example}.tex" >/dev/null
       if [[ "${example}" == "pos-textuais-bibliografia" || \
             "${example}" == "trabalho-academico" || \
-            "${example}" == "projeto-pesquisa" ]]; then
+            "${example}" == "projeto-pesquisa" || \
+            "${example}" == "artigo" ]]; then
         if ! command -v biber >/dev/null 2>&1; then
           echo "biber não está disponível para o ensaio bibliográfico." >&2
           exit 1

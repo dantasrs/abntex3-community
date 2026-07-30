@@ -1,0 +1,31 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=artigo]{abntex3}
+\ABNTEXsetup{titulo={Artigo}}
+\ABNTEXartigoSetup{
+  resumo={Resumo},
+  palavras-chave={teste},
+  data-submissao={1 de janeiro de 2026},
+  data-aprovacao={2 de fevereiro de 2026}
+}
+\ABNTEXartigoautor{Ana}{Doutora}{Universidade}{ana@example.org}
+\begin{document}
+\START
+\ExplSyntaxOn
+\prop_gput:Nnn \g__abntex_article_phases_prop {pre-textual} {true}
+\prop_gput:Nnn \g__abntex_article_phases_prop {textual} {true}
+\prop_gput:Nnn \g__abntex_article_phases_prop {pos-textual} {true}
+\prop_gput:Nnn \g__abntex_article_sections_prop {introducao} {true}
+\prop_gput:Nnn \g__abntex_article_sections_prop {desenvolvimento} {true}
+\prop_gput:Nnn \g__abntex_article_sections_prop {consideracoes-finais} {true}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {referencias} {true}
+\__abntex_article_collect_missing:
+\TYPE{missing=\seq_use:Nn \g__abntex_article_missing_seq {,}}
+\tl_if_blank:VTF \g__abntex_article_other_title_tl
+  {\TYPE{other-title-optional=true}} {\TYPE{other-title-optional=false}}
+\tl_if_blank:VTF \g__abntex_article_identification_tl
+  {\TYPE{identification-optional=true}}
+  {\TYPE{identification-optional=false}}
+\ExplSyntaxOff
+\END
+\end{document}

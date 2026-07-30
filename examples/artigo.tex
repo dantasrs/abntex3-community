@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage[
+  perfil=artigo,
+  artigo-colunas=duas,
+  citacoes=autor-data
+]{abntex3}
+
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Preservação de artigos científicos digitais},
+  subtitulo={um fluxo comunitário reproduzível}
+}
+\ABNTEXartigoSetup{
+  titulo-outro-idioma={Preservation of digital scientific articles},
+  resumo={Este artigo descreve um fluxo reproduzível para preservar documentos científicos digitais.},
+  palavras-chave={preservação digital; normalização; LaTeX},
+  resumo-outro-idioma={This article describes a reproducible workflow for preserving digital scientific documents.},
+  palavras-chave-outro-idioma={digital preservation; standardization; LaTeX},
+  data-submissao={10 de janeiro de 2026},
+  data-aprovacao={20 de março de 2026},
+  identificacao-disponibilidade={Disponível em: \texttt{https://example.org/artigo}}
+}
+\ABNTEXartigoautor
+  {Ana Silva}
+  {Doutora em Ciência da Informação}
+  {Universidade Exemplo}
+  {ana@example.org}
+\ABNTEXartigoautor
+  {Bruno Souza}
+  {Mestre em Preservação Digital}
+  {Instituto Exemplo}
+  {bruno@example.org}
+
+\begin{document}
+\ABNTEXartigopretextual
+\ABNTEXartigotextual
+
+\ABNTEXartigointroducao{%
+  A preservação digital exige procedimentos verificáveis. A apresentação
+  documental também se apoia em normas técnicas \parencite{associacao2025}.
+}
+\ABNTEXartigodesenvolvimento[Procedimentos e resultados]{%
+  O fluxo mantém fontes, referências e artefatos em repositório versionado,
+  executa testes automatizados e valida a distribuição isoladamente.
+}
+\ABNTEXartigoconsideracoesfinais{%
+  A automação reduz falhas de empacotamento e favorece a reprodução.
+}
+
+\ABNTEXartigopostextual
+\ABNTEXbibliografia
+\ABNTEXartigoagradecimentos{À comunidade que revisou o fluxo técnico.}
+\end{document}

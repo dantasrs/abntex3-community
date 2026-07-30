@@ -13,7 +13,7 @@ documentação.
 O projeto possui infraestrutura reproduzível, API experimental de configuração
 e metadados, módulos para layout, paginação, seções, elementos pré e
 pós-textuais, citações, referências, apêndices, anexos e índice, além dos
-perfis acadêmico e de projeto de pesquisa em revisão. A versão 0.0.0 ainda não
+perfis acadêmico, de projeto de pesquisa e de artigo em revisão. A versão 0.0.0 ainda não
 é indicada para produção e não faz alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
@@ -57,6 +57,7 @@ A matriz inicial considera, entre outras:
 - ABNT NBR 10520:2023 — citações;
 - ABNT NBR 6023:2025 — referências;
 - ABNT NBR 15287:2025 — projeto de pesquisa.
+- ABNT NBR 6022:2018 — artigo em publicação periódica.
 
 Consulte [`docs/normas.md`](docs/normas.md) para a matriz completa e os limites
 de uso das normas.
@@ -87,12 +88,12 @@ de uso das normas.
 - [x] **Marco 8 — Projeto de pesquisa:** perfil completo da NBR 15287:2025,
   com estrutura textual própria, exemplo, manual e testes. A revisão normativa
   independente continua pendente.
+- [x] **Marco 9 — Artigo:** perfil completo da NBR 6022:2018, com autoria
+  múltipla, dados editoriais, uma ou duas colunas, exemplo, manual e testes. A
+  revisão normativa independente continua pendente.
 
 ### Próximos marcos
 
-- [ ] **Marco 9 — Artigo:** implementar o perfil da NBR 6022:2018, incluindo
-  autoria múltipla, afiliações, datas editoriais e testes de composição em
-  uma ou duas colunas.
 - [ ] **Marco 10 — Relatório técnico ou científico:** implementar o perfil da
   NBR 10719:2015, com identificação, equipes, dados institucionais e anexos
   específicos.
