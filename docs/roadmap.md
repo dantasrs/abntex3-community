@@ -204,18 +204,21 @@ uma pessoa diferente do autor registre a revisão normativa.
 
 **Norma:** ABNT NBR 6022:2018.
 
-- [ ] Criar a matriz `nbr-6022-2018.md`.
-- [ ] Criar `abntex3-profile-article.dtx`.
-- [ ] Implementar elementos pré-textuais do artigo.
-- [ ] Implementar estrutura textual e pós-textual.
-- [ ] Tratar autoria múltipla, afiliações e datas editoriais.
-- [ ] Criar `examples/artigo.tex`.
-- [ ] Criar testes em uma e duas colunas quando aplicável.
-- [ ] Produzir seção do manual.
+- [x] Criar a matriz `nbr-6022-2018.md`.
+- [x] Criar `abntex3-profile-article.dtx`.
+- [x] Implementar elementos pré-textuais do artigo.
+- [x] Implementar estrutura textual e pós-textual.
+- [x] Tratar autoria múltipla, afiliações e datas editoriais.
+- [x] Criar `examples/artigo.tex`.
+- [x] Criar testes em uma e duas colunas quando aplicável.
+- [x] Produzir seção do manual.
 - [ ] Executar revisão normativa independente.
 
 **Critério de saída:** artigo completo sem depender de comandos do perfil
 acadêmico.
+
+**Estado:** implementação técnica concluída; o marco permanece aberto até que
+uma pessoa diferente do autor registre a revisão normativa.
 
 ## Marco 10 — Perfil de relatório técnico ou científico
 

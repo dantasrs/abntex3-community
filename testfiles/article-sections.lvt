@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=artigo]{abntex3}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:cpn {\tl_use:N \g__abntex_primary_name_tl} #1
+  {\TYPE{title=#1}}
+\ABNTEXartigointroducao[Contexto]{\TYPE{body=intro}}
+\ABNTEXartigodesenvolvimento[Analise]{\TYPE{body=development}}
+\ABNTEXartigoconsideracoesfinais[Conclusao]{\TYPE{body=final}}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {referencias} {true}
+\cs_set_protected:Npn \ABNTEXposttextualtitle #1 {\TYPE{post-title=#1}}
+\ABNTEXartigoagradecimentos{\TYPE{body=thanks}}
+\prop_map_inline:Nn \g__abntex_article_sections_prop {\TYPE{section=#1}}
+\ExplSyntaxOff
+\END
+\end{document}

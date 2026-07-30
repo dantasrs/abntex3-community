@@ -1,0 +1,15 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=artigo]{abntex3}
+\ABNTEXartigoautor{Ana}{Doutora}{Universidade A}{ana@example.org}
+\ABNTEXartigoautor{Bruno}{Mestre}{Instituto B}{bruno@example.org}
+\begin{document}
+\START
+\ExplSyntaxOn
+\TYPE{authors=\seq_count:N \g__abntex_article_authors_seq}
+\cs_set_protected:Npn \__abntex_article_author_print:nnnn #1#2#3#4
+  {\TYPE{author=#1|#2|#3|#4}}
+\seq_map_inline:Nn \g__abntex_article_authors_seq {#1}
+\ExplSyntaxOff
+\END
+\end{document}

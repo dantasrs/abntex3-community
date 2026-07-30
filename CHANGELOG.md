@@ -80,3 +80,10 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 - Comandos estruturais para introdução, referencial teórico, metodologia,
   recursos e cronograma.
 - Validação, exemplo completo, manual e testes do perfil de projeto.
+- Matriz rastreável da ABNT NBR 6022:2018.
+- Módulo `abntex3-profile-article` com bloco pré-textual próprio, autoria
+  múltipla, afiliações, contatos, resumos e datas editoriais.
+- Estrutura textual e pós-textual do artigo, títulos adaptáveis e
+  agradecimentos finais.
+- Composição editorial em uma ou duas colunas, exemplo completo, manual e
+  testes do perfil de artigo.

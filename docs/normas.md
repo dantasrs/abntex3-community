@@ -57,6 +57,7 @@ armazenados no repositório.
   de chamada;
 - [`ABNT NBR 6034:2004`](requisitos/nbr-6034-2004.md) — índice.
 - [`ABNT NBR 15287:2025`](requisitos/nbr-15287-2025.md) — perfil de projeto
+- [`ABNT NBR 6022:2018`](requisitos/nbr-6022-2018.md) — perfil de artigo
   de pesquisa.
 
 ## Conformidade

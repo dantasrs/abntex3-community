@@ -57,7 +57,8 @@
 %   \item |academico|: título, autoria, instituição, natureza, objetivo, área,
 %     orientação, local e data;
 %   \item |projeto|: título, autoria, instituição, local e data;
-%   \item |artigo|: título, autoria e data;
+%   \item |artigo|: título; autoria, resumos e datas editoriais são validados
+%     pelo módulo próprio, que admite múltiplos autores;
 %   \item |relatorio|: título, autoria, instituição, local e data;
 %   \item |livro|: título, autoria, local e data.
 % \end{itemize}
@@ -130,7 +131,7 @@
 \prop_gput:Nnn \g__abntex_profile_required_prop {projeto}
   {titulo,autoria,instituicao,natureza,local,data}
 \prop_gput:Nnn \g__abntex_profile_required_prop {artigo}
-  {titulo,autoria,data}
+  {titulo}
 \prop_gput:Nnn \g__abntex_profile_required_prop {relatorio}
   {titulo,autoria,instituicao,local,data}
 \prop_gput:Nnn \g__abntex_profile_required_prop {livro}

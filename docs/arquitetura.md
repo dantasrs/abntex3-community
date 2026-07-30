@@ -67,6 +67,7 @@ abntex3-community/
 │   ├── abntex3-profile-academic.dtx
 │   ├── abntex3-profile-project.dtx
 │   ├── abntex3-profile-article.dtx
+│   ├── abntex3-profile-article.dtx
 │   ├── abntex3-profile-report.dtx
 │   ├── abntex3-profile-book.dtx
 │   └── abntex3-compat.dtx
@@ -82,6 +83,7 @@ abntex3-community/
 │   ├── referencias-exemplo.bib
 │   ├── trabalho-academico.tex
 │   ├── projeto-pesquisa.tex
+│   ├── artigo.tex
 │   ├── artigo.tex
 │   ├── relatorio-tecnico.tex
 │   ├── livro.tex
@@ -168,7 +170,8 @@ abntex3-community/
 ```
 
 Os arquivos já materializados até o Marco 8 formam a infraestrutura mínima,
-os módulos normativos gerais e os perfis acadêmico e de projeto de pesquisa
+os módulos normativos gerais e os perfis acadêmico, de projeto de pesquisa e
+de artigo
 tecnicamente completos, ainda pendentes de revisão normativa independente.
 Os demais itens da árvore são criados apenas no marco em que sua
 responsabilidade é implementada.

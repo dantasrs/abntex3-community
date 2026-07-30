@@ -1,0 +1,281 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-profile-article.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-profile-article}: perfil de artigo}
+% \author{dantasrs}
+% \date{2026-07-30 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Contrato público}
+%
+% O perfil implementa o fluxo estrutural da ABNT NBR 6022:2018 sem depender
+% dos comandos do perfil acadêmico. A chave |artigo-colunas| aceita |uma| ou
+% |duas|; a escolha é editorial, pois a norma não fixa o número de colunas.
+%
+% \begin{function}{\ABNTEXartigoSetup}
+%   Configura título e resumo em outro idioma, os dois resumos, palavras-chave,
+%   datas de submissão e aprovação e a identificação ou disponibilidade.
+% \end{function}
+%
+% \begin{function}{\ABNTEXartigoautor}
+%   Registra, repetidamente, nome, currículo sucinto, vinculação corporativa e
+%   contato de cada autor.
+% \end{function}
+%
+% \begin{function}{\ABNTEXartigopretextual,\ABNTEXartigotextual,
+%                  \ABNTEXartigopostextual}
+%   Compõem o bloco pré-textual e iniciam as partes textual e pós-textual.
+% \end{function}
+%
+% \begin{function}{\ABNTEXartigointroducao,\ABNTEXartigodesenvolvimento,
+%                  \ABNTEXartigoconsideracoesfinais}
+%   Criam as três divisões textuais. Um argumento opcional permite alterar o
+%   título sem perder o registro semântico da divisão.
+% \end{function}
+%
+% \begin{function}{\ABNTEXartigoagradecimentos}
+%   Compõe agradecimentos como último elemento pós-textual.
+% \end{function}
+%
+% \begin{function}{\ABNTEXvalidateartigo}
+%   Verifica título, autoria, resumo, datas editoriais, fases, divisões
+%   textuais e referências.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-profile-article}
+  {2026-07-30}{0.0.0}{Perfil de artigo do abnTeX3 Community}
+
+\tl_new:N \g__abntex_article_other_title_tl
+\tl_new:N \g__abntex_article_summary_tl
+\tl_new:N \g__abntex_article_keywords_tl
+\tl_new:N \g__abntex_article_other_summary_tl
+\tl_new:N \g__abntex_article_other_keywords_tl
+\tl_new:N \g__abntex_article_submission_tl
+\tl_new:N \g__abntex_article_approval_tl
+\tl_new:N \g__abntex_article_identification_tl
+\tl_new:N \g__abntex_article_columns_tl
+\seq_new:N \g__abntex_article_authors_seq
+\prop_new:N \g__abntex_article_phases_prop
+\prop_new:N \g__abntex_article_sections_prop
+\seq_new:N \g__abntex_article_missing_seq
+\int_new:N \g__abntex_article_phase_int
+\bool_new:N \g__abntex_article_used_bool
+
+\tl_gset:Nn \g__abntex_article_columns_tl {uma}
+
+\msg_new:nnnn {abntex3} {article-profile-required}
+  {O~fluxo~de~artigo~exige~perfil=artigo.}
+  {Selecione~o~perfil~artigo~antes~de~usar~'#1'.}
+\msg_new:nnnn {abntex3} {article-phase-order}
+  {A~fase~do~artigo~'#1'~esta~fora~da~ordem.}
+  {Use~pre-textual,~textual~e~pos-textual~nessa~sequencia.}
+\msg_new:nnnn {abntex3} {article-element-missing}
+  {O~elemento~obrigatorio~do~artigo~'#1'~nao~foi~composto.}
+  {Configure~ou~inclua~o~elemento~pelo~comando~publico~correspondente.}
+\msg_new:nnnn {abntex3} {article-acknowledgements-order}
+  {Os~agradecimentos~devem~encerrar~os~elementos~pos-textuais.}
+  {Componha~as~referencias,~o~glossario,~os~apendices~e~os~anexos~antes.}
+
+\keys_define:nn {abntex3/article}
+  {
+    titulo-outro-idioma .tl_gset:N = \g__abntex_article_other_title_tl,
+    resumo .tl_gset:N = \g__abntex_article_summary_tl,
+    palavras-chave .tl_gset:N = \g__abntex_article_keywords_tl,
+    resumo-outro-idioma .tl_gset:N = \g__abntex_article_other_summary_tl,
+    palavras-chave-outro-idioma .tl_gset:N =
+      \g__abntex_article_other_keywords_tl,
+    data-submissao .tl_gset:N = \g__abntex_article_submission_tl,
+    data-aprovacao .tl_gset:N = \g__abntex_article_approval_tl,
+    identificacao-disponibilidade .tl_gset:N =
+      \g__abntex_article_identification_tl
+  }
+\keys_define:nn {abntex3}
+  {
+    artigo-colunas .choices:nn = {uma, duas}
+      {\tl_gset:Nx \g__abntex_article_columns_tl {\l_keys_choice_tl}},
+    artigo-colunas .initial:n = uma
+  }
+
+\cs_new_protected:Npn \__abntex_article_require_profile:n #1
+  {
+    \tl_if_eq:NnF \g__abntex_profile_tl {artigo}
+      {\msg_error:nnn {abntex3} {article-profile-required} {#1}}
+  }
+
+\cs_new_protected:Npn \__abntex_article_register_phase:nn #1#2
+  {
+    \bool_gset_true:N \g__abntex_article_used_bool
+    \int_compare:nNnT {#1} < {\g__abntex_article_phase_int}
+      {\msg_warning:nnn {abntex3} {article-phase-order} {#2}}
+    \int_gset:Nn \g__abntex_article_phase_int
+      {\int_max:nn {#1} {\g__abntex_article_phase_int}}
+    \prop_gput:Nnn \g__abntex_article_phases_prop {#2} {true}
+  }
+
+\cs_new_protected:Npn \__abntex_article_author_print:nnnn #1#2#3#4
+  {
+    \par\noindent\textbf{#1}\par
+    \noindent\footnotesize #2\par
+    \noindent #3\par
+    \noindent #4\par\normalsize
+  }
+
+\cs_new_protected:Npn \__abntex_article_header:
+  {
+    \begin{center}
+      {\Large\bfseries \ABNTEXmetadata{titulo}
+        \tl_if_blank:eF {\ABNTEXmetadata{subtitulo}}
+          {:~\ABNTEXmetadata{subtitulo}}\par}
+      \tl_if_blank:VF \g__abntex_article_other_title_tl
+        {\medskip{\large\bfseries
+          \tl_use:N \g__abntex_article_other_title_tl\par}}
+    \end{center}
+    \seq_map_inline:Nn \g__abntex_article_authors_seq {##1}
+    \medskip
+    \noindent\textbf{Resumo:}~\tl_use:N \g__abntex_article_summary_tl\par
+    \noindent\textbf{Palavras-chave:}~
+      \tl_use:N \g__abntex_article_keywords_tl\par
+    \tl_if_blank:VF \g__abntex_article_other_summary_tl
+      {
+        \medskip
+        \noindent\textbf{Abstract:}~
+          \tl_use:N \g__abntex_article_other_summary_tl\par
+        \tl_if_blank:VF \g__abntex_article_other_keywords_tl
+          {\noindent\textbf{Keywords:}~
+            \tl_use:N \g__abntex_article_other_keywords_tl\par}
+      }
+    \medskip
+    \noindent\textbf{Submissão:}~
+      \tl_use:N \g__abntex_article_submission_tl.\quad
+    \textbf{Aprovação:}~\tl_use:N \g__abntex_article_approval_tl.\par
+    \tl_if_blank:VF \g__abntex_article_identification_tl
+      {\noindent\tl_use:N \g__abntex_article_identification_tl\par}
+    \medskip
+  }
+
+\cs_new_protected:Npn \__abntex_article_section:nnn #1#2#3
+  {
+    \__abntex_article_require_profile:n {#1}
+    \prop_gput:Nnn \g__abntex_article_sections_prop {#1} {true}
+    \use:c {\tl_use:N \g__abntex_primary_name_tl} {#2}
+    #3
+  }
+
+\cs_new_protected:Npn \__abntex_article_collect_missing:
+  {
+    \seq_gclear:N \g__abntex_article_missing_seq
+    \seq_if_empty:NT \g__abntex_article_authors_seq
+      {\seq_gput_right:Nn \g__abntex_article_missing_seq {autoria}}
+    \tl_if_blank:VT \g__abntex_article_summary_tl
+      {\seq_gput_right:Nn \g__abntex_article_missing_seq {resumo}}
+    \tl_if_blank:VT \g__abntex_article_keywords_tl
+      {\seq_gput_right:Nn \g__abntex_article_missing_seq {palavras-chave}}
+    \tl_if_blank:VT \g__abntex_article_submission_tl
+      {\seq_gput_right:Nn \g__abntex_article_missing_seq {data-submissao}}
+    \tl_if_blank:VT \g__abntex_article_approval_tl
+      {\seq_gput_right:Nn \g__abntex_article_missing_seq {data-aprovacao}}
+    \clist_map_inline:nn {pre-textual, textual, pos-textual}
+      {
+        \prop_if_in:NnF \g__abntex_article_phases_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_article_missing_seq {##1}}
+      }
+    \clist_map_inline:nn {introducao, desenvolvimento, consideracoes-finais}
+      {
+        \prop_if_in:NnF \g__abntex_article_sections_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_article_missing_seq {##1}}
+      }
+    \prop_if_in:NnF \g__abntex_backmatter_seen_prop {referencias}
+      {\seq_gput_right:Nn \g__abntex_article_missing_seq {referencias}}
+  }
+
+\cs_new_protected:Npn \__abntex_article_validate:
+  {
+    \__abntex_article_require_profile:n
+      {\token_to_str:N \ABNTEXvalidateartigo}
+    \ABNTEXvalidate
+    \__abntex_article_collect_missing:
+    \seq_map_inline:Nn \g__abntex_article_missing_seq
+      {\msg_warning:nnn {abntex3} {article-element-missing} {##1}}
+  }
+
+\NewDocumentCommand \ABNTEXartigoSetup {m}
+  {\keys_set:nn {abntex3/article} {#1}}
+\NewDocumentCommand \ABNTEXartigoautor {mmmm}
+  {
+    \seq_gput_right:Nn \g__abntex_article_authors_seq
+      {\__abntex_article_author_print:nnnn {#1}{#2}{#3}{#4}}
+  }
+\NewExpandableDocumentCommand \ABNTEXartigocolunas {}
+  {\tl_use:N \g__abntex_article_columns_tl}
+
+\NewDocumentCommand \ABNTEXartigopretextual {}
+  {
+    \__abntex_article_require_profile:n
+      {\token_to_str:N \ABNTEXartigopretextual}
+    \__abntex_article_register_phase:nn {1} {pre-textual}
+    \tl_if_eq:NnTF \g__abntex_article_columns_tl {duas}
+      {\twocolumn[\__abntex_article_header:]}
+      {\__abntex_article_header:}
+  }
+\NewDocumentCommand \ABNTEXartigotextual {}
+  {
+    \__abntex_article_require_profile:n
+      {\token_to_str:N \ABNTEXartigotextual}
+    \__abntex_article_register_phase:nn {2} {textual}
+  }
+\NewDocumentCommand \ABNTEXartigopostextual {}
+  {
+    \__abntex_article_require_profile:n
+      {\token_to_str:N \ABNTEXartigopostextual}
+    \__abntex_article_register_phase:nn {3} {pos-textual}
+  }
+
+\NewDocumentCommand \ABNTEXartigointroducao {O{Introdução} +m}
+  {\__abntex_article_section:nnn {introducao} {#1} {#2}}
+\NewDocumentCommand \ABNTEXartigodesenvolvimento {O{Desenvolvimento} +m}
+  {\__abntex_article_section:nnn {desenvolvimento} {#1} {#2}}
+\NewDocumentCommand \ABNTEXartigoconsideracoesfinais
+  {O{Considerações~finais} +m}
+  {\__abntex_article_section:nnn {consideracoes-finais} {#1} {#2}}
+\NewDocumentCommand \ABNTEXartigoagradecimentos {+m}
+  {
+    \__abntex_article_require_profile:n {agradecimentos}
+    \prop_if_in:NnF \g__abntex_backmatter_seen_prop {referencias}
+      {\msg_warning:nn {abntex3} {article-acknowledgements-order}}
+    \prop_gput:Nnn \g__abntex_article_sections_prop
+      {agradecimentos} {true}
+    \ABNTEXposttextualtitle{Agradecimentos}
+    #1
+  }
+\NewDocumentCommand \ABNTEXvalidateartigo {}
+  {\__abntex_article_validate:}
+
+\hook_gput_code:nnn {enddocument} {abntex3-profile-article}
+  {
+    \bool_if:NT \g__abntex_article_used_bool
+      {\__abntex_article_validate:}
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+% \end{implementation}
+% \Finale

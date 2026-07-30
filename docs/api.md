@@ -2,7 +2,8 @@
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
 Marcos 3 a 8. A versão `0.0.0` continua experimental. Os módulos estrutural,
-de layout, pré-textual e pós-textual e os perfis acadêmico e de projeto
+de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto
+e de artigo
 possuem rastreabilidade normativa, mas ainda aguardam revisão independente e
 não fazem alegação de conformidade.
 
@@ -85,7 +86,7 @@ perfil:
 | `nenhum` | nenhum |
 | `academico` | título, autoria, instituição, natureza, objetivo, área, orientação, local e data |
 | `projeto` | título, autoria, instituição, local e data |
-| `artigo` | título, autoria e data |
+| `artigo` | título; autoria, resumo e datas são validados pelo perfil próprio |
 | `relatorio` | título, autoria, instituição, local e data |
 | `livro` | título, autoria, local e data |
 
@@ -196,3 +197,18 @@ O Marco 8 acrescenta:
   obrigatórias.
 
 A referência completa está em [`profile-project.md`](profile-project.md).
+
+## Perfil de artigo
+
+- `\ABNTEXartigoSetup` configura resumos, palavras-chave, datas editoriais,
+  título traduzido e identificação de acesso;
+- `\ABNTEXartigoautor` registra repetidamente nome, currículo, vinculação e
+  contato;
+- `\ABNTEXartigopretextual`, `\ABNTEXartigotextual` e
+  `\ABNTEXartigopostextual` coordenam as três partes;
+- `\ABNTEXartigointroducao`, `\ABNTEXartigodesenvolvimento` e
+  `\ABNTEXartigoconsideracoesfinais` registram a estrutura textual;
+- `\ABNTEXvalidateartigo` verifica os elementos obrigatórios.
+
+A opção `artigo-colunas=uma|duas` controla uma escolha editorial. A referência
+completa está em [`profile-article.md`](profile-article.md).

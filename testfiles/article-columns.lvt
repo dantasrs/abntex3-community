@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[perfil=artigo]{abntex3}
+\begin{document}
+\START
+\TYPE{default=\ABNTEXartigocolunas}
+\ABNTEXsetup{artigo-colunas=duas}
+\TYPE{configured=\ABNTEXartigocolunas}
+\ExplSyntaxOn
+\cs_set_protected:Npn \__abntex_article_header: {\TYPE{two-column-header}}
+\cs_set_protected:Npn \twocolumn [#1] {#1}
+\ExplSyntaxOff
+\ABNTEXartigopretextual
+\ExplSyntaxOn
+\bool_gset_false:N \g__abntex_article_used_bool
+\ExplSyntaxOff
+\END
+\end{document}
