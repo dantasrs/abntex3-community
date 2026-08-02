@@ -1,0 +1,35 @@
+\input regression-test.tex
+\documentclass{book}
+\usepackage[perfil=livro]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\seq_gput_right:Nn \g__abntex_book_authors_seq {autor}
+\tl_gset:Nn \g__abntex_book_publisher_tl {Editora}
+\tl_gset:Nn \g__abntex_book_isbn_tl {ISBN}
+\tl_gset:Nn \g__abntex_book_copyright_year_tl {2026}
+\tl_gset:Nn \g__abntex_book_copyright_holder_tl {Titular}
+\tl_gset:Nn \g__abntex_book_reproduction_tl {Direitos}
+\tl_gset:Nn \g__abntex_book_cataloging_tl {Catalogacao}
+\int_gset:Nn \g__abntex_book_pages_int {120}
+\bool_gset_true:N \g__abntex_book_hardcover_bool
+\bool_gset_true:N \g__abntex_book_has_spine_bool
+\bool_gset_true:N \g__abntex_book_has_references_bool
+\bool_gset_true:N \g__abntex_book_has_index_bool
+\__abntex_book_collect_missing:
+\TYPE{inicial=\seq_use:Nn \g__abntex_book_missing_seq {,}}
+\clist_map_inline:nn {externa,pre-textual,textual,pos-textual}
+  {\prop_gput:Nnn \g__abntex_book_phases_prop {#1} {true}}
+\clist_map_inline:nn {capa,folha-de-rosto,creditos,folhas-de-guarda}
+  {\prop_gput:Nnn \g__abntex_book_elements_prop {#1} {true}}
+\prop_gput:Nnn \g__abntex_frontmatter_seen_prop {sumario} {true}
+\prop_gput:Nnn \g__abntex_frontmatter_seen_prop {lombada} {true}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {referencias} {true}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {indice} {true}
+\int_gset:Nn \g__abntex_book_chapters_int {2}
+\__abntex_book_collect_missing:
+\TYPE{completo=\seq_use:Nn \g__abntex_book_missing_seq {,}}
+\ExplSyntaxOff
+\END
+\end{document}

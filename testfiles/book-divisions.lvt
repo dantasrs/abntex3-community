@@ -1,0 +1,17 @@
+\input regression-test.tex
+\documentclass{book}
+\usepackage[perfil=livro]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\cs_set_protected:Npn \part #1 {\TYPE{part=#1}}
+\cs_set_protected:cpn {\tl_use:N \g__abntex_primary_name_tl} #1
+  {\TYPE{chapter=#1}}
+\ABNTEXlivroparte{Fundamentos}
+\ABNTEXlivrocapitulo{Primeiro capitulo}
+\ABNTEXlivrocapitulo{Segundo capitulo}
+\TYPE{chapters=\int_use:N \g__abntex_book_chapters_int}
+\ExplSyntaxOff
+\END
+\end{document}

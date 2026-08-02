@@ -242,16 +242,19 @@ uma pessoa diferente do autor registre a revisão normativa.
 
 **Norma:** ABNT NBR 6029:2023.
 
-- [ ] Criar a matriz `nbr-6029-2023.md`.
-- [ ] Criar `abntex3-profile-book.dtx`.
-- [ ] Implementar elementos editoriais e divisão do corpo da publicação.
-- [ ] Integrar lombada e índice quando solicitados.
-- [ ] Criar `examples/livro.tex`.
-- [ ] Criar testes de livro, folheto, volumes e múltiplas autorias.
-- [ ] Produzir seção do manual.
+- [x] Criar a matriz `nbr-6029-2023.md`.
+- [x] Criar `abntex3-profile-book.dtx`.
+- [x] Implementar elementos editoriais e divisão do corpo da publicação.
+- [x] Integrar lombada e índice quando solicitados.
+- [x] Criar `examples/livro.tex`.
+- [x] Criar testes de livro, folheto, volumes e múltiplas autorias.
+- [x] Produzir seção do manual.
 - [ ] Executar revisão normativa independente.
 
 **Critério de saída:** os cinco perfis previstos estão implementados.
+
+**Estado:** implementação técnica concluída; o marco permanece aberto até que
+uma pessoa diferente do autor registre a revisão normativa.
 
 ## Marco 12 — Migração e compatibilidade
 

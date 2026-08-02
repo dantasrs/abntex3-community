@@ -1,0 +1,19 @@
+\input regression-test.tex
+\documentclass{book}
+\usepackage[perfil=livro]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\ABNTEXlivroSetup{tipo=folheto,meio=eletronico,numero-paginas=32}
+\TYPE{tipo=\ABNTEXtipopublicacao}
+\TYPE{meio=\ABNTEXmeiopublicacao}
+\TYPE{paginas=\int_use:N \g__abntex_book_pages_int}
+\ABNTEXsetup{volume={3}}
+\ABNTEXlivroSetup{tipo=livro,meio=impresso,numero-paginas=120}
+\TYPE{tipo=\ABNTEXtipopublicacao}
+\TYPE{meio=\ABNTEXmeiopublicacao}
+\TYPE{volume=\ABNTEXmetadata{volume}}
+\ExplSyntaxOff
+\END
+\end{document}
