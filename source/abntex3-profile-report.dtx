@@ -1,0 +1,436 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-profile-report.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-profile-report}: relatório técnico ou científico}
+% \author{dantasrs}
+% \date{2026-07-30 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Contrato público}
+%
+% O perfil coordena relatórios técnicos ou científicos conforme a estrutura
+% da ABNT NBR 10719:2015. Capa, lombada e equipe técnica são opcionais. Folha
+% de rosto, resumo vernáculo, sumário e as três divisões textuais são
+% verificados. Dados catalográficos ou formulário de identificação formam
+% uma alternativa obrigatória; referências são exigidas quando
+% |possui-citacoes=sim|.
+%
+% \begin{function}{\ABNTEXrelatorioSetup}
+%   Configura os metadados próprios do relatório, inclusive projeto,
+%   identificação, classificação de segurança, instituições e dados do
+%   formulário de identificação.
+% \end{function}
+%
+% \begin{function}{\ABNTEXrelatoriomembroequipe,\ABNTEXrelatorioequipe}
+%   O primeiro comando registra repetidamente nome, função e instituição; o
+%   segundo compõe a equipe técnica no verso ou na folha subsequente.
+% \end{function}
+%
+% \begin{function}{\ABNTEXrelatoriocapa,\ABNTEXrelatoriofolhaderosto,
+%                  \ABNTEXrelatorioresumo,\ABNTEXrelatorioformulario}
+%   Compõem os elementos específicos do perfil. A capa é opcional e o
+%   formulário pode substituir os dados catalográficos.
+% \end{function}
+%
+% \begin{function}{\ABNTEXrelatorioexterna,\ABNTEXrelatoriopretextual,
+%                  \ABNTEXrelatoriotextual,\ABNTEXrelatoriopostextual}
+%   Iniciam, em ordem, as quatro fases do relatório.
+% \end{function}
+%
+% \begin{function}{\ABNTEXrelatoriointroducao,
+%                  \ABNTEXrelatoriodesenvolvimento,
+%                  \ABNTEXrelatorioconsideracoesfinais}
+%   Criam e registram as três divisões textuais obrigatórias. O título pode
+%   ser alterado pelo argumento opcional.
+% \end{function}
+%
+% \begin{function}{\ABNTEXvalidaterelatorio}
+%   Verifica perfil, metadados, fases, elementos e divisões obrigatórias.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-profile-report}
+  {2026-07-30}{0.0.0}
+  {Perfil de relatorio tecnico ou cientifico do abnTeX3 Community}
+
+\tl_new:N \g__abntex_report_project_tl
+\tl_new:N \g__abntex_report_number_tl
+\tl_new:N \g__abntex_report_code_tl
+\tl_new:N \g__abntex_report_security_tl
+\tl_new:N \g__abntex_report_type_tl
+\tl_new:N \g__abntex_report_summary_tl
+\tl_new:N \g__abntex_report_keywords_tl
+\tl_new:N \g__abntex_report_institution_address_tl
+\tl_new:N \g__abntex_report_sponsor_tl
+\tl_new:N \g__abntex_report_sponsor_address_tl
+\tl_new:N \g__abntex_report_issn_tl
+\tl_new:N \g__abntex_report_edition_tl
+\tl_new:N \g__abntex_report_pages_tl
+\tl_new:N \g__abntex_report_classification_number_tl
+\tl_new:N \g__abntex_report_print_run_tl
+\tl_new:N \g__abntex_report_price_tl
+\tl_new:N \g__abntex_report_distributor_tl
+\tl_new:N \g__abntex_report_notes_tl
+\bool_new:N \g__abntex_report_has_citations_bool
+\seq_new:N \g__abntex_report_team_seq
+\prop_new:N \g__abntex_report_phases_prop
+\prop_new:N \g__abntex_report_sections_prop
+\prop_new:N \g__abntex_report_elements_prop
+\seq_new:N \g__abntex_report_missing_seq
+\int_new:N \g__abntex_report_phase_int
+\bool_new:N \g__abntex_report_used_bool
+
+\msg_new:nnnn {abntex3} {report-profile-required}
+  {O~fluxo~de~relatorio~exige~perfil=relatorio.}
+  {Selecione~o~perfil~relatorio~antes~de~usar~'#1'.}
+\msg_new:nnnn {abntex3} {report-phase-order}
+  {A~fase~do~relatorio~'#1'~esta~fora~da~ordem.}
+  {Use~externa,~pre-textual,~textual~e~pos-textual~nessa~sequencia.}
+\msg_new:nnnn {abntex3} {report-element-missing}
+  {O~elemento~obrigatorio~do~relatorio~'#1'~nao~foi~composto.}
+  {Configure~ou~inclua~o~elemento~pelo~comando~publico~correspondente.}
+
+\keys_define:nn {abntex3/report}
+  {
+    projeto-programa-plano .tl_gset:N = \g__abntex_report_project_tl,
+    numero-relatorio .tl_gset:N = \g__abntex_report_number_tl,
+    codigo-identificacao .tl_gset:N = \g__abntex_report_code_tl,
+    classificacao-seguranca .tl_gset:N = \g__abntex_report_security_tl,
+    tipo-relatorio .tl_gset:N = \g__abntex_report_type_tl,
+    resumo .tl_gset:N = \g__abntex_report_summary_tl,
+    palavras-chave .tl_gset:N = \g__abntex_report_keywords_tl,
+    instituicao-endereco .tl_gset:N =
+      \g__abntex_report_institution_address_tl,
+    instituicao-patrocinadora .tl_gset:N = \g__abntex_report_sponsor_tl,
+    patrocinadora-endereco .tl_gset:N =
+      \g__abntex_report_sponsor_address_tl,
+    issn .tl_gset:N = \g__abntex_report_issn_tl,
+    edicao .tl_gset:N = \g__abntex_report_edition_tl,
+    numero-paginas .tl_gset:N = \g__abntex_report_pages_tl,
+    numero-classificacao .tl_gset:N =
+      \g__abntex_report_classification_number_tl,
+    tiragem .tl_gset:N = \g__abntex_report_print_run_tl,
+    preco .tl_gset:N = \g__abntex_report_price_tl,
+    distribuidor .tl_gset:N = \g__abntex_report_distributor_tl,
+    observacoes .tl_gset:N = \g__abntex_report_notes_tl,
+    possui-citacoes .choice:,
+    possui-citacoes / sim .code:n =
+      {\bool_gset_true:N \g__abntex_report_has_citations_bool},
+    possui-citacoes / nao .code:n =
+      {\bool_gset_false:N \g__abntex_report_has_citations_bool},
+    possui-citacoes .initial:n = nao
+  }
+
+\cs_new_protected:Npn \__abntex_report_require_profile:n #1
+  {
+    \tl_if_eq:NnF \g__abntex_profile_tl {relatorio}
+      {\msg_error:nnn {abntex3} {report-profile-required} {#1}}
+  }
+
+\cs_new_protected:Npn \__abntex_report_register_phase:nn #1#2
+  {
+    \bool_gset_true:N \g__abntex_report_used_bool
+    \int_compare:nNnT {#1} < {\g__abntex_report_phase_int}
+      {\msg_warning:nnn {abntex3} {report-phase-order} {#2}}
+    \int_gset:Nn \g__abntex_report_phase_int
+      {\int_max:nn {#1} {\g__abntex_report_phase_int}}
+    \prop_gput:Nnn \g__abntex_report_phases_prop {#2} {true}
+  }
+
+\cs_new:Npn \__abntex_report_title:
+  {
+    \ABNTEXmetadata{titulo}
+    \tl_if_blank:eF {\ABNTEXmetadata{subtitulo}}
+      {:~\ABNTEXmetadata{subtitulo}}
+  }
+
+\cs_new_protected:Npn \__abntex_report_team_member:nnn #1#2#3
+  {
+    \par\noindent\textbf{#1}\par
+    \tl_if_blank:nF {#2} {\noindent #2\par}
+    \tl_if_blank:nF {#3} {\noindent #3\par}
+    \medskip
+  }
+
+\cs_new_protected:Npn \__abntex_report_section:nnn #1#2#3
+  {
+    \__abntex_report_require_profile:n {#1}
+    \prop_gput:Nnn \g__abntex_report_sections_prop {#1} {true}
+    \use:c {\tl_use:N \g__abntex_primary_name_tl} {#2}
+    #3
+  }
+
+\cs_new_protected:Npn \__abntex_report_field:nn #1#2
+  {
+    \tl_if_blank:nF {#2}
+      {\par\noindent\textbf{#1:}~#2\par}
+  }
+
+\cs_new_protected:Npn \__abntex_report_collect_missing:
+  {
+    \seq_gclear:N \g__abntex_report_missing_seq
+    \tl_if_blank:VT \g__abntex_report_project_tl
+      {\seq_gput_right:Nn \g__abntex_report_missing_seq
+        {projeto-programa-plano}}
+    \tl_if_blank:VT \g__abntex_report_type_tl
+      {\seq_gput_right:Nn \g__abntex_report_missing_seq {tipo-relatorio}}
+    \tl_if_blank:VT \g__abntex_report_summary_tl
+      {\seq_gput_right:Nn \g__abntex_report_missing_seq {resumo}}
+    \tl_if_blank:VT \g__abntex_report_keywords_tl
+      {\seq_gput_right:Nn \g__abntex_report_missing_seq {palavras-chave}}
+    \clist_map_inline:nn {externa, pre-textual, textual, pos-textual}
+      {
+        \prop_if_in:NnF \g__abntex_report_phases_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_report_missing_seq {##1}}
+      }
+    \clist_map_inline:nn
+      {folha-de-rosto, resumo, sumario}
+      {
+        \str_if_eq:nnTF {##1} {sumario}
+          {
+            \prop_if_in:NnF \g__abntex_frontmatter_seen_prop {##1}
+              {\seq_gput_right:Nn \g__abntex_report_missing_seq {##1}}
+          }
+          {
+            \prop_if_in:NnF \g__abntex_report_elements_prop {##1}
+              {\seq_gput_right:Nn \g__abntex_report_missing_seq {##1}}
+          }
+      }
+    \clist_map_inline:nn {introducao, desenvolvimento, consideracoes-finais}
+      {
+        \prop_if_in:NnF \g__abntex_report_sections_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_report_missing_seq {##1}}
+      }
+    \bool_if:NT \g__abntex_report_has_citations_bool
+      {
+        \prop_if_in:NnF \g__abntex_backmatter_seen_prop {referencias}
+          {\seq_gput_right:Nn \g__abntex_report_missing_seq {referencias}}
+      }
+    \prop_if_in:NnF \g__abntex_frontmatter_seen_prop {ficha-catalografica}
+      {
+        \prop_if_in:NnF \g__abntex_report_elements_prop
+          {formulario-identificacao}
+          {\seq_gput_right:Nn \g__abntex_report_missing_seq
+            {ficha-catalografica-ou-formulario-identificacao}}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_report_validate:
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXvalidaterelatorio}
+    \ABNTEXvalidate
+    \__abntex_report_collect_missing:
+    \seq_map_inline:Nn \g__abntex_report_missing_seq
+      {\msg_warning:nnn {abntex3} {report-element-missing} {##1}}
+  }
+
+\NewDocumentCommand \ABNTEXrelatorioSetup {m}
+  {\keys_set:nn {abntex3/report} {#1}}
+
+\NewDocumentCommand \ABNTEXrelatoriomembroequipe {m m m}
+  {
+    \seq_gput_right:Nn \g__abntex_report_team_seq
+      {\__abntex_report_team_member:nnn {#1}{#2}{#3}}
+  }
+
+\NewDocumentCommand \ABNTEXrelatorioexterna {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatorioexterna}
+    \__abntex_report_register_phase:nn {1} {externa}
+    \ABNTEXvalidate
+  }
+
+\NewDocumentCommand \ABNTEXrelatoriocapa {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatoriocapa}
+    \__abntex_frontmatter_register:nn {1} {capa}
+    \__abntex_frontmatter_external_page:n
+      {
+        \centering
+        {\ABNTEXmetadata{instituicao}\par}
+        \tl_if_blank:VF \g__abntex_report_institution_address_tl
+          {\tl_use:N \g__abntex_report_institution_address_tl\par}
+        \vspace{1cm}
+        \tl_if_blank:VF \g__abntex_report_number_tl
+          {Relatório~nº~\tl_use:N \g__abntex_report_number_tl\par}
+        \tl_if_blank:VF \g__abntex_report_issn_tl
+          {ISSN~\tl_use:N \g__abntex_report_issn_tl\par}
+        \vfill
+        {\bfseries\__abntex_report_title:\par}
+        \vfill
+        \tl_if_blank:VF \g__abntex_report_security_tl
+          {\textbf{Classificação~de~segurança:}~
+            \tl_use:N \g__abntex_report_security_tl\par}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXrelatoriopretextual {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatoriopretextual}
+    \__abntex_report_register_phase:nn {2} {pre-textual}
+    \ABNTEXpretextualpages
+  }
+
+\NewDocumentCommand \ABNTEXrelatoriofolhaderosto {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatoriofolhaderosto}
+    \prop_gput:Nnn \g__abntex_report_elements_prop
+      {folha-de-rosto} {true}
+    \__abntex_frontmatter_register:nn {2} {folha-de-rosto}
+    \__abntex_frontmatter_page:n
+      {
+        \centering
+        {\ABNTEXmetadata{instituicao}\par}
+        \vspace{1cm}
+        {\tl_use:N \g__abntex_report_project_tl\par}
+        \vfill
+        {\bfseries\__abntex_report_title:\par}
+        \tl_if_blank:eF {\ABNTEXmetadata{volume}}
+          {\medskip Volume~\ABNTEXmetadata{volume}\par}
+        \tl_if_blank:VF \g__abntex_report_code_tl
+          {\medskip Código:~\tl_use:N \g__abntex_report_code_tl\par}
+        \tl_if_blank:VF \g__abntex_report_security_tl
+          {\medskip Classificação~de~segurança:~
+            \tl_use:N \g__abntex_report_security_tl\par}
+        \vfill
+        {\ABNTEXmetadata{autoria}\par}
+        \vfill
+        {\ABNTEXmetadata{local}\par}
+        {\ABNTEXmetadata{data}\par}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXrelatorioequipe {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatorioequipe}
+    \prop_gput:Nnn \g__abntex_report_elements_prop {equipe-tecnica} {true}
+    \__abntex_frontmatter_page:n
+      {
+        \ABNTEXpretextualtitle{Equipe~técnica}
+        \seq_map_inline:Nn \g__abntex_report_team_seq {##1}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXrelatorioresumo {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatorioresumo}
+    \prop_gput:Nnn \g__abntex_report_elements_prop {resumo} {true}
+    \ABNTEXresumo
+      {\tl_use:N \g__abntex_report_summary_tl}
+      {\tl_use:N \g__abntex_report_keywords_tl}
+  }
+
+\NewDocumentCommand \ABNTEXrelatoriotextual {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatoriotextual}
+    \__abntex_report_register_phase:nn {3} {textual}
+    \ABNTEXtextualpages
+  }
+
+\NewDocumentCommand \ABNTEXrelatoriointroducao {O{Introdução} +m}
+  {\__abntex_report_section:nnn {introducao} {#1} {#2}}
+\NewDocumentCommand \ABNTEXrelatoriodesenvolvimento
+  {O{Desenvolvimento} +m}
+  {\__abntex_report_section:nnn {desenvolvimento} {#1} {#2}}
+\NewDocumentCommand \ABNTEXrelatorioconsideracoesfinais
+  {O{Considerações~finais} +m}
+  {\__abntex_report_section:nnn {consideracoes-finais} {#1} {#2}}
+
+\NewDocumentCommand \ABNTEXrelatoriopostextual {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatoriopostextual}
+    \__abntex_report_register_phase:nn {4} {pos-textual}
+    \ABNTEXposttextualpages
+  }
+
+\NewDocumentCommand \ABNTEXrelatorioformulario {}
+  {
+    \__abntex_report_require_profile:n
+      {\token_to_str:N \ABNTEXrelatorioformulario}
+    \prop_gput:Nnn \g__abntex_report_elements_prop
+      {formulario-identificacao} {true}
+    \__abntex_backmatter_register:nn {6} {formulario-identificacao}
+    \clearpage
+    \ABNTEXposttextualtitle{Formulário~de~identificação}
+    \__abntex_report_field:nn {Título~e~subtítulo}
+      {\__abntex_report_title:}
+    \__abntex_report_field:nn {Classificação~de~segurança}
+      {\tl_use:N \g__abntex_report_security_tl}
+    \__abntex_report_field:nn {Número}
+      {\tl_use:N \g__abntex_report_number_tl}
+    \__abntex_report_field:nn {Tipo~de~relatório}
+      {\tl_use:N \g__abntex_report_type_tl}
+    \__abntex_report_field:nn {Data}{\ABNTEXmetadata{data}}
+    \__abntex_report_field:nn {Projeto/programa/plano}
+      {\tl_use:N \g__abntex_report_project_tl}
+    \__abntex_report_field:nn {Autor(es)}{\ABNTEXmetadata{autoria}}
+    \__abntex_report_field:nn {Instituição~executora}
+      {\ABNTEXmetadata{instituicao};
+        \tl_use:N \g__abntex_report_institution_address_tl}
+    \__abntex_report_field:nn {Instituição~patrocinadora}
+      {\tl_use:N \g__abntex_report_sponsor_tl;
+        \tl_use:N \g__abntex_report_sponsor_address_tl}
+    \__abntex_report_field:nn {Resumo}
+      {\tl_use:N \g__abntex_report_summary_tl}
+    \__abntex_report_field:nn {Palavras-chave/descritores}
+      {\tl_use:N \g__abntex_report_keywords_tl}
+    \__abntex_report_field:nn {Edição}
+      {\tl_use:N \g__abntex_report_edition_tl}
+    \__abntex_report_field:nn {Número~de~páginas}
+      {\tl_use:N \g__abntex_report_pages_tl}
+    \__abntex_report_field:nn {Volume/parte}{\ABNTEXmetadata{volume}}
+    \__abntex_report_field:nn {Número~de~classificação}
+      {\tl_use:N \g__abntex_report_classification_number_tl}
+    \__abntex_report_field:nn {ISSN}{\tl_use:N \g__abntex_report_issn_tl}
+    \__abntex_report_field:nn {Tiragem}
+      {\tl_use:N \g__abntex_report_print_run_tl}
+    \__abntex_report_field:nn {Preço}
+      {\tl_use:N \g__abntex_report_price_tl}
+    \__abntex_report_field:nn {Distribuidor}
+      {\tl_use:N \g__abntex_report_distributor_tl}
+    \__abntex_report_field:nn {Observações/notas}
+      {\tl_use:N \g__abntex_report_notes_tl}
+  }
+
+\NewDocumentCommand \ABNTEXvalidaterelatorio {}
+  {\__abntex_report_validate:}
+
+\hook_gput_code:nnn {enddocument} {abntex3-profile-report}
+  {
+    \bool_if:NT \g__abntex_report_used_bool
+      {\__abntex_report_validate:}
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

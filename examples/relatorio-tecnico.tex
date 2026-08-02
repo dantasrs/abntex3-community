@@ -1,0 +1,80 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage[
+  perfil=relatorio,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Diagnóstico de preservação digital},
+  subtitulo={resultados do ciclo de avaliação institucional},
+  autoria={Centro de Documentação Exemplo},
+  instituicao={Instituto Nacional Exemplo},
+  local={Recife},
+  data={2026}
+}
+
+\ABNTEXrelatorioSetup{
+  projeto-programa-plano={Programa de Preservação Digital},
+  numero-relatorio={RT-2026-004},
+  codigo-identificacao={INE-RT-2026-PD-004},
+  classificacao-seguranca={acesso público},
+  tipo-relatorio={relatório técnico institucional},
+  resumo={O relatório apresenta o diagnóstico de um acervo digital e propõe
+    controles verificáveis para sua preservação.},
+  palavras-chave={preservação digital, relatório técnico, documentação},
+  instituicao-endereco={Avenida Exemplo, 100, Recife, PE},
+  instituicao-patrocinadora={Fundação Exemplo},
+  patrocinadora-endereco={Rua Modelo, 20, Brasília, DF},
+  edicao={1},
+  numero-paginas={a preencher após a composição},
+  distribuidor={Instituto Nacional Exemplo},
+  observacoes={Exemplo demonstrativo do abnTeX3 Community},
+  possui-citacoes=sim
+}
+
+\ABNTEXrelatoriomembroequipe
+  {Ana Silva}{Coordenação geral}{Instituto Nacional Exemplo}
+\ABNTEXrelatoriomembroequipe
+  {Bruno Lima}{Análise de dados}{Instituto Nacional Exemplo}
+
+\begin{document}
+
+\ABNTEXrelatorioexterna
+\ABNTEXrelatoriocapa
+% \ABNTEXlombada % prova opcional, quando aplicável
+
+\ABNTEXrelatoriopretextual
+\ABNTEXrelatoriofolhaderosto
+\ABNTEXrelatorioequipe
+\ABNTEXrelatorioresumo
+\ABNTEXsumario
+
+\ABNTEXrelatoriotextual
+\ABNTEXrelatoriointroducao{%
+  O diagnóstico identifica riscos e descreve as razões da avaliação.
+}
+\ABNTEXrelatoriodesenvolvimento{%
+  O estudo combinou inventário, verificação de integridade e análise de
+  formatos. A documentação dos procedimentos favorece sua reprodução
+  \parencite{associacao2025}.
+}
+\ABNTEXrelatorioconsideracoesfinais{%
+  Recomenda-se manter inventário versionado, cópias independentes e
+  verificações periódicas de integridade.
+}
+
+\ABNTEXrelatoriopostextual
+\ABNTEXbibliografia
+\ABNTEXappendix{Lista de verificação elaborada pela equipe}
+Instrumento usado para registrar os controles observados.
+\ABNTEXannex{Política institucional de demonstração}
+Documento externo associado ao diagnóstico.
+\ABNTEXrelatorioformulario
+
+\end{document}

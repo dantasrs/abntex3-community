@@ -1,0 +1,16 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage[perfil=relatorio]{abntex3}
+\ABNTEXrelatoriomembroequipe{Ana Silva}{Coordenacao geral}{Instituto A}
+\ABNTEXrelatoriomembroequipe{Bruno Lima}{Pesquisa}{Instituto B}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\TYPE{members=\seq_count:N \g__abntex_report_team_seq}
+\cs_set_protected:Npn \__abntex_report_team_member:nnn #1#2#3
+  {\TYPE{member=#1|#2|#3}}
+\seq_map_inline:Nn \g__abntex_report_team_seq {#1}
+\ExplSyntaxOff
+\END
+\end{document}

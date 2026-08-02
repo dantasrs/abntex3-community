@@ -1,0 +1,35 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage[perfil=relatorio]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\ABNTEXrelatorioSetup{
+  projeto-programa-plano={Programa Alfa},
+  tipo-relatorio={técnico},
+  resumo={Resumo},
+  palavras-chave={alfa, beta},
+  possui-citacoes=sim
+}
+\__abntex_report_collect_missing:
+\TYPE{inicial=\seq_use:Nn \g__abntex_report_missing_seq {,}}
+\prop_gput:Nnn \g__abntex_report_phases_prop {externa} {true}
+\prop_gput:Nnn \g__abntex_report_phases_prop {pre-textual} {true}
+\prop_gput:Nnn \g__abntex_report_phases_prop {textual} {true}
+\prop_gput:Nnn \g__abntex_report_phases_prop {pos-textual} {true}
+\prop_gput:Nnn \g__abntex_report_elements_prop {folha-de-rosto} {true}
+\prop_gput:Nnn \g__abntex_report_elements_prop {resumo} {true}
+\prop_gput:Nnn \g__abntex_frontmatter_seen_prop {sumario} {true}
+\prop_gput:Nnn \g__abntex_report_sections_prop {introducao} {true}
+\prop_gput:Nnn \g__abntex_report_sections_prop {desenvolvimento} {true}
+\prop_gput:Nnn \g__abntex_report_sections_prop
+  {consideracoes-finais} {true}
+\prop_gput:Nnn \g__abntex_backmatter_seen_prop {referencias} {true}
+\prop_gput:Nnn \g__abntex_report_elements_prop
+  {formulario-identificacao} {true}
+\__abntex_report_collect_missing:
+\TYPE{completo=\seq_use:Nn \g__abntex_report_missing_seq {,}}
+\ExplSyntaxOff
+\END
+\end{document}

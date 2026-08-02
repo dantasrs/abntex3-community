@@ -224,16 +224,19 @@ uma pessoa diferente do autor registre a revisão normativa.
 
 **Norma:** ABNT NBR 10719:2015.
 
-- [ ] Criar a matriz `nbr-10719-2015.md`.
-- [ ] Criar `abntex3-profile-report.dtx`.
-- [ ] Implementar identificação, equipes, resumo e dados do relatório.
-- [ ] Implementar partes externa, interna e anexos específicos.
-- [ ] Criar `examples/relatorio-tecnico.tex`.
-- [ ] Criar testes de relatório institucional e científico.
-- [ ] Produzir seção do manual.
+- [x] Criar a matriz `nbr-10719-2015.md`.
+- [x] Criar `abntex3-profile-report.dtx`.
+- [x] Implementar identificação, equipes, resumo e dados do relatório.
+- [x] Implementar partes externa, interna e anexos específicos.
+- [x] Criar `examples/relatorio-tecnico.tex`.
+- [x] Criar testes de relatório institucional e científico.
+- [x] Produzir seção do manual.
 - [ ] Executar revisão normativa independente.
 
 **Critério de saída:** relatório completo com metadados próprios do perfil.
+
+**Estado:** implementação técnica concluída; o marco permanece aberto até que
+uma pessoa diferente do autor registre a revisão normativa.
 
 ## Marco 11 — Perfil de livro ou folheto
 

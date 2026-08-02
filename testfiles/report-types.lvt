@@ -1,0 +1,27 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage[perfil=relatorio]{abntex3}
+
+\begin{document}
+\START
+\ExplSyntaxOn
+\ABNTEXrelatorioSetup{
+  projeto-programa-plano={Programa institucional},
+  tipo-relatorio={tecnico institucional},
+  resumo={Resumo institucional},
+  palavras-chave={instituicao},
+  possui-citacoes=nao
+}
+\TYPE{institucional=\tl_use:N \g__abntex_report_type_tl}
+\TYPE{institucional-citacoes=
+  \bool_if:NTF \g__abntex_report_has_citations_bool {sim}{nao}}
+\ABNTEXrelatorioSetup{
+  tipo-relatorio={cientifico},
+  possui-citacoes=sim
+}
+\TYPE{cientifico=\tl_use:N \g__abntex_report_type_tl}
+\TYPE{cientifico-citacoes=
+  \bool_if:NTF \g__abntex_report_has_citations_bool {sim}{nao}}
+\ExplSyntaxOff
+\END
+\end{document}

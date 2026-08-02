@@ -22,11 +22,13 @@ examples/minimo.tex
 examples/pos-textuais-bibliografia.tex
 examples/projeto-pesquisa.tex
 examples/artigo.tex
+examples/relatorio-tecnico.tex
 examples/modelo-artigo-duas-colunas-completo.tex
 examples/modelo-artigo-uma-coluna-completo.tex
 examples/modelo-dissertacao-completo.tex
 examples/modelo-monografia-completo.tex
 examples/modelo-projeto-pesquisa-completo.tex
+examples/modelo-relatorio-cientifico-completo.tex
 examples/modelo-tcc-completo.tex
 examples/modelo-tese-completo.tex
 examples/referencias-exemplo.bib
@@ -41,6 +43,7 @@ source/abntex3-lists.dtx
 source/abntex3-profile-academic.dtx
 source/abntex3-profile-project.dtx
 source/abntex3-profile-article.dtx
+source/abntex3-profile-report.dtx
 source/abntex3-structure.dtx
 source/abntex3.ins
 testfiles/accented-bookmarks.lvt
@@ -133,6 +136,16 @@ testfiles/project-flow.lvt
 testfiles/project-flow.tlg
 testfiles/project-sections.lvt
 testfiles/project-sections.tlg
+testfiles/report-elements.lvt
+testfiles/report-elements.tlg
+testfiles/report-flow.lvt
+testfiles/report-flow.tlg
+testfiles/report-sections.lvt
+testfiles/report-sections.tlg
+testfiles/report-team.lvt
+testfiles/report-team.tlg
+testfiles/report-types.lvt
+testfiles/report-types.tlg
 testfiles/profile-requirements.lvt
 testfiles/profile-requirements.tlg
 testfiles/profile-validation.lvt
@@ -161,6 +174,7 @@ docs/modelos-canonicos.md
 docs/profile-academic.md
 docs/profile-project.md
 docs/profile-article.md
+docs/profile-report.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md
 docs/decisoes/0003-motores-e-versoes.md
@@ -177,6 +191,7 @@ docs/requisitos/nbr-12225-2023.md
 docs/requisitos/nbr-14724-2024.md
 docs/requisitos/nbr-15287-2025.md
 docs/requisitos/nbr-6022-2018.md
+docs/requisitos/nbr-10719-2015.md
 docs/roadmap.md
 docs/structure.md
 docs/versionamento.md
