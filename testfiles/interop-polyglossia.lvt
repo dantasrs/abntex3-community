@@ -1,0 +1,18 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=brazilian]{portuguese}
+\setotherlanguage{english}
+\usepackage{abntex3}
+
+\begin{document}
+\START
+\makeatletter
+\@ifpackageloaded{polyglossia}{\TYPE{polyglossia=loaded}}{}
+\makeatother
+\TYPE{primary-language=\languagename}
+\TYPE{portuguese-input=ok}
+\TYPE{class=\ABNTEXclass}
+\END
+\end{document}

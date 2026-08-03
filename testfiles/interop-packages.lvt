@@ -1,0 +1,27 @@
+\input regression-test.tex
+\documentclass{book}
+\usepackage[brazilian,english]{babel}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{glossaries-extra}
+\usepackage{makeidx}
+\usepackage{abntex3}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\makeindex
+
+\begin{document}
+\START
+\makeatletter
+\@ifpackageloaded{geometry}{\TYPE{geometry=loaded}}{}
+\@ifpackageloaded{microtype}{\TYPE{microtype=loaded}}{}
+\@ifpackageloaded{babel}{\TYPE{babel=loaded}}{}
+\@ifpackageloaded{glossaries-extra}{\TYPE{glossaries-extra=loaded}}{}
+\@ifpackageloaded{makeidx}{\TYPE{makeidx=loaded}}{}
+\@ifpackageloaded{hyperref}{\TYPE{hyperref=loaded}}{}
+\@ifpackageloaded{bookmark}{\TYPE{bookmark=loaded}}{}
+\makeatother
+\TYPE{class=\ABNTEXclass}
+\END
+\end{document}

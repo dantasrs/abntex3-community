@@ -54,6 +54,7 @@ compile_example() {
     artigo \
     relatorio-tecnico \
     livro \
+    qualidade-pdf \
     modelo-tese-completo \
     modelo-dissertacao-completo \
     modelo-tcc-completo \
@@ -115,7 +116,8 @@ compile_example() {
             "${example}.tex" >/dev/null
       elif [[ "${example}" == "estrutura-sumario" || \
             "${example}" == "layout-paginacao" || \
-            "${example}" == "elementos-pretextuais" ]]; then
+            "${example}" == "elementos-pretextuais" || \
+            "${example}" == "qualidade-pdf" ]]; then
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
           lualatex -interaction=nonstopmode -halt-on-error \
             "${example}.tex" >/dev/null

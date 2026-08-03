@@ -1,7 +1,7 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3 a 11. A versão `0.0.0` continua experimental. Os módulos estrutural,
+Marcos 3 a 13. A versão `0.0.0` continua experimental. Os módulos estrutural,
 de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto, de
 artigo, de relatório e de livro possuem rastreabilidade normativa, mas ainda aguardam
 revisão independente e não fazem alegação de conformidade.
@@ -46,6 +46,9 @@ perfis `nenhum`, `academico`, `projeto`, `artigo`, `relatorio` ou `livro`.
 - `volume`;
 - `local`;
 - `data`;
+- `assunto-pdf`;
+- `palavras-chave-pdf`;
+- `idioma-pdf`, com padrão `pt-BR`;
 - `profundidade-secoes`;
 - `profundidade-sumario`;
 - `largura-indicativo-sumario`;
@@ -76,12 +79,17 @@ menor para a maior, é:
 Entre atribuições no mesmo nível, a última ocorrência de uma chave prevalece.
 Uma atribuição não apaga outros metadados.
 
-`\ABNTEXmetadata{<nome>}` recupera de forma expansível o valor de um dos doze
-metadados documentados. Isso permite, por exemplo:
+`\ABNTEXmetadata{<nome>}` recupera de forma expansível um metadado documentado.
+Isso permite, por exemplo:
 
 ```tex
 \title{\ABNTEXmetadata{titulo}}
 ```
+
+Quando `hyperref` está carregado, título, autoria, assunto, palavras-chave e
+idioma são transferidos para o PDF no início do documento. A auditoria e os
+limites de acessibilidade estão em
+[`qualidade-portabilidade.md`](qualidade-portabilidade.md).
 
 ## Validação técnica
 

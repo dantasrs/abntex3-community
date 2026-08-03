@@ -102,15 +102,15 @@ de uso das normas.
 - [x] **Marco 11 — Livro ou folheto:** elementos editoriais, autorias
   repetíveis, volumes, capa, lombada, partes, capítulos e pós-textuais da
   NBR 6029:2023. A revisão normativa independente continua pendente.
+- [x] **Marco 12 — Migração:** correspondência entre interfaces do abnTeX2 e
+  do abnTeX3 Community, camada limitada de compatibilidade e guia de migração
+  para `biblatex-abnt`.
+- [x] **Marco 13 — Qualidade e portabilidade:** suíte em Linux, Windows e
+  macOS, interoperabilidade, metadados do PDF, auditoria de mensagens,
+  desempenho, regressão visual e política inicial de acessibilidade.
 
 ### Próximos marcos
 
-- [x] **Marco 12 — Migração:** publicar a correspondência entre interfaces do
-  abnTeX2 e do abnTeX3 Community, uma camada limitada de compatibilidade e o
-  guia de migração para `biblatex-abnt`.
-- [ ] **Marco 13 — Qualidade e portabilidade:** ampliar os testes para Linux,
-  Windows e macOS, interoperabilidade com pacotes comuns, regressão visual,
-  acessibilidade e desempenho.
 - [ ] **Marco 14 — Alfa e beta:** publicar os primeiros artefatos no GitHub,
   recolher experiências de uso, concluir revisões normativas e congelar
   progressivamente a API.
@@ -692,11 +692,17 @@ l3build check
 l3build doc
 l3build install --texmfhome /caminho/temporario/texmf
 l3build ctan
+./scripts/quality-audit.sh
 ./scripts/validate-distribution.sh
 ```
 
 `l3build check` executa os testes exclusivamente com LuaLaTeX. A integração
-contínua repete a suíte no TeX Live 2024, 2025 e 2026. `l3build ctan` já
+contínua repete a suíte no TeX Live 2024, 2025 e 2026 no Linux e no TeX Live
+2026 em Windows e macOS. A auditoria adicional verifica metadados, marcadores,
+ligações, mensagens, desempenho, dependências e uma página de regressão
+visual. Consulte
+[`docs/qualidade-portabilidade.md`](docs/qualidade-portabilidade.md) para o
+escopo e as limitações. `l3build ctan` já
 executa testes e documentação antes de empacotar; por isso o trabalho de
 distribuição não repete esses comandos. O último comando valida o pacote CTAN
 de ensaio, sem publicá-lo, e compila os exemplos tanto a partir de uma

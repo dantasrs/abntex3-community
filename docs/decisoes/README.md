@@ -14,3 +14,4 @@ decisão deve substituir explicitamente a anterior.
 | [0003](0003-motores-e-versoes.md) | Substituída pela 0005 | Motores e versões de TeX |
 | [0004](0004-politica-de-compatibilidade.md) | Aceita | Compatibilidade e API pública |
 | [0005](0005-lualatex-exclusivo.md) | Aceita | LuaLaTeX como motor exclusivo |
+| [0006](0006-matriz-qualidade-portabilidade.md) | Aceita | Matriz de qualidade e portabilidade |

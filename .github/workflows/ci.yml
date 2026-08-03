@@ -60,7 +60,7 @@ jobs:
           while IFS= read -r -d '' changed_file; do
             echo "- \`${changed_file}\`" >> "${GITHUB_STEP_SUMMARY}"
             case "${changed_file}" in
-              .github/actions/*|.github/workflows/*|\
+              .github/actions/*|.github/workflows/*|.github/texlive-packages|\
               examples/*|scripts/*|source/*|testfiles/*|\
               build.lua|manifest.txt|\
               *.bib|*.dtx|*.ins|*.lua|*.sh|*.sty|*.tex)
@@ -117,19 +117,107 @@ jobs:
             apk add --no-cache diffutils
             l3build check --halt-on-error
 
+  portability:
+    name: Portabilidade — ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: changes
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - windows-latest
+
+    steps:
+      - name: Verificar a detecção de mudanças
+        if: needs.changes.result != 'success'
+        shell: bash
+        run: |
+          echo "A detecção de mudanças falhou." >&2
+          exit 1
+
+      - name: Registrar validação documental
+        if: >-
+          needs.changes.result == 'success' &&
+          needs.changes.outputs.full != 'true'
+        shell: bash
+        run: echo "Nenhum arquivo técnico foi alterado; portabilidade dispensada."
+
+      - name: Obter o código
+        if: needs.changes.outputs.full == 'true'
+        uses: actions/checkout@v6
+
+      - name: Instalar TeX Live 2026
+        if: needs.changes.outputs.full == 'true'
+        uses: TeX-Live/setup-texlive-action@v4
+        with:
+          version: 2026
+          package-file: .github/texlive-packages
+
+      - name: Executar a suíte com LuaLaTeX
+        if: needs.changes.outputs.full == 'true'
+        run: l3build check --halt-on-error
+
+  quality:
+    name: Qualidade do PDF e desempenho
+    runs-on: ubuntu-latest
+    needs: changes
+    if: always()
+
+    steps:
+      - name: Verificar a detecção de mudanças
+        if: needs.changes.result != 'success'
+        run: |
+          echo "A detecção de mudanças falhou." >&2
+          exit 1
+
+      - name: Registrar validação documental
+        if: >-
+          needs.changes.result == 'success' &&
+          needs.changes.outputs.full != 'true'
+        run: echo "Nenhum arquivo técnico foi alterado; auditoria dispensada."
+
+      - name: Obter o código
+        if: needs.changes.outputs.full == 'true'
+        uses: actions/checkout@v6
+
+      - name: Auditar PDF, mensagens, desempenho e regressão visual
+        if: needs.changes.outputs.full == 'true'
+        uses: xu-cheng/texlive-action@v3
+        with:
+          texlive_version: 2026
+          scheme: full
+          run: |
+            apk add --no-cache bash diffutils imagemagick poppler-utils qpdf
+            ./scripts/quality-audit.sh
+
+      - name: Guardar métricas de qualidade
+        if: needs.changes.outputs.full == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: abntex3-metricas-qualidade
+          path: build/quality/metrics.txt
+          if-no-files-found: error
+          retention-days: 30
+
   distribution:
     name: Distribuição de ensaio
     runs-on: ubuntu-latest
     needs:
       - changes
       - tests
+      - portability
+      - quality
     if: always()
 
     steps:
       - name: Verificar as dependências
         if: >-
           needs.changes.result != 'success' ||
-          needs.tests.result != 'success'
+          needs.tests.result != 'success' ||
+          needs.portability.result != 'success' ||
+          needs.quality.result != 'success'
         run: |
           echo "A detecção de mudanças ou a suíte TeX falhou." >&2
           exit 1
