@@ -6,6 +6,11 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
 ### Adicionado
 
+- Inventário e tabela de migração das interfaces canônicas do abnTeX2.
+- Guia de migração para a API do abnTeX3 e para `biblatex-abnt`/`biber`.
+- Módulo opcional `abntex3-compat` com aliases temporários, diagnósticos de
+  depreciação e testes de correspondências diretas.
+
 - Fundação do projeto comunitário independente.
 - Matriz normativa inicial.
 - Arquitetura, inventário de arquivos e roteiro técnico completo.

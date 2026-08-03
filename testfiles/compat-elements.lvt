@@ -1,0 +1,22 @@
+\input regression-test.tex
+\documentclass{report}
+\usepackage{abntex3-compat}
+
+\ExplSyntaxOn
+\msg_redirect_module:nnn {abntex3} {warning} {none}
+\cs_set_protected:Npn \ABNTEXpretextualpages {\TYPE{pretextual = ok}}
+\cs_set_protected:Npn \ABNTEXtextualpages {\TYPE{textual = ok}}
+\cs_set_protected:Npn \ABNTEXposttextualpages {\TYPE{postextual = ok}}
+\cs_set_protected:Npn \ABNTEXcapa {\TYPE{capa = ok}}
+\cs_set_protected:Npn \ABNTEXfolhaderosto {\TYPE{folha = ok}}
+\ExplSyntaxOff
+
+\begin{document}
+\START
+\pretextual
+\textual
+\postextual
+\imprimircapa
+\imprimirfolhaderosto*
+\END
+\end{document}

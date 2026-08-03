@@ -1,0 +1,27 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage{abntex3-compat}
+
+\ExplSyntaxOn
+\msg_redirect_module:nnn {abntex3} {warning} {none}
+\ExplSyntaxOff
+
+\titulo{Titulo legado}
+\autor{Autoria legada}
+\instituicao{Instituicao legada}
+\orientador{Orientacao legada}
+\coorientador{Coorientacao legada}
+\local{Local legado}
+\data{2026}
+
+\begin{document}
+\START
+\TYPE{titulo = \ABNTEXmetadata{titulo}}
+\TYPE{autoria = \ABNTEXmetadata{autoria}}
+\TYPE{instituicao = \ABNTEXmetadata{instituicao}}
+\TYPE{orientacao = \ABNTEXmetadata{orientacao}}
+\TYPE{coorientacao = \ABNTEXmetadata{coorientacao}}
+\TYPE{local = \ABNTEXmetadata{local}}
+\TYPE{data = \ABNTEXmetadata{data}}
+\END
+\end{document}

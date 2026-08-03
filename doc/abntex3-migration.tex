@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{hyperref}
+
+\title{Guia de migração do abnTeX2 para o abnTeX3 Community}
+\author{Projeto abnTeX3 Community}
+\date{2026-08-03}
+
+\begin{document}
+\maketitle
+
+\section{Objetivo}
+
+Este guia apresenta uma migração incremental. O módulo
+\texttt{abntex3-compat} cobre apenas correspondências diretas e emite avisos;
+ele não transforma o abnTeX3 em uma réplica da classe abnTeX2.
+
+\section{Classe e perfil}
+
+Troque a classe legada por \texttt{article}, \texttt{report} ou
+\texttt{book}. Em seguida, selecione explicitamente o perfil:
+
+\begin{verbatim}
+\documentclass[12pt]{report}
+\usepackage[
+  perfil=academico,
+  tipo-trabalho=tese,
+  citacoes=autor-data
+]{abntex3}
+\end{verbatim}
+
+\section{Metadados}
+
+Reúna os setters legados em uma configuração única. O antigo preâmbulo da
+folha de rosto deve ser decomposto, pois natureza, objetivo e área são
+metadados independentes no abnTeX3.
+
+\begin{verbatim}
+\ABNTEXsetup{
+  titulo={Título},
+  autoria={Nome da autoria},
+  instituicao={Instituição},
+  natureza={Tese},
+  objetivo={apresentada para obtenção do título de Doutor},
+  area={Área de concentração},
+  orientacao={Nome da orientação},
+  local={Cidade},
+  data={2026}
+}
+\end{verbatim}
+
+\section{Fases e elementos}
+
+Use o fluxo do perfil, como \verb|\ABNTEXacademicoexterna|,
+\verb|\ABNTEXacademicopretextual|, \verb|\ABNTEXacademicotextual| e
+\verb|\ABNTEXacademicopostextual|. Os elementos são comandos com argumentos
+explícitos, documentados no manual do perfil.
+
+\section{Bibliografia}
+
+Remova \texttt{abntex2cite}; configure \texttt{citacoes=autor-data} ou
+\texttt{citacoes=numerico}, declare o arquivo com
+\verb|\addbibresource{arquivo.bib}| e componha as referências com
+\verb|\ABNTEXbibliografia|. Execute \texttt{biber}, não BibTeX. Converta
+\verb|\citeonline| para \verb|\textcite| e revise citações parentéticas.
+
+\section{Ponte temporária}
+
+Durante uma conversão gradual, carregue \texttt{abntex3-compat} depois de
+\texttt{abntex3}. Resolva os avisos um a um e remova o módulo ao concluir.
+A matriz completa e os limites estão em \texttt{docs/compatibilidade.md}.
+
+\end{document}

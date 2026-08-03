@@ -105,7 +105,7 @@ de uso das normas.
 
 ### Próximos marcos
 
-- [ ] **Marco 12 — Migração:** publicar a correspondência entre interfaces do
+- [x] **Marco 12 — Migração:** publicar a correspondência entre interfaces do
   abnTeX2 e do abnTeX3 Community, uma camada limitada de compatibilidade e o
   guia de migração para `biblatex-abnt`.
 - [ ] **Marco 13 — Qualidade e portabilidade:** ampliar os testes para Linux,
@@ -121,6 +121,11 @@ de uso das normas.
 Consulte a [`arquitetura e árvore de arquivos`](docs/arquitetura.md) e o
 [`roteiro técnico completo`](docs/roadmap.md), que contém tarefas, critérios
 de saída e dependências de cada marco.
+
+Quem mantém documentos em abnTeX2 pode começar pela
+[`matriz de compatibilidade e procedimento de migração`](docs/compatibilidade.md).
+O módulo opcional `abntex3-compat` oferece somente aliases de correspondência
+direta e emite avisos para que a conversão termine na API nativa.
 
 ## Modelos canônicos
 

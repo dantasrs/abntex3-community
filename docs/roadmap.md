@@ -261,15 +261,15 @@ uma pessoa diferente do autor registre a revisão normativa.
 **Objetivo:** permitir adoção gradual sem transformar o núcleo em uma réplica
 do abnTeX2.
 
-- [ ] Inventariar comandos públicos do abnTeX2 usados nos modelos canônicos.
-- [ ] Classificar cada comando como migrável, substituído ou não suportado.
-- [ ] Criar `docs/compatibilidade.md`.
-- [ ] Criar `doc/abntex3-migration.tex`.
-- [ ] Criar `abntex3-compat.dtx`.
-- [ ] Emitir avisos claros para opções antigas reconhecidas.
-- [ ] Publicar tabela “abnTeX2 → abnTeX3”.
-- [ ] Testar migrações representativas, sem exigir compatibilidade integral.
-- [ ] Documentar a migração de BibTeX/`abntex2cite` para
+- [x] Inventariar comandos públicos do abnTeX2 usados nos modelos canônicos.
+- [x] Classificar cada comando como migrável, substituído ou não suportado.
+- [x] Criar `docs/compatibilidade.md`.
+- [x] Criar `doc/abntex3-migration.tex`.
+- [x] Criar `abntex3-compat.dtx`.
+- [x] Emitir avisos claros para opções antigas reconhecidas.
+- [x] Publicar tabela “abnTeX2 → abnTeX3”.
+- [x] Testar migrações representativas, sem exigir compatibilidade integral.
+- [x] Documentar a migração de BibTeX/`abntex2cite` para
       `biblatex-abnt`/`biber`.
 
 **Critério de saída:** um usuário do abnTeX2 consegue avaliar e executar a
