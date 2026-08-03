@@ -1,7 +1,6 @@
 % \iffalse
 %<*driver>
 \documentclass{l3doc}
-\usepackage[T1]{fontenc}
 \usepackage[brazilian]{babel}
 \begin{document}
   \DocInput{abntex3-layout.dtx}
@@ -64,6 +63,20 @@
 % tipográfica nem substitui o tamanho-base definido pela classe; exemplos
 % normativos devem usar 12\,pt. Exceções usam entrelinha simples e
 % \cs{small}, preservando a família escolhida pelo documento.
+%
+% A ABNT NBR 14724:2024, 5.1, recomenda o tamanho 12 para trabalhos
+% acadêmicos e tamanho menor uniforme para as exceções, mas não nomeia uma
+% família. A ABNT NBR 10719:2015, 5.1, pede um tipo padronizado no relatório,
+% também sem escolher uma família. A ABNT NBR 6022:2018, 6.1, recomenda
+% tamanho e uniformidade e deixa o projeto gráfico do artigo ao editor.
+%
+% Exigências por Arial ou Times New Roman são, portanto, normalmente
+% institucionais ou editoriais. Na ausência de exigência local, uma família
+% Times é uma escolha prática para trabalhos acadêmicos, não uma imposição da
+% ABNT. Com LuaLaTeX, pode-se carregar \pkg{fontspec} e selecionar, por
+% exemplo, |\setmainfont{TeX Gyre Termes}|. Essa família livre tem desenho
+% compatível com Times, mas não substitui nominalmente Times New Roman quando
+% um regulamento exigir a fonte específica.
 %
 % \begin{function}{ABNTEXcitacaolonga}
 %   \begin{syntax}

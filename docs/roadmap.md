@@ -56,7 +56,7 @@ implementar regras normativas.
 - [x] Criar testes de carregamento e opções.
 - [x] Criar `examples/minimo.tex`.
 - [x] Configurar `l3build unpack`, `check`, `doc`, `install` e `ctan`.
-- [x] Configurar CI para `pdfTeX`, `LuaTeX` e `XeTeX`.
+- [x] Configurar CI para LuaLaTeX nas versões anuais suportadas do TeX Live.
 - [x] Testar TeX Live corrente e duas versões anuais anteriores.
 - [x] Adicionar verificação de arquivos não permitidos em artefatos.
 - [x] Gerar um pacote CTAN de ensaio sem publicá-lo.
@@ -101,7 +101,7 @@ módulos seguintes, ainda sem alegação de conformidade.
 - [x] Criar documentação e exemplos mínimos.
 
 **Critério de saída:** estrutura e sumário têm requisitos rastreáveis e testes
-nos três motores. Uma revisão normativa independente continua necessária antes
+com LuaLaTeX. Uma revisão normativa independente continua necessária antes
 de qualquer alegação de conformidade.
 
 ## Marco 4 — Layout e paginação

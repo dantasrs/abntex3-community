@@ -34,9 +34,39 @@ pois alteram a geometria física do documento.
 
 ## Política tipográfica
 
-O pacote não escolhe família tipográfica. O tamanho normal continua sendo
-definido pela opção da classe; os exemplos usam 12 pt. Isso preserva a escolha
-editorial e evita substituir fontes de forma silenciosa.
+O pacote não escolhe família tipográfica. Essa decisão reflete os requisitos
+normativos, que não elegem Arial, Times New Roman ou outra família:
+
+- a ABNT NBR 14724:2024, 5.1, recomenda fonte tamanho 12 para o trabalho
+  acadêmico e tamanho menor uniforme para as exceções que enumera;
+- a ABNT NBR 10719:2015, 5.1, recomenda tamanho 12 e um tipo de fonte
+  padronizado em todo o relatório, sem nomear uma família;
+- a ABNT NBR 6022:2018, 6.1, recomenda tamanho 12 e uniformidade no artigo e
+  atribui o projeto gráfico ao editor.
+
+Assim, regras como “Arial ou Times New Roman” normalmente pertencem ao manual
+da instituição, às instruções do periódico ou ao projeto da editora. Esses
+documentos locais devem ser consultados e prevalecem na escolha editorial.
+
+Para um trabalho acadêmico sem exigência institucional de família, uma família
+Times é uma recomendação prática conservadora, pois é recorrente em modelos
+institucionais. Isso não a transforma em “fonte da ABNT”. Com LuaLaTeX, a
+família pode ser escolhida explicitamente:
+
+```tex
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+```
+
+`TeX Gyre Termes` é uma alternativa livre de desenho compatível com Times e
+normalmente está disponível no TeX Live. Ela não é o mesmo arquivo tipográfico
+que Times New Roman; quando uma instituição exigir essa família nominalmente,
+use `\setmainfont{Times New Roman}` se a fonte estiver instalada e licenciada
+no sistema, ou confirme se a alternativa é aceita.
+
+O tamanho normal continua sendo definido pela opção da classe; os exemplos
+usam 12 pt. Isso preserva a escolha editorial e evita substituir fontes de
+forma silenciosa.
 
 O texto geral recebe espaçamento de um e meio. Citações longas, notas de
 rodapé, títulos, fontes e notas de ilustrações e tabelas usam tamanho menor

@@ -107,7 +107,7 @@ jobs:
         if: needs.changes.outputs.full == 'true'
         uses: actions/checkout@v6
 
-      - name: Testar em pdfTeX, LuaTeX e XeTeX
+      - name: Testar com LuaLaTeX
         if: needs.changes.outputs.full == 'true'
         uses: xu-cheng/texlive-action@v3
         with:

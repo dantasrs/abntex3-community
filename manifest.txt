@@ -7,6 +7,7 @@ This work consists of the following files:
 .github/PULL_REQUEST_TEMPLATE.md
 .github/workflows/ci.yml
 .gitignore
+AGENTS.md
 build.lua
 CHANGELOG.md
 CITATION.cff
@@ -192,6 +193,7 @@ docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md
 docs/decisoes/0003-motores-e-versoes.md
 docs/decisoes/0004-politica-de-compatibilidade.md
+docs/decisoes/0005-lualatex-exclusivo.md
 docs/decisoes/README.md
 docs/normas.md
 docs/requisitos/nbr-6024-2012.md

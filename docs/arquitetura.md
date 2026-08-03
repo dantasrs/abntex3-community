@@ -252,11 +252,13 @@ sem comprometer a nova API.
 O primeiro alvo funcional será `article`, `report` e `book`. Compatibilidade
 com `memoir` e KOMA-Script será avaliada depois que o núcleo estiver estável.
 
-A matriz de integração contínua deve abranger `pdfTeX`, `LuaTeX` e `XeTeX`.
+A matriz de integração contínua usa apenas LuaLaTeX, conforme a
+[ADR 0005](decisoes/0005-lualatex-exclusivo.md), em todas as versões anuais do
+TeX Live mantidas pelo projeto.
 Durante o desenvolvimento inicial, serão suportadas a versão corrente e as
 duas versões anuais anteriores do TeX Live, sujeitas à disponibilidade dos
-executores de CI. A política será registrada na decisão
-`0003-motores-e-versoes.md`.
+executores de CI. A política vigente está registrada na ADR 0005; a ADR 0003
+permanece apenas como histórico da decisão substituída.
 
 ## Arquivos que não devem ser criados
 

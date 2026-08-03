@@ -8,6 +8,7 @@ sourcefiles = {"*.dtx", "*.ins"}
 unpackfiles = {"*.ins"}
 installfiles = {"*.sty"}
 typesetfiles = {"*.dtx"}
+typesetexe = "lualatex"
 demofiles = {"examples/*.tex", "examples/*.bib"}
 docfiles = {
   "docs/api.md",
@@ -25,8 +26,8 @@ docfiles = {
 }
 textfiles = {"README.md", "CHANGELOG.md", "LICENSE", "manifest.txt"}
 
-checkengines = {"pdftex", "luatex", "xetex"}
-stdengine = "pdftex"
+checkengines = {"luatex"}
+stdengine = "luatex"
 checkruns = 1
 typesetruns = 2
 

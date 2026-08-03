@@ -59,10 +59,10 @@ uma linha simples de separação.
 A sequência mínima de compilação é:
 
 ```console
-pdflatex documento
+lualatex documento
 biber documento
-pdflatex documento
-pdflatex documento
+lualatex documento
+lualatex documento
 ```
 
 O pacote avisa quando a opção integrada foi selecionada e o `.bbl` ainda não
