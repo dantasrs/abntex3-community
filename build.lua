@@ -20,6 +20,7 @@ docfiles = {
   "docs/profile-article.md",
   "docs/profile-report.md",
   "docs/profile-book.md",
+  "docs/compatibilidade.md",
   "docs/structure.md",
   "docs/requisitos/*.md"
 }

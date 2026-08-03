@@ -37,6 +37,7 @@ examples/trabalho-academico.tex
 scripts/validate-distribution.sh
 source/abntex3.dtx
 source/abntex3-backmatter.dtx
+source/abntex3-compat.dtx
 source/abntex3-core.dtx
 source/abntex3-frontmatter.dtx
 source/abntex3-layout.dtx
@@ -104,6 +105,10 @@ testfiles/common-after.lvt
 testfiles/common-after.tlg
 testfiles/common-before.lvt
 testfiles/common-before.tlg
+testfiles/compat-elements.lvt
+testfiles/compat-elements.tlg
+testfiles/compat-metadata.lvt
+testfiles/compat-metadata.tlg
 testfiles/conflict-after.lvt
 testfiles/conflict-after.tlg
 testfiles/conflict-before.lvt
@@ -178,6 +183,7 @@ testfiles/toc-typography.tlg
 testfiles/unnumbered-titles.lvt
 testfiles/unnumbered-titles.tlg
 docs/api.md
+docs/compatibilidade.md
 docs/arquitetura.md
 docs/backmatter.md
 docs/frontmatter.md
@@ -208,6 +214,7 @@ docs/requisitos/nbr-10719-2015.md
 docs/requisitos/nbr-6029-2023.md
 docs/roadmap.md
 docs/structure.md
+doc/abntex3-migration.tex
 docs/versionamento.md
 manifest.txt
 
