@@ -1,6 +1,7 @@
 # abnTeX3 Community
 
 [![CI](https://github.com/dantasrs/abntex3-community/actions/workflows/ci.yml/badge.svg)](https://github.com/dantasrs/abntex3-community/actions/workflows/ci.yml)
+[![Pré-release](https://github.com/dantasrs/abntex3-community/actions/workflows/release.yml/badge.svg)](https://github.com/dantasrs/abntex3-community/actions/workflows/release.yml)
 [![Licença: LPPL 1.3c+](https://img.shields.io/badge/licen%C3%A7a-LPPL%201.3c%2B-blue.svg)](LICENSE)
 
 Continuação comunitária e independente da ideia apresentada no projeto
@@ -15,7 +16,7 @@ e metadados, módulos para layout, paginação, seções, elementos pré e
 pós-textuais, citações, referências, apêndices, anexos e índice, além dos
 perfis acadêmico, de projeto de pesquisa, de artigo, de relatório e de livro
 ou folheto em revisão.
-A versão 0.0.0 ainda não é indicada para produção e não faz alegação de
+A versão 0.1.0-alpha.1 ainda não é indicada para produção e não faz alegação de
 conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
@@ -111,8 +112,9 @@ de uso das normas.
 
 ### Próximos marcos
 
-- [ ] **Marco 14 — Alfa e beta:** publicar os primeiros artefatos no GitHub,
-  recolher experiências de uso, concluir revisões normativas e congelar
+- [ ] **Marco 14 — Alfa e beta:** a candidata `0.1.0-alpha.1` está preparada
+  para publicação no GitHub; depois da pré-release, serão recolhidas
+  experiências de uso, concluídas revisões normativas e congelada
   progressivamente a API.
 - [ ] **Marco 15 — Versão estável e CTAN:** preparar a versão `1.0.0`, criar
   release e tag, submeter ao CTAN e acompanhar a inclusão nas distribuições
@@ -126,6 +128,16 @@ Quem mantém documentos em abnTeX2 pode começar pela
 [`matriz de compatibilidade e procedimento de migração`](docs/compatibilidade.md).
 O módulo opcional `abntex3-compat` oferece somente aliases de correspondência
 direta e emite avisos para que a conversão termine na API nativa.
+
+## Testar a candidata alfa
+
+A linha `0.1.0-alpha` destina-se a ensaios públicos e pode introduzir mudanças
+de API entre pré-releases. Depois da publicação da tag, os ZIPs CTAN e TDS e
+seus resumos SHA-256 estarão na
+[página de Releases](https://github.com/dantasrs/abntex3-community/releases).
+O [`guia do teste alfa`](docs/teste-alfa.md) explica instalação isolada,
+verificação de integridade, exemplo mínimo e envio de relatos de uso ou
+migração. Os artefatos dessa fase não serão submetidos ao CTAN.
 
 ## Modelos canônicos
 
@@ -692,6 +704,7 @@ l3build check
 l3build doc
 l3build install --texmfhome /caminho/temporario/texmf
 l3build ctan
+./scripts/check-release.sh
 ./scripts/quality-audit.sh
 ./scripts/validate-distribution.sh
 ```

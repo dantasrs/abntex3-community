@@ -50,6 +50,7 @@ abntex3-community/
 │   │   ├── bug.yml
 │   │   ├── config.yml
 │   │   ├── proposta.yml
+│   │   ├── relato-uso.yml
 │   │   └── requisito-normativo.yml
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   └── workflows/
@@ -155,6 +156,7 @@ abntex3-community/
 │   ├── biblatex-numeric.lvt
 │   └── biblatex-numeric.tlg
 ├── scripts/
+│   ├── check-release.sh
 │   ├── quality-audit.sh
 │   └── validate-distribution.sh
 ├── docs/
@@ -172,6 +174,9 @@ abntex3-community/
 │   ├── conformidade.md
 │   ├── compatibilidade.md
 │   ├── qualidade-portabilidade.md
+│   ├── teste-alfa.md
+│   ├── releases/
+│   │   └── 0.1.0-alpha.1.md
 │   ├── versionamento.md
 │   ├── requisitos/
 │   │   ├── nbr-6022-2018.md
@@ -207,12 +212,13 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 13 formam a infraestrutura mínima,
-os módulos normativos gerais e os perfis acadêmico, de projeto de pesquisa,
-artigo, relatório técnico ou científico e livro ou folheto, todos ainda
-pendentes de revisão normativa independente, além da camada de migração e da
-infraestrutura de qualidade e portabilidade. Os demais itens da árvore são
-criados apenas no marco em que sua responsabilidade é implementada.
+Os arquivos já materializados até a preparação alfa do Marco 14 formam a
+infraestrutura mínima, os módulos normativos gerais e os perfis acadêmico, de
+projeto de pesquisa, artigo, relatório técnico ou científico e livro ou
+folheto, todos ainda pendentes de revisão normativa independente, além das
+camadas de migração, qualidade, portabilidade e publicação experimental. Os
+demais itens da árvore são criados apenas no marco em que sua responsabilidade
+é implementada.
 
 ## Responsabilidade dos módulos
 

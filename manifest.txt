@@ -3,10 +3,12 @@ This work consists of the following files:
 .github/ISSUE_TEMPLATE/bug.yml
 .github/ISSUE_TEMPLATE/config.yml
 .github/ISSUE_TEMPLATE/proposta.yml
+.github/ISSUE_TEMPLATE/relato-uso.yml
 .github/ISSUE_TEMPLATE/requisito-normativo.yml
 .github/PULL_REQUEST_TEMPLATE.md
 .github/texlive-packages
 .github/workflows/ci.yml
+.github/workflows/release.yml
 .gitignore
 AGENTS.md
 build.lua
@@ -39,6 +41,7 @@ examples/referencias-exemplo.bib
 examples/trabalho-academico.tex
 scripts/validate-distribution.sh
 scripts/quality-audit.sh
+scripts/check-release.sh
 source/abntex3.dtx
 source/abntex3-backmatter.dtx
 source/abntex3-compat.dtx
@@ -197,6 +200,8 @@ testfiles/unnumbered-titles.tlg
 docs/api.md
 docs/compatibilidade.md
 docs/qualidade-portabilidade.md
+docs/teste-alfa.md
+docs/releases/0.1.0-alpha.1.md
 docs/arquitetura.md
 docs/backmatter.md
 docs/frontmatter.md

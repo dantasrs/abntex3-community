@@ -73,3 +73,7 @@ explícita do usuário.
 - Preserve a matriz de LuaLaTeX no Linux, Windows e macOS definida na ADR 0006.
 - Execute `scripts/quality-audit.sh` em mudanças que afetem o PDF. Atualize a
   baseline visual somente depois de inspecionar uma alteração intencional.
+- Antes de preparar uma release, execute `scripts/check-release.sh`. Tags de
+  versão são criadas somente a partir da `main` sincronizada, depois do merge
+  do PR correspondente e mediante autorização explícita do usuário.
+- Nunca mova, substitua ou envie com `--force` uma tag de versão publicada.

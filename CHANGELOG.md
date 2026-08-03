@@ -2,7 +2,7 @@
 
 Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
-## Não publicado
+## [0.1.0-alpha.1] - 2026-08-03
 
 ### Alterado
 
@@ -13,6 +13,11 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
 ### Adicionado
 
+- Candidata pública `0.1.0-alpha.1`, com metadados sincronizados e aviso
+  explícito de instabilidade da API `0.x`.
+- Workflow de pré-release acionado apenas por tag correspondente à versão,
+  com geração e validação dos ZIPs CTAN/TDS e resumos SHA-256.
+- Guia de teste alfa e formulário para relatos de uso ou migração.
 - Suíte multiplataforma com LuaLaTeX no Linux, Windows e macOS.
 - Metadados de título, autoria, assunto, palavras-chave e idioma integrados ao
   `hyperref`, com testes de marcadores e ligações.

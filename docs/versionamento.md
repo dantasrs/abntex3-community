@@ -25,7 +25,7 @@ Versões `0.x.y` representam desenvolvimento:
   migração;
 - uma API só será declarada estável após revisão, testes e documentação.
 
-A primeira alfa planejada é `0.1.0`. A passagem para `1.0.0` exige o
+A primeira candidata alfa é `0.1.0-alpha.1`. A passagem para `1.0.0` exige o
 cumprimento do Marco 15 do roadmap.
 
 ## API pública
@@ -75,9 +75,9 @@ quando houver demanda, capacidade de manutenção e ausência de conflito.
 
 ## Fontes de versão
 
-Depois da criação do código, a versão canônica ficará no ponto definido pelo
-`build.lua` e será propagada para os arquivos gerados. Em cada release devem
-ser sincronizados:
+A versão e a data canônicas ficam em `release_version` e `release_date`, no
+`build.lua`, e são verificadas por `scripts/check-release.sh`. Em cada release
+devem ser sincronizados:
 
 - cabeçalho `\ProvidesPackage`;
 - `CHANGELOG.md`;
@@ -87,6 +87,20 @@ ser sincronizados:
 - metadados submetidos ao CTAN.
 
 Uma versão publicada é imutável. Qualquer correção produz uma nova versão.
+
+## Processo de pré-release
+
+1. Preparar a candidata em uma branch, sincronizando todos os metadados.
+2. Executar `scripts/check-release.sh` e as validações técnicas completas.
+3. Mesclar o PR na `main` protegida e sincronizar o checkout local.
+4. Criar uma tag anotada `v<versão>` apontando exatamente para a `main`.
+5. Enviar somente a tag; `.github/workflows/release.yml` valida novamente,
+   gera os ZIPs CTAN e TDS, calcula SHA-256 e publica uma pré-release.
+
+O workflow rejeita tags divergentes do `build.lua`. Tags e artefatos
+publicados não devem ser movidos, substituídos nem enviados com `--force`.
+Falhas produzem uma nova execução ou uma nova candidata, nunca a alteração de
+uma versão já publicada. A linha alfa não é submetida ao CTAN.
 
 ## Suporte
 

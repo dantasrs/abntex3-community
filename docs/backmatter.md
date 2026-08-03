@@ -1,7 +1,8 @@
 # Elementos pós-textuais e bibliografia
 
 O módulo `abntex3-backmatter` coordena a parte pós-textual sem reimplementar
-estilos bibliográficos. A API permanece experimental na versão `0.0.0`.
+estilos bibliográficos. A API permanece experimental na versão
+`0.1.0-alpha.1`.
 
 ## Início da parte pós-textual
 

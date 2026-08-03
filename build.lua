@@ -1,5 +1,8 @@
 module = "abntex3"
 
+release_version = "0.1.0-alpha.1"
+release_date = "2026-08-03"
+
 sourcefiledir = "source"
 testfiledir = "testfiles"
 checksuppfiles = {"*.sty"}
@@ -23,6 +26,8 @@ docfiles = {
   "docs/profile-book.md",
   "docs/compatibilidade.md",
   "docs/qualidade-portabilidade.md",
+  "docs/teste-alfa.md",
+  "docs/releases/*.md",
   "docs/structure.md",
   "docs/requisitos/*.md"
 }

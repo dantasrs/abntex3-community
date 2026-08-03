@@ -1,0 +1,54 @@
+name: Publicar pré-release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Validar e publicar artefatos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obter o código da tag
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+
+      - name: Conferir a tag e os metadados
+        run: ./scripts/check-release.sh "${GITHUB_REF_NAME}"
+
+      - name: Gerar e validar os pacotes
+        uses: xu-cheng/texlive-action@22c04326a5d855880f9d39bb955138bf11c6df80 # v3
+        with:
+          texlive_version: 2026
+          scheme: full
+          run: |
+            apk add --no-cache bash diffutils unzip
+            l3build ctan
+            ./scripts/validate-distribution.sh
+            ./scripts/check-release.sh "${GITHUB_REF_NAME}"
+            sha256sum abntex3-ctan.zip abntex3.tds.zip > SHA256SUMS
+
+      - name: Publicar a pré-release no GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          gh release create "${GITHUB_REF_NAME}" \
+            abntex3-ctan.zip \
+            abntex3.tds.zip \
+            SHA256SUMS \
+            --verify-tag \
+            --prerelease \
+            --latest=false \
+            --title "abnTeX3 Community ${version}" \
+            --notes-file "docs/releases/${version}.md"

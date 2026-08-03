@@ -298,10 +298,14 @@ migração sem consultar o código-fonte.
 
 ### Alfa `0.1.0`
 
-- [ ] Entregar infraestrutura, núcleo e perfil acadêmico experimental.
-- [ ] Marcar a API como sujeita a mudanças.
+- [x] Entregar infraestrutura, núcleo e perfil acadêmico experimental.
+- [x] Marcar a API como sujeita a mudanças.
 - [ ] Publicar artefatos em GitHub Releases, ainda sem CTAN.
 - [ ] Recolher exemplos mínimos e relatos de migração.
+
+**Estado:** a candidata `0.1.0-alpha.1`, a automação de release e o canal de
+relatos estão preparados. A publicação e a coleta de experiências permanecem
+abertas até a tag ser criada e haver retorno público.
 
 ### Betas `0.x`
 
