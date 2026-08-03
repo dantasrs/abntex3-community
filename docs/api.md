@@ -1,10 +1,10 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3 a 13. A versão `0.0.0` continua experimental. Os módulos estrutural,
-de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto, de
-artigo, de relatório e de livro possuem rastreabilidade normativa, mas ainda aguardam
-revisão independente e não fazem alegação de conformidade.
+Marcos 3 a 13. A versão `0.1.0-alpha.1` continua experimental. Os módulos
+estrutural, de layout, pré-textual e pós-textual e os perfis acadêmico, de
+projeto, de artigo, de relatório e de livro possuem rastreabilidade normativa,
+mas ainda aguardam revisão independente e não fazem alegação de conformidade.
 
 ## Compatibilidade durante a migração
 

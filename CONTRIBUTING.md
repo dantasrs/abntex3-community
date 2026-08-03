@@ -10,6 +10,10 @@ Obrigado por considerar uma contribuição. Ao participar, você concorda com o
 - Use o template normativo para implementar ou corrigir uma regra de norma.
 - Vulnerabilidades devem seguir [`SECURITY.md`](SECURITY.md), sem issue pública.
 
+Relatos de uso da linha alfa e experiências de migração do abnTeX2 podem usar
+o formulário específico. Consulte [`docs/teste-alfa.md`](docs/teste-alfa.md)
+para informar ambiente, versão e um exemplo mínimo sem dados sensíveis.
+
 Mudanças grandes ou incompatíveis devem ser discutidas antes da implementação.
 Decisões arquiteturais aceitas são registradas em `docs/decisoes/`.
 

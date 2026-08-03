@@ -4,6 +4,8 @@ message: >-
   deste arquivo.
 title: abnTeX3 Community
 type: software
+version: 0.1.0-alpha.1
+date-released: 2026-08-03
 authors:
   - given-names: Rafael
     name-particle: dos Santos

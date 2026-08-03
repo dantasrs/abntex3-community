@@ -1,0 +1,64 @@
+name: Relato de uso ou migração
+description: Compartilhe uma experiência com a alfa ou uma migração do abnTeX2.
+title: "[Alfa]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por testar a versão alfa. Não inclua PDFs de normas, dados pessoais ou documentos sigilosos.
+  - type: input
+    id: versao
+    attributes:
+      label: Versão testada
+      placeholder: 0.1.0-alpha.1
+    validations:
+      required: true
+  - type: textarea
+    id: ambiente
+    attributes:
+      label: Ambiente
+      description: Informe sistema operacional, TeX Live e classe-base.
+      placeholder: |
+        Sistema:
+        TeX Live:
+        Classe-base:
+        Perfil do abnTeX3:
+    validations:
+      required: true
+  - type: dropdown
+    id: origem
+    attributes:
+      label: Tipo de experiência
+      options:
+        - Documento novo
+        - Migração do abnTeX2
+        - Avaliação de modelo canônico
+        - Instalação ou empacotamento
+    validations:
+      required: true
+  - type: textarea
+    id: experiencia
+    attributes:
+      label: Relato
+      description: Explique o que funcionou, o que precisou ser adaptado e onde houve dificuldade.
+    validations:
+      required: true
+  - type: textarea
+    id: exemplo
+    attributes:
+      label: Exemplo mínimo opcional
+      description: Remova informações pessoais e conteúdo protegido antes de colar o exemplo.
+      render: latex
+    validations:
+      required: false
+  - type: checkboxes
+    id: verificacoes
+    attributes:
+      label: Verificações
+      options:
+        - label: O relato não contém dados pessoais, sigilosos ou conteúdo protegido de normas.
+          required: true
+        - label: Concordo em seguir o Código de Conduta.
+          required: true
