@@ -101,3 +101,11 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
   referências condicionadas à existência declarada de citações.
 - Exemplo institucional, modelo científico completo, manual e testes do
   perfil de relatório.
+- Matriz rastreável da ABNT NBR 6029:2023.
+- Módulo `abntex3-profile-book` para livros e folhetos impressos ou digitais.
+- Dados editoriais, autorias e colaborações repetíveis, direitos, catalogação
+  fornecida externamente e validações condicionais de acabamento.
+- Fluxo externo, pré-textual, textual e pós-textual, com capa, folhas de
+  guarda, orelhas, folha de rosto, créditos, partes, capítulos e colofão.
+- Exemplo completo, manual e testes de livro, folheto, volumes, autorias e
+  elementos editoriais.

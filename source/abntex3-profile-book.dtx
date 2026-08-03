@@ -1,0 +1,509 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-profile-book.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-profile-book}: perfil de livro ou folheto}
+% \author{dantasrs}
+% \date{2026-08-02 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Contrato público}
+%
+% O perfil coordena livros e folhetos conforme a ABNT NBR 6029:2023. As
+% escolhas físicas e editoriais são declaradas: tipo de publicação, meio,
+% capa dura, presença de lombada, referências e índice.
+%
+% \begin{function}{\ABNTEXlivroSetup}
+%   Configura editora, ISBN, edição, direitos, catalogação e condições
+%   editoriais. |tipo| aceita |livro| ou |folheto| e |meio| aceita
+%   |impresso| ou |eletronico|.
+% \end{function}
+%
+% \begin{function}{\ABNTEXlivroautor,\ABNTEXlivrocolaborador}
+%   Registram repetidamente autorias e outros colaboradores com a respectiva
+%   forma de participação.
+% \end{function}
+%
+% \begin{function}{\ABNTEXlivrocapa,\ABNTEXlivrofolhasdeguarda,
+%                  \ABNTEXlivroorelha,\ABNTEXlivrofalsafolhaderosto,
+%                  \ABNTEXlivrofolhaderosto,\ABNTEXlivrocreditos}
+%   Compõem os elementos externos e pré-textuais próprios da publicação.
+% \end{function}
+%
+% \begin{function}{\ABNTEXlivroparte,\ABNTEXlivrocapitulo,
+%                  \ABNTEXlivroprefacio,\ABNTEXlivroposfacio,
+%                  \ABNTEXlivrocolofao}
+%   Compõem as divisões editoriais e registram a presença do corpo.
+% \end{function}
+%
+% \begin{function}{\ABNTEXvalidatelivro}
+%   Verifica metadados, fases, elementos e condições declaradas.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-profile-book}
+  {2026-08-02}{0.0.0}
+  {Perfil de livro ou folheto do abnTeX3 Community}
+
+\tl_new:N \g__abntex_book_type_tl
+\tl_new:N \g__abntex_book_medium_tl
+\tl_new:N \g__abntex_book_publisher_tl
+\tl_new:N \g__abntex_book_isbn_tl
+\tl_new:N \g__abntex_book_edition_tl
+\tl_new:N \g__abntex_book_original_title_tl
+\tl_new:N \g__abntex_book_copyright_year_tl
+\tl_new:N \g__abntex_book_copyright_holder_tl
+\tl_new:N \g__abntex_book_reproduction_tl
+\tl_new:N \g__abntex_book_other_formats_tl
+\tl_new:N \g__abntex_book_credits_tl
+\tl_new:N \g__abntex_book_cataloging_tl
+\tl_new:N \g__abntex_book_publisher_data_tl
+\tl_new:N \g__abntex_book_cover_summary_tl
+\tl_new:N \g__abntex_book_barcode_tl
+\int_new:N \g__abntex_book_pages_int
+\bool_new:N \g__abntex_book_hardcover_bool
+\bool_new:N \g__abntex_book_has_spine_bool
+\bool_new:N \g__abntex_book_has_references_bool
+\bool_new:N \g__abntex_book_has_index_bool
+\seq_new:N \g__abntex_book_authors_seq
+\seq_new:N \g__abntex_book_author_names_seq
+\seq_new:N \g__abntex_book_contributors_seq
+\prop_new:N \g__abntex_book_phases_prop
+\prop_new:N \g__abntex_book_elements_prop
+\seq_new:N \g__abntex_book_missing_seq
+\int_new:N \g__abntex_book_phase_int
+\int_new:N \g__abntex_book_chapters_int
+\bool_new:N \g__abntex_book_used_bool
+
+\tl_gset:Nn \g__abntex_book_type_tl {livro}
+\tl_gset:Nn \g__abntex_book_medium_tl {impresso}
+
+\msg_new:nnnn {abntex3} {book-profile-required}
+  {O~fluxo~de~livro~exige~perfil=livro.}
+  {Selecione~o~perfil~livro~antes~de~usar~'#1'.}
+\msg_new:nnnn {abntex3} {book-class-required}
+  {O~perfil~de~livro~nao~e~compativel~com~a~classe~article.}
+  {Use~a~classe~book~ou~report.}
+\msg_new:nnnn {abntex3} {book-phase-order}
+  {A~fase~da~publicacao~'#1'~esta~fora~da~ordem.}
+  {Use~externa,~pre-textual,~textual~e~pos-textual~nessa~sequencia.}
+\msg_new:nnnn {abntex3} {book-element-missing}
+  {O~elemento~obrigatorio~da~publicacao~'#1'~nao~foi~composto.}
+  {Configure~ou~inclua~o~elemento~pelo~comando~publico~correspondente.}
+\msg_new:nnnn {abntex3} {book-page-range}
+  {O~total~de~paginas~declarado~(#2)~nao~corresponde~a~'#1'.}
+  {Use~5--49~para~folheto~e~50~ou~mais~para~livro.}
+
+\keys_define:nn {abntex3/book}
+  {
+    tipo .choices:nn = {livro, folheto}
+      {\tl_gset:Nx \g__abntex_book_type_tl {\l_keys_choice_tl}},
+    tipo .initial:n = livro,
+    meio .choices:nn = {impresso, eletronico}
+      {\tl_gset:Nx \g__abntex_book_medium_tl {\l_keys_choice_tl}},
+    meio .initial:n = impresso,
+    editora .tl_gset:N = \g__abntex_book_publisher_tl,
+    isbn .tl_gset:N = \g__abntex_book_isbn_tl,
+    edicao .tl_gset:N = \g__abntex_book_edition_tl,
+    titulo-original .tl_gset:N = \g__abntex_book_original_title_tl,
+    ano-direito-autoral .tl_gset:N =
+      \g__abntex_book_copyright_year_tl,
+    detentor-direito-autoral .tl_gset:N =
+      \g__abntex_book_copyright_holder_tl,
+    direito-reproducao .tl_gset:N = \g__abntex_book_reproduction_tl,
+    outros-suportes .tl_gset:N = \g__abntex_book_other_formats_tl,
+    creditos .tl_gset:N = \g__abntex_book_credits_tl,
+    dados-catalogacao .tl_gset:N = \g__abntex_book_cataloging_tl,
+    dados-editora .tl_gset:N = \g__abntex_book_publisher_data_tl,
+    resumo-contracapa .tl_gset:N = \g__abntex_book_cover_summary_tl,
+    codigo-barras .tl_gset:N = \g__abntex_book_barcode_tl,
+    numero-paginas .int_gset:N = \g__abntex_book_pages_int,
+    capa-dura .choice:,
+    capa-dura / sim .code:n =
+      {\bool_gset_true:N \g__abntex_book_hardcover_bool},
+    capa-dura / nao .code:n =
+      {\bool_gset_false:N \g__abntex_book_hardcover_bool},
+    capa-dura .initial:n = nao,
+    comporta-lombada .choice:,
+    comporta-lombada / sim .code:n =
+      {\bool_gset_true:N \g__abntex_book_has_spine_bool},
+    comporta-lombada / nao .code:n =
+      {\bool_gset_false:N \g__abntex_book_has_spine_bool},
+    comporta-lombada .initial:n = nao,
+    possui-referencias .choice:,
+    possui-referencias / sim .code:n =
+      {\bool_gset_true:N \g__abntex_book_has_references_bool},
+    possui-referencias / nao .code:n =
+      {\bool_gset_false:N \g__abntex_book_has_references_bool},
+    possui-referencias .initial:n = nao,
+    possui-indice .choice:,
+    possui-indice / sim .code:n =
+      {\bool_gset_true:N \g__abntex_book_has_index_bool},
+    possui-indice / nao .code:n =
+      {\bool_gset_false:N \g__abntex_book_has_index_bool},
+    possui-indice .initial:n = nao
+  }
+
+\cs_new_protected:Npn \__abntex_book_require_profile:n #1
+  {
+    \tl_if_eq:NnF \g__abntex_profile_tl {livro}
+      {\msg_error:nnn {abntex3} {book-profile-required} {#1}}
+    \tl_if_eq:NnT \g__abntex_class_tl {article}
+      {\msg_error:nn {abntex3} {book-class-required}}
+  }
+
+\cs_new_protected:Npn \__abntex_book_register_phase:nn #1#2
+  {
+    \bool_gset_true:N \g__abntex_book_used_bool
+    \int_compare:nNnT {#1} < {\g__abntex_book_phase_int}
+      {\msg_warning:nnn {abntex3} {book-phase-order} {#2}}
+    \int_gset:Nn \g__abntex_book_phase_int
+      {\int_max:nn {#1} {\g__abntex_book_phase_int}}
+    \prop_gput:Nnn \g__abntex_book_phases_prop {#2} {true}
+  }
+
+\cs_new:Npn \__abntex_book_title:
+  {
+    \ABNTEXmetadata{titulo}
+    \tl_if_blank:eF {\ABNTEXmetadata{subtitulo}}
+      {:~\ABNTEXmetadata{subtitulo}}
+  }
+
+\cs_new_protected:Npn \__abntex_book_person:nn #1#2
+  {
+    #1
+    \tl_if_blank:nF {#2} {~(#2)}
+    \par
+  }
+
+\cs_new_protected:Npn \__abntex_book_optional_field:nn #1#2
+  {
+    \tl_if_blank:eF {#2}
+      {\par\noindent\textbf{#1:}~#2\par}
+  }
+
+\cs_new_protected:Npn \__abntex_book_collect_missing:
+  {
+    \seq_gclear:N \g__abntex_book_missing_seq
+    \seq_if_empty:NT \g__abntex_book_authors_seq
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {autoria}}
+    \tl_if_blank:VT \g__abntex_book_publisher_tl
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {editora}}
+    \tl_if_blank:VT \g__abntex_book_isbn_tl
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {isbn}}
+    \tl_if_blank:VT \g__abntex_book_copyright_year_tl
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {ano-direito-autoral}}
+    \tl_if_blank:VT \g__abntex_book_copyright_holder_tl
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq
+        {detentor-direito-autoral}}
+    \tl_if_blank:VT \g__abntex_book_reproduction_tl
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {direito-reproducao}}
+    \tl_if_blank:VT \g__abntex_book_cataloging_tl
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {dados-catalogacao}}
+    \int_compare:nNnF {\g__abntex_book_pages_int} > {0}
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {numero-paginas}}
+    \clist_map_inline:nn {externa, pre-textual, textual, pos-textual}
+      {
+        \prop_if_in:NnF \g__abntex_book_phases_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_book_missing_seq {##1}}
+      }
+    \clist_map_inline:nn {capa, folha-de-rosto, creditos}
+      {
+        \prop_if_in:NnF \g__abntex_book_elements_prop {##1}
+          {\seq_gput_right:Nn \g__abntex_book_missing_seq {##1}}
+      }
+    \prop_if_in:NnF \g__abntex_frontmatter_seen_prop {sumario}
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {sumario}}
+    \int_compare:nNnF {\g__abntex_book_chapters_int} > {0}
+      {\seq_gput_right:Nn \g__abntex_book_missing_seq {corpo-textual}}
+    \bool_if:NT \g__abntex_book_hardcover_bool
+      {
+        \prop_if_in:NnF \g__abntex_book_elements_prop {folhas-de-guarda}
+          {\seq_gput_right:Nn \g__abntex_book_missing_seq
+            {folhas-de-guarda}}
+      }
+    \bool_if:NT \g__abntex_book_has_spine_bool
+      {
+        \prop_if_in:NnF \g__abntex_frontmatter_seen_prop {lombada}
+          {\seq_gput_right:Nn \g__abntex_book_missing_seq {lombada}}
+      }
+    \bool_if:NT \g__abntex_book_has_references_bool
+      {
+        \prop_if_in:NnF \g__abntex_backmatter_seen_prop {referencias}
+          {\seq_gput_right:Nn \g__abntex_book_missing_seq {referencias}}
+      }
+    \bool_if:NT \g__abntex_book_has_index_bool
+      {
+        \prop_if_in:NnF \g__abntex_backmatter_seen_prop {indice}
+          {\seq_gput_right:Nn \g__abntex_book_missing_seq {indice}}
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_book_validate_page_range:
+  {
+    \int_compare:nNnT {\g__abntex_book_pages_int} > {0}
+      {
+        \tl_if_eq:NnTF \g__abntex_book_type_tl {folheto}
+          {
+            \int_compare:nNnT {\g__abntex_book_pages_int} < {5}
+              {\msg_warning:nnnn {abntex3} {book-page-range}
+                {folheto} {\int_use:N \g__abntex_book_pages_int}}
+            \int_compare:nNnT {\g__abntex_book_pages_int} > {49}
+              {\msg_warning:nnnn {abntex3} {book-page-range}
+                {folheto} {\int_use:N \g__abntex_book_pages_int}}
+          }
+          {
+            \int_compare:nNnT {\g__abntex_book_pages_int} < {50}
+              {\msg_warning:nnnn {abntex3} {book-page-range}
+                {livro} {\int_use:N \g__abntex_book_pages_int}}
+          }
+      }
+  }
+
+\cs_new_protected:Npn \__abntex_book_validate:
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXvalidatelivro}
+    \ABNTEXvalidate
+    \__abntex_book_collect_missing:
+    \__abntex_book_validate_page_range:
+    \seq_map_inline:Nn \g__abntex_book_missing_seq
+      {\msg_warning:nnn {abntex3} {book-element-missing} {##1}}
+  }
+
+\NewDocumentCommand \ABNTEXlivroSetup {m}
+  {\keys_set:nn {abntex3/book} {#1}}
+\NewExpandableDocumentCommand \ABNTEXtipopublicacao {}
+  {\tl_use:N \g__abntex_book_type_tl}
+\NewExpandableDocumentCommand \ABNTEXmeiopublicacao {}
+  {\tl_use:N \g__abntex_book_medium_tl}
+
+\NewDocumentCommand \ABNTEXlivroautor {m m}
+  {
+    \seq_gput_right:Nn \g__abntex_book_authors_seq
+      {\__abntex_book_person:nn {#1}{#2}}
+    \seq_gput_right:Nn \g__abntex_book_author_names_seq {#1}
+    \tl_set:Nx \l_tmpa_tl
+      {\seq_use:Nn \g__abntex_book_author_names_seq {;~}}
+    \prop_gput:NnV \g__abntex_metadata_prop {autoria} \l_tmpa_tl
+  }
+\NewDocumentCommand \ABNTEXlivrocolaborador {m m}
+  {
+    \seq_gput_right:Nn \g__abntex_book_contributors_seq
+      {\__abntex_book_person:nn {#1}{#2}}
+  }
+
+\NewDocumentCommand \ABNTEXlivroexterna {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivroexterna}
+    \__abntex_book_register_phase:nn {1} {externa}
+    \ABNTEXvalidate
+  }
+
+\NewDocumentCommand \ABNTEXlivrocapa {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivrocapa}
+    \prop_gput:Nnn \g__abntex_book_elements_prop {capa} {true}
+    \__abntex_frontmatter_register:nn {1} {capa}
+    \__abntex_frontmatter_external_page:n
+      {
+        \centering
+        \seq_map_inline:Nn \g__abntex_book_authors_seq {##1}
+        \vfill
+        {\bfseries\Large\__abntex_book_title:\par}
+        \tl_if_blank:VF \g__abntex_book_edition_tl
+          {\medskip \tl_use:N \g__abntex_book_edition_tl~edição\par}
+        \vfill
+        {\tl_use:N \g__abntex_book_publisher_tl\par}
+        {\ABNTEXmetadata{local}\par}
+        {\ABNTEXmetadata{data}\par}
+      }
+    \__abntex_frontmatter_external_page:n
+      {
+        \vspace*{\fill}
+        \tl_if_blank:VF \g__abntex_book_cover_summary_tl
+          {\tl_use:N \g__abntex_book_cover_summary_tl\par\bigskip}
+        \noindent ISBN~\tl_use:N \g__abntex_book_isbn_tl\par
+        \tl_if_blank:VF \g__abntex_book_barcode_tl
+          {\noindent Código~de~barras:~\tl_use:N \g__abntex_book_barcode_tl\par}
+        \tl_if_blank:VF \g__abntex_book_publisher_data_tl
+          {\noindent\tl_use:N \g__abntex_book_publisher_data_tl\par}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlivrofolhasdeguarda {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivrofolhasdeguarda}
+    \prop_gput:Nnn \g__abntex_book_elements_prop {folhas-de-guarda} {true}
+    \__abntex_frontmatter_external_page:n {\mbox{}}
+  }
+
+\NewDocumentCommand \ABNTEXlivroorelha {m m}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivroorelha}
+    \prop_gput:Nnn \g__abntex_book_elements_prop {orelhas} {true}
+    \__abntex_frontmatter_external_page:n
+      {
+        \ABNTEXpretextualtitle{Sobre~a~autoria}
+        #1\par\bigskip
+        \ABNTEXpretextualtitle{Sobre~a~obra}
+        #2\par
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlivropretextual {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivropretextual}
+    \__abntex_book_register_phase:nn {2} {pre-textual}
+    \ABNTEXpretextualpages
+  }
+
+\NewDocumentCommand \ABNTEXlivrofalsafolhaderosto {O{}}
+  {
+    \prop_gput:Nnn \g__abntex_book_elements_prop
+      {falsa-folha-de-rosto} {true}
+    \__abntex_frontmatter_page:n
+      {
+        \centering\vspace*{\fill}
+        {\bfseries\__abntex_book_title:\par}
+        \vfill
+        \tl_if_blank:nF {#1} {\raggedright #1\par}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlivrofolhaderosto {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivrofolhaderosto}
+    \prop_gput:Nnn \g__abntex_book_elements_prop {folha-de-rosto} {true}
+    \__abntex_frontmatter_register:nn {2} {folha-de-rosto}
+    \__abntex_frontmatter_page:n
+      {
+        \centering
+        \seq_map_inline:Nn \g__abntex_book_authors_seq {##1}
+        \vfill
+        {\bfseries\Large\__abntex_book_title:\par}
+        \seq_if_empty:NF \g__abntex_book_contributors_seq
+          {\bigskip\seq_map_inline:Nn \g__abntex_book_contributors_seq {##1}}
+        \tl_if_blank:VF \g__abntex_book_edition_tl
+          {\bigskip \tl_use:N \g__abntex_book_edition_tl~edição\par}
+        \tl_if_blank:eF {\ABNTEXmetadata{volume}}
+          {\medskip Volume~\ABNTEXmetadata{volume}\par}
+        \vfill
+        {\tl_use:N \g__abntex_book_publisher_tl\par}
+        {\ABNTEXmetadata{local}\par}
+        {\ABNTEXmetadata{data}\par}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlivrocreditos {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivrocreditos}
+    \prop_gput:Nnn \g__abntex_book_elements_prop {creditos} {true}
+    \__abntex_frontmatter_page:n
+      {
+        \small\setstretch{1}
+        \noindent ©~\tl_use:N \g__abntex_book_copyright_year_tl~
+          \tl_use:N \g__abntex_book_copyright_holder_tl\par\medskip
+        \noindent\tl_use:N \g__abntex_book_reproduction_tl\par
+        \__abntex_book_optional_field:nn {Título~original}
+          {\tl_use:N \g__abntex_book_original_title_tl}
+        \__abntex_book_optional_field:nn {Outros~suportes}
+          {\tl_use:N \g__abntex_book_other_formats_tl}
+        \__abntex_book_optional_field:nn {Créditos}
+          {\tl_use:N \g__abntex_book_credits_tl}
+        \par\bigskip
+        \noindent\textbf{Dados~internacionais~de~catalogação~na~publicação}
+        \par\smallskip
+        \tl_use:N \g__abntex_book_cataloging_tl\par
+        \__abntex_book_optional_field:nn {Editora}
+          {\tl_use:N \g__abntex_book_publisher_data_tl}
+      }
+  }
+
+\NewDocumentCommand \ABNTEXlivroprefacio {O{Prefácio} +m}
+  {
+    \prop_gput:Nnn \g__abntex_book_elements_prop {prefacio} {true}
+    \ABNTEXpretextualtitle{#1}
+    #2\par
+  }
+
+\NewDocumentCommand \ABNTEXlivrotextual {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivrotextual}
+    \__abntex_book_register_phase:nn {3} {textual}
+    \ABNTEXtextualpages
+  }
+
+\NewDocumentCommand \ABNTEXlivroparte {m}
+  {\part{#1}}
+\NewDocumentCommand \ABNTEXlivrocapitulo {m}
+  {
+    \int_gincr:N \g__abntex_book_chapters_int
+    \use:c {\tl_use:N \g__abntex_primary_name_tl} {#1}
+  }
+
+\NewDocumentCommand \ABNTEXlivropostextual {}
+  {
+    \__abntex_book_require_profile:n
+      {\token_to_str:N \ABNTEXlivropostextual}
+    \__abntex_book_register_phase:nn {4} {pos-textual}
+    \ABNTEXposttextualpages
+  }
+
+\NewDocumentCommand \ABNTEXlivroposfacio {O{Posfácio} +m}
+  {
+    \prop_gput:Nnn \g__abntex_book_elements_prop {posfacio} {true}
+    \ABNTEXposttextualtitle{#1}
+    #2\par
+  }
+
+\NewDocumentCommand \ABNTEXlivrocolofao {+m}
+  {
+    \prop_gput:Nnn \g__abntex_book_elements_prop {colofao} {true}
+    \__abntex_backmatter_register:nn {6} {colofao}
+    \clearpage
+    \thispagestyle{empty}
+    \vspace*{\fill}
+    \begin{center}\small #1\end{center}
+  }
+
+\NewDocumentCommand \ABNTEXvalidatelivro {}
+  {\__abntex_book_validate:}
+
+\hook_gput_code:nnn {enddocument} {abntex3-profile-book}
+  {
+    \bool_if:NT \g__abntex_book_used_bool
+      {\__abntex_book_validate:}
+  }
+
+\endinput
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale

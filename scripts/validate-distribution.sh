@@ -53,6 +53,7 @@ compile_example() {
     projeto-pesquisa \
     artigo \
     relatorio-tecnico \
+    livro \
     modelo-tese-completo \
     modelo-dissertacao-completo \
     modelo-tcc-completo \
@@ -68,6 +69,7 @@ compile_example() {
           "${example}" == "projeto-pesquisa" || \
           "${example}" == "artigo" || \
           "${example}" == "relatorio-tecnico" || \
+          "${example}" == "livro" || \
           "${example}" == modelo-* ]]; then
       cp "${project_dir}/examples/referencias-exemplo.bib" \
         "${run_dir}/referencias-exemplo.bib"
@@ -81,6 +83,7 @@ compile_example() {
             "${example}" == "trabalho-academico" || \
             "${example}" == "projeto-pesquisa" || \
             "${example}" == "artigo" || \
+            "${example}" == "livro" || \
             "${example}" == modelo-* ]]; then
         if ! command -v biber >/dev/null 2>&1; then
           echo "biber não está disponível para o ensaio bibliográfico." >&2
@@ -91,12 +94,13 @@ compile_example() {
               "${example}" == "modelo-tese-completo" || \
               "${example}" == "modelo-dissertacao-completo" || \
               "${example}" == "modelo-tcc-completo" || \
-            "${example}" == "modelo-monografia-completo" || \
-            "${example}" == "modelo-projeto-pesquisa-completo" || \
-            "${example}" == "modelo-relatorio-cientifico-completo" ]]; then
+              "${example}" == "modelo-monografia-completo" || \
+              "${example}" == "modelo-projeto-pesquisa-completo" || \
+              "${example}" == "livro" || \
+              "${example}" == "modelo-relatorio-cientifico-completo" ]]; then
           makeindex "${example}" >/dev/null
         fi
-        if [[ "${example}" == modelo-* ]]; then
+        if [[ "${example}" == modelo-* || "${example}" == "livro" ]]; then
           if ! command -v makeglossaries >/dev/null 2>&1; then
             echo "makeglossaries não está disponível para os modelos canônicos." >&2
             exit 1

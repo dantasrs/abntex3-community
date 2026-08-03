@@ -133,8 +133,16 @@ abntex3-community/
 │   ├── report-sections.tlg
 │   ├── report-types.lvt
 │   ├── report-types.tlg
-│   ├── profile-book.lvt
-│   ├── profile-book.tlg
+│   ├── book-authors.lvt
+│   ├── book-authors.tlg
+│   ├── book-divisions.lvt
+│   ├── book-divisions.tlg
+│   ├── book-elements.lvt
+│   ├── book-elements.tlg
+│   ├── book-flow.lvt
+│   ├── book-flow.tlg
+│   ├── book-types.lvt
+│   ├── book-types.tlg
 │   ├── biblatex-author-year.lvt
 │   ├── biblatex-author-year.tlg
 │   ├── biblatex-numeric.lvt
@@ -149,6 +157,7 @@ abntex3-community/
 │   ├── profile-project.md
 │   ├── profile-article.md
 │   ├── profile-report.md
+│   ├── profile-book.md
 │   ├── structure.md
 │   ├── roadmap.md
 │   ├── normas.md
@@ -187,10 +196,11 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 10 formam a infraestrutura mínima,
+Os arquivos já materializados até o Marco 11 formam a infraestrutura mínima,
 os módulos normativos gerais e os perfis acadêmico, de projeto de pesquisa,
-artigo e relatório técnico ou científico, todos ainda pendentes de revisão
-normativa independente. Os demais itens da árvore são criados apenas no marco
+artigo, relatório técnico ou científico e livro ou folheto, todos ainda
+pendentes de revisão normativa independente. Os demais itens da árvore são
+criados apenas no marco
 em que sua responsabilidade é implementada.
 
 ## Responsabilidade dos módulos

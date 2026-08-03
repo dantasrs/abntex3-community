@@ -23,6 +23,7 @@ examples/pos-textuais-bibliografia.tex
 examples/projeto-pesquisa.tex
 examples/artigo.tex
 examples/relatorio-tecnico.tex
+examples/livro.tex
 examples/modelo-artigo-duas-colunas-completo.tex
 examples/modelo-artigo-uma-coluna-completo.tex
 examples/modelo-dissertacao-completo.tex
@@ -44,11 +45,22 @@ source/abntex3-profile-academic.dtx
 source/abntex3-profile-project.dtx
 source/abntex3-profile-article.dtx
 source/abntex3-profile-report.dtx
+source/abntex3-profile-book.dtx
 source/abntex3-structure.dtx
 source/abntex3.ins
 testfiles/accented-bookmarks.lvt
 testfiles/accented-bookmarks.tlg
 testfiles/article-authors.lvt
+testfiles/book-authors.lvt
+testfiles/book-authors.tlg
+testfiles/book-divisions.lvt
+testfiles/book-divisions.tlg
+testfiles/book-elements.lvt
+testfiles/book-elements.tlg
+testfiles/book-flow.lvt
+testfiles/book-flow.tlg
+testfiles/book-types.lvt
+testfiles/book-types.tlg
 testfiles/article-authors.tlg
 testfiles/article-columns.lvt
 testfiles/article-columns.tlg
@@ -175,6 +187,7 @@ docs/profile-academic.md
 docs/profile-project.md
 docs/profile-article.md
 docs/profile-report.md
+docs/profile-book.md
 docs/decisoes/0001-pacote-em-vez-de-classe.md
 docs/decisoes/0002-integracao-biblatex-abnt.md
 docs/decisoes/0003-motores-e-versoes.md
@@ -192,6 +205,7 @@ docs/requisitos/nbr-14724-2024.md
 docs/requisitos/nbr-15287-2025.md
 docs/requisitos/nbr-6022-2018.md
 docs/requisitos/nbr-10719-2015.md
+docs/requisitos/nbr-6029-2023.md
 docs/roadmap.md
 docs/structure.md
 docs/versionamento.md

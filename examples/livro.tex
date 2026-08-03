@@ -1,0 +1,129 @@
+\documentclass[12pt]{book}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{glossaries}
+\usepackage[
+  perfil=livro,
+  impressao=frente-e-verso,
+  citacoes=autor-data
+]{abntex3}
+
+\makeindex
+\makeglossaries
+\newglossaryentry{edicao}{
+  name={edição},
+  description={conjunto de exemplares produzidos a partir de uma matriz}
+}
+\addbibresource{referencias-exemplo.bib}
+
+\ABNTEXsetup{
+  titulo={Introdução à documentação digital},
+  subtitulo={conceitos, métodos e práticas},
+  volume={1},
+  local={Recife},
+  data={2026}
+}
+
+\ABNTEXlivroSetup{
+  tipo=livro,
+  meio=impresso,
+  editora={Editora Exemplo},
+  isbn={978-65-00000-00-0},
+  edicao={2},
+  ano-direito-autoral={2026},
+  detentor-direito-autoral={Editora Exemplo},
+  direito-reproducao={Esta publicação demonstrativa pode ser reproduzida
+    com indicação da fonte.},
+  outros-suportes={Disponível também em formato digital},
+  creditos={Projeto gráfico e revisão: Equipe Editorial Exemplo},
+  dados-catalogacao={Dados demonstrativos. Substitua este conteúdo por ficha
+    preparada por profissional habilitado, com nome e registro no CRB.},
+  dados-editora={Rua do Livro, 10, Recife, PE; editora.example.org},
+  resumo-contracapa={Uma apresentação prática dos princípios de documentação
+    e preservação digital.},
+  numero-paginas=120,
+  capa-dura=sim,
+  comporta-lombada=sim,
+  possui-referencias=sim,
+  possui-indice=sim
+}
+
+\ABNTEXlivroautor{Ana Silva}{autora}
+\ABNTEXlivroautor{Bruno Lima}{organizador}
+\ABNTEXlivrocolaborador{Carla Souza}{ilustradora}
+
+\begin{document}
+
+\ABNTEXlivroexterna
+\ABNTEXlivrocapa
+\ABNTEXlombada[Volume 1]
+\ABNTEXlivrofolhasdeguarda
+\ABNTEXlivroorelha
+  {Ana Silva pesquisa preservação digital e normalização documental.}
+  {A obra apresenta conceitos fundamentais e um fluxo demonstrativo.}
+
+\ABNTEXlivropretextual
+\ABNTEXlivrofalsafolhaderosto[Série Estudos Documentais, volume 1]
+\ABNTEXlivrofolhaderosto
+\ABNTEXlivrocreditos
+\ABNTEXerrata
+  {SILVA, Ana; LIMA, Bruno. Introdução à documentação digital. 2. ed.
+   Recife: Editora Exemplo, 2026.}
+  {Não há correções nesta edição demonstrativa.}
+\ABNTEXdedicatoria{Às pessoas que preservam a memória documental.}
+\ABNTEXagradecimentos{À equipe editorial e às pessoas revisoras.}
+\ABNTEXepigrafe[Autoria demonstrativa]{Documentar é permitir reencontro.}
+\ABNTEXlistadeilustracoes
+\ABNTEXlistadetabelas
+\ABNTEXsigla{PDF}{Portable Document Format}
+\ABNTEXlistadesiglas
+\ABNTEXsumario
+
+\ABNTEXlivrotextual
+\ABNTEXlivroprefacio{Este prefácio apresenta a segunda \gls{edicao}.}
+\ABNTEXlivroparte{Fundamentos}
+\ABNTEXlivrocapitulo{Documentação e memória}
+O registro estruturado apoia a recuperação e a preservação da informação
+\parencite{associacao2025}. O termo documentação\index{documentação} abrange
+processos técnicos e decisões editoriais.
+
+\begin{figure}[htbp]
+  \centering
+  \rule{0.55\textwidth}{3cm}
+  \caption{Fluxo documental demonstrativo}
+  \ABNTEXfonte{Elaborada pelas autorias (2026).}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Componentes de uma publicação demonstrativa}
+  \begin{tabular}{ll}
+    \hline
+    Componente & Finalidade \\
+    \hline
+    Metadados & Identificação editorial \\
+    Estrutura & Organização do conteúdo \\
+    \hline
+  \end{tabular}
+  \ABNTEXfonte{Elaborada pelas autorias (2026).}
+\end{table}
+
+\ABNTEXlivrocapitulo{Preservação digital}
+Formatos abertos, cópias independentes e verificações de integridade reduzem
+riscos de perda da informação.
+
+\ABNTEXlivropostextual
+\ABNTEXlivroposfacio{O posfácio registra possibilidades de continuidade.}
+\ABNTEXbibliografia
+\ABNTEXglossario
+\ABNTEXappendix{Lista de verificação editorial}
+Material elaborado pelas autorias para apoiar a preparação da obra.
+\ABNTEXannex{Documento externo demonstrativo}
+Material não elaborado pelas autorias.
+\ABNTEXindice[Índice de assuntos]
+\ABNTEXlivrocolofao{Composição em LaTeX com o abnTeX3 Community.\\
+Editora Exemplo, Recife, 2026.}
+
+\end{document}

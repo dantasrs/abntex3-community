@@ -1,9 +1,9 @@
 # API pública
 
 Este documento descreve o contrato iniciado no Marco 2 e ampliado nos
-Marcos 3 a 10. A versão `0.0.0` continua experimental. Os módulos estrutural,
+Marcos 3 a 11. A versão `0.0.0` continua experimental. Os módulos estrutural,
 de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto, de
-artigo e de relatório possuem rastreabilidade normativa, mas ainda aguardam
+artigo, de relatório e de livro possuem rastreabilidade normativa, mas ainda aguardam
 revisão independente e não fazem alegação de conformidade.
 
 ## Carregamento e classes
@@ -226,3 +226,19 @@ O Marco 10 acrescenta:
   `possui-citacoes=sim` e alternativa entre catalogação e formulário.
 
 A referência completa está em [`profile-report.md`](profile-report.md).
+
+## Perfil de livro ou folheto
+
+O Marco 11 acrescenta:
+
+- `\ABNTEXlivroSetup`, para tipo, meio, editora, ISBN, direitos, catalogação e
+  condições editoriais;
+- `\ABNTEXlivroautor` e `\ABNTEXlivrocolaborador`, para registros repetíveis;
+- coordenadores das partes externa, pré-textual, textual e pós-textual;
+- capa, folhas de guarda, orelhas, falsa folha de rosto, folha de rosto,
+  créditos e colofão próprios do perfil;
+- comandos para prefácio, partes, capítulos e posfácio;
+- `\ABNTEXvalidatelivro`, com lombada, folhas de guarda, referências e índice
+  condicionados às escolhas declaradas.
+
+A referência completa está em [`profile-book.md`](profile-book.md).

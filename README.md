@@ -13,7 +13,8 @@ documentação.
 O projeto possui infraestrutura reproduzível, API experimental de configuração
 e metadados, módulos para layout, paginação, seções, elementos pré e
 pós-textuais, citações, referências, apêndices, anexos e índice, além dos
-perfis acadêmico, de projeto de pesquisa, de artigo e de relatório em revisão.
+perfis acadêmico, de projeto de pesquisa, de artigo, de relatório e de livro
+ou folheto em revisão.
 A versão 0.0.0 ainda não é indicada para produção e não faz alegação de
 conformidade.
 
@@ -60,6 +61,7 @@ A matriz inicial considera, entre outras:
 - ABNT NBR 15287:2025 — projeto de pesquisa;
 - ABNT NBR 6022:2018 — artigo em publicação periódica;
 - ABNT NBR 10719:2015 — relatório técnico ou científico.
+- ABNT NBR 6029:2023 — livro ou folheto.
 
 Consulte [`docs/normas.md`](docs/normas.md) para a matriz completa e os limites
 de uso das normas.
@@ -97,11 +99,12 @@ de uso das normas.
   equipe técnica, resumo, dados institucionais, formulário, exemplos e testes
   das variantes institucional e científica. A revisão normativa independente
   continua pendente.
+- [x] **Marco 11 — Livro ou folheto:** elementos editoriais, autorias
+  repetíveis, volumes, capa, lombada, partes, capítulos e pós-textuais da
+  NBR 6029:2023. A revisão normativa independente continua pendente.
 
 ### Próximos marcos
 
-- [ ] **Marco 11 — Livro ou folheto:** implementar o perfil da
-  NBR 6029:2023, incluindo elementos editoriais, volumes, lombada e índice.
 - [ ] **Marco 12 — Migração:** publicar a correspondência entre interfaces do
   abnTeX2 e do abnTeX3 Community, uma camada limitada de compatibilidade e o
   guia de migração para `biblatex-abnt`.
@@ -122,7 +125,8 @@ de saída e dependências de cada marco.
 ## Modelos canônicos
 
 Há modelos completos e auditáveis para tese, dissertação, TCC, monografia,
-projeto de pesquisa, artigo em uma ou duas colunas e relatório científico.
+projeto de pesquisa, artigo em uma ou duas colunas, relatório científico e
+livro.
 Eles demonstram todos os elementos aplicáveis atualmente implementados. Cada
 arquivo tem duas funções:
 
@@ -141,6 +145,7 @@ arquivo tem duas funções:
 | Artigo em uma coluna | [`modelo-artigo-uma-coluna-completo.tex`](examples/modelo-artigo-uma-coluna-completo.tex) |
 | Artigo em duas colunas | [`modelo-artigo-duas-colunas-completo.tex`](examples/modelo-artigo-duas-colunas-completo.tex) |
 | Relatório científico | [`modelo-relatorio-cientifico-completo.tex`](examples/modelo-relatorio-cientifico-completo.tex) |
+| Livro ou folheto | [`livro.tex`](examples/livro.tex) |
 
 Os arquivos são deliberadamente extensos: não significa que todo documento
 deva conter todos aqueles elementos. A matriz de cobertura e o procedimento
@@ -175,7 +180,7 @@ Esses três conceitos atuam em níveis diferentes:
 | Conceito | Exemplos | O que controla |
 | --- | --- | --- |
 | Classe LaTeX | `article`, `report`, `book` | Estrutura básica do LaTeX, como a existência de capítulos |
-| Perfil | `academico`, `projeto`, `artigo`, `relatorio` | Fluxo, elementos obrigatórios e validações do gênero documental |
+| Perfil | `academico`, `projeto`, `artigo`, `relatorio`, `livro` | Fluxo, elementos obrigatórios e validações do gênero documental |
 | Tipo de trabalho | `tese`, `dissertacao`, `tcc`, `monografia` | Variação declarada dentro do perfil acadêmico |
 
 A classe não substitui o perfil. Por exemplo, `report` fornece `\chapter`, mas
@@ -192,6 +197,7 @@ Como ponto de partida:
 - use `article` com `perfil=artigo` para artigo.
 - use `report` ou `book` com `perfil=relatorio` para relatório técnico ou
   científico.
+- use `book` ou `report` com `perfil=livro` para livro ou folheto.
 
 As classes `abntex2`, `memoir` e KOMA-Script não são suportadas atualmente.
 O `abntex3` é um pacote carregado por `\usepackage`, não uma classe usada em
@@ -205,11 +211,10 @@ O `abntex3` é um pacote carregado por `\usepackage`, não uma classe usada em
 | Projeto | `perfil=projeto` | título, autoria, instituição, natureza, local e data | folha de rosto, sumário, cinco divisões textuais e referências |
 | Artigo | `perfil=artigo`, `artigo-colunas=...` | título; autorias e dados próprios em `\ABNTEXartigoSetup` | elementos iniciais, introdução, desenvolvimento, considerações finais e referências |
 | Relatório | `perfil=relatorio` | título, autoria, instituição, local e data; dados próprios em `\ABNTEXrelatorioSetup` | folha de rosto, resumo, sumário, três divisões, catalogação ou formulário e referências quando houver citações |
+| Livro | `perfil=livro`, `tipo=livro|folheto` | título, local e data; autorias, editora, ISBN, direitos e catalogação em `\ABNTEXlivroSetup` | capa, folha de rosto, créditos, sumário, corpo e elementos condicionais declarados |
 
-Há ainda os identificadores experimentais `nenhum` e `livro`.
-`nenhum` permite usar os módulos gerais sem um fluxo documental específico.
-O perfil `livro` ainda não possui implementação completa e não deve ser usado
-como modelo final.
+O identificador experimental `nenhum` permite usar os módulos gerais sem um
+fluxo documental específico.
 
 ### Estrutura mínima do arquivo
 
@@ -506,6 +511,35 @@ verificados. Ao final, inclua dados catalográficos com
 O exemplo completo está em
 [`examples/relatorio-tecnico.tex`](examples/relatorio-tecnico.tex).
 
+### Perfil de livro ou folheto
+
+Use `perfil=livro` sobre `book` ou `report`. Além dos metadados gerais,
+declare os dados editoriais e registre cada autoria separadamente:
+
+```tex
+\usepackage[perfil=livro, citacoes=autor-data]{abntex3}
+\ABNTEXlivroSetup{
+  tipo=livro,
+  meio=impresso,
+  editora={Editora Exemplo},
+  isbn={978-65-00000-00-0},
+  numero-paginas=120,
+  ano-direito-autoral={2026},
+  detentor-direito-autoral={Editora Exemplo},
+  direito-reproducao={Texto definido pela editora},
+  dados-catalogacao={Ficha fornecida por profissional habilitado}
+}
+\ABNTEXlivroautor{Ana Silva}{autora}
+```
+
+No documento, coordene `\ABNTEXlivroexterna`,
+`\ABNTEXlivropretextual`, `\ABNTEXlivrotextual` e
+`\ABNTEXlivropostextual`. O pacote valida capa, folha de rosto, créditos,
+sumário e corpo, além de lombada, folhas de guarda, referências e índice
+quando declarados. O arquivo [`examples/livro.tex`](examples/livro.tex)
+demonstra o fluxo completo; a referência está em
+[`docs/profile-book.md`](docs/profile-book.md).
+
 ### Recursos comuns aos perfis
 
 #### Citações, figuras e tabelas
@@ -601,7 +635,8 @@ normais; elas devem desaparecer nas passagens finais.
 Os comandos coordenadores registram a ordem das partes e, ao final, avisam
 sobre metadados ou elementos obrigatórios ausentes. Também é possível chamar
 explicitamente `\ABNTEXvalidateacademico`, `\ABNTEXvalidateprojeto`,
-`\ABNTEXvalidateartigo` ou `\ABNTEXvalidaterelatorio`.
+`\ABNTEXvalidateartigo`, `\ABNTEXvalidaterelatorio` ou
+`\ABNTEXvalidatelivro`.
 
 A validação confirma completude técnica observável. Ela não:
 
@@ -625,7 +660,8 @@ O fluxo completo de tese, dissertação, TCC ou monografia está em
 O perfil de projeto de pesquisa está documentado em
 [`docs/profile-project.md`](docs/profile-project.md), o perfil de artigo em
 [`docs/profile-article.md`](docs/profile-article.md) e o perfil de relatório em
-[`docs/profile-report.md`](docs/profile-report.md).
+[`docs/profile-report.md`](docs/profile-report.md). O perfil de livro ou
+folheto está em [`docs/profile-book.md`](docs/profile-book.md).
 
 ## Desenvolvimento
 

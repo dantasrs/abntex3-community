@@ -21,6 +21,7 @@ substituem decisões institucionais, conteúdo científico ou leitura das normas
 | `modelo-artigo-uma-coluna-completo.tex` | artigo | uma coluna |
 | `modelo-artigo-duas-colunas-completo.tex` | artigo | duas colunas |
 | `modelo-relatorio-cientifico-completo.tex` | relatório | científico |
+| `livro.tex` | livro | livro impresso, capa dura e com índice |
 
 Todos ficam em `examples/` e compartilham apenas o arquivo bibliográfico
 `referencias-exemplo.bib`. Cada `.tex` contém sua configuração, seus metadados
@@ -28,29 +29,29 @@ e todo o corpo documental, de modo que possa ser copiado como ponto de partida.
 
 ## Matriz de cobertura
 
-| Grupo observável | Acadêmicos | Projeto | Artigos | Relatório |
-| --- | --- | --- | --- | --- |
-| Capa | obrigatória, presente | opcional, presente | não aplicável | opcional, presente |
-| Lombada | prova opcional, presente | prova opcional, presente | não aplicável | prova opcional, presente |
-| Folha de rosto | presente | presente | não aplicável | própria, presente |
-| Ficha catalográfica/formulário | ponto de extensão presente | não aplicável | não aplicável | formulário presente |
-| Errata | presente | não aplicável | não aplicável | presente |
-| Folha de aprovação | presente | não aplicável | não aplicável | não aplicável |
-| Dedicatória, agradecimentos e epígrafe pré-textuais | presentes | não aplicáveis | não aplicáveis | agradecimentos presentes |
-| Resumos e palavras-chave em dois idiomas | presentes | não aplicáveis | presentes | vernáculo presente |
-| Autoria múltipla, vínculos e contatos | metadado geral | metadado geral | duas autorias presentes | autoria e equipe presentes |
-| Datas editoriais e identificação de acesso | não aplicáveis | não aplicáveis | presentes | dados do formulário presentes |
-| Listas de ilustrações e tabelas | presentes | presentes | não previstas pelo perfil | presentes |
-| Abreviaturas, siglas e símbolos | presentes | presentes | não previstas pelo perfil | presentes |
-| Sumário | presente | presente | não aplicável | presente |
-| Estrutura textual do perfil | capítulos demonstrativos | cinco divisões específicas | três divisões específicas | três divisões específicas |
-| Citação narrativa, parentética, longa e nota | presentes | presentes | presentes | parentética presente |
-| Figura, tabela, legenda e fonte | presentes | presentes | presentes | presentes |
-| Referências | presentes | presentes | presentes | presentes |
-| Glossário | presente | presente | presente | presente |
-| Apêndice e anexo | presentes | presentes | presentes | presentes |
-| Índice remissivo | presente | presente | não previsto pelo perfil | presente |
-| Agradecimentos finais | não aplicáveis | não aplicáveis | presentes e por último | não aplicáveis |
+| Grupo observável | Acadêmicos | Projeto | Artigos | Relatório | Livro |
+| --- | --- | --- | --- | --- | --- |
+| Capa | obrigatória, presente | opcional, presente | não aplicável | opcional, presente | prova editorial presente |
+| Lombada | prova opcional, presente | prova opcional, presente | não aplicável | prova opcional, presente | prova presente |
+| Folha de rosto | presente | presente | não aplicável | própria, presente | própria, presente |
+| Ficha catalográfica/formulário | ponto de extensão presente | não aplicável | não aplicável | formulário presente | dados catalográficos presentes |
+| Errata | presente | não aplicável | não aplicável | presente | presente |
+| Folha de aprovação | presente | não aplicável | não aplicável | não aplicável | não aplicável |
+| Dedicatória, agradecimentos e epígrafe pré-textuais | presentes | não aplicáveis | não aplicáveis | agradecimentos presentes | presentes |
+| Resumos e palavras-chave em dois idiomas | presentes | não aplicáveis | presentes | vernáculo presente | não aplicáveis |
+| Autoria múltipla, vínculos e contatos | metadado geral | metadado geral | duas autorias presentes | autoria e equipe presentes | duas autorias e colaboração presentes |
+| Datas editoriais e identificação de acesso | não aplicáveis | não aplicáveis | presentes | dados do formulário presentes | edição, ISBN e direitos presentes |
+| Listas de ilustrações e tabelas | presentes | presentes | não previstas pelo perfil | presentes | presentes |
+| Abreviaturas, siglas e símbolos | presentes | presentes | não previstas pelo perfil | presentes | sigla presente |
+| Sumário | presente | presente | não aplicável | presente | presente |
+| Estrutura textual do perfil | capítulos demonstrativos | cinco divisões específicas | três divisões específicas | três divisões específicas | parte e dois capítulos |
+| Citação narrativa, parentética, longa e nota | presentes | presentes | presentes | parentética presente | parentética presente |
+| Figura, tabela, legenda e fonte | presentes | presentes | presentes | presentes | presentes |
+| Referências | presentes | presentes | presentes | presentes | presentes |
+| Glossário | presente | presente | presente | presente | presente |
+| Apêndice e anexo | presentes | presentes | presentes | presentes | presentes |
+| Índice remissivo | presente | presente | não previsto pelo perfil | presente | presente |
+| Agradecimentos finais | não aplicáveis | não aplicáveis | presentes e por último | não aplicáveis | não aplicáveis |
 
 A lista combinada de abreviaturas e siglas foi escolhida nos modelos. As APIs
 de listas separadas continuam demonstradas em `elementos-pretextuais.tex`;
