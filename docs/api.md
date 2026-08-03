@@ -6,6 +6,14 @@ de layout, pré-textual e pós-textual e os perfis acadêmico, de projeto, de
 artigo, de relatório e de livro possuem rastreabilidade normativa, mas ainda aguardam
 revisão independente e não fazem alegação de conformidade.
 
+## Compatibilidade durante a migração
+
+O módulo opcional `abntex3-compat` fornece aliases temporários para metadados,
+fases e elementos do abnTeX2 que têm correspondência direta. Ele é carregado
+separadamente, emite avisos de depreciação e não faz parte da API nativa a ser
+preservada. A classificação completa está em
+[`compatibilidade.md`](compatibilidade.md).
+
 ## Carregamento e classes
 
 O pacote deve ser carregado sobre `article`, `report` ou `book`:
