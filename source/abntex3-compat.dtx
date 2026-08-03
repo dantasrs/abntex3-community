@@ -1,0 +1,121 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\begin{document}
+  \DocInput{abntex3-compat.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\pkg{abntex3-compat}: compatibilidade limitada com o abnTeX2}
+% \author{dantasrs}
+% \date{2026-08-03 v0.0.0}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Escopo}
+%
+% Este módulo opcional oferece aliases somente para metadados, transições de
+% fase e elementos com correspondência direta. Cada uso emite aviso de
+% depreciação com a interface nativa recomendada. Ele não carrega a classe
+% \pkg{abntex2}, não aceita \pkg{abntex2cite} e não reproduz interfaces do
+% \pkg{memoir}. Consulte \file{docs/compatibilidade.md} antes de ativá-lo.
+%
+% \begin{verbatim}
+% \documentclass{report}
+% \usepackage[perfil=academico,tipo-trabalho=tese]{abntex3}
+% \usepackage{abntex3-compat}
+% \titulo{Título legado em migração}
+% \autor{Nome}
+% \end{verbatim}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+% \section{Implementação}
+%    \begin{macrocode}
+%<@@=abntex>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage{abntex3-compat}
+  {2026-08-03}{0.0.0}
+  {Compatibilidade limitada do abnTeX3 Community com o abnTeX2}
+
+\RequirePackage{abntex3}
+
+\cs_new_protected:Npn \__abntex_compat_warn:nn #1#2
+  {\__abntex_warn_deprecated:nn {#1} {#2}}
+\cs_new_protected:Npn \__abntex_compat_metadata:nnn #1#2#3
+  {
+    \__abntex_compat_warn:nn {#1} {\ABNTEXsetup\{#2=...\}}
+    \ABNTEXsetup {#2={#3}}
+  }
+
+\NewDocumentCommand \titulo {m}
+  {\__abntex_compat_metadata:nnn {\titulo} {titulo} {#1}}
+\NewDocumentCommand \autor {m}
+  {\__abntex_compat_metadata:nnn {\autor} {autoria} {#1}}
+\NewDocumentCommand \instituicao {m}
+  {\__abntex_compat_metadata:nnn {\instituicao} {instituicao} {#1}}
+\NewDocumentCommand \orientador {m}
+  {\__abntex_compat_metadata:nnn {\orientador} {orientacao} {#1}}
+\NewDocumentCommand \coorientador {m}
+  {\__abntex_compat_metadata:nnn {\coorientador} {coorientacao} {#1}}
+\NewDocumentCommand \local {m}
+  {\__abntex_compat_metadata:nnn {\local} {local} {#1}}
+\NewDocumentCommand \data {m}
+  {\__abntex_compat_metadata:nnn {\data} {data} {#1}}
+
+\NewDocumentCommand \imprimirtitulo {}
+  {\__abntex_compat_warn:nn {\imprimirtitulo} {\ABNTEXmetadata\{titulo\}}
+   \ABNTEXmetadata{titulo}}
+\NewDocumentCommand \imprimirautor {}
+  {\__abntex_compat_warn:nn {\imprimirautor} {\ABNTEXmetadata\{autoria\}}
+   \ABNTEXmetadata{autoria}}
+\NewDocumentCommand \imprimirinstituicao {}
+  {\__abntex_compat_warn:nn {\imprimirinstituicao} {\ABNTEXmetadata\{instituicao\}}
+   \ABNTEXmetadata{instituicao}}
+\NewDocumentCommand \imprimirorientador {}
+  {\__abntex_compat_warn:nn {\imprimirorientador} {\ABNTEXmetadata\{orientacao\}}
+   \ABNTEXmetadata{orientacao}}
+\NewDocumentCommand \imprimircoorientador {}
+  {\__abntex_compat_warn:nn {\imprimircoorientador} {\ABNTEXmetadata\{coorientacao\}}
+   \ABNTEXmetadata{coorientacao}}
+\NewDocumentCommand \imprimirlocal {}
+  {\__abntex_compat_warn:nn {\imprimirlocal} {\ABNTEXmetadata\{local\}}
+   \ABNTEXmetadata{local}}
+\NewDocumentCommand \imprimirdata {}
+  {\__abntex_compat_warn:nn {\imprimirdata} {\ABNTEXmetadata\{data\}}
+   \ABNTEXmetadata{data}}
+
+\NewDocumentCommand \pretextual {}
+  {\__abntex_compat_warn:nn {\pretextual} {\ABNTEXpretextualpages}
+   \ABNTEXpretextualpages}
+\NewDocumentCommand \textual {}
+  {\__abntex_compat_warn:nn {\textual} {\ABNTEXtextualpages}
+   \ABNTEXtextualpages}
+\NewDocumentCommand \postextual {}
+  {\__abntex_compat_warn:nn {\postextual} {\ABNTEXposttextualpages}
+   \ABNTEXposttextualpages}
+\NewDocumentCommand \imprimircapa {}
+  {\__abntex_compat_warn:nn {\imprimircapa} {\ABNTEXcapa}
+   \ABNTEXcapa}
+\NewDocumentCommand \imprimirfolhaderosto {s}
+  {\__abntex_compat_warn:nn {\imprimirfolhaderosto} {\ABNTEXfolhaderosto}
+   \ABNTEXfolhaderosto}
+\NewDocumentCommand \fonte {m}
+  {\__abntex_compat_warn:nn {\fonte} {\ABNTEXfonte}
+   \ABNTEXfonte{#1}}
+\NewDocumentCommand \nota {m}
+  {\__abntex_compat_warn:nn {\nota} {\ABNTEXnota}
+   \ABNTEXnota{#1}}
+
+\endinput
+%</package>
+%    \end{macrocode}
+% \end{implementation}
+% \Finale
