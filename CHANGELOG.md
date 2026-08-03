@@ -4,6 +4,13 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
 ## Não publicado
 
+### Alterado
+
+- LuaLaTeX passa a ser o único motor suportado no build, na CI, nos exemplos e
+  na validação da distribuição; outros motores recebem erro explícito.
+- A política de motor é registrada na ADR 0005 e em instruções persistentes no
+  `AGENTS.md` para uso consistente em diferentes máquinas.
+
 ### Adicionado
 
 - Inventário e tabela de migração das interfaces canônicas do abnTeX2.

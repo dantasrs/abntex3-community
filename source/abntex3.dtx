@@ -1,7 +1,6 @@
 % \iffalse
 %<*driver>
 \documentclass{l3doc}
-\usepackage[T1]{fontenc}
 \usepackage[brazilian]{babel}
 \begin{document}
   \DocInput{abntex3.dtx}
@@ -61,6 +60,12 @@
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesExplPackage{abntex3}
   {2026-07-29}{0.0.0}{Nucleo estrutural do abnTeX3 Community}
+
+\msg_new:nnnn {abntex3} {luatex-required}
+  {O~abnTeX3~Community~exige~LuaLaTeX.}
+  {Compile~este~documento~com~lualatex.}
+\sys_if_engine_luatex:F
+  {\msg_fatal:nn {abntex3} {luatex-required}}
 
 \RequirePackage{abntex3-core}
 \RequirePackage{abntex3-layout}

@@ -72,8 +72,8 @@ de uso das normas.
 
 - [x] **Marco 0 — Fundação:** governança, independência, licença, arquitetura
   e matriz normativa inicial.
-- [x] **Marco 1 — Infraestrutura:** fontes documentadas, `l3build`, testes nos
-  três motores, CI e pacote CTAN de ensaio.
+- [x] **Marco 1 — Infraestrutura:** fontes documentadas, `l3build`, testes com
+  LuaLaTeX, CI e pacote CTAN de ensaio.
 - [x] **Marco 2 — Núcleo e API:** configuração, metadados, perfis e suporte
   inicial a `article`, `report` e `book`.
 - [x] **Marco 3 — Estrutura:** numeração progressiva, seções, sumário,
@@ -165,6 +165,20 @@ documental completo.
 
 ### Instalação
 
+O abnTeX3 Community suporta exclusivamente LuaLaTeX. Use uma instalação TeX
+Live que inclua LuaLaTeX, `l3build`, `biblatex-abnt`, `biber` e as demais
+dependências dos recursos escolhidos.
+
+As normas gerais no escopo não determinam uma família como Arial ou Times New
+Roman: a ABNT NBR 14724:2024, 5.1, recomenda o tamanho; a ABNT NBR 10719:2015,
+5.1, exige padronização; e a ABNT NBR 6022:2018, 6.1, deixa o projeto gráfico
+do artigo a critério editorial. O pacote, portanto, não impõe família
+tipográfica. Para trabalhos acadêmicos, uma família Times é uma escolha
+prática frequentemente aceita por regulamentos institucionais, mas o manual
+local sempre prevalece. Consulte a [política tipográfica](docs/layout.md) para
+configuração com `fontspec` e para distinguir Times New Roman de alternativas
+compatíveis.
+
 O pacote ainda não foi publicado no CTAN. Para instalar a versão de
 desenvolvimento na árvore pessoal do TeX, use:
 
@@ -229,7 +243,6 @@ metadados:
 
 ```tex
 \documentclass[12pt]{report}
-\usepackage[T1]{fontenc}
 \usepackage[brazilian]{babel}
 \usepackage{csquotes}
 \usepackage[
@@ -609,26 +622,26 @@ pode representar uma escolha institucional deliberada.
 
 ### Compilação
 
-Para um documento simples, duas execuções de `pdflatex` atualizam referências
+Para um documento simples, duas execuções de `lualatex` atualizam referências
 internas, listas e sumário. Com bibliografia processada pelo `biber`, use:
 
 ```sh
-pdflatex trabalho.tex
+lualatex trabalho.tex
 biber trabalho
-pdflatex trabalho.tex
-pdflatex trabalho.tex
+lualatex trabalho.tex
+lualatex trabalho.tex
 ```
 
 Se houver glossário ou índice, execute também os respectivos processadores
 entre a primeira e as últimas passagens:
 
 ```sh
-pdflatex trabalho.tex
+lualatex trabalho.tex
 biber trabalho
 makeglossaries trabalho
 makeindex trabalho
-pdflatex trabalho.tex
-pdflatex trabalho.tex
+lualatex trabalho.tex
+lualatex trabalho.tex
 ```
 
 O nome passado a `biber`, `makeglossaries` e `makeindex` não inclui a extensão
@@ -682,7 +695,7 @@ l3build ctan
 ./scripts/validate-distribution.sh
 ```
 
-`l3build check` executa os testes com pdfTeX, LuaTeX e XeTeX. A integração
+`l3build check` executa os testes exclusivamente com LuaLaTeX. A integração
 contínua repete a suíte no TeX Live 2024, 2025 e 2026. `l3build ctan` já
 executa testes e documentação antes de empacotar; por isso o trabalho de
 distribuição não repete esses comandos. O último comando valida o pacote CTAN
@@ -696,6 +709,8 @@ também são sempre completas.
 
 ## Governança e colaboração
 
+- [`AGENTS.md`](AGENTS.md) — decisões operacionais persistentes entre máquinas
+  e agentes;
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — fluxo e requisitos das contribuições;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — padrões de convivência;
 - [`SECURITY.md`](SECURITY.md) — relato privado de vulnerabilidades;

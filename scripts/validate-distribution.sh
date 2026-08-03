@@ -77,7 +77,7 @@ compile_example() {
     (
       cd "${run_dir}"
       TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
-        pdflatex -interaction=nonstopmode -halt-on-error \
+        lualatex -interaction=nonstopmode -halt-on-error \
           "${example}.tex" >/dev/null
       if [[ "${example}" == "pos-textuais-bibliografia" || \
             "${example}" == "trabalho-academico" || \
@@ -108,16 +108,16 @@ compile_example() {
           makeglossaries "${example}" >/dev/null
         fi
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
-          pdflatex -interaction=nonstopmode -halt-on-error \
+          lualatex -interaction=nonstopmode -halt-on-error \
             "${example}.tex" >/dev/null
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
-          pdflatex -interaction=nonstopmode -halt-on-error \
+          lualatex -interaction=nonstopmode -halt-on-error \
             "${example}.tex" >/dev/null
       elif [[ "${example}" == "estrutura-sumario" || \
             "${example}" == "layout-paginacao" || \
             "${example}" == "elementos-pretextuais" ]]; then
         TEXMFHOME="${texmf_home}" TEXMFVAR="${run_dir}/texmf-var" \
-          pdflatex -interaction=nonstopmode -halt-on-error \
+          lualatex -interaction=nonstopmode -halt-on-error \
             "${example}.tex" >/dev/null
       fi
     )

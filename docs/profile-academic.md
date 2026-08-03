@@ -88,10 +88,10 @@ pós-graduação nem conformidade semântica das referências.
 apresenta uma dissertação completa. Como o exemplo possui bibliografia, use:
 
 ```sh
-pdflatex trabalho-academico
+lualatex trabalho-academico
 biber trabalho-academico
-pdflatex trabalho-academico
-pdflatex trabalho-academico
+lualatex trabalho-academico
+lualatex trabalho-academico
 ```
 
 O exemplo usa `biblatex-abnt` por meio da opção explícita

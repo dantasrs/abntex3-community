@@ -70,19 +70,19 @@ Uma pessoa avaliadora pode:
 6. registrar achados sem considerar o próprio modelo uma declaração de
    conformidade.
 
-O ensaio automatizado executa `pdflatex`, `biber`, `makeindex` quando
-aplicável, `makeglossaries` e novas passagens de `pdflatex` tanto na instalação
+O ensaio automatizado executa `lualatex`, `biber`, `makeindex` quando
+aplicável, `makeglossaries` e novas passagens de `lualatex` tanto na instalação
 isolada quanto no pacote TDS.
 
 Para reproduzir manualmente um modelo acadêmico ou de projeto:
 
 ```sh
-pdflatex modelo-tese-completo.tex
+lualatex modelo-tese-completo.tex
 biber modelo-tese-completo
 makeindex modelo-tese-completo
 makeglossaries modelo-tese-completo
-pdflatex modelo-tese-completo.tex
-pdflatex modelo-tese-completo.tex
+lualatex modelo-tese-completo.tex
+lualatex modelo-tese-completo.tex
 ```
 
 Nos dois artigos, omita apenas a chamada a `makeindex`, pois o índice remissivo
