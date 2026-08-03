@@ -22,6 +22,7 @@ docfiles = {
   "docs/profile-report.md",
   "docs/profile-book.md",
   "docs/compatibilidade.md",
+  "docs/qualidade-portabilidade.md",
   "docs/structure.md",
   "docs/requisitos/*.md"
 }

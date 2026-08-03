@@ -13,6 +13,15 @@ Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
 ### Adicionado
 
+- Suíte multiplataforma com LuaLaTeX no Linux, Windows e macOS.
+- Metadados de título, autoria, assunto, palavras-chave e idioma integrados ao
+  `hyperref`, com testes de marcadores e ligações.
+- Testes de interoperabilidade com pacotes comuns e conteúdo em português e
+  inglês por `babel` e `polyglossia`.
+- Auditoria de mensagens públicas, desempenho, dependências e regressão visual
+  de página canônica.
+- Política inicial de estudo de PDF/UA e inventário explícito de limitações de
+  acessibilidade e portabilidade.
 - Inventário e tabela de migração das interfaces canônicas do abnTeX2.
 - Guia de migração para a API do abnTeX3 e para `biblatex-abnt`/`biber`.
 - Módulo opcional `abntex3-compat` com aliases temporários, diagnósticos de

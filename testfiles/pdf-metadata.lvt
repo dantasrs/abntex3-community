@@ -1,0 +1,27 @@
+\input regression-test.tex
+\documentclass{article}
+\usepackage[brazilian]{babel}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{abntex3}
+
+\ABNTEXsetup{
+  titulo={Qualidade do PDF},
+  autoria={Equipe abnTeX3},
+  assunto-pdf={Auditoria de metadados},
+  palavras-chave-pdf={LaTeX, acessibilidade, qualidade},
+  idioma-pdf={pt-BR}
+}
+
+\begin{document}
+\START
+\TYPE{title=\ABNTEXmetadata{titulo}}
+\TYPE{author=\ABNTEXmetadata{autoria}}
+\TYPE{subject=\ABNTEXmetadata{assunto-pdf}}
+\TYPE{keywords=\ABNTEXmetadata{palavras-chave-pdf}}
+\makeatletter
+\TYPE{language=\@pdflang}
+\TYPE{display-title=\ifHy@pdfdisplaydoctitle true\else false\fi}
+\makeatother
+\END
+\end{document}

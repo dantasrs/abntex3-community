@@ -1,0 +1,43 @@
+\documentclass{article}
+
+\usepackage[brazilian,english]{babel}
+\usepackage{geometry}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{abntex3}
+
+\makeindex
+
+\ABNTEXsetup{
+  titulo={Auditoria de qualidade do PDF},
+  autoria={Equipe abnTeX3 Community},
+  assunto-pdf={Portabilidade, metadados e acessibilidade},
+  palavras-chave-pdf={LaTeX, PDF, qualidade, portabilidade},
+  idioma-pdf={pt-BR}
+}
+
+\title{\ABNTEXmetadata{titulo}}
+\author{\ABNTEXmetadata{autoria}}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Qualidade e portabilidade}
+
+Este documento contém ações, órgãos e informações em português. O
+\href{https://github.com/dantasrs/abntex3-community}{repositório do projeto}
+é uma ligação externa verificável. O termo qualidade\index{qualidade} também
+alimenta o índice de ensaio.
+
+\begin{otherlanguage}{english}
+\section{Additional language}
+
+This paragraph verifies a second language without changing the primary PDF
+language metadata.
+\end{otherlanguage}
+
+\end{document}

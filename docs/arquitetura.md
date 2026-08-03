@@ -93,6 +93,7 @@ abntex3-community/
 │   ├── modelo-relatorio-cientifico-completo.tex
 │   ├── relatorio-tecnico.tex
 │   ├── livro.tex
+│   ├── qualidade-pdf.tex
 │   └── referencias.bib
 ├── testfiles/
 │   ├── support/
@@ -143,11 +144,18 @@ abntex3-community/
 │   ├── book-flow.tlg
 │   ├── book-types.lvt
 │   ├── book-types.tlg
+│   ├── interop-packages.lvt
+│   ├── interop-packages.tlg
+│   ├── interop-polyglossia.lvt
+│   ├── interop-polyglossia.tlg
+│   ├── pdf-metadata.lvt
+│   ├── pdf-metadata.tlg
 │   ├── biblatex-author-year.lvt
 │   ├── biblatex-author-year.tlg
 │   ├── biblatex-numeric.lvt
 │   └── biblatex-numeric.tlg
 ├── scripts/
+│   ├── quality-audit.sh
 │   └── validate-distribution.sh
 ├── docs/
 │   ├── arquitetura.md
@@ -163,6 +171,7 @@ abntex3-community/
 │   ├── normas.md
 │   ├── conformidade.md
 │   ├── compatibilidade.md
+│   ├── qualidade-portabilidade.md
 │   ├── versionamento.md
 │   ├── requisitos/
 │   │   ├── nbr-6022-2018.md
@@ -182,7 +191,9 @@ abntex3-community/
 │       ├── 0001-pacote-em-vez-de-classe.md
 │       ├── 0002-integracao-biblatex-abnt.md
 │       ├── 0003-motores-e-versoes.md
-│       └── 0004-politica-de-compatibilidade.md
+│       ├── 0004-politica-de-compatibilidade.md
+│       ├── 0005-lualatex-exclusivo.md
+│       └── 0006-matriz-qualidade-portabilidade.md
 ├── bases/                         # somente local; nunca versionar
 ├── .gitignore
 ├── build.lua
@@ -196,12 +207,12 @@ abntex3-community/
 └── manifest.txt
 ```
 
-Os arquivos já materializados até o Marco 11 formam a infraestrutura mínima,
+Os arquivos já materializados até o Marco 13 formam a infraestrutura mínima,
 os módulos normativos gerais e os perfis acadêmico, de projeto de pesquisa,
 artigo, relatório técnico ou científico e livro ou folheto, todos ainda
-pendentes de revisão normativa independente. Os demais itens da árvore são
-criados apenas no marco
-em que sua responsabilidade é implementada.
+pendentes de revisão normativa independente, além da camada de migração e da
+infraestrutura de qualidade e portabilidade. Os demais itens da árvore são
+criados apenas no marco em que sua responsabilidade é implementada.
 
 ## Responsabilidade dos módulos
 
@@ -259,6 +270,11 @@ Durante o desenvolvimento inicial, serão suportadas a versão corrente e as
 duas versões anuais anteriores do TeX Live, sujeitas à disponibilidade dos
 executores de CI. A política vigente está registrada na ADR 0005; a ADR 0003
 permanece apenas como histórico da decisão substituída.
+
+A suíte histórica roda em Linux; a versão corrente também roda em Windows e
+macOS. Auditoria de PDF, desempenho, mensagens e regressão visual permanece em
+Linux controlado, conforme a
+[ADR 0006](decisoes/0006-matriz-qualidade-portabilidade.md).
 
 ## Arquivos que não devem ser criados
 

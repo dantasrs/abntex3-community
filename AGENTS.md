@@ -70,3 +70,6 @@ explícita do usuário.
 - Não inclua PDFs de normas, conteúdo de `bases/` ou artefatos gerados no Git.
 - Antes de publicar mudanças técnicas, execute `git diff --check`,
   `l3build check` e as validações adicionais descritas em `CONTRIBUTING.md`.
+- Preserve a matriz de LuaLaTeX no Linux, Windows e macOS definida na ADR 0006.
+- Execute `scripts/quality-audit.sh` em mudanças que afetem o PDF. Atualize a
+  baseline visual somente depois de inspecionar uma alteração intencional.

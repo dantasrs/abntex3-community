@@ -33,7 +33,8 @@
 %   Recupera de forma expansível um metadado configurado. Os nomes aceitos
 %   são |titulo|, |subtitulo|, |autoria|, |instituicao|, |natureza|,
 %   |objetivo|, |area|, |orientacao|, |coorientacao|, |volume|, |local| e
-%   |data|.
+%   |data|. Para o PDF também existem |assunto-pdf|, |palavras-chave-pdf| e
+%   |idioma-pdf|.
 % \end{function}
 %
 % \begin{function}{\ABNTEXprofile,\ABNTEXclass}
@@ -120,7 +121,8 @@
 \clist_map_inline:nn
   {
     titulo, subtitulo, autoria, instituicao, natureza,
-    objetivo, area, orientacao, coorientacao, volume, local, data
+    objetivo, area, orientacao, coorientacao, volume, local, data,
+    assunto-pdf, palavras-chave-pdf, idioma-pdf
   }
   {\prop_gput:Nnn \g__abntex_metadata_prop {#1} {}}
 
@@ -167,7 +169,14 @@
     local .code:n =
       {\prop_gput:Nnn \g__abntex_metadata_prop {local} {#1}},
     data .code:n =
-      {\prop_gput:Nnn \g__abntex_metadata_prop {data} {#1}}
+      {\prop_gput:Nnn \g__abntex_metadata_prop {data} {#1}},
+    assunto-pdf .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {assunto-pdf} {#1}},
+    palavras-chave-pdf .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {palavras-chave-pdf} {#1}},
+    idioma-pdf .code:n =
+      {\prop_gput:Nnn \g__abntex_metadata_prop {idioma-pdf} {#1}},
+    idioma-pdf .initial:n = pt-BR
   }
 
 \cs_new_protected:Npn \__abntex_report_package_conflict:n #1
@@ -221,7 +230,7 @@
       }
     \seq_map_inline:Nn \g__abntex_missing_metadata_seq
       {
-        \msg_warning:nnnn {abntex3} {required-metadata-missing}
+        \msg_warning:nnxx {abntex3} {required-metadata-missing}
           {##1} {\tl_use:N \g__abntex_profile_tl}
       }
   }
@@ -235,6 +244,28 @@
     \__abntex_check_loaded_conflicts:
     \bool_if:NT \g__abntex_debug_bool
       {\msg_info:nn {abntex3} {debug-enabled}}
+  }
+
+\cs_new_protected:Npn \abntex_pdf_initialize:
+  {
+    \@ifpackageloaded {hyperref}
+      {
+        \hypersetup
+          {
+            pdftitle={\prop_item:Nn \g__abntex_metadata_prop {titulo}},
+            pdfauthor={\prop_item:Nn \g__abntex_metadata_prop {autoria}},
+            pdfsubject={\prop_item:Nn \g__abntex_metadata_prop {assunto-pdf}},
+            pdfkeywords={\prop_item:Nn \g__abntex_metadata_prop
+              {palavras-chave-pdf}},
+            pdflang={\prop_item:Nn \g__abntex_metadata_prop {idioma-pdf}},
+            pdfcreator={abnTeX3~Community~com~LuaLaTeX},
+            pdfdisplaydoctitle=true,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            unicode=true
+          }
+      }
+      {}
   }
 
 \NewDocumentCommand \ABNTEXsetup {m}

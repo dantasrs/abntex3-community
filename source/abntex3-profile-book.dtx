@@ -261,15 +261,15 @@
         \tl_if_eq:NnTF \g__abntex_book_type_tl {folheto}
           {
             \int_compare:nNnT {\g__abntex_book_pages_int} < {5}
-              {\msg_warning:nnnn {abntex3} {book-page-range}
+              {\msg_warning:nnxx {abntex3} {book-page-range}
                 {folheto} {\int_use:N \g__abntex_book_pages_int}}
             \int_compare:nNnT {\g__abntex_book_pages_int} > {49}
-              {\msg_warning:nnnn {abntex3} {book-page-range}
+              {\msg_warning:nnxx {abntex3} {book-page-range}
                 {folheto} {\int_use:N \g__abntex_book_pages_int}}
           }
           {
             \int_compare:nNnT {\g__abntex_book_pages_int} < {50}
-              {\msg_warning:nnnn {abntex3} {book-page-range}
+              {\msg_warning:nnxx {abntex3} {book-page-range}
                 {livro} {\int_use:N \g__abntex_book_pages_int}}
           }
       }

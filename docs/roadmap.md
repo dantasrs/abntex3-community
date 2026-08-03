@@ -277,19 +277,22 @@ migração sem consultar o código-fonte.
 
 ## Marco 13 — Qualidade, acessibilidade e portabilidade
 
-- [ ] Executar a suíte em Linux, Windows e macOS.
-- [ ] Testar hiperlinks, marcadores e metadados do PDF.
-- [ ] Testar entradas em português e em idioma adicional.
-- [ ] Verificar mensagens sem vazamento de comandos internos.
-- [ ] Medir tempo de compilação e quantidade de dependências.
-- [ ] Testar interoperabilidade com `hyperref`, `bookmark`, `geometry`,
+- [x] Executar a suíte em Linux, Windows e macOS.
+- [x] Testar hiperlinks, marcadores e metadados do PDF.
+- [x] Testar entradas em português e em idioma adicional.
+- [x] Verificar mensagens sem vazamento de comandos internos.
+- [x] Medir tempo de compilação e quantidade de dependências.
+- [x] Testar interoperabilidade com `hyperref`, `bookmark`, `geometry`,
       `microtype`, `babel`, `polyglossia`, `glossaries-extra` e `makeidx`.
-- [ ] Definir política inicial de PDF/UA como estudo, sem alegação prematura.
-- [ ] Executar análise de regressões visuais para páginas canônicas.
-- [ ] Documentar limitações conhecidas.
-- [ ] Resolver todos os avisos bloqueadores.
+- [x] Definir política inicial de PDF/UA como estudo, sem alegação prematura.
+- [x] Executar análise de regressões visuais para páginas canônicas.
+- [x] Documentar limitações conhecidas.
+- [x] Resolver todos os avisos bloqueadores.
 
 **Critério de saída:** candidato a beta portável e com limitações explícitas.
+
+**Estado:** implementação técnica concluída; a portabilidade permanece sujeita
+à execução contínua da matriz e às limitações documentadas.
 
 ## Marco 14 — Alfa e beta públicos
 
