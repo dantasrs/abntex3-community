@@ -56,6 +56,39 @@ explícita do usuário.
 - Ao concluir um marco, valide, faça commit, envie a branch e abra um PR. O PR
   começa como rascunho, salvo instrução contrária do usuário.
 
+## Checkpoint compartilhado — 2026-08-03
+
+Este checkpoint registra a passagem para a fase pública do Marco 14. Ele é
+histórico: se `origin/main` estiver adiante dos identificadores abaixo, o
+estado online mais recente prevalece e deve ser investigado antes de agir.
+
+- O PR #20, do Marco 13, e o PR #21, de preparação da alfa, foram mesclados.
+- A `origin/main` apontava para `77cf7db` ao registrar este checkpoint.
+- A tag anotada `v0.1.0-alpha.1` aponta para esse merge e já foi enviada.
+- A pré-release pública está em
+  <https://github.com/dantasrs/abntex3-community/releases/tag/v0.1.0-alpha.1>.
+- O workflow de release terminou com sucesso e publicou
+  `abntex3-ctan.zip`, `abntex3.tds.zip` e `SHA256SUMS`.
+- As branches remotas dos PRs #20 e #21 foram removidas após os merges; não as
+  recrie. Em outra máquina, uma branch local correspondente pode aparecer com
+  upstream `gone`.
+- Não recrie, mova ou envie novamente a tag `v0.1.0-alpha.1`. Qualquer
+  correção publicada deve receber uma nova versão e uma nova tag.
+
+O próximo trabalho do Marco 14 é registrar no README e no roadmap que a alfa
+foi efetivamente publicada e, depois, organizar a coleta de experiências de
+uso e migração para preparar os betas `0.x`. Não avance ao Marco 15 nem envie
+ao CTAN enquanto as revisões normativas independentes e os demais critérios do
+Marco 14 estiverem pendentes.
+
+Ao retomar em outra máquina:
+
+1. execute a sequência obrigatória de verificação online deste arquivo;
+2. se a árvore estiver limpa, volte para `main` e avance somente com
+   `git merge --ff-only origin/main`;
+3. confirme a pré-release e os PRs abertos antes de escolher a tarefa;
+4. crie uma nova branch `agent/<descricao>` a partir da `main` sincronizada.
+
 ## Decisões técnicas atuais
 
 - LuaLaTeX é o único motor LaTeX suportado e usado em exemplos, testes,
