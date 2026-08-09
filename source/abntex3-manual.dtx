@@ -1,0 +1,241 @@
+% \iffalse
+%<*driver>
+\documentclass{l3doc}
+\usepackage[brazilian]{babel}
+\usepackage{booktabs}
+\begin{document}
+  \sloppy
+  \DocInput{abntex3-manual.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{Manual do \pkg{abntex3} Community}
+% \author{Rafael dos Santos Dantas}
+% \date{2026-08-03 v0.1.0-alpha.1}
+%
+% \maketitle
+% \tableofcontents
+%
+% \begin{documentation}
+%
+% \section{Apresentação}
+%
+% O \pkg{abntex3} Community é um pacote modular para produzir documentos
+% brasileiros sobre as classes usuais \cls{article}, \cls{report} e
+% \cls{book}. Esta primeira alfa é destinada a testes: não é recomendada para
+% produção, pode receber mudanças de API e não constitui alegação de
+% conformidade com normas da ABNT. LuaLaTeX é o único motor suportado.
+%
+% O pacote cuida da estrutura e apresentação documental. Citações e
+% referências são responsabilidade do \pkg{biblatex-abnt}, processado por
+% \texttt{biber}. Regras institucionais específicas devem permanecer no
+% documento ou em extensões externas ao núcleo.
+%
+% \section{Instalação}
+%
+% Para testar uma release, baixe \file{abntex3.tds.zip} e
+% \file{SHA256SUMS} na página de Releases, confira o resumo SHA-256 e extraia o
+% TDS em uma árvore TeX de ensaio. Também é possível instalar um checkout:
+%
+% \begin{verbatim}
+% git clone https://github.com/dantasrs/abntex3-community.git
+% cd abntex3-community
+% l3build install
+% \end{verbatim}
+%
+% A distribuição TeX precisa oferecer LuaLaTeX. Documentos com bibliografia
+% também precisam de \pkg{biblatex-abnt} e \texttt{biber}. O pacote ainda não
+% está no CTAN; os artefatos alfa não devem substituir silenciosamente uma
+% instalação usada em produção.
+%
+% \section{Primeiro documento}
+%
+% \begin{verbatim}
+% \documentclass{report}
+% \usepackage[brazilian]{babel}
+% \usepackage[perfil=academico,tipo-trabalho=dissertacao]{abntex3}
+%
+% \ABNTEXsetup{
+%   titulo={Documento de ensaio},
+%   autoria={Nome da autoria},
+%   instituicao={Instituição},
+%   natureza={Dissertação},
+%   objetivo={apresentada para obtenção do título},
+%   area={Área de concentração},
+%   orientacao={Nome da orientação},
+%   local={Cidade},
+%   data={2026}
+% }
+%
+% \begin{document}
+% \ABNTEXacademicoexterna
+% \ABNTEXacademicopretextual
+% \ABNTEXfolhaderosto
+% \ABNTEXsumario
+% \ABNTEXacademicotextual
+% \chapter{Introdução}
+% Texto do documento.
+% \end{document}
+% \end{verbatim}
+%
+% As opções de carregamento são processadas primeiro. Chamadas posteriores de
+% \cs{ABNTEXsetup} têm precedência; em cada nível, a última atribuição de uma
+% chave prevalece.
+% \cs{ABNTEXvalidate} verifica os metadados técnicos do perfil selecionado.
+%
+% \section{Classe, perfil e tipo}
+%
+% A classe fornece a estrutura básica do LaTeX. O perfil coordena o fluxo e os
+% elementos de um gênero documental. O tipo é uma variação dentro de um
+% perfil. As combinações usuais são:
+%
+% \begin{center}
+% \begin{tabular}{lll}
+% \toprule
+% Documento & Classe sugerida & Configuração \\
+% \midrule
+% tese, dissertação, TCC & \cls{report} ou \cls{book} &
+%   \texttt{perfil=academico} \\
+% projeto de pesquisa & \cls{report} ou \cls{book} &
+%   \texttt{perfil=projeto} \\
+% artigo & \cls{article} & \texttt{perfil=artigo} \\
+% relatório & \cls{report} ou \cls{book} &
+%   \texttt{perfil=relatorio} \\
+% livro ou folheto & \cls{book} ou \cls{report} &
+%   \texttt{perfil=livro} \\
+% \bottomrule
+% \end{tabular}
+% \end{center}
+%
+% O perfil \texttt{nenhum} expõe módulos gerais sem impor um fluxo. As classes
+% \cls{abntex2}, \cls{memoir} e KOMA-Script não são suportadas nesta alfa.
+%
+% \section{Configuração comum}
+%
+% \cs{ABNTEXsetup}\marg{chaves} reúne metadados, layout e escolhas comuns.
+% Entre as chaves centrais estão \texttt{titulo}, \texttt{subtitulo},
+% \texttt{autoria}, \texttt{instituicao}, \texttt{natureza},
+% \texttt{objetivo}, \texttt{area}, \texttt{orientacao},
+% \texttt{coorientacao}, \texttt{volume}, \texttt{local} e \texttt{data}.
+% \cs{ABNTEXmetadata}\marg{nome} recupera um metadado documentado;
+% \cs{ABNTEXprofile} e \cs{ABNTEXclass} informam perfil e classe detectados.
+%
+% Para o PDF, use \texttt{assunto-pdf}, \texttt{palavras-chave-pdf} e
+% \texttt{idioma-pdf}. Com \pkg{hyperref} carregado, o pacote transfere título,
+% autoria e esses valores aos metadados do arquivo.
+%
+% \section{Layout, estrutura e fases}
+%
+% As chaves \texttt{papel}, \texttt{orientacao-papel}, \texttt{impressao} e
+% as quatro margens controlam a página. \cs{ABNTEXpretextualpages} inicia a
+% contagem não exibida; \cs{ABNTEXtextualpages} passa a exibir a paginação sem
+% reiniciar o contador. O ambiente \env{ABNTEXcitacaolonga},
+% \cs{ABNTEXfonte} e \cs{ABNTEXnota} tratam exceções tipográficas comuns.
+%
+% \cs{ABNTEXstructureSetup} configura níveis de seção.
+% \cs{ABNTEXsumario} produz o sumário, e \cs{ABNTEXappendix} e
+% \cs{ABNTEXannex} iniciam apêndices e anexos. Títulos pré e pós-textuais usam
+% \cs{ABNTEXpretextualtitle} e \cs{ABNTEXposttextualtitle}.
+%
+% \section{Elementos pré-textuais}
+%
+% O módulo geral oferece:
+% \begin{itemize}
+% \item \cs{ABNTEXcapa}, \cs{ABNTEXlombada} e \cs{ABNTEXfolhaderosto};
+% \item \cs{ABNTEXfichacatalografica}, \cs{ABNTEXerrata} e
+%   \cs{ABNTEXfolhadeaprovacao};
+% \item \cs{ABNTEXdedicatoria}, \cs{ABNTEXagradecimentos} e
+%   \cs{ABNTEXepigrafe};
+% \item \cs{ABNTEXresumo} e \cs{ABNTEXresumoemlinguaestrangeira}.
+% \end{itemize}
+% Dados profissionais de catalogação devem ser preparados externamente.
+%
+% Há listas automáticas de ilustrações e tabelas e registros declarativos para
+% abreviaturas, siglas e símbolos. \cs{ABNTEXvalidatepretextual} diagnostica
+% ordem e omissões observáveis no perfil acadêmico.
+%
+% \section{Bibliografia e elementos pós-textuais}
+%
+% Escolha \texttt{citacoes=externo}, \texttt{autor-data} ou
+% \texttt{numerico}. Os dois últimos carregam \pkg{biblatex-abnt}; o primeiro
+% deixa a configuração inteiramente com o documento. Um fluxo típico é:
+%
+% \begin{verbatim}
+% \usepackage[citacoes=autor-data]{abntex3}
+% \addbibresource{referencias.bib}
+% ...
+% \ABNTEXposttextualpages
+% \ABNTEXbibliografia
+% \end{verbatim}
+%
+% Compile documentos bibliográficos com LuaLaTeX, \texttt{biber} e mais duas
+% passagens de LuaLaTeX. \cs{ABNTEXglossario} e \cs{ABNTEXindice} são pontos
+% de integração para os geradores correspondentes.
+%
+% \section{Perfis documentais}
+%
+% Cada perfil possui comandos para suas fases, validação e dados próprios:
+%
+% \begin{description}
+% \item[Acadêmico] Comandos de fases com prefixo
+%   \texttt{ABNTEXacademico} e \cs{ABNTEXvalidateacademico}.
+% \item[Projeto] Comandos com prefixo \texttt{ABNTEXprojeto}, incluindo as
+%   cinco divisões textuais e \cs{ABNTEXvalidateprojeto}.
+% \item[Artigo] \cs{ABNTEXartigoSetup}, autorias repetíveis, fases, divisões,
+%   uma ou duas colunas e validação própria.
+% \item[Relatório] \cs{ABNTEXrelatorioSetup}, equipe repetível, elementos
+%   próprios, fases e validação própria.
+% \item[Livro] \cs{ABNTEXlivroSetup}, autorias e colaborações repetíveis,
+%   elementos editoriais, divisões e validação própria.
+% \end{description}
+%
+% Os manuais técnicos de cada perfil descrevem argumentos, obrigatoriedade e
+% condicionais. Os modelos canônicos são a referência prática mais completa.
+%
+% \section{Migração do abnTeX2}
+%
+% O \pkg{abntex3} é um pacote, não uma classe. Migre primeiro a classe-base e
+% os metadados, depois as fases e elementos, e por fim a bibliografia para
+% \pkg{biblatex-abnt}/\texttt{biber}. O módulo opcional
+% \pkg{abntex3-compat} oferece apenas aliases inequívocos e emite avisos; ele
+% não pretende reproduzir \cls{memoir}, \pkg{abntex2cite} ou toda a superfície
+% histórica do abnTeX2.
+%
+% \section{Modelos, testes e diagnóstico}
+%
+% O diretório \file{examples/} contém modelos completos para todos os perfis.
+% Comece por uma cópia do modelo correspondente e remova apenas os elementos
+% opcionais de que não precisa. Para diagnosticar uma configuração, ative
+% \texttt{debug=true} e execute os validadores do perfil.
+%
+% Desenvolvedores devem rodar pelo menos:
+%
+% \begin{verbatim}
+% git diff --check
+% l3build check
+% l3build doc
+% \end{verbatim}
+%
+% Correções observáveis precisam de teste que falhe antes da correção e passe
+% depois. Alterações de distribuição também exigem \texttt{l3build ctan} e
+% \texttt{scripts/validate-distribution.sh}; mudanças no PDF canônico exigem
+% \texttt{scripts/quality-audit.sh}.
+%
+% \section{Estabilidade e como colaborar}
+%
+% A baseline da primeira alfa protege os nomes públicos contra remoção
+% acidental, mas a linha \texttt{0.x} ainda pode mudar. Alterações
+% incompatíveis exigem discussão, changelog, migração, teste e nova versão.
+% Relatos de uso devem informar sistema, TeX Live, classe, perfil e exemplo
+% mínimo sem dados sensíveis e mencionar a issue 23. Divergências normativas
+% devem citar norma, edição e item sem reproduzir conteúdo protegido; a
+% revisão independente das matrizes é acompanhada na issue 24.
+%
+% A referência completa, o guia alfa, a política de API, as matrizes de
+% requisitos e os canais de contribuição estão no repositório:
+% \url{https://github.com/dantasrs/abntex3-community}.
+%
+% \end{documentation}
+%
+% \Finale

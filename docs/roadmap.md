@@ -300,21 +300,30 @@ migração sem consultar o código-fonte.
 
 - [x] Entregar infraestrutura, núcleo e perfil acadêmico experimental.
 - [x] Marcar a API como sujeita a mudanças.
-- [ ] Publicar artefatos em GitHub Releases, ainda sem CTAN.
+- [x] Publicar artefatos em GitHub Releases, ainda sem CTAN.
 - [ ] Recolher exemplos mínimos e relatos de migração.
 
-**Estado:** a candidata `0.1.0-alpha.1`, a automação de release e o canal de
-relatos estão preparados. A publicação e a coleta de experiências permanecem
-abertas até a tag ser criada e haver retorno público.
+**Estado:** a pré-release `0.1.0-alpha.1` foi publicada com ZIPs CTAN/TDS e
+resumos SHA-256. A coleta está organizada na
+[`issue #23`](https://github.com/dantasrs/abntex3-community/issues/23) e
+permanece aberta até haver retorno externo documentado.
 
 ### Betas `0.x`
 
-- [ ] Congelar progressivamente nomes de opções e comandos.
-- [ ] Entregar os demais perfis.
-- [ ] Exigir teste de regressão para toda correção.
+- [x] Congelar progressivamente nomes de opções e comandos.
+- [x] Entregar os demais perfis.
+- [x] Exigir teste de regressão para toda correção.
 - [ ] Concluir revisão independente das 12 matrizes normativas.
-- [ ] Auditar licença, atribuições e conteúdo dos artefatos.
-- [ ] Produzir manual PDF completo.
+- [x] Auditar licença, atribuições e conteúdo dos artefatos.
+- [x] Produzir manual PDF completo.
+
+**Estado:** a baseline da API alfa está protegida por teste e política de
+mudanças; os cinco perfis estão implementados; a auditoria da primeira release
+e o manual unificado foram concluídos. A classificação definitiva das
+interfaces congeladas será revisada antes do primeiro beta. Relatos de uso e
+revisões independentes continuam sendo critérios externos pendentes.
+A revisão das matrizes é acompanhada na
+[`issue #24`](https://github.com/dantasrs/abntex3-community/issues/24).
 
 **Critério de saída:** nenhuma mudança incompatível conhecida necessária para
 a API pública.

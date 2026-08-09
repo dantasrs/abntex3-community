@@ -16,6 +16,8 @@ para informar ambiente, versão e um exemplo mínimo sem dados sensíveis.
 
 Mudanças grandes ou incompatíveis devem ser discutidas antes da implementação.
 Decisões arquiteturais aceitas são registradas em `docs/decisoes/`.
+A baseline pública e o processo de congelamento progressivo estão em
+[`docs/estabilidade-api.md`](docs/estabilidade-api.md).
 
 ## Contribuições normativas
 
@@ -44,6 +46,12 @@ Não inclua no repositório:
 4. Execute as verificações disponíveis no estágio atual do projeto.
 5. Preencha o template do pull request e relacione a issue correspondente.
 6. Não inclua arquivos gerados nem conteúdo de `bases/`.
+
+Uma correção de comportamento observável deve incluir um teste de regressão
+que falhe sem a correção e passe com ela. Quando isso for tecnicamente
+impossível, o PR deve explicar a limitação e fornecer a verificação
+reproduzível mais próxima. Mudanças exclusivamente documentais não precisam
+inventar um teste LaTeX; devem registrar essa justificativa no checklist.
 
 Toda mudança deve passar por `git diff --check`. Mudanças de código também
 devem passar por `l3build check` e pela compilação dos exemplos afetados.

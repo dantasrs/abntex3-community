@@ -49,6 +49,7 @@ source/abntex3-core.dtx
 source/abntex3-frontmatter.dtx
 source/abntex3-layout.dtx
 source/abntex3-lists.dtx
+source/abntex3-manual.dtx
 source/abntex3-profile-academic.dtx
 source/abntex3-profile-project.dtx
 source/abntex3-profile-article.dtx
@@ -158,6 +159,8 @@ testfiles/pagination.lvt
 testfiles/pagination.tlg
 testfiles/pdf-metadata.lvt
 testfiles/pdf-metadata.tlg
+testfiles/public-api-baseline.lvt
+testfiles/public-api-baseline.tlg
 testfiles/primary-pages.lvt
 testfiles/primary-pages.tlg
 testfiles/project-elements.lvt
@@ -198,6 +201,8 @@ testfiles/toc-typography.tlg
 testfiles/unnumbered-titles.lvt
 testfiles/unnumbered-titles.tlg
 docs/api.md
+docs/estabilidade-api.md
+docs/auditorias/release-0.1.0-alpha.1.md
 docs/compatibilidade.md
 docs/qualidade-portabilidade.md
 docs/teste-alfa.md

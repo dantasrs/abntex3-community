@@ -35,9 +35,11 @@ for source_file in "${project_dir}"/source/*.dtx; do
     echo "Cabeçalho de documentação divergente: ${source_file}" >&2
     exit 1
   fi
-  if ! grep -Fq "{${release_date}}{${release_version}}" "${source_file}"; then
-    echo "Metadado de pacote divergente: ${source_file}" >&2
-    exit 1
+  if grep -Fq '%<*package>' "${source_file}"; then
+    if ! grep -Fq "{${release_date}}{${release_version}}" "${source_file}"; then
+      echo "Metadado de pacote divergente: ${source_file}" >&2
+      exit 1
+    fi
   fi
 done
 
@@ -45,7 +47,7 @@ grep -Fqx "version: ${release_version}" "${project_dir}/CITATION.cff"
 grep -Fqx "date-released: ${release_date}" "${project_dir}/CITATION.cff"
 grep -Fq "## [${release_version}] - ${release_date}" \
   "${project_dir}/CHANGELOG.md"
-grep -Fq "A versão ${release_version}" "${project_dir}/README.md"
+grep -Fq "${release_version}" "${project_dir}/README.md"
 grep -Fq "# abnTeX3 Community ${release_version}" \
   "${project_dir}/docs/releases/${release_version}.md"
 
