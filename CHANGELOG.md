@@ -2,6 +2,20 @@
 
 Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
+## [Não publicado]
+
+### Adicionado
+
+- Manual PDF unificado de instalação, configuração, perfis, bibliografia,
+  migração, diagnóstico e contribuição.
+- Baseline executável da API pública de `0.1.0-alpha.1` e política de
+  congelamento progressivo antes dos betas.
+- Auditoria técnica dos checksums, licença, atribuições e conteúdo dos
+  artefatos efetivamente publicados.
+- Exigência explícita de teste de regressão para toda correção observável.
+- Registro da publicação efetiva da pré-release e dos critérios externos ainda
+  pendentes no README e no roadmap.
+
 ## [0.1.0-alpha.1] - 2026-08-03
 
 ### Alterado

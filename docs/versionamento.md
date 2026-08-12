@@ -52,6 +52,11 @@ Pré-releases não recebem garantia de compatibilidade com a seguinte
 pré-release. Metadados de build podem ser usados em artefatos locais, mas não
 substituem tags oficiais.
 
+A partir de `0.1.0-alpha.1`, interfaces documentadas integram uma baseline
+protegida contra remoção acidental. A classificação progressiva e o processo
+de exceção estão em [`estabilidade-api.md`](estabilidade-api.md). Essa
+salvaguarda não antecipa a garantia de estabilidade de `1.0.0`.
+
 ## Depreciação
 
 Após `1.0.0`, uma interface pública obsoleta deverá:

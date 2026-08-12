@@ -70,9 +70,9 @@ abntex3-community/
 │   ├── abntex3-profile-article.dtx
 │   ├── abntex3-profile-report.dtx
 │   ├── abntex3-profile-book.dtx
+│   ├── abntex3-manual.dtx
 │   └── abntex3-compat.dtx
 ├── doc/
-│   ├── abntex3-manual.tex
 │   ├── abntex3-migration.tex
 │   └── abntex3-doc.bib
 ├── examples/
@@ -162,6 +162,7 @@ abntex3-community/
 ├── docs/
 │   ├── arquitetura.md
 │   ├── api.md
+│   ├── estabilidade-api.md
 │   ├── backmatter.md
 │   ├── profile-academic.md
 │   ├── profile-project.md
@@ -177,6 +178,8 @@ abntex3-community/
 │   ├── teste-alfa.md
 │   ├── releases/
 │   │   └── 0.1.0-alpha.1.md
+│   ├── auditorias/
+│   │   └── release-0.1.0-alpha.1.md
 │   ├── versionamento.md
 │   ├── requisitos/
 │   │   ├── nbr-6022-2018.md

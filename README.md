@@ -16,8 +16,10 @@ e metadados, módulos para layout, paginação, seções, elementos pré e
 pós-textuais, citações, referências, apêndices, anexos e índice, além dos
 perfis acadêmico, de projeto de pesquisa, de artigo, de relatório e de livro
 ou folheto em revisão.
-A versão 0.1.0-alpha.1 ainda não é indicada para produção e não faz alegação de
-conformidade.
+A pré-release pública
+[`0.1.0-alpha.1`](https://github.com/dantasrs/abntex3-community/releases/tag/v0.1.0-alpha.1)
+está disponível para ensaios; ela ainda não é indicada para produção e não faz
+alegação de conformidade.
 
 O primeiro objetivo é criar um pacote leve, testável e compatível com classes
 LaTeX usuais. Regras de citações e referências serão delegadas ao
@@ -112,10 +114,10 @@ de uso das normas.
 
 ### Próximos marcos
 
-- [ ] **Marco 14 — Alfa e beta:** a candidata `0.1.0-alpha.1` está preparada
-  para publicação no GitHub; depois da pré-release, serão recolhidas
-  experiências de uso, concluídas revisões normativas e congelada
-  progressivamente a API.
+- [ ] **Marco 14 — Alfa e beta:** a alfa `0.1.0-alpha.1` foi publicada com
+  artefatos íntegros e auditados, manual unificado e baseline da API. A coleta
+  pública de experiências e as revisões normativas independentes continuam
+  abertas antes do primeiro beta.
 - [ ] **Marco 15 — Versão estável e CTAN:** preparar a versão `1.0.0`, criar
   release e tag, submeter ao CTAN e acompanhar a inclusão nas distribuições
   TeX.
@@ -129,15 +131,24 @@ Quem mantém documentos em abnTeX2 pode começar pela
 O módulo opcional `abntex3-compat` oferece somente aliases de correspondência
 direta e emite avisos para que a conversão termine na API nativa.
 
-## Testar a candidata alfa
+## Testar a alfa publicada
 
 A linha `0.1.0-alpha` destina-se a ensaios públicos e pode introduzir mudanças
-de API entre pré-releases. Depois da publicação da tag, os ZIPs CTAN e TDS e
-seus resumos SHA-256 estarão na
-[página de Releases](https://github.com/dantasrs/abntex3-community/releases).
+de API entre pré-releases. Os ZIPs CTAN e TDS e seus resumos SHA-256 estão na
+[release `v0.1.0-alpha.1`](https://github.com/dantasrs/abntex3-community/releases/tag/v0.1.0-alpha.1).
 O [`guia do teste alfa`](docs/teste-alfa.md) explica instalação isolada,
 verificação de integridade, exemplo mínimo e envio de relatos de uso ou
 migração. Os artefatos dessa fase não serão submetidos ao CTAN.
+
+Os resultados públicos são acompanhados na
+[`issue #23`](https://github.com/dantasrs/abntex3-community/issues/23). A
+[`issue #24`](https://github.com/dantasrs/abntex3-community/issues/24)
+coordena, separadamente, a revisão normativa independente das 12 matrizes.
+
+O próximo artefato da linha `0.x` também conterá `abntex3-manual.pdf`, o manual
+unificado de instalação, configuração, perfis, bibliografia, migração e
+diagnóstico. A referência detalhada permanece dividida entre
+[`docs/api.md`](docs/api.md) e os manuais técnicos de cada módulo.
 
 ## Modelos canônicos
 
@@ -191,8 +202,10 @@ local sempre prevalece. Consulte a [política tipográfica](docs/layout.md) para
 configuração com `fontspec` e para distinguir Times New Roman de alternativas
 compatíveis.
 
-O pacote ainda não foi publicado no CTAN. Para instalar a versão de
-desenvolvimento na árvore pessoal do TeX, use:
+O pacote ainda não foi publicado no CTAN. Para um ensaio reproduzível, prefira
+o TDS assinado por SHA-256 na
+[pré-release](https://github.com/dantasrs/abntex3-community/releases/tag/v0.1.0-alpha.1).
+Para instalar a versão de desenvolvimento na árvore pessoal do TeX, use:
 
 ```sh
 git clone https://github.com/dantasrs/abntex3-community.git

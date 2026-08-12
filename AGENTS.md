@@ -89,6 +89,31 @@ Ao retomar em outra máquina:
 3. confirme a pré-release e os PRs abertos antes de escolher a tarefa;
 4. crie uma nova branch `agent/<descricao>` a partir da `main` sincronizada.
 
+## Checkpoint compartilhado — 2026-08-09
+
+Este checkpoint sucede o anterior sem alterar a tag publicada.
+
+- O PR #25 está aberto como rascunho na branch
+  `agent/marco-14-pos-alfa`; o primeiro commit é `5975194`.
+- O PR registra a alfa publicada, adiciona baseline executável para 107
+  interfaces públicas, política de estabilidade progressiva, exigência de
+  regressão, auditoria dos artefatos e manual PDF unificado.
+- A validação local aprovou `git diff --check`, `scripts/check-release.sh`, os
+  70 testes do `l3build check`, `l3build doc`, `l3build ctan`,
+  `scripts/validate-distribution.sh` e `scripts/quality-audit.sh`.
+- A coleta de experiências da alfa está na issue #23:
+  <https://github.com/dantasrs/abntex3-community/issues/23>.
+- A revisão normativa independente das 12 matrizes está na issue #24:
+  <https://github.com/dantasrs/abntex3-community/issues/24>.
+- As duas tarefas externas continuam abertas. Não marque o Marco 14 como
+  concluído, não avance ao Marco 15 e não crie beta ou nova tag sem nova
+  avaliação e autorização explícita.
+
+Em outra máquina, consulte primeiro o PR #25 e seus checks. Se ele ainda
+estiver aberto, não replique o trabalho nem envie commits concorrentes à
+branch. Se estiver mesclado, sincronize `main` somente por avanço rápido e
+remova a branch local antiga apenas depois de confirmar a incorporação.
+
 ## Decisões técnicas atuais
 
 - LuaLaTeX é o único motor LaTeX suportado e usado em exemplos, testes,
@@ -103,6 +128,9 @@ Ao retomar em outra máquina:
 - Não inclua PDFs de normas, conteúdo de `bases/` ou artefatos gerados no Git.
 - Antes de publicar mudanças técnicas, execute `git diff --check`,
   `l3build check` e as validações adicionais descritas em `CONTRIBUTING.md`.
+- Toda correção de comportamento observável deve incluir teste de regressão
+  que falhe antes da correção e passe depois; exceções precisam de justificativa
+  e verificação reproduzível no PR.
 - Preserve a matriz de LuaLaTeX no Linux, Windows e macOS definida na ADR 0006.
 - Execute `scripts/quality-audit.sh` em mudanças que afetem o PDF. Atualize a
   baseline visual somente depois de inspecionar uma alteração intencional.

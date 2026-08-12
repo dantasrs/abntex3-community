@@ -15,6 +15,8 @@ typesetexe = "lualatex"
 demofiles = {"examples/*.tex", "examples/*.bib"}
 docfiles = {
   "docs/api.md",
+  "docs/estabilidade-api.md",
+  "docs/auditorias/*.md",
   "docs/backmatter.md",
   "docs/frontmatter.md",
   "docs/layout.md",

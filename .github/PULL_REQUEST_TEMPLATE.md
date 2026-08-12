@@ -36,6 +36,8 @@ git diff --check
 - [ ] Li e segui `CONTRIBUTING.md` e o Código de Conduta.
 - [ ] Atualizei documentação e `CHANGELOG.md` quando necessário.
 - [ ] Adicionei ou atualizei testes para comportamentos observáveis.
+- [ ] Toda correção inclui teste que falha antes e passa depois, ou justifiquei
+      por que isso não se aplica.
 - [ ] Não incluí PDFs de normas, arquivos de `bases/` ou artefatos derivados.
 - [ ] Identifiquei a origem e a licença de qualquer código reutilizado.
 - [ ] Registrei impacto de compatibilidade e eventual depreciação.

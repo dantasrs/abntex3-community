@@ -121,9 +121,10 @@ O núcleo possui mensagens próprias para:
 - diagnóstico ativado.
 
 Comandos, opções e chaves documentados são a API pública experimental da linha
-`0.0.x`. Funções e variáveis com nomes internos não têm garantia de
-compatibilidade. Nenhuma interface está obsoleta até o Marco 6; a mensagem de
-depreciação estabelece o mecanismo que será usado quando necessário.
+`0.x`. Funções e variáveis com nomes internos não têm garantia de
+compatibilidade. A baseline de `0.1.0-alpha.1`, as categorias de estabilidade
+e o processo para mudanças incompatíveis estão em
+[`estabilidade-api.md`](estabilidade-api.md).
 
 ## Estrutura e sumário
 

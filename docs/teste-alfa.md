@@ -6,8 +6,9 @@ declaração automática de conformidade normativa.
 
 ## Baixar e verificar
 
-Na página de Releases, baixe `abntex3.tds.zip` e `SHA256SUMS`. No diretório em
-que os arquivos foram salvos, confira a integridade no Linux:
+Na [release `v0.1.0-alpha.1`](https://github.com/dantasrs/abntex3-community/releases/tag/v0.1.0-alpha.1),
+baixe `abntex3.tds.zip` e `SHA256SUMS`. No diretório em que os arquivos foram
+salvos, confira a integridade no Linux:
 
 ```sh
 sha256sum --check SHA256SUMS --ignore-missing
@@ -83,3 +84,9 @@ Use o formulário **Relato de uso ou migração** nas issues e informe:
 Erros reproduzíveis continuam no formulário de bug. Divergências normativas
 devem usar o formulário próprio e indicar norma, edição e item sem transcrever
 trechos extensos.
+
+Mencione a
+[`issue #23`](https://github.com/dantasrs/abntex3-community/issues/23) no
+relato para que a cobertura coletiva seja atualizada. A revisão normativa
+independente possui acompanhamento separado na
+[`issue #24`](https://github.com/dantasrs/abntex3-community/issues/24).
